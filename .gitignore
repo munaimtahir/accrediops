@@ -19,6 +19,7 @@ dist/
 coverage/
 htmlcov/
 .pytest_cache/
+*.sqlite3
 
 # Local exports
 generated/
