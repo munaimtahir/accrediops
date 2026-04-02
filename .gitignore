@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+env/
+
+# Node
+node_modules/
+dist/
+.next/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Build / runtime
+*.log
+coverage/
+htmlcov/
+.pytest_cache/
+
+# Local exports
+generated/
+tmp/

@@ -1,0 +1,31 @@
+openapi: 3.1.0
+info:
+  title: AccrediOps API
+  version: 0.1.0
+  summary: Contract placeholder for the internal accreditation operations platform
+  description: |
+    This is the initial contract placeholder.
+    The full API surface must be finalized before backend and frontend implementation.
+
+servers:
+  - url: https://api.example.internal
+
+tags:
+  - name: Frameworks
+  - name: Clients
+  - name: Indicators
+  - name: Evidence
+  - name: Workflow
+  - name: AI
+  - name: Exports
+
+paths: {}
+
+components:
+  schemas:
+    Placeholder:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Contract to be finalized before implementation.
