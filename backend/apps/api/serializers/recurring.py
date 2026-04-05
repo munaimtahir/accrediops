@@ -21,6 +21,10 @@ class RecurringRequirementSerializer(serializers.ModelSerializer):
 
 
 class RecurringEvidenceInstanceSerializer(serializers.ModelSerializer):
+    project_indicator_id = serializers.IntegerField(
+        source="recurring_requirement.project_indicator.id",
+        read_only=True,
+    )
     linked_evidence_title = serializers.CharField(source="linked_evidence_item.title", read_only=True)
     project_id = serializers.IntegerField(source="recurring_requirement.project_indicator.project_id", read_only=True)
     project_name = serializers.CharField(source="recurring_requirement.project_indicator.project.name", read_only=True)
@@ -32,6 +36,7 @@ class RecurringEvidenceInstanceSerializer(serializers.ModelSerializer):
         model = RecurringEvidenceInstance
         fields = (
             "id",
+            "project_indicator_id",
             "project_id",
             "project_name",
             "indicator_id",

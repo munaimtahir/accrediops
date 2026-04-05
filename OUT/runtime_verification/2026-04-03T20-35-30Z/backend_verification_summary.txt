@@ -1,0 +1,117 @@
+=== backend_coverage_output tail ===
+apps/audit/apps.py                                                                5      0      0      0   100%
+apps/audit/migrations/0001_initial.py                                             7      0      0      0   100%
+apps/audit/migrations/__init__.py                                                 0      0      0      0   100%
+apps/audit/models/__init__.py                                                     2      0      0      0   100%
+apps/audit/models/audit_event.py                                                 15      1      0      0    93%   25
+apps/audit/services.py                                                           23      3     12      3    83%   15, 19, 25
+apps/evidence/__init__.py                                                         0      0      0      0   100%
+apps/evidence/admin.py                                                            8      0      0      0   100%
+apps/evidence/apps.py                                                             5      0      0      0   100%
+apps/evidence/migrations/0001_initial.py                                          7      0      0      0   100%
+apps/evidence/migrations/0002_evidenceitem_file_label_and_more.py                 4      0      0      0   100%
+apps/evidence/migrations/__init__.py                                              0      0      0      0   100%
+apps/evidence/models/__init__.py                                                  2      0      0      0   100%
+apps/evidence/models/evidence.py                                                 35      5      4      0    77%   72-79, 82
+apps/evidence/services.py                                                        57     18     14      5    62%   31, 33, 94-143, 158, 160, 162
+apps/exports/__init__.py                                                          0      0      0      0   100%
+apps/exports/admin.py                                                            16      0      0      0   100%
+apps/exports/apps.py                                                              4      0      0      0   100%
+apps/exports/migrations/0001_initial.py                                           6      0      0      0   100%
+apps/exports/migrations/0002_importlog_exportjob.py                               6      0      0      0   100%
+apps/exports/migrations/__init__.py                                               0      0      0      0   100%
+apps/exports/models.py                                                           12      1      0      0    92%   25
+apps/exports/models_admin.py                                                     24      2      0      0    92%   28, 41
+apps/exports/services.py                                                         94      1     30      3    97%   127->117, 157, 184->172
+apps/exports/services_admin.py                                                   31      2      4      0    94%   11-12
+apps/frameworks/__init__.py                                                       0      0      0      0   100%
+apps/frameworks/admin.py                                                         21      0      0      0   100%
+apps/frameworks/apps.py                                                           5      0      0      0   100%
+apps/frameworks/migrations/0001_initial.py                                        6      0      0      0   100%
+apps/frameworks/migrations/__init__.py                                            0      0      0      0   100%
+apps/frameworks/models/__init__.py                                                2      0      0      0   100%
+apps/frameworks/models/framework.py                                              35      5      2      0    81%   13, 34, 60-61, 64
+apps/indicators/__init__.py                                                       0      0      0      0   100%
+apps/indicators/admin.py                                                         24      0      0      0   100%
+apps/indicators/apps.py                                                           5      0      0      0   100%
+apps/indicators/migrations/0001_initial.py                                        7      0      0      0   100%
+apps/indicators/migrations/0002_indicator_evidence_reuse_policy_and_more.py       4      0      0      0   100%
+apps/indicators/migrations/__init__.py                                            0      0      0      0   100%
+apps/indicators/models/__init__.py                                                2      0      0      0   100%
+apps/indicators/models/indicator.py                                              88     16     18      2    74%   75-84, 87, 160, 162, 166, 189, 214
+apps/indicators/services.py                                                     135     31     38      9    72%   33, 35, 37, 99-101, 104, 126-142, 153-167, 192, 269-272, 339, 340->342, 343, 357-358
+apps/indicators/signals.py                                                        0      0      0      0   100%
+apps/masters/__init__.py                                                          0      0      0      0   100%
+apps/masters/admin.py                                                             7      0      0      0   100%
+apps/masters/apps.py                                                              5      0      0      0   100%
+apps/masters/choices.py                                                          87      0      0      0   100%
+apps/masters/migrations/0001_initial.py                                           5      0      0      0   100%
+apps/masters/migrations/__init__.py                                               0      0      0      0   100%
+apps/masters/models.py                                                           14      1      0      0    93%   20
+apps/masters/services.py                                                          7      3      2      0    44%   12, 16-17
+apps/projects/__init__.py                                                         0      0      0      0   100%
+apps/projects/admin.py                                                            7      0      0      0   100%
+apps/projects/apps.py                                                             5      0      0      0   100%
+apps/projects/migrations/0001_initial.py                                          7      0      0      0   100%
+apps/projects/migrations/0002_accreditationproject_client_profile.py              5      0      0      0   100%
+apps/projects/migrations/__init__.py                                              0      0      0      0   100%
+apps/projects/models/__init__.py                                                  2      0      0      0   100%
+apps/projects/models/project.py                                                  20      1      0      0    95%   45
+apps/projects/services.py                                                        66     10     18      4    81%   13-21, 26-38, 92->94, 100->82, 107->111, 173->175
+apps/recurring/__init__.py                                                        0      0      0      0   100%
+apps/recurring/admin.py                                                          13      0      0      0   100%
+apps/recurring/apps.py                                                            5      0      0      0   100%
+apps/recurring/migrations/0001_initial.py                                         6      0      0      0   100%
+apps/recurring/migrations/__init__.py                                             0      0      0      0   100%
+apps/recurring/models/__init__.py                                                 2      0      0      0   100%
+apps/recurring/models/recurring.py                                               27      2      0      0    93%   25, 62
+apps/recurring/services.py                                                      100     56     44      6    39%   26-31, 37-51, 58, 70->78, 84, 86->88, 122-154, 165-201
+apps/workflow/__init__.py                                                         0      0      0      0   100%
+apps/workflow/apps.py                                                             5      0      0      0   100%
+apps/workflow/guards.py                                                          11      0      0      0   100%
+apps/workflow/migrations/__init__.py                                              0      0      0      0   100%
+apps/workflow/permissions.py                                                     43     20     22      6    48%   11, 15-17, 28, 31, 36, 39, 44, 47, 51-60
+apps/workflow/transitions.py                                                      7      1      2      1    78%   33
+-------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                          2572    371    330     66    82%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+
+======================== 24 passed in 118.51s (0:01:58) ========================
+\n=== status_check tail ===
+== docker compose ps ==
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+accrediops-backend    accrediops-backend    "sh -c 'python manag…"   backend    3 minutes ago   Up 2 minutes (healthy)   8000/tcp
+accrediops-caddy      caddy:2.8             "caddy run --config …"   caddy      2 minutes ago   Up About a minute        80/tcp, 443/tcp, 2019/tcp, 443/udp, 0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   2 minutes ago   Up 2 minutes (healthy)   3000/tcp
+
+== health checks ==
+{"status":"ok","service":"accrediops-frontend"}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+Base URL: http://127.0.0.1:18080
+\n=== smoke_verify tail ===
+[PASS] frontend root -> http://127.0.0.1:18080/
+[PASS] frontend health -> http://127.0.0.1:18080/health/frontend
+[PASS] backend health (proxy) -> http://127.0.0.1:18080/health/backend
+[PASS] backend health (api) -> http://127.0.0.1:18080/api/health/
+[PASS] projects page -> http://127.0.0.1:18080/projects
+[PASS] api auth session endpoint -> http://127.0.0.1:18080/api/auth/session/ (status 200)
+[PASS] api projects endpoint -> http://127.0.0.1:18080/api/projects/ (status 403)
+Smoke verify: SUCCESS
+\n=== playwright_output tail ===
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens (7.3s)
+  ✓  2 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (3.6s)
+  ✓  3 tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves (3.5s)
+  ✓  4 tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy (114ms)
+
+  4 passed (16.9s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

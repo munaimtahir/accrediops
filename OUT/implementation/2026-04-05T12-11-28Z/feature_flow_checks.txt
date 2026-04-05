@@ -1,0 +1,43 @@
+SPRINT FLOW CHECKS
+==================
+
+Backend route count: 30
+OpenAPI path count: 51
+Normalized backend paths: 30
+Normalized openapi paths: 51
+
+Missing in OpenAPI (normalized):
+none
+
+Missing in Backend URLs (normalized):
+/api/client-profiles/{}/variables-preview/
+/api/exports/projects/{}/excel/
+/api/exports/projects/{}/generate/
+/api/exports/projects/{}/history/
+/api/exports/projects/{}/physical-retrieval/
+/api/exports/projects/{}/print-bundle/
+/api/project-indicators/{}/
+/api/project-indicators/{}/ai-outputs/
+/api/project-indicators/{}/assign/
+/api/project-indicators/{}/evidence/
+/api/project-indicators/{}/mark-met/
+/api/project-indicators/{}/reopen/
+/api/project-indicators/{}/send-for-review/
+/api/project-indicators/{}/start/
+/api/project-indicators/{}/update-working-state/
+/api/projects/{}/areas-progress/
+/api/projects/{}/initialize-from-framework/
+/api/projects/{}/pre-inspection-check/
+/api/projects/{}/standards-progress/
+/api/recurring/instances/{}/approve/
+/api/recurring/instances/{}/submit/
+
+Core flow checks:
+- Login redirect: verified by Playwright app-flows test #1.
+- Login success + projects access: verified by Playwright app-flows test #3.
+- Create project + initialize from framework: verified by Playwright app-flows test #4 and Vitest create-project form tests.
+- Open created workspace + operational navigation: verified by app-flows test #5.
+- Evidence review journey: verified by core-journeys test #1.
+- Recurring submit/approve journey: verified by core-journeys test #2.
+- Clone to new project workspace: verified by core-journeys test #4.
+- Admin route access after login: verified by core-journeys test #5.

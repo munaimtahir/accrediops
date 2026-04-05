@@ -1,0 +1,47 @@
+### scripts/devops/status_check.sh
+== docker compose ps ==
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+
+== health checks ==
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sims_frontend</title>
+    <script type="module" crossorigin src="/assets/index-DJ3NUTOt.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-r_WEMD86.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sims_frontend</title>
+    <script type="module" crossorigin src="/assets/index-DJ3NUTOt.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-r_WEMD86.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
+{"status": "degraded", "checks": {"db": {"status": "ok", "latency_ms": 30.15}, "migrations": {"status": "fail", "error": "unsupported operand type(s) for -: 'list' and 'dict'"}, "redis": {"status": "ok"}}, "version": "unknown"}
+Base URL: http://127.0.0.1:8080
+
+### scripts/devops/smoke_verify.sh
+[PASS] frontend root -> http://127.0.0.1:8080/
+[PASS] frontend health -> http://127.0.0.1:8080/health/frontend
+[PASS] backend health (proxy) -> http://127.0.0.1:8080/health/backend
+[PASS] backend health (api) -> http://127.0.0.1:8080/api/health/
+[PASS] projects page -> http://127.0.0.1:8080/projects
+[FAIL] api auth session endpoint -> http://127.0.0.1:8080/api/auth/session/ (status 404; expected one of: 200 401 403)
+[FAIL] api projects endpoint -> http://127.0.0.1:8080/api/projects/ (status 404; expected one of: 200 401 403)
+Smoke verify: FAILURE

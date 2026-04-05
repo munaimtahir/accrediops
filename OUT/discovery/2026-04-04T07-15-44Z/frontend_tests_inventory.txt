@@ -1,0 +1,10 @@
+frontend/tests/admin-dashboard-screen.test.tsx
+frontend/tests/app-shell.test.tsx
+frontend/tests/e2e/app-flows.spec.ts
+frontend/tests/evidence-form.test.tsx
+frontend/tests/export-history-screen.test.tsx
+frontend/tests/inspection-screen.test.tsx
+frontend/tests/project-list-screen.test.tsx
+frontend/tests/recurring-screen.test.tsx
+frontend/tests/test-utils.tsx
+frontend/tests/worklist-screen.test.tsx

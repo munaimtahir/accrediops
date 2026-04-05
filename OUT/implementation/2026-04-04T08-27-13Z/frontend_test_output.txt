@@ -1,0 +1,27 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/project-overview-screen.test.tsx (1 test) 251ms
+ ✓ tests/project-list-screen.test.tsx (2 tests) 287ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 1571ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 1055ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 513ms
+ ✓ tests/inspection-screen.test.tsx (1 test) 97ms
+ ✓ tests/worklist-screen.test.tsx (1 test) 175ms
+ ✓ tests/evidence-form.test.tsx (1 test) 1080ms
+   ✓ EvidenceForm > submits with physical evidence fields 1077ms
+ ✓ tests/recurring-screen.test.tsx (1 test) 102ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 127ms
+ ✓ tests/export-history-screen.test.tsx (1 test) 187ms
+ ✓ tests/app-shell.test.tsx (1 test) 102ms
+
+ Test Files  10 passed (10)
+      Tests  12 passed (12)
+   Start at  09:54:02
+   Duration  9.30s (transform 1.01s, setup 1.18s, collect 5.70s, tests 3.98s, environment 9.10s, prepare 2.09s)
+

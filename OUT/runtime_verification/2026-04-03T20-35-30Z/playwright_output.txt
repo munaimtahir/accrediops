@@ -1,0 +1,14 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens (7.3s)
+  ✓  2 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (3.6s)
+  ✓  3 tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves (3.5s)
+  ✓  4 tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy (114ms)
+
+  4 passed (16.9s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

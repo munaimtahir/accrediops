@@ -1,0 +1,26 @@
+## admin login headers
+HTTP/2 500 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:44:12 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 145
+
+
+## admin login head
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Server Error (500)</title>
+</head>
+<body>
+  <h1>Server Error (500)</h1><p></p>
+</body>
+</html>

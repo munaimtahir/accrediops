@@ -1,0 +1,26 @@
+
+Running 16 tests using 2 workers
+
+  ✓   1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (1.8s)
+  ✓   3 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (1.1s)
+  ✓   4 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (3.6s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:31:7 › Core operational browser journeys › evidence review journey works end-to-end (12.2s)
+  ✓   5 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (9.1s)
+  ✓   7 tests/e2e/app-flows.spec.ts:44:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (4.2s)
+  ✓   8 tests/e2e/app-flows.spec.ts:53:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (107ms)
+  ✓   6 tests/e2e/core-journeys.spec.ts:54:7 › Core operational browser journeys › recurring approval from indicator context works (10.6s)
+  ✓   9 tests/e2e/core-journeys.spec.ts:71:7 › Core operational browser journeys › create flow supports client profile linkage (7.8s)
+  ✓  10 tests/e2e/core-journeys.spec.ts:105:7 › Core operational browser journeys › clone project then open cloned workspace (4.1s)
+  ✓  11 tests/e2e/core-journeys.spec.ts:126:7 › Core operational browser journeys › admin route access is available after login (2.4s)
+  ✓  12 tests/e2e/core-journeys.spec.ts:133:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (16.4s)
+  ✓  13 tests/e2e/core-journeys.spec.ts:175:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (18.1s)
+  ✓  14 tests/e2e/core-journeys.spec.ts:221:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (7.8s)
+  ✓  15 tests/e2e/core-journeys.spec.ts:244:7 › Core operational browser journeys › non-admin user cannot access export history actions (12.0s)
+  ✓  16 tests/e2e/core-journeys.spec.ts:262:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (11.8s)
+
+  16 passed (1.8m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

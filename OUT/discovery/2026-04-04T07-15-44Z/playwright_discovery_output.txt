@@ -1,0 +1,246 @@
+
+Running 9 tests using 1 worker
+
+  ✘  1 tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens (7.5s)
+  ✘  2 tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens (retry #1) (6.2s)
+  ✘  3 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (5.9s)
+  ✘  4 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (retry #1) (6.5s)
+  ✘  5 tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves (5.8s)
+  ✘  6 tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves (retry #1) (6.1s)
+  ✓  7 tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy (47ms)
+  ✓  8 tests/e2e/app-flows.spec.ts:26:7 › AccrediOps end-to-end flows › 5. project detail flow route is discoverable (858ms)
+  ✓  9 tests/e2e/app-flows.spec.ts:31:7 › AccrediOps end-to-end flows › 6. indicator detail route is discoverable (792ms)
+  ✓  10 tests/e2e/app-flows.spec.ts:36:7 › AccrediOps end-to-end flows › 7. recurring queue route is discoverable (944ms)
+  ✓  11 tests/e2e/app-flows.spec.ts:41:7 › AccrediOps end-to-end flows › 8. print pack route is discoverable (858ms)
+  ✓  12 tests/e2e/app-flows.spec.ts:46:7 › AccrediOps end-to-end flows › 9. client profile route is discoverable (861ms)
+
+
+  1) tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens ─────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects/[39m
+    Received string:  [31m"http://127.0.0.1:8080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    2 × unexpected value "http://127.0.0.1:8080/dashboard"[22m
+    [2m    6 × unexpected value "http://127.0.0.1:8080/login"[22m
+
+
+      4 |   test("1. project list opens", async ({ page }) => {
+      5 |     await page.goto("/projects");
+    > 6 |     await expect(page).toHaveURL(/\/projects/);
+        |                        ^
+      7 |   });
+      8 |
+      9 |   test("2. login page opens", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:6:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects/[39m
+    Received string:  [31m"http://127.0.0.1:8080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:8080/login"[22m
+
+
+      4 |   test("1. project list opens", async ({ page }) => {
+      5 |     await page.goto("/projects");
+    > 6 |     await expect(page).toHaveURL(/\/projects/);
+        |                        ^
+      7 |   });
+      8 |
+      9 |   test("2. login page opens", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:6:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-1-project-list-opens-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens ───────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('AccrediOps sign-in')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('AccrediOps sign-in')[22m
+
+
+       9 |   test("2. login page opens", async ({ page }) => {
+      10 |     await page.goto("/login");
+    > 11 |     await expect(page.getByText("AccrediOps sign-in")).toBeVisible();
+         |                                                        ^
+      12 |   });
+      13 |
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:11:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('AccrediOps sign-in')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('AccrediOps sign-in')[22m
+
+
+       9 |   test("2. login page opens", async ({ page }) => {
+      10 |     await page.goto("/login");
+    > 11 |     await expect(page.getByText("AccrediOps sign-in")).toBeVisible();
+         |                                                        ^
+      12 |   });
+      13 |
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:11:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves ─
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/admin/[39m
+    Received string:  [31m"http://127.0.0.1:8080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:8080/login"[22m
+
+
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+      15 |     await page.goto("/admin");
+    > 16 |     await expect(page).toHaveURL(/\/admin/);
+         |                        ^
+      17 |   });
+      18 |
+      19 |   test("4. health endpoints reachable via proxy", async ({ request }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:16:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/admin/[39m
+    Received string:  [31m"http://127.0.0.1:8080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:8080/login"[22m
+
+
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+      15 |     await page.goto("/admin");
+    > 16 |     await expect(page).toHaveURL(/\/admin/);
+         |                        ^
+      17 |   });
+      18 |
+      19 |   test("4. health endpoints reachable via proxy", async ({ request }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:16:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/app-flows-AccrediOps-end-t-280a7-3-admin-page-route-resolves-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens ──────────
+    tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens ────────────
+    tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves ──
+  6 passed (57.2s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

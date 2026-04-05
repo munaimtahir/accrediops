@@ -1,0 +1,72 @@
+# Runtime verification manifest
+# timestamp: 2026-04-03T20-35-30Z
+
+INIT: created artifact dirs at 2026-04-03T20-35-30Z
+CMD: docker compose ps + docker ps + ss listeners
+CMD: curl root/healthz/api-health live domain
+CMD: docker compose logs frontend/caddy
+CMD: ss + ps process scan
+CMD: inspect serve_frontend.py + frontend/site
+CMD: curl local backend 18000 routes/admin
+CMD: cat /etc/caddy/Caddyfile + systemctl caddy
+CMD: pre-fix direct checks 8013/18000/static
+CMD: ps -fp 1999079,2068791
+CMD: backend collectstatic --noinput
+CMD: frontend npm install && npm run build
+CMD: kill 1999079 2068791
+CMD: tail frontend/backend runtime logs
+CMD: live endpoint checks local+domain
+CMD: backend pip install --user -r requirements.txt
+CMD: systemctl --user daemon-reload + restart services
+CMD: systemctl --user status frontend/backend
+CMD: docker compose ps
+CMD: docker compose logs frontend/caddy --tail=200
+CMD: curl route/static/admin checks
+CMD: curl admin login page
+CMD: backend collectstatic --noinput (post-whitenoise)
+CMD: curl local admin login host/default
+CMD: curl admin login direct+domain after backend restart
+CMD: systemctl --user restart accrediops-backend.service
+CMD: retry curl admin login direct+domain after backend restart
+CMD: duplicate api and trailing slash checks
+CMD: scripts/testing/run_backend_tests.sh
+CMD: backend python3 manage.py test
+CMD: frontend npm test
+CMD: frontend npx playwright test -c playwright.config.ts
+CMD: frontend npm run build
+CMD: timeout 15 scripts/devops/logs_tail.sh
+CMD: scripts/devops/status_check.sh
+CMD: scripts/devops/smoke_verify.sh
+CMD: systemctl --user cat frontend/backend services
+CMD: final live sanity HEAD checks
+CMD: python3 -m venv /tmp/accrediops-venv-check
+CMD: scripts/testing/run_backend_tests.sh (post-fix)
+CMD: frontend npx playwright test -c playwright.config.ts (post-fix)
+CMD: clean_stop/rebuild_up/status_check/smoke_verify (post-fix)
+CMD: scripts/devops/status_check.sh (post-fix)
+CMD: scripts/devops/smoke_verify.sh (post-fix)
+CMD: PLAYWRIGHT_BASE_URL=18080 npx playwright test -c playwright.config.ts
+CMD: rm -rf backend/.venv && scripts/testing/run_backend_tests.sh (post-venv-install)
+CMD: scripts/testing/run_all_checks.sh (post-fix)
+CMD: scripts/testing/run_all_checks.sh (after .next chown)
+CMD: replaced root-owned frontend/.next and reran frontend build+vitest+playwright
+
+CMD: npm run build && npm run test -- --run && PLAYWRIGHT_BASE_URL=http://127.0.0.1:18080 npx playwright test -c playwright.config.ts
+CMD: scripts/testing/run_all_checks.sh (after .next reset)
+CMD: set -o pipefail && scripts/testing/run_all_checks.sh (captured exit 1)
+CMD: set -o pipefail && scripts/testing/run_all_checks.sh 2>&1 (captured exit 1)
+CMD: patched scripts/testing/run_all_checks.sh and reran (exit 1)
+CMD: status_check.sh and smoke_verify.sh after frontend_next_cache fix
+CMD: run_all_checks.sh after frontend_next_cache fix (exit 1)
+CMD: docker compose restart frontend && curl /health/frontend,/login verification
+CMD: docker compose logs frontend --tail=120 (post-restart)
+CMD: docker compose up -d frontend caddy (post frontend_next_cache volume)
+CMD: docker compose up -d --build frontend caddy (production frontend runtime)
+CMD: frontend playwright iterative runs x3 (PLAYWRIGHT_BASE_URL=18080)
+CMD: scripts/testing/run_all_checks.sh final pass
+CMD: scripts/testing/run_all_checks.sh final repeat pass
+CMD: docker compose build frontend
+CMD: docker compose up -d backend frontend caddy
+CMD: iterative playwright x3 after stabilization
+CMD: run_all_checks_final (exit 0)
+CMD: run_all_checks_final_repeat (exit 0)

@@ -1,0 +1,237 @@
+# inspect placeholder server script
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import html
+import os
+from http import HTTPStatus
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+
+class FrontendHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, directory: str, **kwargs):
+        self._site_dir = Path(directory)
+        super().__init__(*args, directory=directory, **kwargs)
+
+    def do_GET(self) -> None:
+        if self.path in {"/healthz", "/healthz/"}:
+            body = b'{"status":"ok","service":"accrediops-frontend"}'
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        return super().do_GET()
+
+    def list_directory(self, path: str):
+        body = (
+            "<!doctype html><html><body><h1>Directory listing disabled</h1>"
+            f"<p>{html.escape(path)}</p></body></html>"
+        ).encode("utf-8")
+        self.send_response(HTTPStatus.FORBIDDEN)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+        return None
+
+    def end_headers(self) -> None:
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Serve the AccrediOps operator shell.")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8013)
+    parser.add_argument(
+        "--root",
+        default=str(Path(__file__).resolve().parents[1] / "frontend" / "site"),
+    )
+    args = parser.parse_args()
+
+    site_root = Path(args.root).resolve()
+    if not site_root.exists():
+        raise SystemExit(f"Frontend root does not exist: {site_root}")
+
+    os.chdir(site_root)
+    handler = lambda *a, **kw: FrontendHandler(*a, directory=str(site_root), **kw)
+    server = ThreadingHTTPServer((args.host, args.port), handler)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+
+
+if __name__ == "__main__":
+    main()
+
+# frontend/site listing
+frontend/site/index.html
+
+# frontend/site/index preview
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccrediOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --card: rgba(255, 252, 247, 0.92);
+      --ink: #1f2a2d;
+      --muted: #617177;
+      --line: rgba(31, 42, 45, 0.12);
+      --accent: #a53d2f;
+      --accent-strong: #7c2518;
+      --accent-soft: rgba(165, 61, 47, 0.12);
+      --shadow: 0 24px 60px rgba(59, 41, 27, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(165, 61, 47, 0.18), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(40, 108, 99, 0.18), transparent 28%),
+        linear-gradient(135deg, #efe4d1 0%, var(--bg) 46%, #fcfaf5 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(980px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 48px 48px 28px;
+      background:
+        linear-gradient(135deg, rgba(165, 61, 47, 0.96), rgba(64, 86, 90, 0.92)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent);
+      color: #fff7f1;
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-family: "IBM Plex Serif", Georgia, serif;
+      font-size: clamp(2.3rem, 4vw, 4.4rem);
+      line-height: 0.98;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 56ch;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255, 247, 241, 0.9);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      padding: 32px 48px 48px;
+    }
+
+    .panel, .tile {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .tile-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tile {
+      padding: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(249, 245, 238, 0.92));
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .actions a {
+      text-decoration: none;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .actions a:hover {
+      transform: translateY(-1px);
+    }
+
+    .actions .primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .actions .primary:hover {
+      background: var(--accent-strong);
+    }
+
+    .actions .secondary {
+      background: var(--accent-soft);
+      border-color: rgba(165, 61, 47, 0.24);
+      color: var(--accent-strong);
+    }

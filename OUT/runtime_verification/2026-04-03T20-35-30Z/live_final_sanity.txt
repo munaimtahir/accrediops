@@ -1,0 +1,80 @@
+=== live final checks ===
+HTTP/2 307 
+alt-svc: h3=":443"; ma=2592000
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+date: Fri, 03 Apr 2026 20:57:22 GMT
+etag: "hoirvdl1yj42q"
+location: /projects
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-powered-by: Next.js
+content-length: 5282
+
+
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+date: Fri, 03 Apr 2026 20:57:22 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:57:22 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: max-age=0, no-cache, no-store, must-revalidate, private
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:57:22 GMT
+expires: Fri, 03 Apr 2026 20:57:22 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=LAzeQpj0OeyY8cNjSrKED9TsnZvoKqf0; expires=Fri, 02 Apr 2027 20:57:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+
+HTTP/2 200 
+access-control-allow-origin: *
+alt-svc: h3=":443"; ma=2592000
+cache-control: max-age=60, public
+content-type: text/css; charset="utf-8"
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:57:23 GMT
+etag: "69d025f1-533e"
+last-modified: Fri, 03 Apr 2026 20:41:21 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+

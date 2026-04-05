@@ -1,0 +1,11 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 tests/e2e/core-journeys.spec.ts:133:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (16.3s)
+
+  1 passed (23.4s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

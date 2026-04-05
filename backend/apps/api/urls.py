@@ -1,5 +1,21 @@
 from django.urls import path
 
+from apps.api.views.auth import AuthLoginView, AuthLogoutView, AuthSessionView
+from apps.api.views.system import BackendHealthView
+from apps.api.views.admin import (
+    AdminDashboardView,
+    AdminUserUpdateView,
+    AdminUsersView,
+    AuditLogView,
+    ExportGenerateView,
+    ExportHistoryView,
+    FrameworkImportValidateView,
+    ImportLogListView,
+    MasterValueListCreateView,
+    MasterValueUpdateView,
+    ProjectReadinessView,
+    ReopenOverridesView,
+)
 from apps.api.views.ai_actions import AIAcceptView, AIGenerateView, ProjectIndicatorAIOutputsView
 from apps.api.views.dashboard import DashboardWorklistView
 from apps.api.views.evidence import (
@@ -8,7 +24,12 @@ from apps.api.views.evidence import (
     EvidenceUpdateView,
     ProjectIndicatorEvidenceListView,
 )
-from apps.api.views.exports import ProjectExcelExportView, ProjectPrintBundleExportView
+from apps.api.views.exports import (
+    ProjectExcelExportView,
+    ProjectPhysicalRetrievalExportView,
+    ProjectPrintBundleExportView,
+)
+from apps.api.views.frameworks import FrameworkAnalysisView, FrameworkListView
 from apps.api.views.project_indicators import (
     ProjectIndicatorAssignView,
     ProjectIndicatorDetailView,
@@ -20,8 +41,11 @@ from apps.api.views.project_indicators import (
 )
 from apps.api.views.projects import (
     AreasProgressView,
+    ProjectCloneView,
     ProjectInitializeFromFrameworkView,
+    ProjectInspectionView,
     ProjectListCreateView,
+    PreInspectionCheckView,
     ProjectRetrieveUpdateView,
     StandardsProgressView,
 )
@@ -30,15 +54,52 @@ from apps.api.views.recurring import (
     RecurringInstanceSubmitView,
     RecurringQueueView,
 )
+from apps.api.views.users import (
+    ClientProfileListCreateView,
+    ClientProfileRetrieveUpdateView,
+    ClientProfileVariablesPreviewView,
+    UserListView,
+)
 
 
 urlpatterns = [
+    path("api/health/", BackendHealthView.as_view(), name="api-health"),
+    path("api/auth/session/", AuthSessionView.as_view(), name="auth-session"),
+    path("api/auth/login/", AuthLoginView.as_view(), name="auth-login"),
+    path("api/auth/logout/", AuthLogoutView.as_view(), name="auth-logout"),
+    path("api/users/", UserListView.as_view(), name="user-list"),
+    path("api/admin/dashboard/", AdminDashboardView.as_view(), name="admin-dashboard"),
+    path("api/admin/masters/<str:key>/", MasterValueListCreateView.as_view(), name="admin-master-list-create"),
+    path("api/admin/masters/<str:key>/<int:pk>/", MasterValueUpdateView.as_view(), name="admin-master-update"),
+    path("api/admin/users/", AdminUsersView.as_view(), name="admin-users"),
+    path("api/admin/users/<int:pk>/", AdminUserUpdateView.as_view(), name="admin-user-update"),
+    path("api/audit/", AuditLogView.as_view(), name="audit-log"),
+    path("api/admin/overrides/", ReopenOverridesView.as_view(), name="admin-overrides"),
+    path("api/admin/import/validate-framework/", FrameworkImportValidateView.as_view(), name="framework-import-validate"),
+    path("api/admin/import/logs/", ImportLogListView.as_view(), name="import-log-list"),
+    path("api/client-profiles/", ClientProfileListCreateView.as_view(), name="client-profile-list-create"),
+    path("api/client-profiles/<int:pk>/", ClientProfileRetrieveUpdateView.as_view(), name="client-profile-detail"),
+    path(
+        "api/client-profiles/<int:pk>/variables-preview/",
+        ClientProfileVariablesPreviewView.as_view(),
+        name="client-profile-variables-preview",
+    ),
     path("api/projects/", ProjectListCreateView.as_view(), name="project-list-create"),
+    path("api/frameworks/", FrameworkListView.as_view(), name="framework-list"),
+    path("api/frameworks/<int:framework_id>/analysis/", FrameworkAnalysisView.as_view(), name="framework-analysis"),
     path("api/projects/<int:pk>/", ProjectRetrieveUpdateView.as_view(), name="project-detail"),
     path(
         "api/projects/<int:project_id>/initialize-from-framework/",
         ProjectInitializeFromFrameworkView.as_view(),
         name="project-initialize-from-framework",
+    ),
+    path("api/projects/<int:project_id>/clone/", ProjectCloneView.as_view(), name="project-clone"),
+    path("api/projects/<int:project_id>/readiness/", ProjectReadinessView.as_view(), name="project-readiness"),
+    path("api/projects/<int:project_id>/inspection-view/", ProjectInspectionView.as_view(), name="project-inspection-view"),
+    path(
+        "api/projects/<int:project_id>/pre-inspection-check/",
+        PreInspectionCheckView.as_view(),
+        name="project-pre-inspection-check",
     ),
     path(
         "api/projects/<int:project_id>/standards-progress/",
@@ -121,5 +182,20 @@ urlpatterns = [
         "api/exports/projects/<int:project_id>/print-bundle/",
         ProjectPrintBundleExportView.as_view(),
         name="project-export-print-bundle",
+    ),
+    path(
+        "api/exports/projects/<int:project_id>/physical-retrieval/",
+        ProjectPhysicalRetrievalExportView.as_view(),
+        name="project-export-physical-retrieval",
+    ),
+    path(
+        "api/exports/projects/<int:project_id>/history/",
+        ExportHistoryView.as_view(),
+        name="project-export-history",
+    ),
+    path(
+        "api/exports/projects/<int:project_id>/generate/",
+        ExportGenerateView.as_view(),
+        name="project-export-generate",
     ),
 ]

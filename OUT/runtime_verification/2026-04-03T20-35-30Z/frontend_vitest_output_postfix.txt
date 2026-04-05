@@ -1,0 +1,22 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run --run
+
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/inspection-screen.test.tsx (1 test) 85ms
+ ✓ tests/project-list-screen.test.tsx (1 test) 182ms
+ ✓ tests/worklist-screen.test.tsx (1 test) 196ms
+ ✓ tests/recurring-screen.test.tsx (1 test) 140ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 136ms
+ ✓ tests/evidence-form.test.tsx (1 test) 731ms
+   ✓ EvidenceForm > submits with physical evidence fields 728ms
+ ✓ tests/export-history-screen.test.tsx (1 test) 281ms
+ ✓ tests/app-shell.test.tsx (1 test) 163ms
+
+ Test Files  8 passed (8)
+      Tests  8 passed (8)
+   Start at  23:18:11
+   Duration  8.32s (transform 971ms, setup 1.45s, collect 6.13s, tests 1.91s, environment 8.96s, prepare 1.49s)
+

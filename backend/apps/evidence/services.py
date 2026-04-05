@@ -45,6 +45,10 @@ def create_evidence_item(
     text_content: str = "",
     evidence_date=None,
     notes: str = "",
+    physical_location_type: str = "",
+    location_details: str = "",
+    file_label: str = "",
+    is_physical_copy_available: bool = False,
 ) -> EvidenceItem:
     ensure_project_owner_access(actor, project_indicator)
     _validate_source_fields(source_type=source_type, file_or_url=file_or_url, text_content=text_content)
@@ -65,6 +69,10 @@ def create_evidence_item(
         evidence_date=evidence_date,
         uploaded_by=actor,
         notes=notes,
+        physical_location_type=physical_location_type,
+        location_details=location_details,
+        file_label=file_label,
+        is_physical_copy_available=is_physical_copy_available,
     )
     log_audit_event(
         actor=actor,
@@ -97,6 +105,16 @@ def update_evidence_item(
             text_content=validated_data.get("text_content", evidence_item.text_content),
             evidence_date=validated_data.get("evidence_date", evidence_item.evidence_date),
             notes=validated_data.get("notes", evidence_item.notes),
+            physical_location_type=validated_data.get(
+                "physical_location_type",
+                evidence_item.physical_location_type,
+            ),
+            location_details=validated_data.get("location_details", evidence_item.location_details),
+            file_label=validated_data.get("file_label", evidence_item.file_label),
+            is_physical_copy_available=validated_data.get(
+                "is_physical_copy_available",
+                evidence_item.is_physical_copy_available,
+            ),
         )
         log_audit_event(
             actor=actor,

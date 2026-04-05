@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from apps.audit.models import AuditEvent
 from apps.audit.services import log_audit_event, snapshot_instance
+from apps.exports.services import classify_indicator_risk
 from apps.indicators.models import (
     ProjectIndicator,
     ProjectIndicatorComment,
@@ -213,10 +214,18 @@ def validate_project_indicator_readiness(project_indicator: ProjectIndicator) ->
         "rejected_current_evidence_count": rejected_current.count(),
         "minimum_required_evidence_count": project_indicator.indicator.minimum_required_evidence_count,
         "has_minimum_required_evidence": approved_current.count() >= project_indicator.indicator.minimum_required_evidence_count,
+        "missing_evidence_count": max(
+            project_indicator.indicator.minimum_required_evidence_count - approved_current.count(),
+            0,
+        ),
         "all_current_evidence_approved": current_evidence.exists() and not current_evidence.exclude(approval_status="APPROVED").exists(),
         "no_rejected_current_evidence": not rejected_current.exists(),
         "overdue_recurring_instances_count": overdue_recurring,
+        "overdue_recurring_count": overdue_recurring,
         "recurring_requirements_clear": overdue_recurring == 0,
+        "is_ready_for_review": bool(project_indicator.notes.strip()) or project_indicator.evidence_items.exists(),
+        "is_blocked": project_indicator.current_status == ProjectIndicatorStatusChoices.BLOCKED,
+        "rejected_evidence_count": rejected_current.count(),
     }
     readiness["ready_for_met"] = all(
         [
@@ -226,6 +235,7 @@ def validate_project_indicator_readiness(project_indicator: ProjectIndicator) ->
             readiness["recurring_requirements_clear"],
         ],
     )
+    readiness["risk"] = classify_indicator_risk(project_indicator, today=today)
     return readiness
 
 
@@ -286,6 +296,8 @@ def standards_progress(project):
             met_indicators=Count("id", filter=Q(is_met=True)),
             blocked_count=Count("id", filter=Q(current_status=ProjectIndicatorStatusChoices.BLOCKED)),
             in_review_count=Count("id", filter=Q(current_status=ProjectIndicatorStatusChoices.UNDER_REVIEW)),
+            not_started_count=Count("id", filter=Q(current_status=ProjectIndicatorStatusChoices.NOT_STARTED)),
+            overdue_count=Count("id", filter=Q(due_date__lt=timezone.localdate(), is_met=False)),
         )
         .order_by("indicator__area__code", "indicator__standard__code")
     )
@@ -293,6 +305,16 @@ def standards_progress(project):
     for row in queryset:
         total = row["total_indicators"] or 1
         row["progress_percent"] = round((row["met_indicators"] / total) * 100, 2)
+        row["blocked_indicators"] = row["blocked_count"]
+        row["readiness_score"] = round(
+            (
+                (row["met_indicators"] / total) * 70
+                + ((total - row["blocked_count"] - row["overdue_count"]) / total) * 30
+            )
+            * 100
+            / 100,
+            2,
+        )
         rows.append(row)
     return rows
 
@@ -315,10 +337,18 @@ def areas_progress(project):
         item["total_standards"] += 1
         if row["total_indicators"] == row["met_indicators"]:
             item["completed_standards"] += 1
+        if "high_risk_standards_count" not in item:
+            item["high_risk_standards_count"] = 0
+        if row.get("blocked_count", 0) > 0 or row.get("overdue_count", 0) > 0:
+            item["high_risk_standards_count"] += 1
     results = []
     for item in grouped.values():
         total = item["total_standards"] or 1
         item["progress_percent"] = round((item["completed_standards"] / total) * 100, 2)
+        item["readiness_score"] = round(
+            ((item["total_standards"] - item["high_risk_standards_count"]) / total) * 100,
+            2,
+        )
         results.append(item)
     return sorted(results, key=lambda item: item["area_code"])
 

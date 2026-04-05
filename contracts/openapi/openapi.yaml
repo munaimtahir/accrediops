@@ -1,31 +1,2677 @@
 openapi: 3.1.0
 info:
   title: AccrediOps API
-  version: 0.1.0
-  summary: Contract placeholder for the internal accreditation operations platform
+  version: 1.0.0
+  summary: Implemented contract for AccrediOps governance workflow API
   description: |
-    This is the initial contract placeholder.
-    The full API surface must be finalized before backend and frontend implementation.
-
+    This contract reflects currently implemented backend behavior, including envelope responses:
+    - success responses: { success: true, data: ... }
+    - error responses: { success: false, error: { code, message, details } }
 servers:
-  - url: https://api.example.internal
-
+  - url: http://127.0.0.1:18080
+    description: Local Caddy reverse proxy
+  - url: http://127.0.0.1:8000
+    description: Direct Django service (local host runtime dependent)
 tags:
+  - name: System
+  - name: Auth
+  - name: Users
+  - name: Admin
   - name: Frameworks
-  - name: Clients
-  - name: Indicators
+  - name: Projects
+  - name: Worklist
+  - name: Project Indicators
   - name: Evidence
-  - name: Workflow
-  - name: AI
+  - name: Recurring
+  - name: AI Advisory
   - name: Exports
-
-paths: {}
-
+paths:
+  /api/health/:
+    get:
+      tags: [System]
+      summary: Backend health check
+      operationId: apiHealth
+      responses:
+        "200":
+          description: Backend service and database health
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessBackendHealth"
+  /api/auth/session/:
+    get:
+      tags: [Auth]
+      summary: Get current authenticated session
+      operationId: authSession
+      responses:
+        "200":
+          description: Current auth session state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAuthSession"
+  /api/auth/login/:
+    post:
+      tags: [Auth]
+      summary: Log in using username and password
+      operationId: authLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthLoginRequest"
+      responses:
+        "200":
+          description: Login succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAuthSession"
+        "400":
+          description: Invalid credentials or validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /api/auth/logout/:
+    post:
+      tags: [Auth]
+      summary: Log out current session
+      operationId: authLogout
+      responses:
+        "200":
+          description: Logout succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAuthSession"
+  /api/users/:
+    get:
+      tags: [Users]
+      summary: List active users
+      operationId: usersList
+      parameters:
+        - $ref: "#/components/parameters/RoleQuery"
+        - $ref: "#/components/parameters/SearchQuery"
+      responses:
+        "200":
+          description: User summaries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessUserSummaryList"
+  /api/client-profiles/:
+    get:
+      tags: [Users]
+      summary: List client profiles
+      operationId: clientProfilesList
+      responses:
+        "200":
+          description: Client profile rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessClientProfileList"
+    post:
+      tags: [Users]
+      summary: Create client profile
+      operationId: clientProfilesCreate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientProfileWrite"
+      responses:
+        "201":
+          description: Client profile created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessClientProfile"
+  /api/client-profiles/{id}/:
+    get:
+      tags: [Users]
+      summary: Get client profile
+      operationId: clientProfilesRetrieve
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Client profile detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessClientProfile"
+    patch:
+      tags: [Users]
+      summary: Update client profile
+      operationId: clientProfilesUpdate
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientProfileWrite"
+      responses:
+        "200":
+          description: Client profile updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessClientProfile"
+  /api/client-profiles/{id}/variables-preview/:
+    post:
+      tags: [Users]
+      summary: Preview variable replacement using client profile fields
+      operationId: clientProfilesVariablesPreview
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VariablesPreviewRequest"
+      responses:
+        "200":
+          description: Replacement preview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessVariablesPreview"
+  /api/admin/dashboard/:
+    get:
+      tags: [Admin]
+      summary: Get governance admin dashboard metrics
+      operationId: adminDashboard
+      responses:
+        "200":
+          description: Dashboard metrics and recent audit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAdminDashboard"
+        "403":
+          description: Requires ADMIN or LEAD
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /api/admin/masters/{key}/:
+    get:
+      tags: [Admin]
+      summary: List master values by key
+      operationId: adminMastersList
+      parameters:
+        - $ref: "#/components/parameters/KeyPath"
+      responses:
+        "200":
+          description: Master values
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMasterValueList"
+    post:
+      tags: [Admin]
+      summary: Create master value by key
+      operationId: adminMastersCreate
+      parameters:
+        - $ref: "#/components/parameters/KeyPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MasterValueWrite"
+      responses:
+        "201":
+          description: Master value created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMasterValue"
+  /api/admin/masters/{key}/{id}/:
+    patch:
+      tags: [Admin]
+      summary: Update master value
+      operationId: adminMastersUpdate
+      parameters:
+        - $ref: "#/components/parameters/KeyPath"
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MasterValueWrite"
+      responses:
+        "200":
+          description: Master value updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMasterValue"
+  /api/admin/users/:
+    get:
+      tags: [Admin]
+      summary: List admin-manageable users
+      operationId: adminUsersList
+      responses:
+        "200":
+          description: User rows with admin fields
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAdminUserList"
+  /api/admin/users/{id}/:
+    patch:
+      tags: [Admin]
+      summary: Update admin-managed user fields
+      operationId: adminUsersUpdate
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUserWrite"
+      responses:
+        "200":
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAdminUser"
+  /api/audit/:
+    get:
+      tags: [Admin]
+      summary: Query audit log
+      operationId: auditList
+      parameters:
+        - name: user
+          in: query
+          schema:
+            type: integer
+        - name: event_type
+          in: query
+          schema:
+            type: string
+        - name: object_type
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Audit rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAuditEventAdminList"
+  /api/admin/overrides/:
+    get:
+      tags: [Admin]
+      summary: List MET reopen override audit events
+      operationId: adminOverrides
+      responses:
+        "200":
+          description: Override rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAuditEventAdminList"
+  /api/admin/import/validate-framework/:
+    post:
+      tags: [Admin]
+      summary: Validate framework import rows and log result
+      operationId: adminImportValidateFramework
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FrameworkImportValidateRequest"
+      responses:
+        "200":
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessFrameworkImportValidateResult"
+  /api/admin/import/logs/:
+    get:
+      tags: [Admin]
+      summary: List framework import logs
+      operationId: adminImportLogs
+      responses:
+        "200":
+          description: Import logs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessImportLogList"
+  /api/frameworks/:
+    get:
+      tags: [Frameworks]
+      summary: List frameworks
+      operationId: frameworksList
+      responses:
+        "200":
+          description: Framework summary rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessFrameworkSummaryList"
+  /api/frameworks/{id}/analysis/:
+    get:
+      tags: [Frameworks]
+      summary: Framework indicator analysis summary
+      operationId: frameworksAnalysis
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Framework analysis counters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessFrameworkAnalysis"
+  /api/projects/:
+    get:
+      tags: [Projects]
+      summary: List accreditation projects
+      operationId: projectsList
+      parameters:
+        - $ref: "#/components/parameters/PageQuery"
+        - $ref: "#/components/parameters/PageSizeQuery"
+      responses:
+        "200":
+          description: Paginated projects list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessPaginatedProject"
+    post:
+      tags: [Projects]
+      summary: Create accreditation project (ADMIN/LEAD)
+      operationId: projectsCreate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectWrite"
+      responses:
+        "201":
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProject"
+        "403":
+          description: Requires ADMIN or LEAD
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /api/projects/{id}/:
+    get:
+      tags: [Projects]
+      summary: Get project detail
+      operationId: projectsRetrieve
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Project detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProject"
+    patch:
+      tags: [Projects]
+      summary: Update project fields (ADMIN/LEAD)
+      operationId: projectsUpdate
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectWrite"
+      responses:
+        "200":
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProject"
+  /api/projects/{id}/initialize-from-framework/:
+    post:
+      tags: [Projects]
+      summary: Initialize project indicators and recurring requirements from framework
+      operationId: projectsInitializeFromFramework
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitializeProjectRequest"
+      responses:
+        "200":
+          description: Initialization counts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessInitializeProjectResult"
+  /api/projects/{id}/clone/:
+    post:
+      tags: [Projects]
+      summary: Clone project scaffold without evidence/comments
+      operationId: projectsClone
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloneProjectRequest"
+      responses:
+        "201":
+          description: Cloned project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProject"
+  /api/projects/{id}/readiness/:
+    get:
+      tags: [Projects, Admin]
+      summary: Project readiness summary with risk rows
+      operationId: projectsReadiness
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Readiness summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectReadiness"
+  /api/projects/{id}/inspection-view/:
+    get:
+      tags: [Projects]
+      summary: Inspection-mode view (MET indicators only)
+      operationId: projectsInspectionView
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Inspection sections
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessInspectionView"
+  /api/projects/{id}/pre-inspection-check/:
+    get:
+      tags: [Projects]
+      summary: Pre-inspection blockers summary
+      operationId: projectsPreInspectionCheck
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Pre-inspection checklist payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessPreInspectionCheck"
+  /api/projects/{id}/standards-progress/:
+    get:
+      tags: [Projects]
+      summary: Standards progress for project
+      operationId: projectsStandardsProgress
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Standards progress rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessStandardsProgressList"
+  /api/projects/{id}/areas-progress/:
+    get:
+      tags: [Projects]
+      summary: Areas progress for project
+      operationId: projectsAreasProgress
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Areas progress rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAreasProgressList"
+  /api/dashboard/worklist/:
+    get:
+      tags: [Worklist]
+      summary: Paginated governed indicator worklist
+      operationId: dashboardWorklist
+      parameters:
+        - $ref: "#/components/parameters/PageQuery"
+        - $ref: "#/components/parameters/PageSizeQuery"
+        - name: project_id
+          in: query
+          schema: { type: integer }
+        - name: area_id
+          in: query
+          schema: { type: integer }
+        - name: standard_id
+          in: query
+          schema: { type: integer }
+        - name: status
+          in: query
+          schema: { $ref: "#/components/schemas/IndicatorStatus" }
+        - name: priority
+          in: query
+          schema: { $ref: "#/components/schemas/Priority" }
+        - name: owner_id
+          in: query
+          schema: { type: integer }
+        - name: reviewer_id
+          in: query
+          schema: { type: integer }
+        - name: approver_id
+          in: query
+          schema: { type: integer }
+        - name: recurring
+          in: query
+          schema: { type: boolean }
+        - name: due_today
+          in: query
+          schema: { type: boolean }
+        - name: overdue
+          in: query
+          schema: { type: boolean }
+        - name: search
+          in: query
+          schema: { type: string }
+        - name: evidence_approval_status
+          in: query
+          schema: { $ref: "#/components/schemas/EvidenceApprovalStatus" }
+      responses:
+        "200":
+          description: Paginated worklist rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessPaginatedDashboardRow"
+  /api/project-indicators/{id}/:
+    get:
+      tags: [Project Indicators]
+      summary: Get project indicator detail
+      operationId: projectIndicatorsRetrieve
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Full project indicator detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicatorDetail"
+  /api/project-indicators/{id}/assign/:
+    post:
+      tags: [Project Indicators]
+      summary: Assign owner/reviewer/approver and priority/due date
+      operationId: projectIndicatorsAssign
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignProjectIndicatorRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/update-working-state/:
+    post:
+      tags: [Project Indicators]
+      summary: Update working notes/priority/due date (no status mutation)
+      operationId: projectIndicatorsUpdateWorkingState
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkingStateRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/start/:
+    post:
+      tags: [Project Indicators]
+      summary: "Workflow command: start"
+      operationId: projectIndicatorsStart
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowReasonRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/send-for-review/:
+    post:
+      tags: [Project Indicators]
+      summary: "Workflow command: send-for-review"
+      operationId: projectIndicatorsSendForReview
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowReasonRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/mark-met/:
+    post:
+      tags: [Project Indicators]
+      summary: "Workflow command: mark-met"
+      operationId: projectIndicatorsMarkMet
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowReasonRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/reopen/:
+    post:
+      tags: [Project Indicators]
+      summary: "Workflow command: reopen (admin)"
+      operationId: projectIndicatorsReopen
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReopenRequest"
+      responses:
+        "200":
+          description: Updated project indicator
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectIndicator"
+  /api/project-indicators/{id}/evidence/:
+    get:
+      tags: [Evidence]
+      summary: List evidence for project indicator
+      operationId: projectIndicatorsEvidenceList
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Evidence list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessEvidenceItemList"
+  /api/evidence/:
+    post:
+      tags: [Evidence]
+      summary: Create evidence item
+      operationId: evidenceCreate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEvidenceRequest"
+      responses:
+        "201":
+          description: Evidence created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessEvidenceItem"
+  /api/evidence/{id}/update/:
+    post:
+      tags: [Evidence]
+      summary: Update evidence item (versions if already reviewed)
+      operationId: evidenceUpdate
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEvidenceRequest"
+      responses:
+        "200":
+          description: Evidence updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessEvidenceItem"
+  /api/evidence/{id}/review/:
+    post:
+      tags: [Evidence]
+      summary: Review evidence item
+      operationId: evidenceReview
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvidenceReviewRequest"
+      responses:
+        "200":
+          description: Evidence reviewed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessEvidenceItem"
+  /api/recurring/queue/:
+    get:
+      tags: [Recurring]
+      summary: List recurring queue items
+      operationId: recurringQueue
+      parameters:
+        - name: project_id
+          in: query
+          schema: { type: integer }
+        - name: frequency
+          in: query
+          schema: { $ref: "#/components/schemas/RecurrenceFrequency" }
+        - name: owner_id
+          in: query
+          schema: { type: integer }
+        - name: due_today
+          in: query
+          schema: { type: boolean }
+        - name: overdue
+          in: query
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: Recurring queue rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessRecurringInstanceList"
+  /api/recurring/instances/{id}/submit/:
+    post:
+      tags: [Recurring]
+      summary: Submit recurring instance
+      operationId: recurringSubmit
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitRecurringRequest"
+      responses:
+        "200":
+          description: Recurring instance updated to SUBMITTED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessRecurringInstance"
+  /api/recurring/instances/{id}/approve/:
+    post:
+      tags: [Recurring]
+      summary: Approve or reject recurring instance
+      operationId: recurringApprove
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApproveRecurringRequest"
+      responses:
+        "200":
+          description: Recurring instance reviewed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessRecurringInstance"
+  /api/project-indicators/{id}/ai-outputs/:
+    get:
+      tags: [AI Advisory]
+      summary: List AI outputs for project indicator
+      operationId: aiOutputsList
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: AI outputs list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAIOutputList"
+  /api/ai/generate/:
+    post:
+      tags: [AI Advisory]
+      summary: Generate advisory output
+      operationId: aiGenerate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateAIRequest"
+      responses:
+        "201":
+          description: AI output generated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAIOutput"
+  /api/ai/outputs/{id}/accept/:
+    post:
+      tags: [AI Advisory]
+      summary: Accept AI output (advisory acceptance only)
+      operationId: aiAccept
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+      responses:
+        "200":
+          description: AI output accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessAIOutput"
+  /api/exports/projects/{id}/excel/:
+    get:
+      tags: [Exports]
+      summary: Generate structured excel export payload
+      operationId: exportsProjectExcel
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Export payload with bundle/warnings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectExcelExport"
+  /api/exports/projects/{id}/print-bundle/:
+    get:
+      tags: [Exports]
+      summary: Generate structured print bundle payload
+      operationId: exportsProjectPrintBundle
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Print bundle sections with warnings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectPrintBundleExport"
+  /api/exports/projects/{id}/physical-retrieval/:
+    get:
+      tags: [Exports]
+      summary: Generate physical evidence retrieval list
+      operationId: exportsProjectPhysicalRetrieval
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Physical evidence retrieval items
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessProjectPhysicalRetrievalExport"
+  /api/exports/projects/{id}/history/:
+    get:
+      tags: [Exports, Admin]
+      summary: List project export jobs
+      operationId: exportsProjectHistory
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Export job rows
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessExportJobList"
+  /api/exports/projects/{id}/generate/:
+    post:
+      tags: [Exports, Admin]
+      summary: Create export job record
+      operationId: exportsProjectGenerate
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateExportRequest"
+      responses:
+        "201":
+          description: Export job created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessExportJob"
 components:
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    KeyPath:
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string
+    RoleQuery:
+      name: role
+      in: query
+      schema:
+        $ref: "#/components/schemas/UserRole"
+    SearchQuery:
+      name: search
+      in: query
+      schema:
+        type: string
+    PageQuery:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+    PageSizeQuery:
+      name: page_size
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
   schemas:
-    Placeholder:
+    ErrorEnvelope:
+      type: object
+      additionalProperties: false
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details: {}
+          required: [code, message, details]
+      required: [success, error]
+    UserRole:
+      type: string
+      enum: [ADMIN, LEAD, OWNER, REVIEWER, APPROVER]
+    ProjectStatus:
+      type: string
+      enum: [DRAFT, ACTIVE, COMPLETED, ARCHIVED]
+    IndicatorStatus:
+      type: string
+      enum: [NOT_STARTED, IN_PROGRESS, UNDER_REVIEW, MET, BLOCKED]
+    Priority:
+      type: string
+      enum: [LOW, MEDIUM, HIGH, CRITICAL]
+    RecurrenceFrequency:
+      type: string
+      enum: [NONE, DAILY, WEEKLY, MONTHLY, YEARLY]
+    RecurrenceMode:
+      type: string
+      enum: [DIGITAL, UPLOAD, EITHER]
+    EvidenceSourceType:
+      type: string
+      enum: [UPLOAD, URL, TEXT_NOTE, GENERATED, EXTERNAL_REF]
+    EvidenceValidityStatus:
+      type: string
+      enum: [UNKNOWN, VALID, INVALID]
+    EvidenceCompletenessStatus:
+      type: string
+      enum: [UNKNOWN, COMPLETE, INCOMPLETE]
+    EvidenceApprovalStatus:
+      type: string
+      enum: [PENDING, APPROVED, REJECTED]
+    RecurringInstanceStatus:
+      type: string
+      enum: [PENDING, SUBMITTED, APPROVED, MISSED]
+    AIOutputType:
+      type: string
+      enum: [GUIDANCE, DRAFT, ASSESSMENT]
+    EvidenceReusePolicy:
+      type: string
+      enum: [NONE, MANUAL_REVIEW, AUTO_ALLOWED]
+    PhysicalLocationType:
+      type: string
+      enum: [BINDER, CABINET, ROOM, OTHER]
+    UserSummary:
       type: object
       properties:
-        message:
+        id: { type: integer }
+        username: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+        role: { $ref: "#/components/schemas/UserRole" }
+      required: [id, username, first_name, last_name, role]
+    FrameworkSummary:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        description: { type: string }
+      required: [id, name, description]
+    FrameworkAnalysis:
+      type: object
+      properties:
+        framework_id: { type: integer }
+        framework_name: { type: string }
+        total_indicators: { type: integer }
+        recurring_indicators: { type: integer }
+        one_time_indicators: { type: integer }
+        physical_evidence_indicators: { type: integer }
+        register_log_indicators: { type: integer }
+        document_indicators: { type: integer }
+        meeting_minutes_indicators: { type: integer }
+      required:
+        - framework_id
+        - framework_name
+        - total_indicators
+        - recurring_indicators
+        - one_time_indicators
+        - physical_evidence_indicators
+        - register_log_indicators
+        - document_indicators
+        - meeting_minutes_indicators
+    ClientProfile:
+      type: object
+      properties:
+        id: { type: integer }
+        organization_name: { type: string }
+        address: { type: string }
+        license_number: { type: string }
+        registration_number: { type: string }
+        contact_person: { type: string }
+        department_names:
+          type: array
+          items: { type: string }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+      required:
+        - id
+        - organization_name
+        - address
+        - license_number
+        - registration_number
+        - contact_person
+        - department_names
+        - created_at
+        - updated_at
+    ClientProfileWrite:
+      type: object
+      properties:
+        organization_name: { type: string }
+        address: { type: string }
+        license_number: { type: string }
+        registration_number: { type: string }
+        contact_person: { type: string }
+        department_names:
+          type: array
+          items: { type: string }
+    VariablesPreviewRequest:
+      type: object
+      properties:
+        text: { type: string }
+      required: [text]
+    VariablesPreviewResponse:
+      type: object
+      properties:
+        text: { type: string }
+        replaced_text: { type: string }
+      required: [text, replaced_text]
+    Project:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        client_name: { type: string }
+        accrediting_body_name: { type: string }
+        framework: { type: integer }
+        client_profile:
+          type: integer
+          nullable: true
+        status: { $ref: "#/components/schemas/ProjectStatus" }
+        start_date: { type: string, format: date }
+        target_date: { type: string, format: date }
+        notes: { type: string }
+        created_by:
+          type: integer
+          nullable: true
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        total_indicators: { type: integer }
+        met_indicators: { type: integer }
+        pending_indicators: { type: integer }
+        recurring_due_today: { type: integer }
+        overdue_recurring_items: { type: integer }
+      required:
+        - id
+        - name
+        - client_name
+        - accrediting_body_name
+        - framework
+        - client_profile
+        - status
+        - start_date
+        - target_date
+        - notes
+        - created_by
+        - created_at
+        - updated_at
+        - total_indicators
+        - met_indicators
+        - pending_indicators
+        - recurring_due_today
+        - overdue_recurring_items
+    ProjectWrite:
+      type: object
+      properties:
+        name: { type: string }
+        client_name: { type: string }
+        accrediting_body_name: { type: string }
+        framework: { type: integer }
+        client_profile:
+          type: integer
+          nullable: true
+        status: { $ref: "#/components/schemas/ProjectStatus" }
+        start_date: { type: string, format: date }
+        target_date: { type: string, format: date }
+        notes: { type: string }
+      required: [name, client_name, accrediting_body_name, framework, start_date, target_date]
+    CloneProjectRequest:
+      type: object
+      properties:
+        name: { type: string }
+        client_name: { type: string }
+      required: [name, client_name]
+    InitializeProjectRequest:
+      type: object
+      properties:
+        create_initial_instances: { type: boolean, default: true }
+    InitializeProjectResult:
+      type: object
+      properties:
+        created_project_indicators: { type: integer }
+        recurring_requirements_processed: { type: integer }
+      required: [created_project_indicators, recurring_requirements_processed]
+    IndicatorMaster:
+      type: object
+      properties:
+        id: { type: integer }
+        framework: { type: integer }
+        area: { type: integer }
+        standard: { type: integer }
+        code: { type: string }
+        text: { type: string }
+        required_evidence_description: { type: string }
+        evidence_type: { type: string }
+        document_type: { type: string }
+        fulfillment_guidance: { type: string }
+        is_recurring: { type: boolean }
+        recurrence_frequency: { $ref: "#/components/schemas/RecurrenceFrequency" }
+        recurrence_mode: { $ref: "#/components/schemas/RecurrenceMode" }
+        minimum_required_evidence_count: { type: integer }
+        reusable_template_allowed: { type: boolean }
+        evidence_reuse_policy: { $ref: "#/components/schemas/EvidenceReusePolicy" }
+        is_active: { type: boolean }
+        sort_order: { type: integer }
+      required:
+        - id
+        - framework
+        - area
+        - standard
+        - code
+        - text
+        - required_evidence_description
+        - evidence_type
+        - document_type
+        - fulfillment_guidance
+        - is_recurring
+        - recurrence_frequency
+        - recurrence_mode
+        - minimum_required_evidence_count
+        - reusable_template_allowed
+        - evidence_reuse_policy
+        - is_active
+        - sort_order
+    ProjectIndicator:
+      type: object
+      properties:
+        id: { type: integer }
+        project: { type: integer }
+        indicator: { $ref: "#/components/schemas/IndicatorMaster" }
+        current_status: { $ref: "#/components/schemas/IndicatorStatus" }
+        is_finalized: { type: boolean }
+        is_met: { type: boolean }
+        owner:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        reviewer:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        approver:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        priority: { $ref: "#/components/schemas/Priority" }
+        due_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        notes: { type: string }
+        last_updated_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+        last_updated_at: { type: string, format: date-time }
+      required:
+        - id
+        - project
+        - indicator
+        - current_status
+        - is_finalized
+        - is_met
+        - owner
+        - reviewer
+        - approver
+        - priority
+        - due_date
+        - notes
+        - last_updated_by
+        - last_updated_at
+    EvidenceItem:
+      type: object
+      properties:
+        id: { type: integer }
+        project_indicator: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        source_type: { $ref: "#/components/schemas/EvidenceSourceType" }
+        file_or_url: { type: string }
+        text_content: { type: string }
+        version_no: { type: integer }
+        is_current: { type: boolean }
+        evidence_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        uploaded_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+        uploaded_at: { type: string, format: date-time }
+        notes: { type: string }
+        validity_status: { $ref: "#/components/schemas/EvidenceValidityStatus" }
+        completeness_status: { $ref: "#/components/schemas/EvidenceCompletenessStatus" }
+        approval_status: { $ref: "#/components/schemas/EvidenceApprovalStatus" }
+        reviewed_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+        reviewed_at:
+          oneOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        review_notes: { type: string }
+        physical_location_type:
+          oneOf:
+            - $ref: "#/components/schemas/PhysicalLocationType"
+            - type: string
+              enum: [""]
+        location_details: { type: string }
+        file_label: { type: string }
+        is_physical_copy_available: { type: boolean }
+      required:
+        - id
+        - project_indicator
+        - title
+        - description
+        - source_type
+        - file_or_url
+        - text_content
+        - version_no
+        - is_current
+        - evidence_date
+        - uploaded_by
+        - uploaded_at
+        - notes
+        - validity_status
+        - completeness_status
+        - approval_status
+        - reviewed_by
+        - reviewed_at
+        - review_notes
+        - physical_location_type
+        - location_details
+        - file_label
+        - is_physical_copy_available
+    RecurringRequirement:
+      type: object
+      properties:
+        id: { type: integer }
+        frequency: { $ref: "#/components/schemas/RecurrenceFrequency" }
+        mode: { $ref: "#/components/schemas/RecurrenceMode" }
+        start_date: { type: string, format: date }
+        end_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        is_active: { type: boolean }
+        instructions: { type: string }
+        expected_title_template: { type: string }
+      required:
+        - id
+        - frequency
+        - mode
+        - start_date
+        - end_date
+        - is_active
+        - instructions
+        - expected_title_template
+    RecurringInstance:
+      type: object
+      properties:
+        id: { type: integer }
+        project_indicator_id: { type: integer }
+        project_id: { type: integer }
+        project_name: { type: string }
+        indicator_id: { type: integer }
+        indicator_code: { type: string }
+        indicator_text: { type: string }
+        due_date: { type: string, format: date }
+        period_label: { type: string }
+        status: { $ref: "#/components/schemas/RecurringInstanceStatus" }
+        linked_evidence_item:
+          oneOf:
+            - type: integer
+            - type: "null"
+        linked_evidence_title: { type: string }
+        submitted_at:
+          oneOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        approved_at:
+          oneOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        notes: { type: string }
+      required:
+        - id
+        - project_indicator_id
+        - project_id
+        - project_name
+        - indicator_id
+        - indicator_code
+        - indicator_text
+        - due_date
+        - period_label
+        - status
+        - linked_evidence_item
+        - linked_evidence_title
+        - submitted_at
+        - approved_at
+        - notes
+    AIOutput:
+      type: object
+      properties:
+        id: { type: integer }
+        project_indicator: { type: integer }
+        output_type: { $ref: "#/components/schemas/AIOutputType" }
+        prompt_context_snapshot:
+          type: object
+          additionalProperties: true
+        content: { type: string }
+        model_name: { type: string }
+        created_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+        created_at: { type: string, format: date-time }
+        accepted: { type: boolean }
+        accepted_at:
+          oneOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        accepted_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+      required:
+        - id
+        - project_indicator
+        - output_type
+        - prompt_context_snapshot
+        - content
+        - model_name
+        - created_by
+        - created_at
+        - accepted
+        - accepted_at
+        - accepted_by
+    AuditEvent:
+      type: object
+      properties:
+        id: { type: integer }
+        actor:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        event_type: { type: string }
+        object_type: { type: string }
+        object_id: { type: string }
+        before_json:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        after_json:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        reason:
+          oneOf:
+            - type: string
+            - type: "null"
+        timestamp: { type: string, format: date-time }
+      required:
+        - id
+        - actor
+        - event_type
+        - object_type
+        - object_id
+        - before_json
+        - after_json
+        - reason
+        - timestamp
+    ProjectIndicatorComment:
+      type: object
+      properties:
+        id: { type: integer }
+        type:
           type: string
-          example: Contract to be finalized before implementation.
+          enum: [WORKING, REVIEW, APPROVAL]
+        text: { type: string }
+        created_by:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        created_at: { type: string, format: date-time }
+      required: [id, type, text, created_by, created_at]
+    ProjectIndicatorStatusHistory:
+      type: object
+      properties:
+        id: { type: integer }
+        from_status: { $ref: "#/components/schemas/IndicatorStatus" }
+        to_status: { $ref: "#/components/schemas/IndicatorStatus" }
+        action: { type: string }
+        reason: { type: string }
+        actor:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        timestamp: { type: string, format: date-time }
+      required: [id, from_status, to_status, action, reason, actor, timestamp]
+    ProjectIndicatorReadinessFlags:
+      type: object
+      properties:
+        approved_evidence_count: { type: integer }
+        total_current_evidence_count: { type: integer }
+        rejected_current_evidence_count: { type: integer }
+        minimum_required_evidence_count: { type: integer }
+        has_minimum_required_evidence: { type: boolean }
+        missing_evidence_count: { type: integer }
+        all_current_evidence_approved: { type: boolean }
+        no_rejected_current_evidence: { type: boolean }
+        overdue_recurring_instances_count: { type: integer }
+        overdue_recurring_count: { type: integer }
+        recurring_requirements_clear: { type: boolean }
+        is_ready_for_review: { type: boolean }
+        is_blocked: { type: boolean }
+        rejected_evidence_count: { type: integer }
+        ready_for_met: { type: boolean }
+        risk:
+          type: object
+          properties:
+            risk_level:
+              type: string
+              enum: [LOW, MEDIUM, HIGH]
+            rejected_evidence_count: { type: integer }
+            overdue_recurring_count: { type: integer }
+            incomplete_evidence_count: { type: integer }
+            no_evidence_near_due: { type: boolean }
+            in_review_long_time: { type: boolean }
+          required:
+            - risk_level
+            - rejected_evidence_count
+            - overdue_recurring_count
+            - incomplete_evidence_count
+            - no_evidence_near_due
+            - in_review_long_time
+      required:
+        - approved_evidence_count
+        - total_current_evidence_count
+        - rejected_current_evidence_count
+        - minimum_required_evidence_count
+        - has_minimum_required_evidence
+        - missing_evidence_count
+        - all_current_evidence_approved
+        - no_rejected_current_evidence
+        - overdue_recurring_instances_count
+        - overdue_recurring_count
+        - recurring_requirements_clear
+        - is_ready_for_review
+        - is_blocked
+        - rejected_evidence_count
+        - ready_for_met
+        - risk
+    ProjectIndicatorDetail:
+      allOf:
+        - $ref: "#/components/schemas/ProjectIndicator"
+        - type: object
+          properties:
+            evidence_items:
+              type: array
+              items: { $ref: "#/components/schemas/EvidenceItem" }
+            recurring_requirement:
+              oneOf:
+                - $ref: "#/components/schemas/RecurringRequirement"
+                - type: "null"
+            recurring_instances:
+              type: array
+              items: { $ref: "#/components/schemas/RecurringInstance" }
+            comments:
+              type: array
+              items: { $ref: "#/components/schemas/ProjectIndicatorComment" }
+            status_history:
+              type: array
+              items: { $ref: "#/components/schemas/ProjectIndicatorStatusHistory" }
+            ai_outputs:
+              type: array
+              items: { $ref: "#/components/schemas/AIOutput" }
+            audit_summary:
+              type: array
+              items: { $ref: "#/components/schemas/AuditEvent" }
+            readiness_flags:
+              $ref: "#/components/schemas/ProjectIndicatorReadinessFlags"
+          required:
+            - evidence_items
+            - recurring_requirement
+            - recurring_instances
+            - comments
+            - status_history
+            - ai_outputs
+            - audit_summary
+            - readiness_flags
+    DashboardRow:
+      type: object
+      properties:
+        project_indicator_id: { type: integer }
+        project_id: { type: integer }
+        project_name: { type: string }
+        area_id: { type: integer }
+        area_name: { type: string }
+        standard_id: { type: integer }
+        standard_name: { type: string }
+        indicator_id: { type: integer }
+        indicator_code: { type: string }
+        indicator_text: { type: string }
+        current_status: { $ref: "#/components/schemas/IndicatorStatus" }
+        is_met: { type: boolean }
+        priority: { $ref: "#/components/schemas/Priority" }
+        owner:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+        due_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        is_recurring: { type: boolean }
+        recurrence_frequency: { $ref: "#/components/schemas/RecurrenceFrequency" }
+        approved_evidence_count: { type: integer }
+        total_evidence_count: { type: integer }
+        pending_recurring_instances_count: { type: integer }
+        overdue_recurring_instances_count: { type: integer }
+        risk:
+          type: object
+          properties:
+            risk_level:
+              type: string
+              enum: [LOW, MEDIUM, HIGH]
+            rejected_evidence_count: { type: integer }
+            overdue_recurring_count: { type: integer }
+            incomplete_evidence_count: { type: integer }
+            no_evidence_near_due: { type: boolean }
+            in_review_long_time: { type: boolean }
+          required:
+            - risk_level
+            - rejected_evidence_count
+            - overdue_recurring_count
+            - incomplete_evidence_count
+            - no_evidence_near_due
+            - in_review_long_time
+        last_updated_at: { type: string, format: date-time }
+      required:
+        - project_indicator_id
+        - project_id
+        - project_name
+        - area_id
+        - area_name
+        - standard_id
+        - standard_name
+        - indicator_id
+        - indicator_code
+        - indicator_text
+        - current_status
+        - is_met
+        - priority
+        - owner
+        - due_date
+        - is_recurring
+        - recurrence_frequency
+        - approved_evidence_count
+        - total_evidence_count
+        - pending_recurring_instances_count
+        - overdue_recurring_instances_count
+        - risk
+        - last_updated_at
+    StandardsProgressRow:
+      type: object
+      properties:
+        area_id: { type: integer }
+        area_code: { type: string }
+        area_name: { type: string }
+        standard_id: { type: integer }
+        standard_code: { type: string }
+        standard_name: { type: string }
+        total_indicators: { type: integer }
+        met_indicators: { type: integer }
+        blocked_count: { type: integer }
+        blocked_indicators: { type: integer }
+        in_review_count: { type: integer }
+        not_started_count: { type: integer }
+        overdue_count: { type: integer }
+        readiness_score: { type: number }
+        progress_percent: { type: number }
+      required:
+        - area_id
+        - area_code
+        - area_name
+        - standard_id
+        - standard_code
+        - standard_name
+        - total_indicators
+        - met_indicators
+        - blocked_count
+        - blocked_indicators
+        - in_review_count
+        - not_started_count
+        - overdue_count
+        - readiness_score
+        - progress_percent
+    AreasProgressRow:
+      type: object
+      properties:
+        area_id: { type: integer }
+        area_code: { type: string }
+        area_name: { type: string }
+        total_standards: { type: integer }
+        completed_standards: { type: integer }
+        high_risk_standards_count: { type: integer }
+        readiness_score: { type: number }
+        progress_percent: { type: number }
+      required:
+        - area_id
+        - area_code
+        - area_name
+        - total_standards
+        - completed_standards
+        - high_risk_standards_count
+        - readiness_score
+        - progress_percent
+    AssignProjectIndicatorRequest:
+      type: object
+      properties:
+        owner_id:
+          oneOf:
+            - type: integer
+            - type: "null"
+        reviewer_id:
+          oneOf:
+            - type: integer
+            - type: "null"
+        approver_id:
+          oneOf:
+            - type: integer
+            - type: "null"
+        priority: { $ref: "#/components/schemas/Priority" }
+        due_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        notes: { type: string }
+    UpdateWorkingStateRequest:
+      type: object
+      properties:
+        notes: { type: string }
+        due_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        priority: { $ref: "#/components/schemas/Priority" }
+      required: [notes]
+    WorkflowReasonRequest:
+      type: object
+      properties:
+        reason: { type: string }
+    ReopenRequest:
+      type: object
+      properties:
+        reason: { type: string }
+      required: [reason]
+    CreateEvidenceRequest:
+      type: object
+      properties:
+        project_indicator_id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        source_type: { $ref: "#/components/schemas/EvidenceSourceType" }
+        file_or_url: { type: string }
+        text_content: { type: string }
+        evidence_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        notes: { type: string }
+        physical_location_type:
+          oneOf:
+            - $ref: "#/components/schemas/PhysicalLocationType"
+            - type: string
+              enum: [""]
+        location_details: { type: string }
+        file_label: { type: string }
+        is_physical_copy_available: { type: boolean }
+      required: [project_indicator_id, title, source_type]
+    UpdateEvidenceRequest:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        notes: { type: string }
+        file_or_url: { type: string }
+        text_content: { type: string }
+        evidence_date:
+          oneOf:
+            - type: string
+              format: date
+            - type: "null"
+        physical_location_type:
+          oneOf:
+            - $ref: "#/components/schemas/PhysicalLocationType"
+            - type: string
+              enum: [""]
+        location_details: { type: string }
+        file_label: { type: string }
+        is_physical_copy_available: { type: boolean }
+    EvidenceReviewRequest:
+      type: object
+      properties:
+        validity_status: { $ref: "#/components/schemas/EvidenceValidityStatus" }
+        completeness_status: { $ref: "#/components/schemas/EvidenceCompletenessStatus" }
+        approval_status: { $ref: "#/components/schemas/EvidenceApprovalStatus" }
+        review_notes: { type: string }
+      required: [validity_status, completeness_status, approval_status]
+    SubmitRecurringRequest:
+      type: object
+      properties:
+        evidence_item_id:
+          oneOf:
+            - type: integer
+            - type: "null"
+        text_content: { type: string }
+        notes: { type: string }
+    ApproveRecurringRequest:
+      type: object
+      properties:
+        approval_status:
+          type: string
+          enum: [APPROVED, REJECTED]
+        notes: { type: string }
+      required: [approval_status]
+    GenerateAIRequest:
+      type: object
+      properties:
+        project_indicator_id: { type: integer }
+        output_type: { $ref: "#/components/schemas/AIOutputType" }
+        user_instruction: { type: string }
+      required: [project_indicator_id, output_type]
+    AdminDashboard:
+      type: object
+      properties:
+        total_projects: { type: integer }
+        active_projects: { type: integer }
+        overdue_indicators: { type: integer }
+        overdue_recurring_items: { type: integer }
+        indicators_under_review: { type: integer }
+        recent_audit_events:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              event_type: { type: string }
+              object_type: { type: string }
+              object_id: { type: string }
+              reason:
+                oneOf:
+                  - type: string
+                  - type: "null"
+              timestamp: { type: string, format: date-time }
+              actor__id:
+                oneOf:
+                  - type: integer
+                  - type: "null"
+              actor__username:
+                oneOf:
+                  - type: string
+                  - type: "null"
+            required: [id, event_type, object_type, object_id, reason, timestamp, actor__id, actor__username]
+      required:
+        - total_projects
+        - active_projects
+        - overdue_indicators
+        - overdue_recurring_items
+        - indicators_under_review
+        - recent_audit_events
+    ProjectReadiness:
+      type: object
+      properties:
+        overall_score: { type: number }
+        percent_met: { type: number }
+        percent_in_progress: { type: number }
+        percent_blocked: { type: number }
+        recurring_compliance_score: { type: number }
+        high_risk_indicators:
+          type: array
+          items:
+            type: object
+            properties:
+              project_indicator_id: { type: integer }
+              indicator_code: { type: string }
+              rejected_evidence_count: { type: integer }
+              overdue_recurring_count: { type: integer }
+              no_evidence_near_due: { type: boolean }
+            required:
+              - project_indicator_id
+              - indicator_code
+              - rejected_evidence_count
+              - overdue_recurring_count
+              - no_evidence_near_due
+      required:
+        - overall_score
+        - percent_met
+        - percent_in_progress
+        - percent_blocked
+        - recurring_compliance_score
+        - high_risk_indicators
+    ExportJob:
+      type: object
+      properties:
+        id: { type: integer }
+        project: { type: integer }
+        type: { type: string }
+        created_by:
+          oneOf:
+            - type: integer
+            - type: "null"
+        created_at: { type: string, format: date-time }
+        status: { type: string }
+        file_name: { type: string }
+        parameters:
+          type: object
+          additionalProperties: true
+        warnings:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required:
+        - id
+        - project
+        - type
+        - created_by
+        - created_at
+        - status
+        - file_name
+        - parameters
+        - warnings
+    ImportLog:
+      type: object
+      properties:
+        id: { type: integer }
+        file_name: { type: string }
+        rows_processed: { type: integer }
+        errors:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        created_at: { type: string, format: date-time }
+      required: [id, file_name, rows_processed, errors, created_at]
+    FrameworkImportValidateRequest:
+      type: object
+      properties:
+        file_name: { type: string }
+        rows:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required: [rows]
+    FrameworkImportValidateResult:
+      type: object
+      properties:
+        rows_processed: { type: integer }
+        errors:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        log_id: { type: integer }
+      required: [rows_processed, errors, log_id]
+    MasterValue:
+      type: object
+      properties:
+        id: { type: integer }
+        key: { type: string }
+        code: { type: string }
+        label: { type: string }
+        is_active: { type: boolean }
+        sort_order: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+      required: [id, key, code, label, is_active, sort_order, created_at, updated_at]
+    MasterValueWrite:
+      type: object
+      properties:
+        code: { type: string }
+        label: { type: string }
+        is_active: { type: boolean }
+        sort_order: { type: integer }
+    AdminUser:
+      type: object
+      properties:
+        id: { type: integer }
+        username: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+        email: { type: string }
+        role: { $ref: "#/components/schemas/UserRole" }
+        is_active: { type: boolean }
+        department:
+          oneOf:
+            - type: integer
+            - type: "null"
+        department_name:
+          oneOf:
+            - type: string
+            - type: "null"
+      required:
+        - id
+        - username
+        - first_name
+        - last_name
+        - email
+        - role
+        - is_active
+        - department
+        - department_name
+    AdminUserWrite:
+      type: object
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        email: { type: string }
+        role: { $ref: "#/components/schemas/UserRole" }
+        is_active: { type: boolean }
+        department:
+          oneOf:
+            - type: integer
+            - type: "null"
+    AuditEventAdmin:
+      type: object
+      properties:
+        id: { type: integer }
+        actor:
+          oneOf:
+            - type: integer
+            - type: "null"
+        actor_username:
+          oneOf:
+            - type: string
+            - type: "null"
+        event_type: { type: string }
+        object_type: { type: string }
+        object_id: { type: string }
+        before_json:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        after_json:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: "null"
+        reason:
+          oneOf:
+            - type: string
+            - type: "null"
+        timestamp: { type: string, format: date-time }
+      required:
+        - id
+        - actor
+        - actor_username
+        - event_type
+        - object_type
+        - object_id
+        - before_json
+        - after_json
+        - reason
+        - timestamp
+    PrintBundleSection:
+      type: object
+      properties:
+        name: { type: string }
+        standards:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              indicators:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    project_indicator_id: { type: integer }
+                    indicator_code: { type: string }
+                    indicator_text: { type: string }
+                    status: { $ref: "#/components/schemas/IndicatorStatus" }
+                    notes: { type: string }
+                    reusable_template_allowed: { type: boolean }
+                    evidence_reuse_policy: { $ref: "#/components/schemas/EvidenceReusePolicy" }
+                    evidence_list:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id: { type: integer }
+                          title: { type: string }
+                          approval_status: { $ref: "#/components/schemas/EvidenceApprovalStatus" }
+                          source_type: { $ref: "#/components/schemas/EvidenceSourceType" }
+                          order: { type: integer }
+                          notes: { type: string }
+                          physical_location_type:
+                            oneOf:
+                              - $ref: "#/components/schemas/PhysicalLocationType"
+                              - type: string
+                                enum: [""]
+                          location_details: { type: string }
+                          file_label: { type: string }
+                          is_physical_copy_available: { type: boolean }
+                        required:
+                          - id
+                          - title
+                          - approval_status
+                          - source_type
+                          - order
+                          - notes
+                          - physical_location_type
+                          - location_details
+                          - file_label
+                          - is_physical_copy_available
+                  required:
+                    - project_indicator_id
+                    - indicator_code
+                    - indicator_text
+                    - status
+                    - notes
+                    - reusable_template_allowed
+                    - evidence_reuse_policy
+                    - evidence_list
+            required: [name, indicators]
+      required: [name, standards]
+    ProjectExcelExportResponse:
+      type: object
+      properties:
+        format: { type: string, const: excel }
+        project_id: { type: integer }
+        status: { type: string, enum: [ready, warning] }
+        message: { type: string }
+        bundle:
+          type: object
+          properties:
+            sections:
+              type: array
+              items: { $ref: "#/components/schemas/PrintBundleSection" }
+          required: [sections]
+        warnings:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required: [format, project_id, status, message, bundle, warnings]
+    ProjectPrintBundleExportResponse:
+      type: object
+      properties:
+        format: { type: string, const: print-bundle }
+        project_id: { type: integer }
+        status: { type: string, enum: [ready, warning] }
+        message: { type: string }
+        sections:
+          type: array
+          items: { $ref: "#/components/schemas/PrintBundleSection" }
+        warnings:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required: [format, project_id, status, message, sections, warnings]
+    ProjectPhysicalRetrievalExportResponse:
+      type: object
+      properties:
+        format: { type: string, const: physical-retrieval }
+        project_id: { type: integer }
+        status: { type: string, const: ready }
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              area: { type: string }
+              standard: { type: string }
+              indicator_code: { type: string }
+              evidence_title: { type: string }
+              binder_or_location:
+                oneOf:
+                  - $ref: "#/components/schemas/PhysicalLocationType"
+                  - type: string
+                    enum: [""]
+              location_details: { type: string }
+              file_label: { type: string }
+            required:
+              - area
+              - standard
+              - indicator_code
+              - evidence_title
+              - binder_or_location
+              - location_details
+              - file_label
+      required: [format, project_id, status, items]
+    InspectionViewResponse:
+      type: object
+      properties:
+        sections:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              standards:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: { type: string }
+                    indicators:
+                      type: array
+                      items:
+                        type: object
+                        additionalProperties: true
+                  required: [name, indicators]
+            required: [name, standards]
+      required: [sections]
+    PreInspectionCheckResponse:
+      type: object
+      properties:
+        missing_evidence:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        unapproved_items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        overdue_recurring:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        high_risk_indicators:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required: [missing_evidence, unapproved_items, overdue_recurring, high_risk_indicators]
+    GenerateExportRequest:
+      type: object
+      properties:
+        type: { type: string }
+        parameters:
+          type: object
+          additionalProperties: true
+    AuthSession:
+      type: object
+      properties:
+        authenticated: { type: boolean }
+        user:
+          oneOf:
+            - $ref: "#/components/schemas/UserSummary"
+            - type: "null"
+      required: [authenticated, user]
+    AuthLoginRequest:
+      type: object
+      properties:
+        username: { type: string }
+        password: { type: string }
+      required: [username, password]
+    BackendHealth:
+      type: object
+      properties:
+        status: { type: string }
+        service: { type: string }
+        database: { type: string }
+      required: [status, service, database]
+    PaginatedProject:
+      type: object
+      properties:
+        count: { type: integer }
+        next:
+          oneOf:
+            - type: string
+            - type: "null"
+        previous:
+          oneOf:
+            - type: string
+            - type: "null"
+        results:
+          type: array
+          items: { $ref: "#/components/schemas/Project" }
+      required: [count, next, previous, results]
+    PaginatedDashboardRow:
+      type: object
+      properties:
+        count: { type: integer }
+        next:
+          oneOf:
+            - type: string
+            - type: "null"
+        previous:
+          oneOf:
+            - type: string
+            - type: "null"
+        results:
+          type: array
+          items: { $ref: "#/components/schemas/DashboardRow" }
+      required: [count, next, previous, results]
+    SuccessAuthSession:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/AuthSession" }
+      required: [success, data]
+    SuccessBackendHealth:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/BackendHealth" }
+      required: [success, data]
+    SuccessUserSummaryList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/UserSummary" }
+      required: [success, data]
+    SuccessClientProfile:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ClientProfile" }
+      required: [success, data]
+    SuccessClientProfileList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/ClientProfile" }
+      required: [success, data]
+    SuccessVariablesPreview:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/VariablesPreviewResponse" }
+      required: [success, data]
+    SuccessFrameworkSummaryList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/FrameworkSummary" }
+      required: [success, data]
+    SuccessFrameworkAnalysis:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/FrameworkAnalysis" }
+      required: [success, data]
+    SuccessProject:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/Project" }
+      required: [success, data]
+    SuccessPaginatedProject:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/PaginatedProject" }
+      required: [success, data]
+    SuccessInitializeProjectResult:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/InitializeProjectResult" }
+      required: [success, data]
+    SuccessProjectReadiness:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectReadiness" }
+      required: [success, data]
+    SuccessInspectionView:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/InspectionViewResponse" }
+      required: [success, data]
+    SuccessPreInspectionCheck:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/PreInspectionCheckResponse" }
+      required: [success, data]
+    SuccessStandardsProgressList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/StandardsProgressRow" }
+      required: [success, data]
+    SuccessAreasProgressList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/AreasProgressRow" }
+      required: [success, data]
+    SuccessPaginatedDashboardRow:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/PaginatedDashboardRow" }
+      required: [success, data]
+    SuccessProjectIndicator:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectIndicator" }
+      required: [success, data]
+    SuccessProjectIndicatorDetail:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectIndicatorDetail" }
+      required: [success, data]
+    SuccessEvidenceItem:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/EvidenceItem" }
+      required: [success, data]
+    SuccessEvidenceItemList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/EvidenceItem" }
+      required: [success, data]
+    SuccessRecurringInstance:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/RecurringInstance" }
+      required: [success, data]
+    SuccessRecurringInstanceList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/RecurringInstance" }
+      required: [success, data]
+    SuccessAIOutput:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/AIOutput" }
+      required: [success, data]
+    SuccessAIOutputList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/AIOutput" }
+      required: [success, data]
+    SuccessProjectExcelExport:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectExcelExportResponse" }
+      required: [success, data]
+    SuccessProjectPrintBundleExport:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectPrintBundleExportResponse" }
+      required: [success, data]
+    SuccessProjectPhysicalRetrievalExport:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ProjectPhysicalRetrievalExportResponse" }
+      required: [success, data]
+    SuccessExportJob:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/ExportJob" }
+      required: [success, data]
+    SuccessExportJobList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/ExportJob" }
+      required: [success, data]
+    SuccessAdminDashboard:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/AdminDashboard" }
+      required: [success, data]
+    SuccessMasterValue:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/MasterValue" }
+      required: [success, data]
+    SuccessMasterValueList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/MasterValue" }
+      required: [success, data]
+    SuccessAdminUser:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/AdminUser" }
+      required: [success, data]
+    SuccessAdminUserList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/AdminUser" }
+      required: [success, data]
+    SuccessAuditEventAdminList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/AuditEventAdmin" }
+      required: [success, data]
+    SuccessImportLogList:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/ImportLog" }
+      required: [success, data]
+    SuccessFrameworkImportValidateResult:
+      type: object
+      properties:
+        success: { type: boolean, const: true }
+        data: { $ref: "#/components/schemas/FrameworkImportValidateResult" }
+      required: [success, data]

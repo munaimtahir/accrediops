@@ -1,0 +1,1030 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ · tests/project-management-form.test.tsx (1)
+ · tests/create-project-form.test.tsx (2)
+ · tests/project-management-form.test.tsx (1)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠙ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠹ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠸ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠸ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠼ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠼ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠴ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠴ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠦ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠦ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠧ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠧ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠇ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠇ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠏ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠏ updates project details and client profile linkage
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠋ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠋ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠙ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠹ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠸ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠸ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠼ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠼ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠴ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠴ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠦ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠦ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠧ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠧ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠇ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠇ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠏ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠏ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠋ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠋ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠙ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠹ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠸ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠸ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠼ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠼ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠴ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠴ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠦ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠦ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠧ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠧ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠇ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠇ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠏ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠏ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠋ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠋ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠙ updates project details and client profile linkage
+ · tests/project-list-screen.test.tsx (2)
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠹ updates project details and client profile linkage
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠸ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠸ updates project details and client profile linkage
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠼ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠼ updates project details and client profile linkage
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠴ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ❯ tests/project-management-form.test.tsx (1)
+   ❯ ProjectManagementForm (1)
+     ⠴ updates project details and client profile linkage
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠦ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠧ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠇ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠏ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠋ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠸ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠼ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠴ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠦ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠧ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠇ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠏ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠋ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠙ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ⠹ creates and initializes project when checkbox is enabled
+     · creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠙ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠹ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠸ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠼ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠴ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠦ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠧ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠇ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠏ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠋ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠙ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠹ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠸ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠼ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠴ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠦ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠧ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠇ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠏ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠋ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠙ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠹ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠸ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠼ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+[1A ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠴ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠦ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠧ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠇ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠏ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠋ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠙ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠹ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠸ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠼ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠴ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠦ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠧ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠇ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠏ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠋ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ❯ tests/create-project-form.test.tsx (2)
+   ❯ CreateProjectForm (2)
+     ✓ creates and initializes project when checkbox is enabled 1027ms
+     ⠙ creates draft only when initialize is unchecked
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ · tests/project-overview-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ · tests/project-overview-screen.test.tsx (1)
+ · tests/worklist-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ · tests/inspection-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ · tests/evidence-form.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠙ submits with physical evidence fields
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠹ submits with physical evidence fields
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠸ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠼ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠴ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠦ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠧ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠇ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠏ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠋ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠙ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠹ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠸ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠼ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠴ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠦ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠧ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠇ submits with physical evidence fields
+ · tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠏ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠋ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠙ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠹ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠸ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠼ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠴ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠦ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠧ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ❯ tests/evidence-form.test.tsx (1)
+   ❯ EvidenceForm (1)
+     ⠇ submits with physical evidence fields
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ · tests/recurring-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/recurring-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/recurring-screen.test.tsx (1)
+ · tests/admin-dashboard-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/recurring-screen.test.tsx (1)
+ ✓ tests/admin-dashboard-screen.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/recurring-screen.test.tsx (1)
+ ✓ tests/admin-dashboard-screen.test.tsx (1)
+ · tests/app-shell.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/worklist-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/recurring-screen.test.tsx (1)
+ ✓ tests/admin-dashboard-screen.test.tsx (1)
+ ✓ tests/app-shell.test.tsx (1)
+ ✓ tests/admin-dashboard-screen.test.tsx (1)
+ ✓ tests/app-shell.test.tsx (1)
+ ✓ tests/create-project-form.test.tsx (2) 1809ms
+ ✓ tests/evidence-form.test.tsx (1) 607ms
+ ✓ tests/export-history-screen.test.tsx (1)
+ ✓ tests/inspection-screen.test.tsx (1)
+ ✓ tests/project-list-screen.test.tsx (2) 354ms
+ ✓ tests/project-management-form.test.tsx (1) 825ms
+ ✓ tests/project-overview-screen.test.tsx (1) 343ms
+ ✓ tests/recurring-screen.test.tsx (1)
+ ✓ tests/worklist-screen.test.tsx (1)
+
+ Test Files  11 passed (11)
+      Tests  13 passed (13)
+   Start at  13:19:19
+   Duration  10.42s (transform 1.20s, setup 1.39s, collect 6.07s, tests 4.89s, environment 10.19s, prepare 2.63s)
+
+⠙___BEGIN___COMMAND_DONE_MARKER___0

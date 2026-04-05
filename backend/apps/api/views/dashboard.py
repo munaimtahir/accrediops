@@ -4,6 +4,7 @@ from rest_framework.generics import ListAPIView
 
 from apps.api.pagination import EnvelopePagination
 from apps.api.serializers.project_indicators import DashboardWorklistSerializer
+from apps.exports.services import classify_indicator_risk
 from apps.indicators.models import ProjectIndicator
 
 
@@ -88,3 +89,18 @@ class DashboardWorklistView(ListAPIView):
                 evidence_items__approval_status=params["evidence_approval_status"],
             )
         return queryset.distinct()
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        payload = response.data["data"]
+        rows = payload["results"]
+        id_map = {
+            item.id: item
+            for item in ProjectIndicator.objects.filter(id__in=[row["project_indicator_id"] for row in rows]).prefetch_related(
+                "evidence_items",
+                "recurring_requirement__instances",
+            )
+        }
+        for row in rows:
+            row["risk"] = classify_indicator_risk(id_map[row["project_indicator_id"]])
+        return response

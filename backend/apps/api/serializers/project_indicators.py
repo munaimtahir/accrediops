@@ -32,6 +32,8 @@ class IndicatorMasterSerializer(serializers.ModelSerializer):
             "recurrence_frequency",
             "recurrence_mode",
             "minimum_required_evidence_count",
+            "reusable_template_allowed",
+            "evidence_reuse_policy",
             "is_active",
             "sort_order",
         )

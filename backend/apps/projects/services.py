@@ -5,10 +5,12 @@ from apps.audit.services import log_audit_event, snapshot_instance
 from apps.indicators.models import Indicator, ProjectIndicator
 from apps.masters.choices import ProjectStatusChoices
 from apps.projects.models import AccreditationProject
+from apps.recurring.models import RecurringRequirement
 from apps.workflow.permissions import ensure_admin_or_lead_access
 
 
 def create_project(*, actor, **validated_data) -> AccreditationProject:
+    ensure_admin_or_lead_access(actor)
     project = AccreditationProject.objects.create(created_by=actor, **validated_data)
     log_audit_event(
         actor=actor,
@@ -121,3 +123,75 @@ def initialize_project_from_framework(
         "created_project_indicators": created_count,
         "recurring_requirements_processed": recurring_count,
     }
+
+
+@transaction.atomic
+def clone_project(
+    *,
+    source_project: AccreditationProject,
+    actor,
+    name: str,
+    client_name: str,
+) -> AccreditationProject:
+    ensure_admin_or_lead_access(actor)
+    project = AccreditationProject.objects.create(
+        name=name,
+        client_name=client_name,
+        accrediting_body_name=source_project.accrediting_body_name,
+        framework=source_project.framework,
+        status=ProjectStatusChoices.DRAFT,
+        start_date=source_project.start_date,
+        target_date=source_project.target_date,
+        notes=source_project.notes,
+        created_by=actor,
+        client_profile=source_project.client_profile,
+    )
+    source_items = (
+        ProjectIndicator.objects.filter(project=source_project)
+        .select_related("indicator", "owner", "reviewer", "approver")
+        .all()
+    )
+    source_by_indicator_id = {item.indicator_id: item for item in source_items}
+    indicators = Indicator.objects.filter(
+        framework=source_project.framework,
+        is_active=True,
+    ).select_related("area", "standard")
+    for indicator in indicators:
+        source_item = source_by_indicator_id.get(indicator.id)
+        project_indicator = ProjectIndicator.objects.create(
+            project=project,
+            indicator=indicator,
+            owner=source_item.owner if source_item else None,
+            reviewer=source_item.reviewer if source_item else None,
+            approver=source_item.approver if source_item else None,
+            priority=source_item.priority if source_item else "MEDIUM",
+            due_date=project.target_date,
+            notes="",
+            last_updated_by=actor,
+        )
+        if indicator.is_recurring:
+            source_requirement = None
+            if source_item and hasattr(source_item, "recurring_requirement"):
+                source_requirement = source_item.recurring_requirement
+            RecurringRequirement.objects.create(
+                project_indicator=project_indicator,
+                frequency=source_requirement.frequency if source_requirement else indicator.recurrence_frequency,
+                mode=source_requirement.mode if source_requirement else indicator.recurrence_mode,
+                start_date=project.start_date,
+                end_date=project.target_date,
+                is_active=True,
+                instructions=source_requirement.instructions if source_requirement else indicator.fulfillment_guidance,
+                expected_title_template=(
+                    source_requirement.expected_title_template if source_requirement else indicator.code
+                ),
+            )
+
+    log_audit_event(
+        actor=actor,
+        event_type="project.cloned",
+        obj=project,
+        before=None,
+        after=snapshot_instance(project),
+        reason=f"cloned from project {source_project.id}",
+    )
+    return project

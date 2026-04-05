@@ -1,0 +1,103 @@
+Frontend-Backend Truth Audit
+Backend endpoints: 30
+Frontend hook endpoint patterns: 46
+
+MISSING BACKEND -> FRONTEND HOOK MAPPINGS
+- /api/health/
+
+FRONTEND HOOK PATTERNS WITHOUT BACKEND ENDPOINT
+- /api/client-profiles/{id}/variables-preview/
+  - frontend/lib/hooks/use-client-profiles.ts
+- /api/exports/projects/{id}/excel/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/exports/projects/{id}/generate/
+  - frontend/lib/hooks/use-readiness.ts
+- /api/exports/projects/{id}/history/
+  - frontend/lib/hooks/use-readiness.ts
+- /api/exports/projects/{id}/print-bundle/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/project-indicators/{id}/
+  - frontend/lib/hooks/use-indicator.ts
+- /api/project-indicators/{id}/ai-outputs/
+  - frontend/lib/hooks/use-indicator.ts
+- /api/project-indicators/{id}/assign/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/project-indicators/{id}/evidence/
+  - frontend/lib/hooks/use-evidence.ts
+- /api/project-indicators/{id}/update-working-state/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/project-indicators/{id}/{id}/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/projects/{id}/areas-progress/
+  - frontend/lib/hooks/use-progress.ts
+- /api/projects/{id}/initialize-from-framework/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/projects/{id}/pre-inspection-check/
+  - frontend/lib/hooks/use-readiness.ts
+- /api/projects/{id}/standards-progress/
+  - frontend/lib/hooks/use-progress.ts
+- /api/recurring/instances/{id}/approve/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/recurring/instances/{id}/submit/
+  - frontend/lib/hooks/use-mutations.ts
+
+BACKEND -> FRONTEND MAP
+- /api/admin/dashboard/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/import/logs/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/import/validate-framework/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/masters/{id}/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/masters/{id}/{id}/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/overrides/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/users/
+  - frontend/lib/hooks/use-admin.ts
+- /api/admin/users/{id}/
+  - frontend/lib/hooks/use-admin.ts
+- /api/ai/generate/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/ai/outputs/{id}/accept/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/audit/
+  - frontend/lib/hooks/use-admin.ts
+- /api/auth/login/
+  - frontend/lib/hooks/use-auth.ts
+- /api/auth/logout/
+  - frontend/lib/hooks/use-auth.ts
+- /api/auth/session/
+  - frontend/lib/hooks/use-auth.ts
+- /api/client-profiles/
+  - frontend/lib/hooks/use-client-profiles.ts
+- /api/client-profiles/{id}/
+  - frontend/lib/hooks/use-client-profiles.ts
+- /api/dashboard/worklist/
+  - frontend/lib/hooks/use-worklist.ts
+- /api/evidence/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/evidence/{id}/review/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/evidence/{id}/update/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/frameworks/
+  - frontend/lib/hooks/use-frameworks.ts
+- /api/frameworks/{id}/analysis/
+  - frontend/lib/hooks/use-framework-analysis.ts
+- /api/projects/
+  - frontend/lib/hooks/use-mutations.ts
+  - frontend/lib/hooks/use-projects.ts
+- /api/projects/{id}/
+  - frontend/lib/hooks/use-projects.ts
+- /api/projects/{id}/clone/
+  - frontend/lib/hooks/use-mutations.ts
+- /api/projects/{id}/inspection-view/
+  - frontend/lib/hooks/use-readiness.ts
+- /api/projects/{id}/readiness/
+  - frontend/lib/hooks/use-readiness.ts
+- /api/recurring/queue/
+  - frontend/lib/hooks/use-recurring-queue.ts
+- /api/users/
+  - frontend/lib/hooks/use-users.ts

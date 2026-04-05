@@ -1,0 +1,6 @@
+total 8
+drwxrwxr-x 2 munaim munaim 4096 Apr  3 20:47 .
+drwxrwxr-x 5 munaim munaim 4096 Apr  3 20:47 ..
+lrwxrwxrwx 1 munaim munaim    7 Apr  3 20:47 python -> python3
+lrwxrwxrwx 1 munaim munaim   16 Apr  3 20:47 python3 -> /usr/bin/python3
+lrwxrwxrwx 1 munaim munaim    7 Apr  3 20:47 python3.12 -> python3

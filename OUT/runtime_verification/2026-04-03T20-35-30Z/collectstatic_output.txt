@@ -1,0 +1,2 @@
+
+0 static files copied to '/home/munaim/srv/apps/accrediops/backend/staticfiles', 161 unmodified, 463 post-processed.

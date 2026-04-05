@@ -1,0 +1,44 @@
+== frontend status ==
+● accrediops-frontend.service - AccrediOps frontend (Next.js)
+     Loaded: loaded (/home/munaim/.config/systemd/user/accrediops-frontend.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-04-03 20:43:29 UTC; 10s ago
+   Main PID: 2526334 (npm run start -)
+      Tasks: 35 (limit: 19108)
+     Memory: 225.6M (peak: 225.7M)
+        CPU: 3.826s
+     CGroup: /user.slice/user-1003.slice/user@1003.service/app.slice/accrediops-frontend.service
+             ├─2526334 "npm run start --hostname 127.0.0.1 --port 8013"
+             ├─2526415 sh -c "next start --hostname 127.0.0.1 --port 8013"
+             └─2526416 "next-server (v15.5.14)"
+
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal systemd[784926]: Started accrediops-frontend.service - AccrediOps frontend (Next.js).
+Apr 03 20:43:33 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526334]: > accrediops-frontend@0.1.0 start
+Apr 03 20:43:33 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526334]: > next start --hostname 127.0.0.1 --port 8013
+Apr 03 20:43:34 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526416]:    ▲ Next.js 15.5.14
+Apr 03 20:43:34 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526416]:    - Local:        http://127.0.0.1:8013
+Apr 03 20:43:34 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526416]:    - Network:      http://127.0.0.1:8013
+Apr 03 20:43:34 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526416]:  ✓ Starting...
+Apr 03 20:43:35 vps.us-central1-c.c.crack-saga-487819-k0.internal npm[2526416]:  ✓ Ready in 1625ms
+
+== backend status ==
+● accrediops-backend.service - AccrediOps backend (Django)
+     Loaded: loaded (/home/munaim/.config/systemd/user/accrediops-backend.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-04-03 20:43:29 UTC; 10s ago
+    Process: 2526328 ExecStartPre=/usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py migrate --noinput (code=exited, status=0/SUCCESS)
+   Main PID: 2526333 (python3)
+      Tasks: 1 (limit: 19108)
+     Memory: 49.4M (peak: 50.0M)
+        CPU: 1.847s
+     CGroup: /user.slice/user-1003.slice/user@1003.service/app.slice/accrediops-backend.service
+             └─2526333 /usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py runserver 127.0.0.1:18000 --noreload
+
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526328]:   Apply all migrations: accounts, admin, ai_actions, audit, auth, contenttypes, evidence, exports, frameworks, indicators, masters, projects, recurring, sessions
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526328]: Running migrations:
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526328]:   No migrations to apply.
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal systemd[784926]: Started accrediops-backend.service - AccrediOps backend (Django).
+Apr 03 20:43:29 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: Performing system checks...
+Apr 03 20:43:30 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: System check identified no issues (0 silenced).
+Apr 03 20:43:30 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: April 03, 2026 - 20:43:30
+Apr 03 20:43:30 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: Django version 4.2.29, using settings 'config.accrediops_backend.settings'
+Apr 03 20:43:30 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: Starting development server at http://127.0.0.1:18000/
+Apr 03 20:43:30 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2526333]: Quit the server with CONTROL-C.

@@ -3,6 +3,7 @@ from django.db import models
 
 from apps.masters.choices import (
     DocumentTypeChoices,
+    EvidenceReusePolicyChoices,
     EvidenceTypeChoices,
     IndicatorCommentTypeChoices,
     PriorityChoices,
@@ -55,6 +56,12 @@ class Indicator(models.Model):
         default=RecurrenceModeChoices.EITHER,
     )
     minimum_required_evidence_count = models.PositiveIntegerField(default=1)
+    reusable_template_allowed = models.BooleanField(default=False)
+    evidence_reuse_policy = models.CharField(
+        max_length=20,
+        choices=EvidenceReusePolicyChoices.choices,
+        default=EvidenceReusePolicyChoices.NONE,
+    )
     is_active = models.BooleanField(default=True)
     sort_order = models.PositiveIntegerField(default=0)
 

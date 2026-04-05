@@ -1,4 +1,5 @@
 from apps.ai_actions.models import GeneratedOutput
+from apps.accounts.models import ClientProfile
 from apps.api.tests.base import ContractBaseTestCase
 from apps.evidence.models import EvidenceItem
 from apps.indicators.services import assign_project_indicator
@@ -86,3 +87,37 @@ class EvidenceAndAITest(ContractBaseTestCase):
         self.assertEqual(project_indicator.current_status, "NOT_STARTED")
         self.assertFalse(project_indicator.is_met)
         self.assertEqual(GeneratedOutput.objects.filter(project_indicator=project_indicator).count(), 1)
+
+    def test_ai_generation_applies_client_variable_replacement(self):
+        profile = ClientProfile.objects.create(
+            organization_name="Acme Health",
+            address="Main Street",
+            license_number="LIC-123",
+            registration_number="REG-987",
+            contact_person="A. Manager",
+            department_names=["Quality"],
+        )
+        self.project.client_profile = profile
+        self.project.save(update_fields=["client_profile"])
+        project_indicators = self.initialize_project()
+        project_indicator = project_indicators["IND-001"]
+        assign_project_indicator(
+            project_indicator=project_indicator,
+            actor=self.admin,
+            owner=self.owner,
+            reviewer=self.reviewer,
+            approver=self.approver,
+        )
+        self.client.force_authenticate(user=self.owner)
+        response = self.client.post(
+            "/api/ai/generate/",
+            {
+                "project_indicator_id": project_indicator.id,
+                "output_type": "GUIDANCE",
+                "user_instruction": "Include {{organization_name}} and {{license_number}} in the draft.",
+            },
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertIn("Acme Health", response.json()["data"]["content"])
+        self.assertIn("LIC-123", response.json()["data"]["content"])

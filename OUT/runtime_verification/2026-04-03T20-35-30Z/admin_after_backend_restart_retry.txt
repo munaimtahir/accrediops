@@ -1,0 +1,275 @@
+## direct 18000 admin/login
+HTTP/1.1 200 OK
+Date: Fri, 03 Apr 2026 20:47:33 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+Expires: Fri, 03 Apr 2026 20:47:33 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie
+X-Frame-Options: DENY
+Content-Length: 4259
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie:  csrftoken=TSosCRf7Xed96WFz52jCQSOiS2iSQM7Z; expires=Fri, 02 Apr 2027 20:47:33 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Log in | Django site admin</title>
+<link rel="stylesheet" href="/static/admin/css/base.523eb49842a7.css">
+
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.ef27a31af300.css">
+  <script src="/static/admin/js/theme.ab270f56bb9c.js" defer></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.269a1bd44627.css">
+  <script src="/static/admin/js/nav_sidebar.3b9190d420b1.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/login.586129c60a93.css">
+
+
+
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.f6533dab034d.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+  
+<button class="theme-toggle">
+  <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+  <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+  <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+
+
+        </div>
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+      
+      <div id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="7p3bEr4CJrfOSirCqAbasrbxbZR11Jk0Q7ht689zwviNO4W1lskC89PFTRZJHlhP">
+  <div class="form-row">
+    
+    <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+    
+    <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/">
+  </div>
+  
+  
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+
+## domain admin/login
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: max-age=0, no-cache, no-store, must-revalidate, private
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:47:33 GMT
+expires: Fri, 03 Apr 2026 20:47:33 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=jJO8BooNmdiPSCvZFag5BoT13k0tJnSc; expires=Fri, 02 Apr 2027 20:47:33 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 4259
+
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Log in | Django site admin</title>
+<link rel="stylesheet" href="/static/admin/css/base.523eb49842a7.css">
+
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.ef27a31af300.css">
+  <script src="/static/admin/js/theme.ab270f56bb9c.js" defer></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.269a1bd44627.css">
+  <script src="/static/admin/js/nav_sidebar.3b9190d420b1.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/login.586129c60a93.css">
+
+
+
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.f6533dab034d.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+  
+<button class="theme-toggle">
+  <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+  <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+  <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+
+
+        </div>
+        
+        
+    </div>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+      
+      <div id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="ooCyc0tazrOQYvjE6VJ95s7w3yUeniLGxXgwDeHNLuWvGXEtBVP4wGQnWIKxWvtI">
+  <div class="form-row">
+    
+    <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+    
+    <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/">
+  </div>
+  
+  
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->

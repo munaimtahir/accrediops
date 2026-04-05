@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccrediOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --card: rgba(255, 252, 247, 0.92);
+      --ink: #1f2a2d;
+      --muted: #617177;
+      --line: rgba(31, 42, 45, 0.12);
+      --accent: #a53d2f;
+      --accent-strong: #7c2518;
+      --accent-soft: rgba(165, 61, 47, 0.12);
+      --shadow: 0 24px 60px rgba(59, 41, 27, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(165, 61, 47, 0.18), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(40, 108, 99, 0.18), transparent 28%),
+        linear-gradient(135deg, #efe4d1 0%, var(--bg) 46%, #fcfaf5 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(980px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 48px 48px 28px;
+      background:
+        linear-gradient(135deg, rgba(165, 61, 47, 0.96), rgba(64, 86, 90, 0.92)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent);
+      color: #fff7f1;
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-family: "IBM Plex Serif", Georgia, serif;
+      font-size: clamp(2.3rem, 4vw, 4.4rem);
+      line-height: 0.98;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 56ch;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255, 247, 241, 0.9);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      padding: 32px 48px 48px;
+    }
+
+    .panel, .tile {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .tile-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tile {
+      padding: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(249, 245, 238, 0.92));
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    p, li {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .actions a {
+      text-decoration: none;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .actions a:hover {
+      transform: translateY(-1px);
+    }
+
+    .actions .primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .actions .primary:hover {
+      background: var(--accent-strong);
+    }
+
+    .actions .secondary {
+      background: var(--accent-soft);
+      border-color: rgba(165, 61, 47, 0.24);
+      color: var(--accent-strong);
+    }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      font-size: 0.95rem;
+    }
+
+    .meta strong {
+      color: var(--ink);
+    }
+
+    code {
+      background: rgba(31, 42, 45, 0.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-family: "IBM Plex Mono", "SFMono-Regular", monospace;
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .content {
+        padding: 28px;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="kicker">Internal Accreditation Operations</div>
+      <h1>AccrediOps is live on the former OPS slot.</h1>
+      <p>
+        This deployment currently exposes the working Django backend on the reused OPS API port and
+        a lightweight operator shell on the reused OPS frontend port. The full product frontend is
+        still to be built inside this repository.
+      </p>
+    </section>
+
+    <section class="content">
+      <article class="panel">
+        <h2>What is available now</h2>
+        <ul>
+          <li>Django admin for internal data entry and review.</li>
+          <li>REST API endpoints under <code>/api/</code>.</li>
+          <li>SQLite-backed starter environment with existing migrations applied.</li>
+          <li>Stable local bindings on <code>127.0.0.1:8013</code> and <code>127.0.0.1:18000</code>.</li>
+        </ul>
+
+        <div class="actions">
+          <a class="primary" href="/admin/">Open Admin</a>
+          <a class="secondary" href="/api/projects/">Open API</a>
+          <a class="secondary" href="/api/dashboard/worklist/">Dashboard Worklist</a>
+        </div>
+
+        <div class="meta">
+          <div><strong>Frontend port:</strong> <code>8013</code></div>
+          <div><strong>Backend port:</strong> <code>18000</code></div>
+          <div><strong>Primary domain:</strong> <code>ops.alshifalab.pk</code></div>
+        </div>
+      </article>
+
+      <aside class="tile-grid">
+        <section class="tile">
+          <h2>Operator note</h2>
+          <p>
+            The root screen is intentionally lightweight because this repository does not yet contain
+            a real React, Next, or Streamlit frontend implementation to launch on the reused OPS UI port.
+          </p>
+        </section>
+        <section class="tile">
+          <h2>Next build step</h2>
+          <p>
+            Replace this shell with the actual application frontend once the UI code is added under
+            <code>frontend/</code>. The routing and user services can stay in place.
+          </p>
+        </section>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

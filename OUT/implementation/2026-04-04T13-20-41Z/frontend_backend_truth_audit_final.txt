@@ -1,0 +1,50 @@
+Frontend ↔ Backend Truth Audit (Sprint 2)
+Timestamp: 2026-04-04T13-20-41Z
+
+Scope
+- Backend API source: backend/apps/api/urls.py
+- Frontend API usage source: frontend/lib/hooks/*.ts and referenced screens/forms
+- UI action audit focus: project and indicator operational surfaces
+
+Backend endpoint count (urls.py): 51
+Frontend API patterns found in hooks: 40+ concrete patterns (dynamic variants consolidated)
+
+Resolved mapping gaps in this sprint
+1) /api/health/
+- Before: backend endpoint existed without frontend usage surface.
+- Now: mapped by useBackendHealth() and surfaced in admin system-health screen.
+- Files: frontend/lib/hooks/use-health.ts, frontend/components/screens/system-health-screen.tsx, frontend/app/(workbench)/admin/system-health/page.tsx, frontend/components/layout/sidebar.tsx
+
+2) /api/exports/projects/{id}/physical-retrieval/
+- Before: backend endpoint existed with no frontend usage.
+- Now: mapped by usePhysicalRetrievalExport() and exposed in overview/export screens.
+- Files: frontend/lib/hooks/use-readiness.ts, frontend/components/screens/project-overview-screen.tsx, frontend/components/screens/project-export-history-screen.tsx
+
+Project-management frontend utility improvements
+- Create project flow remains wired to real backend create + initialize command.
+- Added management utility via ProjectManagementForm (PATCH /api/projects/{id}/).
+- Added Manage entry points from project list and project overview.
+- Added client profile linkage path in create/manage UX.
+
+Button/action wiring audit highlights
+- Projects list actions:
+  - Create project -> useCreateProject + optional useInitializeProjectFromFramework
+  - Open project -> route /projects/{id}
+  - Manage -> useUpdateProject via ProjectManagementForm
+- Project overview actions:
+  - Clone project -> useCloneProject
+  - Manage project -> useUpdateProject
+  - Export excel/print bundle -> useProjectExport
+  - Physical retrieval -> usePhysicalRetrievalExport
+  - Readiness/inspection/worklist/recurring/client profile links -> routed pages with backend-backed hooks
+- Indicator detail command actions remain command-endpoint based (start/send-for-review/mark-met/reopen), no direct status mutation path added.
+
+Missing items (true gaps after implementation)
+- No confirmed missing frontend mapping for implemented core operational backend endpoints in urls.py.
+- Remaining practical caveat: environment proxy behavior can differ by frontend runtime/proxy stack, but frontend hook mapping itself is complete for implemented surfaces.
+
+Verification summary
+- Frontend unit tests: pass
+- Playwright core journeys (new): pass on active stack (baseURL 127.0.0.1:18080)
+- Playwright app flows: pass on active stack (baseURL 127.0.0.1:18080)
+- Frontend build (default .next): blocked by pre-existing filesystem permission issue in this environment (EACCES on .next cleanup); isolated build with alternate dist succeeded.

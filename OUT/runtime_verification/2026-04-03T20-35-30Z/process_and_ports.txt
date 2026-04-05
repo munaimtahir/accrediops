@@ -1,0 +1,39 @@
+# listening ports
+LISTEN 0      4096       127.0.0.1:8080       0.0.0.0:*                                        
+LISTEN 0      4096       127.0.0.1:8081       0.0.0.0:*                                        
+LISTEN 0      4096       127.0.0.1:8082       0.0.0.0:*                                        
+LISTEN 0      5          127.0.0.1:8013       0.0.0.0:*    users:(("python3",pid=1999079,fd=3))
+LISTEN 0      4096       127.0.0.1:8014       0.0.0.0:*                                        
+LISTEN 0      4096       127.0.0.1:8015       0.0.0.0:*                                        
+LISTEN 0      4096       127.0.0.1:8010       0.0.0.0:*                                        
+LISTEN 0      128        127.0.0.1:8016       0.0.0.0:*    users:(("streamlit",pid=624,fd=6))  
+LISTEN 0      4096               *:80               *:*                                        
+LISTEN 0      4096               *:443              *:*                                        
+
+# serve_frontend processes
+caddy        596       1  0 Apr01 ?        00:02:41 /usr/bin/caddy run --environ --config /etc/caddy/Caddyfile
+caddy       1827    1672  0 Apr01 ?        00:19:26 redis-server *:6379
+root        2072    1662  0 Apr01 ?        00:00:00 sh -c python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+caddy       2148    1741  0 Apr01 ?        00:17:36 redis-server *:6379
+ubuntu      2305    1924  0 Apr01 ?        00:00:35 /opt/venv/bin/python /opt/venv/bin/gunicorn rims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120 --access-logfile - --error-logfile - --log-level info
+root        2526    2033  0 Apr01 ?        00:00:29 /usr/local/bin/python3.11 /usr/local/bin/gunicorn sims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+root        4248    2526  0 Apr01 ?        00:00:05 /usr/local/bin/python3.11 /usr/local/bin/gunicorn sims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+root        4249    2526  0 Apr01 ?        00:00:05 /usr/local/bin/python3.11 /usr/local/bin/gunicorn sims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+root        4250    2526  0 Apr01 ?        00:00:05 /usr/local/bin/python3.11 /usr/local/bin/gunicorn sims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3
+root        4381    2072  0 Apr01 ?        00:00:30 /usr/local/bin/python3.12 /usr/local/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+root        4477    4381  0 Apr01 ?        00:00:02 /usr/local/bin/python3.12 /usr/local/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+root        4478    4381  0 Apr01 ?        00:00:02 /usr/local/bin/python3.12 /usr/local/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+root        4479    4381  0 Apr01 ?        00:00:02 /usr/local/bin/python3.12 /usr/local/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+ubuntu      4763    2305  0 Apr01 ?        00:00:22 /opt/venv/bin/python /opt/venv/bin/gunicorn rims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120 --access-logfile - --error-logfile - --log-level info
+ubuntu      4784    2305  0 Apr01 ?        00:00:23 /opt/venv/bin/python /opt/venv/bin/gunicorn rims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120 --access-logfile - --error-logfile - --log-level info
+ubuntu      4794    2305  0 Apr01 ?        00:00:22 /opt/venv/bin/python /opt/venv/bin/gunicorn rims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120 --access-logfile - --error-logfile - --log-level info
+ubuntu      4813    2305  0 Apr01 ?        00:00:21 /opt/venv/bin/python /opt/venv/bin/gunicorn rims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120 --access-logfile - --error-logfile - --log-level info
+munaim   1999079  784926  0 10:56 ?        00:00:06 /usr/bin/python3 /home/munaim/srv/apps/accrediops/scripts/serve_frontend.py --host 127.0.0.1 --port 8013
+munaim   2068791  784926  0 12:10 ?        00:00:10 /usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py runserver 127.0.0.1:18000 --noreload
+caddy    2509260 2509215  0 20:25 ?        00:00:05 redis-server *:6379
+ubuntu   2509661 2509637  0 20:26 ?        00:00:00 sh -c python manage.py migrate --noinput &&        python manage.py collectstatic --noinput &&        gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60
+ubuntu   2509978 2509661  0 20:26 ?        00:00:01 /usr/local/bin/python3.11 /home/sims/.local/bin/gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60
+ubuntu   2510021 2509978  0 20:26 ?        00:00:03 /usr/local/bin/python3.11 /home/sims/.local/bin/gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60
+ubuntu   2510022 2509978  0 20:26 ?        00:00:03 /usr/local/bin/python3.11 /home/sims/.local/bin/gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60
+ubuntu   2510023 2509978  0 20:26 ?        00:00:03 /usr/local/bin/python3.11 /home/sims/.local/bin/gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60
+ubuntu   2510024 2509978  0 20:26 ?        00:00:02 /usr/local/bin/python3.11 /home/sims/.local/bin/gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60

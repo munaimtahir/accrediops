@@ -6,6 +6,8 @@ from apps.masters.choices import GeneratedOutputTypeChoices
 
 
 class GeneratedOutputSerializer(serializers.ModelSerializer):
+    prompt_context_snapshot = serializers.JSONField()
+
     class Meta:
         model = GeneratedOutput
         fields = (

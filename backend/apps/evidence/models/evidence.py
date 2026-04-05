@@ -6,6 +6,7 @@ from apps.masters.choices import (
     EvidenceCompletenessStatusChoices,
     EvidenceSourceTypeChoices,
     EvidenceValidityStatusChoices,
+    PhysicalLocationTypeChoices,
 )
 
 
@@ -55,6 +56,14 @@ class EvidenceItem(models.Model):
     )
     reviewed_at = models.DateTimeField(null=True, blank=True)
     review_notes = models.TextField(blank=True)
+    physical_location_type = models.CharField(
+        max_length=20,
+        choices=PhysicalLocationTypeChoices.choices,
+        blank=True,
+    )
+    location_details = models.TextField(blank=True)
+    file_label = models.CharField(max_length=255, blank=True)
+    is_physical_copy_available = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-uploaded_at"]

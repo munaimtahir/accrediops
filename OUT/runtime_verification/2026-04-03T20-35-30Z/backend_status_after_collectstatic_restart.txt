@@ -1,0 +1,21 @@
+● accrediops-backend.service - AccrediOps backend (Django)
+     Loaded: loaded (/home/munaim/.config/systemd/user/accrediops-backend.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-04-03 20:47:20 UTC; 3s ago
+    Process: 2530261 ExecStartPre=/usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py migrate --noinput (code=exited, status=0/SUCCESS)
+   Main PID: 2530276 (python3)
+      Tasks: 1 (limit: 19108)
+     Memory: 50.0M (peak: 50.0M)
+        CPU: 1.884s
+     CGroup: /user.slice/user-1003.slice/user@1003.service/app.slice/accrediops-backend.service
+             └─2530276 /usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py runserver 127.0.0.1:18000 --noreload
+
+Apr 03 20:47:20 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530261]:   Apply all migrations: accounts, admin, ai_actions, audit, auth, contenttypes, evidence, exports, frameworks, indicators, masters, projects, recurring, sessions
+Apr 03 20:47:20 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530261]: Running migrations:
+Apr 03 20:47:20 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530261]:   No migrations to apply.
+Apr 03 20:47:20 vps.us-central1-c.c.crack-saga-487819-k0.internal systemd[784926]: Started accrediops-backend.service - AccrediOps backend (Django).
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: Performing system checks...
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: System check identified no issues (0 silenced).
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: April 03, 2026 - 20:47:21
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: Django version 4.2.29, using settings 'config.accrediops_backend.settings'
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: Starting development server at http://127.0.0.1:18000/
+Apr 03 20:47:21 vps.us-central1-c.c.crack-saga-487819-k0.internal python3[2530276]: Quit the server with CONTROL-C.

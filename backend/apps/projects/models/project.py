@@ -21,6 +21,13 @@ class AccreditationProject(models.Model):
     start_date = models.DateField()
     target_date = models.DateField()
     notes = models.TextField(blank=True)
+    client_profile = models.ForeignKey(
+        "accounts.ClientProfile",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="projects",
+    )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

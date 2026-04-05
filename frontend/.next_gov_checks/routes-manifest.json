@@ -1,0 +1,239 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/api/:path*/",
+        "destination": "http://127.0.0.1:8000/api/:path*/",
+        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?/(?:/)?$"
+      },
+      {
+        "source": "/api/:path*",
+        "destination": "http://127.0.0.1:8000/api/:path*/",
+        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/frameworks/[id]/analysis",
+      "regex": "^/frameworks/([^/]+?)/analysis(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/frameworks/(?<nxtPid>[^/]+?)/analysis(?:/)?$"
+    },
+    {
+      "page": "/project-indicators/[id]",
+      "regex": "^/project\\-indicators/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/project\\-indicators/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]",
+      "regex": "^/projects/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/areas-progress",
+      "regex": "^/projects/([^/]+?)/areas\\-progress(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/areas\\-progress(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/client-profile",
+      "regex": "^/projects/([^/]+?)/client\\-profile(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/client\\-profile(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/exports",
+      "regex": "^/projects/([^/]+?)/exports(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/exports(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/inspection",
+      "regex": "^/projects/([^/]+?)/inspection(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/inspection(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/print-pack",
+      "regex": "^/projects/([^/]+?)/print\\-pack(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/print\\-pack(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/readiness",
+      "regex": "^/projects/([^/]+?)/readiness(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/readiness(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/recurring",
+      "regex": "^/projects/([^/]+?)/recurring(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/recurring(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/standards-progress",
+      "regex": "^/projects/([^/]+?)/standards\\-progress(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/standards\\-progress(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/worklist",
+      "regex": "^/projects/([^/]+?)/worklist(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/worklist(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/audit",
+      "regex": "^/admin/audit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/audit(?:/)?$"
+    },
+    {
+      "page": "/admin/import-logs",
+      "regex": "^/admin/import\\-logs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/import\\-logs(?:/)?$"
+    },
+    {
+      "page": "/admin/masters/document-types",
+      "regex": "^/admin/masters/document\\-types(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/masters/document\\-types(?:/)?$"
+    },
+    {
+      "page": "/admin/masters/evidence-types",
+      "regex": "^/admin/masters/evidence\\-types(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/masters/evidence\\-types(?:/)?$"
+    },
+    {
+      "page": "/admin/masters/priorities",
+      "regex": "^/admin/masters/priorities(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/masters/priorities(?:/)?$"
+    },
+    {
+      "page": "/admin/masters/statuses",
+      "regex": "^/admin/masters/statuses(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/masters/statuses(?:/)?$"
+    },
+    {
+      "page": "/admin/overrides",
+      "regex": "^/admin/overrides(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/overrides(?:/)?$"
+    },
+    {
+      "page": "/admin/system-health",
+      "regex": "^/admin/system\\-health(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/system\\-health(?:/)?$"
+    },
+    {
+      "page": "/admin/users",
+      "regex": "^/admin/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/users(?:/)?$"
+    },
+    {
+      "page": "/healthz",
+      "regex": "^/healthz(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/healthz(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/projects",
+      "regex": "^/projects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/projects(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

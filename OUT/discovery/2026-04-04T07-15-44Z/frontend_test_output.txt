@@ -1,0 +1,28 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run --run
+
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/project-list-screen.test.tsx (1 test) 370ms
+   ✓ ProjectsListScreen > renders project list 364ms
+ ✓ tests/worklist-screen.test.tsx (1 test) 335ms
+   ✓ ProjectWorklistScreen > renders filters and table 332ms
+ ✓ tests/project-overview-screen.test.tsx (1 test) 449ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 442ms
+ ✓ tests/recurring-screen.test.tsx (1 test) 158ms
+ ✓ tests/inspection-screen.test.tsx (1 test) 202ms
+ ✓ tests/evidence-form.test.tsx (1 test) 1057ms
+   ✓ EvidenceForm > submits with physical evidence fields 1054ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 368ms
+   ✓ AdminDashboardScreen > renders admin metrics 350ms
+ ✓ tests/export-history-screen.test.tsx (1 test) 398ms
+   ✓ ProjectExportHistoryScreen > renders export history page 395ms
+ ✓ tests/app-shell.test.tsx (1 test) 253ms
+
+ Test Files  9 passed (9)
+      Tests  9 passed (9)
+   Start at  07:32:55
+   Duration  14.56s (transform 1.82s, setup 2.56s, collect 11.37s, tests 3.59s, environment 15.15s, prepare 3.40s)
+

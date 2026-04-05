@@ -1,0 +1,42 @@
+SPRINT: 2026-04-04T08-27-13Z
+
+PHASE A
+- Implemented create project modal flow on /projects
+- Wired create + initialize-from-framework API mutation sequence
+- Added UI role gating for create action (ADMIN/LEAD enabled, others disabled)
+
+PHASE B
+- Stabilized Playwright base URL and auth/protected-route baseline
+- Added deterministic E2E global setup seeding (admin user + framework graph)
+- Updated E2E selectors/assertions for reliable login and create/init journey
+
+PHASE C
+- Replaced placeholder OpenAPI artifact with implemented backend contract
+- Added explicit command endpoints and envelope schema modeling
+
+PHASE D
+- Expanded and executed backend/frontend/E2E verification
+- Captured outputs in this directory:
+  - backend_test_output.txt
+  - backend_coverage_output.txt
+  - frontend_build_output.txt
+  - frontend_test_output.txt
+  - playwright_output.txt
+  - feature_flow_checks.txt
+
+PRIMARY CHANGED FILES
+- frontend/components/forms/create-project-form.tsx
+- frontend/components/screens/projects-list-screen.tsx
+- frontend/components/common/modal.tsx
+- frontend/tests/create-project-form.test.tsx
+- frontend/tests/project-list-screen.test.tsx
+- frontend/tests/e2e/global-setup.cjs
+- frontend/tests/e2e/app-flows.spec.ts
+- frontend/playwright.config.ts
+- contracts/openapi/openapi.yaml
+- docs/_implementation/2026-04-04T08-27-13Z/00_sprint_plan.md
+- docs/_implementation/2026-04-04T08-27-13Z/01_create_project_flow_design.md
+- docs/_implementation/2026-04-04T08-27-13Z/02_auth_and_e2e_stabilization.md
+- docs/_implementation/2026-04-04T08-27-13Z/03_openapi_alignment_plan.md
+- docs/_implementation/2026-04-04T08-27-13Z/04_test_expansion_plan.md
+- docs/_implementation/2026-04-04T08-27-13Z/05_final_sprint_verdict.md

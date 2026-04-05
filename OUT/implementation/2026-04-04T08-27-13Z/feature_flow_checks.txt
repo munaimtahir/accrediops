@@ -1,0 +1,21 @@
+CMD: playwright flow verification
+RESULT: PASS
+DETAIL:
+- protected route unauthenticated redirect to /login?next=%2Fprojects
+- login page renders expected form
+- admin login reaches /projects
+- create project + initialize from framework reaches /projects/{id}
+- post-login recurring route opens from project home
+- health endpoints reachable via proxy
+
+CMD: backend API create/init verification
+RESULT: PASS
+DETAIL:
+- POST /api/projects/ created project (201)
+- POST /api/projects/{id}/initialize-from-framework/ created project indicators (200)
+- owner role create attempt rejected (403)
+
+CMD: frameworks list support for create form
+RESULT: PASS
+DETAIL:
+- GET /api/frameworks/ returns framework rows used for selector

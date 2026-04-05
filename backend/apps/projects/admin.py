@@ -9,6 +9,7 @@ class AccreditationProjectAdmin(admin.ModelAdmin):
         "id",
         "name",
         "client_name",
+        "client_profile",
         "accrediting_body_name",
         "framework",
         "status",

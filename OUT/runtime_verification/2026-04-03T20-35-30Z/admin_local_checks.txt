@@ -1,0 +1,47 @@
+## local admin host checks
+HTTP/1.1 500 Internal Server Error
+Date: Fri, 03 Apr 2026 20:44:58 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 145
+Vary: Cookie
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Server Error (500)</title>
+</head>
+<body>
+  <h1>Server Error (500)</h1><p></p>
+</body>
+</html>
+
+## local admin default host checks
+HTTP/1.1 500 Internal Server Error
+Date: Fri, 03 Apr 2026 20:44:58 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 145
+Vary: Cookie
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Server Error (500)</title>
+</head>
+<body>
+  <h1>Server Error (500)</h1><p></p>
+</body>
+</html>

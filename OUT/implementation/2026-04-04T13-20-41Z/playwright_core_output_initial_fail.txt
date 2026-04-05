@@ -1,0 +1,239 @@
+⠙
+Running 3 tests using 1 worker
+
+     1 …ts/e2e/core-journeys.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end
+  ✘  1 …ore-journeys.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end (10.7s)     2 …-journeys.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end (retry #1)
+  ✘  2 …s.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end (retry #1) (11.2s)     3 …core-journeys.spec.ts:67:7 › Core operational browser journeys › recurring approval from indicator context works
+  ✘  3 …urneys.spec.ts:67:7 › Core operational browser journeys › recurring approval from indicator context works (9.2s)     4 …ys.spec.ts:67:7 › Core operational browser journeys › recurring approval from indicator context works (retry #1)
+  ✘  4 …ts:67:7 › Core operational browser journeys › recurring approval from indicator context works (retry #1) (10.5s)     5 …e2e/core-journeys.spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage
+  ✘  5 …e-journeys.spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage (7.7s)     6 …urneys.spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage (retry #1)
+  ✘  6 …spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage (retry #1) (8.0s)
+
+  1) tests/e2e/core-journeys.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/approved/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/approved/i) resolved to 2 elements:
+        1) <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Approved evidence</p> aka getByText('Approved evidence')
+        2) <option value="APPROVED">APPROVED</option> aka getByLabel('ApprovalPENDINGAPPROVEDREJECTED')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/approved/i)
+
+
+      62 |
+      63 |     await expect(page.getByText("Approval state")).toBeVisible();
+    > 64 |     await expect(page.getByText(/approved/i)).toBeVisible();
+         |                                               ^
+      65 |   });
+      66 |
+      67 |   test("recurring approval from indicator context works", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:64:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/approved/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/approved/i) resolved to 2 elements:
+        1) <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Approved evidence</p> aka getByText('Approved evidence')
+        2) <option value="APPROVED">APPROVED</option> aka getByLabel('ApprovalPENDINGAPPROVEDREJECTED')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/approved/i)
+
+
+      62 |
+      63 |     await expect(page.getByText("Approval state")).toBeVisible();
+    > 64 |     await expect(page.getByText(/approved/i)).toBeVisible();
+         |                                               ^
+      65 |   });
+      66 |
+      67 |   test("recurring approval from indicator context works", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:64:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:67:7 › Core operational browser journeys › recurring approval from indicator context works 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/approved/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/approved/i) resolved to 2 elements:
+        1) <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Approved evidence</p> aka getByText('Approved evidence')
+        2) <textarea class="min-h-24 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900">Approved by E2E.</textarea> aka getByRole('textbox', { name: 'Notes', exact: true })
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/approved/i)
+
+
+      78 |     await approveModal.getByRole("button", { name: "Approve instance" }).click();
+      79 |
+    > 80 |     await expect(page.getByText(/approved/i)).toBeVisible();
+         |                                               ^
+      81 |     await expect(page.getByText(/Status\s+Approved/i)).toBeVisible();
+      82 |   });
+      83 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:80:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/approved/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/approved/i) resolved to 2 elements:
+        1) <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Approved evidence</p> aka getByText('Approved evidence')
+        2) <textarea class="min-h-24 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-slate-900">Approved by E2E.</textarea> aka getByRole('textbox', { name: 'Notes', exact: true })
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/approved/i)
+
+
+      78 |     await approveModal.getByRole("button", { name: "Approve instance" }).click();
+      79 |
+    > 80 |     await expect(page.getByText(/approved/i)).toBeVisible();
+         |                                               ^
+      81 |     await expect(page.getByText(/Status\s+Approved/i)).toBeVisible();
+      82 |   });
+      83 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:80:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/core-journeys.spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage 
+
+    Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Client profile' }) resolved to 2 elements:
+        1) <a href="/projects/25/client-profile" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Client Profile', exact: true })
+        2) <a href="/projects/25/client-profile" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-10 px-4 py-2">Client profile</a> aka getByRole('link', { name: 'Client profile', exact: true })
+
+    Call log:
+      - waiting for getByRole('link', { name: 'Client profile' })
+
+
+      105 |
+      106 |     await expect(page).toHaveURL(/\/projects\/\d+/);
+    > 107 |     await page.getByRole("link", { name: "Client profile" }).click();
+          |                                                              ^
+      108 |     await expect(page).toHaveURL(/\/projects\/\d+\/client-profile/);
+      109 |     const previewHeading = page.getByRole("heading", { name: "Client profile and variable preview" });
+      110 |     const linkButton = page.getByRole("button", { name: "Link client profile" });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:107:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Client profile' }) resolved to 2 elements:
+        1) <a href="/projects/26/client-profile" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Client Profile', exact: true })
+        2) <a href="/projects/26/client-profile" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-10 px-4 py-2">Client profile</a> aka getByRole('link', { name: 'Client profile', exact: true })
+
+    Call log:
+      - waiting for getByRole('link', { name: 'Client profile' })
+
+
+      105 |
+      106 |     await expect(page).toHaveURL(/\/projects\/\d+/);
+    > 107 |     await page.getByRole("link", { name: "Client profile" }).click();
+          |                                                              ^
+      108 |     await expect(page).toHaveURL(/\/projects\/\d+\/client-profile/);
+      109 |     const previewHeading = page.getByRole("heading", { name: "Client profile and variable preview" });
+      110 |     const linkButton = page.getByRole("button", { name: "Link client profile" });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:107:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/core-journeys.spec.ts:44:7 › Core operational browser journeys › evidence review journey works end-to-end 
+    tests/e2e/core-journeys.spec.ts:67:7 › Core operational browser journeys › recurring approval from indicator context works 
+    tests/e2e/core-journeys.spec.ts:84:7 › Core operational browser journeys › create flow supports client profile linkage 
+
+To open last HTML report run:
+
+  npx playwright show-report ../playwright-report
+
+⠙

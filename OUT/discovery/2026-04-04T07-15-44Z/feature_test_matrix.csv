@@ -1,0 +1,13 @@
+Feature,Frontend route/component,Backend endpoint/service,Current test coverage,Missing tests,Recommended test type,Priority
+Login/session,"/login, AuthGuard","/api/auth/session|login|logout","Backend covered, E2E partial/failing","Successful login + protected-route stabilization","Playwright",P0
+Projects list/open,"/projects, project overview","/api/projects/, /api/projects/{id}/","Frontend+backend covered","Richer open/filter/user journey","Playwright",P1
+Project create/init,"(missing primary UI)","POST /api/projects/, /api/projects/{id}/initialize-from-framework/","Backend exists, FE missing","Create/init UI and full journey tests","Frontend+Playwright",P0
+Clone project,"CloneProjectForm","POST /api/projects/{id}/clone/","Backend covered, FE partial","Clone + open new project journey","Playwright",P1
+Worklist,"ProjectWorklistScreen","GET /api/dashboard/worklist/","Frontend+backend covered","Deep filter semantics in browser","Playwright",P1
+Indicator commands,"IndicatorDetailScreen","start/send-for-review/mark-met/reopen","Backend covered","Toolbar command interaction flows","Frontend+Playwright",P1
+Evidence flows,"EvidenceForm, EvidenceReviewForm","/api/evidence/*","Frontend+backend covered","End-to-end add/review/approve assertions","Playwright",P1
+Recurring flows,"ProjectRecurringScreen + indicator recurring modal","/api/recurring/queue|submit|approve","Backend covered incl approve; FE partial","Browser submit+approve lifecycle","Playwright",P1
+AI advisory,"Indicator AI panel","/api/ai/generate, /api/ai/outputs/{id}/accept","Backend covered","UI interaction and advisory acceptance checks","Frontend+Playwright",P2
+Client variables,"ProjectClientProfileScreen","/api/client-profiles/*","Backend partial + FE surface","Linked profile edit + preview journey","Frontend+Playwright",P1
+Print pack,"ProjectPrintPackScreen","/api/exports/projects/{id}/print-bundle/","Backend covered, FE partial","Content-level print structure checks","Playwright",P2
+Admin overrides,"AdminOverridesScreen","/api/admin/overrides/","Backend covered, FE shallow","Action-depth/behavioral coverage","Frontend+Playwright",P1

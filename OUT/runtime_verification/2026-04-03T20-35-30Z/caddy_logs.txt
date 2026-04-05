@@ -1,0 +1,1 @@
+## docker compose logs caddy --tail=200

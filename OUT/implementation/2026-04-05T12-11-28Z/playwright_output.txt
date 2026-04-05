@@ -1,0 +1,21 @@
+
+Running 11 tests using 2 workers
+
+  ✓   1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (2.1s)
+  ✓   3 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (1.5s)
+  ✓   4 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (4.8s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:31:7 › Core operational browser journeys › evidence review journey works end-to-end (15.7s)
+  ✓   5 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (10.6s)
+  ✓   7 tests/e2e/app-flows.spec.ts:44:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (5.5s)
+  ✓   8 tests/e2e/app-flows.spec.ts:53:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (244ms)
+  ✓   6 tests/e2e/core-journeys.spec.ts:54:7 › Core operational browser journeys › recurring approval from indicator context works (11.1s)
+  ✓   9 tests/e2e/core-journeys.spec.ts:71:7 › Core operational browser journeys › create flow supports client profile linkage (7.9s)
+  ✓  10 tests/e2e/core-journeys.spec.ts:105:7 › Core operational browser journeys › clone project then open cloned workspace (5.3s)
+  ✓  11 tests/e2e/core-journeys.spec.ts:126:7 › Core operational browser journeys › admin route access is available after login (3.9s)
+
+  11 passed (47.4s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

@@ -20,6 +20,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "client_name",
             "accrediting_body_name",
             "framework",
+            "client_profile",
             "status",
             "start_date",
             "target_date",
@@ -67,6 +68,7 @@ class ProjectWriteSerializer(serializers.ModelSerializer):
             "client_name",
             "accrediting_body_name",
             "framework",
+            "client_profile",
             "status",
             "start_date",
             "target_date",
@@ -76,6 +78,11 @@ class ProjectWriteSerializer(serializers.ModelSerializer):
 
 class InitializeProjectSerializer(serializers.Serializer):
     create_initial_instances = serializers.BooleanField(required=False, default=True)
+
+
+class CloneProjectSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    client_name = serializers.CharField()
 
 
 class StandardsProgressSerializer(serializers.Serializer):
@@ -88,7 +95,11 @@ class StandardsProgressSerializer(serializers.Serializer):
     total_indicators = serializers.IntegerField()
     met_indicators = serializers.IntegerField()
     blocked_count = serializers.IntegerField()
+    blocked_indicators = serializers.IntegerField()
     in_review_count = serializers.IntegerField()
+    not_started_count = serializers.IntegerField()
+    overdue_count = serializers.IntegerField()
+    readiness_score = serializers.FloatField()
     progress_percent = serializers.FloatField()
 
 
@@ -98,4 +109,6 @@ class AreasProgressSerializer(serializers.Serializer):
     area_name = serializers.CharField()
     total_standards = serializers.IntegerField()
     completed_standards = serializers.IntegerField()
+    high_risk_standards_count = serializers.IntegerField()
+    readiness_score = serializers.FloatField()
     progress_percent = serializers.FloatField()

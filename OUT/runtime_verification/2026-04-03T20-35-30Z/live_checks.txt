@@ -1,0 +1,249 @@
+# listeners
+LISTEN 0      5          127.0.0.1:8013       0.0.0.0:*    users:(("python3",pid=2525097,fd=3))
+LISTEN 0      10         127.0.0.1:18000      0.0.0.0:*    users:(("python3",pid=2525096,fd=4))
+
+# local direct checks
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.12.3
+Date: Fri, 03 Apr 2026 20:42:29 GMT
+Content-type: text/html
+Content-Length: 6268
+Last-Modified: Fri, 03 Apr 2026 10:56:42 GMT
+Cache-Control: no-store
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccrediOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --card: rgba(255, 252, 247, 0.92);
+      --ink: #1f2a2d;
+      --muted: #617177;
+      --line: rgba(31, 42, 45, 0.12);
+      --accent: #a53d2f;
+      --accent-strong: #7c2518;
+      --accent-soft: rgba(165, 61, 47, 0.12);
+      --shadow: 0 24px 60px rgba(59, 41, 27, 0.14);
+    }
+
+
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.12.3
+Date: Fri, 03 Apr 2026 20:42:29 GMT
+Content-Type: application/json
+Content-Length: 47
+Cache-Control: no-store
+
+{"status":"ok","service":"accrediops-frontend"}
+HTTP/1.1 200 OK
+Date: Fri, 03 Apr 2026 20:42:29 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: application/json
+Vary: Accept, Cookie
+Allow: GET, HEAD, OPTIONS
+X-Frame-Options: DENY
+Content-Length: 86
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+HTTP/1.1 404 Not Found
+Date: Fri, 03 Apr 2026 20:42:29 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+# domain checks
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: no-store
+content-type: text/html
+date: Fri, 03 Apr 2026 20:42:30 GMT
+last-modified: Fri, 03 Apr 2026 10:56:42 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.0 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 6268
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccrediOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --card: rgba(255, 252, 247, 0.92);
+      --ink: #1f2a2d;
+      --muted: #617177;
+      --line: rgba(31, 42, 45, 0.12);
+      --accent: #a53d2f;
+      --accent-strong: #7c2518;
+      --accent-soft: rgba(165, 61, 47, 0.12);
+      --shadow: 0 24px 60px rgba(59, 41, 27, 0.14);
+    }
+
+
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: no-store
+content-type: application/json
+date: Fri, 03 Apr 2026 20:42:30 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.0 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 47
+
+{"status":"ok","service":"accrediops-frontend"}
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:42:30 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 86
+
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+HTTP/2 404 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:42:30 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 179
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+# duplicate-api and trailing-slash checks
+## https://ops.alshifalab.pk/api/health/
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:47:47 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 86
+
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+## https://ops.alshifalab.pk/api/health
+HTTP/2 301 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:47:47 GMT
+location: /api/health/
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+
+## https://ops.alshifalab.pk/api//health/
+HTTP/2 404 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Fri, 03 Apr 2026 20:47:47 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 179
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+## https://ops.alshifalab.pk/projects
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+date: Fri, 03 Apr 2026 20:47:47 GMT
+etag: "tu2y51oboc80h"
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-powered-by: Next.js
+
+<!DOCTYPE html><!--Eq8W2o28cPjQZo_Njz3c0--><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/26d4368bf94c0ec4-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/98e207f02528a563-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/d3ebbfd689654d3a-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/db96af6b531dc71f-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/b1f6b3b788e17f21.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-06c69ce3658e37a4.js"/><script src="/_next/static/chunks/4bd1b696-c023c6e3521b1417.js" async=""></script><script src="/_next/static/chunks/255-38b49df12a94ee57.js" async=""></script><script src="/_next/static/chunks/main-app-14368e47824f3575.js" async=""></script><script src="/_next/static/chunks/551-17bdfe8d2d64dec9.js" async=""></script><script src="/_next/static/chunks/app/layout-57644a8711159a46.js" async=""></script><script src="/_next/static/chunks/516-60747e823a9e4b32.js" async=""></script><script src="/_next/static/chunks/135-a5ade5fa4dcb0113.js" async=""></script><script src="/_next/static/chunks/940-b88e7380f6aa8759.js" async=""></script><script src="/_next/static/chunks/app/(workbench)/layout-77b0fef323da222d.js" async=""></script><script src="/_next/static/chunks/app/(workbench)/projects/page-a39f84cac47132e6.js" async=""></script><meta name="next-size-adjust" content=""/><title>AccrediOps</title><meta name="description" content="Internal accreditation operations workbench."/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="__variable_c8daab __variable_595324"><div hidden=""><!--$--><!--/$--></div><div class="min-h-screen space-y-4 p-6"><div class="animate-pulse rounded-md bg-slate-200 h-16 w-full"></div><div class="animate-pulse rounded-md bg-slate-200 h-[calc(100vh-140px)] w-full"></div></div><div class="fixed bottom-4 right-4 z-50 flex w-full max-w-sm flex-col gap-2"></div><script src="/_next/static/chunks/webpack-06c69ce3658e37a4.js" id="_R_" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[2802,[\"551\",\"static/chunks/551-17bdfe8d2d64dec9.js\",\"177\",\"static/chunks/app/layout-57644a8711159a46.js\"],\"AppProviders\"]\n3:I[9766,[],\"\"]\n4:I[8924,[],\"\"]\n5:I[7361,[\"551\",\"static/chunks/551-17bdfe8d2d64dec9.js\",\"516\",\"static/chunks/516-60747e823a9e4b32.js\",\"135\",\"static/chunks/135-a5ade5fa4dcb0113.js\",\"940\",\"static/chunks/940-b88e7380f6aa8759.js\",\"674\",\"static/chunks/app/(workbench)/layout-77b0fef323da222d.js\"],\"AuthGuard\"]\n6:I[7757,[\"551\",\"static/chunks/551-17bdfe8d2d64dec9.js\",\"516\",\"static/chunks/516-60747e823a9e4b32.js\",\"135\",\"static/chunks/135-a5ade5fa4dcb0113.js\",\"940\",\"static/chunks/940-b88e7380f6aa8759.js\",\"674\",\"static/chunks/app/(workbench)/layout-77b0fef323da222d.js\"],\"Sidebar\"]\n7:I[8319,[\"551\",\"static/chunks/551-17bdfe8d2d64dec9.js\",\"516\",\"static/chunks/516-60747e823a9e4b32.js\",\"135\",\"static/chunks/135-a5ade5fa4dcb0113.js\",\"940\",\"static/chunks/940-b88e7380f6aa8759.js\",\"674\",\"static/chunks/app/(workbench)/layout-77b0fef323da222d.js\"],\"Topbar\"]\n8:I[5948,[\"551\",\"static/chunks/551-17bdfe8d2d64dec9.js\",\"516\",\"static/chunks/516-60747e823a9e4b32.js\",\"135\",\"static/chunks/135-a5ade5fa4dcb0113.js\",\"780\",\"static/chunks/app/(workbench)/projects/page-a39f84cac47132e6.js\"],\"ProjectsListScreen\"]\n9:I[4431,[],\"OutletBoundary\"]\nb:I[5278,[],\"AsyncMetadataOutlet\"]\nd:I[4431,[],\"ViewportBoundary\"]\nf:I[4431,[],\"MetadataBoundary\"]\n10:\"$Sreact.suspense\"\n12:I[7150,[],\"\"]\n:HL[\"/_next/static/media/26d4368bf94c0ec4-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/98e207f02528a563-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/d3ebbfd689654d3a-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/db96af6b531dc71f-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/css/b1f6b3b788e17f21.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"Eq8W2o28cPjQZo_Njz3c0\",\"p\":\"\",\"c\":[\"\",\"projects\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"(workbench)\",{\"children\":[\"projects\",{\"children\":[\"__PAGE__\",{}]}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/b1f6b3b788e17f21.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[\"$\",\"body\",null,{\"className\":\"__variable_c8daab __variable_595324\",\"children\":[\"$\",\"$L2\",null,{\"children\":[\"$\",\"$L3\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]}]]}],{\"children\":[\"(workbench)\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L5\",null,{\"children\":[\"$\",\"div\",null,{\"className\":\"flex min-h-screen bg-[#f5f7fb] text-slate-900\",\"children\":[[\"$\",\"$L6\",null,{}],[\"$\",\"div\",null,{\"className\":\"min-w-0 flex-1\",\"children\":[[\"$\",\"$L7\",null,{}],[\"$\",\"main\",null,{\"className\":\"min-h-[calc(100vh-81px)] p-6\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto flex w-full max-w-[1600px] flex-col gap-6\",\"children\":[\"$\",\"$L3\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":\"$0:f:0:1:1:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:style\",\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":\"$0:f:0:1:1:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:1:props:style\",\"children\":404}],[\"$\",\"div\",null,{\"style\":\"$0:f:0:1:1:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:2:props:style\",\"children\":[\"$\",\"h2\",null,{\"style\":\"$0:f:0:1:1:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:2:props:children:props:style\",\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]]}]]}]}]]}],{\"children\":[\"projects\",[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L3\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L8\",null,{}],null,[\"$\",\"$L9\",null,{\"children\":[\"$La\",[\"$\",\"$Lb\",null,{\"promise\":\"$@c\"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$Ld\",null,{\"children\":\"$Le\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$Lf\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$10\",null,{\"fallback\":null,\"children\":\"$L11\"}]}]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$12\",[]],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"e:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\na:null\n"])</script><script>self.__next_f.push([1,"c:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"AccrediOps\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Internal accreditation operations workbench.\"}]],\"error\":null,\"digest\":\"$undefined\"}\n"])</script><script>self.__next_f.push([1,"11:\"$c:metadata\"\n"])</script></body></html>
+## https://ops.alshifalab.pk/projects/
+HTTP/2 308 
+alt-svc: h3=":443"; ma=2592000
+date: Fri, 03 Apr 2026 20:47:47 GMT
+location: /projects
+referrer-policy: strict-origin-when-cross-origin
+refresh: 0;url=/projects
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+/projects

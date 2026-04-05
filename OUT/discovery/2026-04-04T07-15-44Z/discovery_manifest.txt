@@ -1,0 +1,19 @@
+CMD: repository surface inventory
+CMD: generated frontend/backend/api inventories
+CMD: collected test inventories
+CMD: ran playwright suite for discovery
+CMD: begin test expansion phase
+CMD: npm run test -- --run
+CMD: python backend/manage.py test apps.api.tests --verbosity 1
+CMD: NEXT_DIST_DIR=.next_discovery npm run build
+CMD: pytest --cov=apps --cov-report=term --cov-report=xml
+CMD: npx playwright test tests/e2e/app-flows.spec.ts
+CMD: python3 backend/manage.py test apps.api.tests --verbosity 1
+CMD: pytest
+CMD: find OUT/playwright artifacts
+CMD: expanded playwright run captured
+CMD: python3 backend/manage.py test apps.api.tests --verbosity 1
+CMD: npm run test -- --run
+CMD: python3 -m coverage run --source=apps -m pytest -o addopts='' apps/api/tests && python3 -m coverage report -m
+CMD: .venv/bin/pytest
+CMD: python3 backend/manage.py test apps.api.tests --verbosity 1

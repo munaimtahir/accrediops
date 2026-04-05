@@ -1,0 +1,75 @@
+# permissions
+-rw-r--r-- 1 root root 9003 Apr  3 11:00 /etc/caddy/Caddyfile
+drwxr-xr-x 2 root root 4096 Mar 12 08:51 /etc/caddy
+
+# direct local checks
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.12.3
+Date: Fri, 03 Apr 2026 20:38:56 GMT
+Content-type: text/html
+Content-Length: 6268
+Last-Modified: Fri, 03 Apr 2026 10:56:42 GMT
+Cache-Control: no-store
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccrediOps</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --card: rgba(255, 252, 247, 0.92);
+      --ink: #1f2a2d;
+      --muted: #617177;
+      --line: rgba(31, 42, 45, 0.12);
+      --accent: #a53d2f;
+      --accent-strong: #7c2518;
+      --accent-soft: rgba(165, 61, 47, 0.12);
+      --shadow: 0 24px 60px rgba(59, 41, 27, 0.14);
+    }
+
+
+HTTP/1.1 404 Not Found
+Date: Fri, 03 Apr 2026 20:38:57 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+HTTP/1.1 404 Not Found
+Date: Fri, 03 Apr 2026 20:38:57 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>

@@ -7,6 +7,7 @@ from apps.masters.choices import (
     EvidenceCompletenessStatusChoices,
     EvidenceSourceTypeChoices,
     EvidenceValidityStatusChoices,
+    PhysicalLocationTypeChoices,
 )
 
 
@@ -33,6 +34,10 @@ class EvidenceItemSerializer(serializers.ModelSerializer):
             "reviewed_by",
             "reviewed_at",
             "review_notes",
+            "physical_location_type",
+            "location_details",
+            "file_label",
+            "is_physical_copy_available",
         )
 
 
@@ -48,6 +53,15 @@ class CreateEvidenceSerializer(serializers.Serializer):
     text_content = serializers.CharField(required=False, allow_blank=True, default="")
     evidence_date = serializers.DateField(required=False, allow_null=True)
     notes = serializers.CharField(required=False, allow_blank=True, default="")
+    physical_location_type = serializers.ChoiceField(
+        choices=PhysicalLocationTypeChoices.choices,
+        required=False,
+        allow_blank=True,
+        default="",
+    )
+    location_details = serializers.CharField(required=False, allow_blank=True, default="")
+    file_label = serializers.CharField(required=False, allow_blank=True, default="")
+    is_physical_copy_available = serializers.BooleanField(required=False, default=False)
 
 
 class UpdateEvidenceSerializer(serializers.Serializer):
@@ -57,6 +71,14 @@ class UpdateEvidenceSerializer(serializers.Serializer):
     file_or_url = serializers.CharField(required=False, allow_blank=True)
     text_content = serializers.CharField(required=False, allow_blank=True)
     evidence_date = serializers.DateField(required=False, allow_null=True)
+    physical_location_type = serializers.ChoiceField(
+        choices=PhysicalLocationTypeChoices.choices,
+        required=False,
+        allow_blank=True,
+    )
+    location_details = serializers.CharField(required=False, allow_blank=True)
+    file_label = serializers.CharField(required=False, allow_blank=True)
+    is_physical_copy_available = serializers.BooleanField(required=False)
 
 
 class EvidenceReviewSerializer(serializers.Serializer):

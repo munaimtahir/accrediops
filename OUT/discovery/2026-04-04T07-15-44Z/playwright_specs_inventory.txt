@@ -1,0 +1,25 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("AccrediOps end-to-end flows", () => {
+  test("1. project list opens", async ({ page }) => {
+    await page.goto("/projects");
+    await expect(page).toHaveURL(/\/projects/);
+  });
+
+  test("2. login page opens", async ({ page }) => {
+    await page.goto("/login");
+    await expect(page.getByText("AccrediOps sign-in")).toBeVisible();
+  });
+
+  test("3. admin page route resolves", async ({ page }) => {
+    await page.goto("/admin");
+    await expect(page).toHaveURL(/\/admin/);
+  });
+
+  test("4. health endpoints reachable via proxy", async ({ request }) => {
+    const backend = await request.get("/health/backend");
+    const frontend = await request.get("/health/frontend");
+    expect(backend.ok()).toBeTruthy();
+    expect(frontend.ok()).toBeTruthy();
+  });
+});

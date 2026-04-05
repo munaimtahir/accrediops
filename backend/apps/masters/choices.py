@@ -106,3 +106,16 @@ class DocumentTypeChoices(models.TextChoices):
     MINUTES = "MINUTES", "Minutes"
     REPORT = "REPORT", "Report"
     OTHER = "OTHER", "Other"
+
+
+class EvidenceReusePolicyChoices(models.TextChoices):
+    NONE = "NONE", "None"
+    MANUAL_REVIEW = "MANUAL_REVIEW", "Manual Review"
+    AUTO_ALLOWED = "AUTO_ALLOWED", "Auto Allowed"
+
+
+class PhysicalLocationTypeChoices(models.TextChoices):
+    BINDER = "BINDER", "Binder"
+    CABINET = "CABINET", "Cabinet"
+    ROOM = "ROOM", "Room"
+    OTHER = "OTHER", "Other"

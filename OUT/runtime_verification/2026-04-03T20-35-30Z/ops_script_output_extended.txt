@@ -1,0 +1,314 @@
+### scripts/devops/clean_stop.sh
+[accrediops] stopping stack (volumes preserved)...
+[accrediops] stack stopped.
+
+### scripts/devops/rebuild_up.sh
+[accrediops] building containers...
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [backend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 258B done
+#2 DONE 0.1s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 139B 0.0s done
+#3 DONE 0.1s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#4 ...
+
+#5 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#5 DONE 0.5s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 0.5s
+
+#6 [backend internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [frontend internal] load .dockerignore
+#7 transferring context: 2B 0.0s done
+#7 DONE 0.1s
+
+#8 [backend internal] load build context
+#8 transferring context: 9.41MB 0.7s done
+#8 DONE 0.8s
+
+#9 [frontend internal] load build context
+#9 transferring context: 98.21MB 4.1s done
+#9 DONE 4.3s
+
+#10 [backend 1/5] FROM docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4
+#10 resolve docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4
+#10 resolve docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4 5.8s done
+#10 DONE 5.9s
+
+#11 [backend 2/5] WORKDIR /app
+#11 CACHED
+
+#12 [frontend 1/5] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#12 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.1s done
+#12 DONE 5.8s
+
+#13 [frontend 2/5] WORKDIR /app
+#13 CACHED
+
+#14 [frontend 3/5] COPY package*.json /app/
+#14 ...
+
+#15 [backend 3/5] COPY requirements.txt /app/requirements.txt
+#15 DONE 1.3s
+
+#14 [frontend 3/5] COPY package*.json /app/
+#14 DONE 1.3s
+
+#16 [frontend 4/5] RUN npm install
+#16 ...
+
+#17 [backend 4/5] RUN pip install --no-cache-dir -r /app/requirements.txt
+#17 5.764 Collecting Django<5.3,>=5.2 (from -r /app/requirements.txt (line 1))
+#17 5.857   Downloading django-5.2.12-py3-none-any.whl.metadata (4.1 kB)
+#17 5.933 Collecting djangorestframework<3.17,>=3.16 (from -r /app/requirements.txt (line 2))
+#17 5.949   Downloading djangorestframework-3.16.1-py3-none-any.whl.metadata (11 kB)
+#17 5.981 Collecting python-dotenv<2.0,>=1.1 (from -r /app/requirements.txt (line 3))
+#17 5.997   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+#17 6.045 Collecting psycopg<4.0,>=3.2 (from psycopg[binary]<4.0,>=3.2->-r /app/requirements.txt (line 4))
+#17 6.061   Downloading psycopg-3.3.3-py3-none-any.whl.metadata (4.3 kB)
+#17 6.107 Collecting whitenoise<7.0,>=6.7 (from -r /app/requirements.txt (line 5))
+#17 6.126   Downloading whitenoise-6.12.0-py3-none-any.whl.metadata (3.7 kB)
+#17 6.211 Collecting pytest<9.0,>=8.3 (from -r /app/requirements.txt (line 6))
+#17 6.227   Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+#17 6.281 Collecting pytest-django<5.0,>=4.8 (from -r /app/requirements.txt (line 7))
+#17 6.298   Downloading pytest_django-4.12.0-py3-none-any.whl.metadata (8.0 kB)
+#17 6.342 Collecting pytest-cov<6.0,>=5.0 (from -r /app/requirements.txt (line 8))
+#17 6.358   Downloading pytest_cov-5.0.0-py3-none-any.whl.metadata (27 kB)
+#17 6.411 Collecting asgiref>=3.8.1 (from Django<5.3,>=5.2->-r /app/requirements.txt (line 1))
+#17 6.427   Downloading asgiref-3.11.1-py3-none-any.whl.metadata (9.3 kB)
+#17 6.464 Collecting sqlparse>=0.3.1 (from Django<5.3,>=5.2->-r /app/requirements.txt (line 1))
+#17 6.480   Downloading sqlparse-0.5.5-py3-none-any.whl.metadata (4.7 kB)
+#17 6.647 Collecting typing-extensions>=4.6 (from psycopg<4.0,>=3.2->psycopg[binary]<4.0,>=3.2->-r /app/requirements.txt (line 4))
+#17 6.665   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#17 6.692 Collecting iniconfig>=1 (from pytest<9.0,>=8.3->-r /app/requirements.txt (line 6))
+#17 6.708   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+#17 6.748 Collecting packaging>=20 (from pytest<9.0,>=8.3->-r /app/requirements.txt (line 6))
+#17 6.765   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+#17 6.796 Collecting pluggy<2,>=1.5 (from pytest<9.0,>=8.3->-r /app/requirements.txt (line 6))
+#17 6.810   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+#17 6.863 Collecting pygments>=2.7.2 (from pytest<9.0,>=8.3->-r /app/requirements.txt (line 6))
+#17 6.879   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+#17 ...
+
+#16 [frontend 4/5] RUN npm install
+#16 7.763 npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+#16 ...
+
+#17 [backend 4/5] RUN pip install --no-cache-dir -r /app/requirements.txt
+#17 7.849 Collecting coverage>=5.2.1 (from coverage[toml]>=5.2.1->pytest-cov<6.0,>=5.0->-r /app/requirements.txt (line 8))
+#17 7.866   Downloading coverage-7.13.5-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.5 kB)
+#17 8.208 Collecting psycopg-binary==3.3.3 (from psycopg[binary]<4.0,>=3.2->-r /app/requirements.txt (line 4))
+#17 8.229   Downloading psycopg_binary-3.3.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.7 kB)
+#17 8.268 Downloading django-5.2.12-py3-none-any.whl (8.3 MB)
+#17 8.462    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.3/8.3 MB 58.6 MB/s eta 0:00:00
+#17 8.480 Downloading djangorestframework-3.16.1-py3-none-any.whl (1.1 MB)
+#17 8.492    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 186.0 MB/s eta 0:00:00
+#17 8.510 Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+#17 8.526 Downloading psycopg-3.3.3-py3-none-any.whl (212 kB)
+#17 8.544 Downloading whitenoise-6.12.0-py3-none-any.whl (20 kB)
+#17 8.562 Downloading pytest-8.4.2-py3-none-any.whl (365 kB)
+#17 8.585 Downloading pytest_django-4.12.0-py3-none-any.whl (26 kB)
+#17 8.600 Downloading pytest_cov-5.0.0-py3-none-any.whl (21 kB)
+#17 8.618 Downloading psycopg_binary-3.3.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.2 MB)
+#17 8.655    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 172.3 MB/s eta 0:00:00
+#17 8.676 Downloading asgiref-3.11.1-py3-none-any.whl (24 kB)
+#17 8.689 Downloading coverage-7.13.5-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (254 kB)
+#17 8.715 Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+#17 8.732 Downloading packaging-26.0-py3-none-any.whl (74 kB)
+#17 8.751 Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+#17 8.777 Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+#17 8.792    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 161.5 MB/s eta 0:00:00
+#17 8.812 Downloading sqlparse-0.5.5-py3-none-any.whl (46 kB)
+#17 8.828 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#17 9.119 Installing collected packages: whitenoise, typing-extensions, sqlparse, python-dotenv, pygments, psycopg-binary, pluggy, packaging, iniconfig, coverage, asgiref, pytest, psycopg, Django, pytest-django, pytest-cov, djangorestframework
+#17 18.69 Successfully installed Django-5.2.12 asgiref-3.11.1 coverage-7.13.5 djangorestframework-3.16.1 iniconfig-2.3.0 packaging-26.0 pluggy-1.6.0 psycopg-3.3.3 psycopg-binary-3.3.3 pygments-2.20.0 pytest-8.4.2 pytest-cov-5.0.0 pytest-django-4.12.0 python-dotenv-1.2.2 sqlparse-0.5.5 typing-extensions-4.15.0 whitenoise-6.12.0
+#17 18.69 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#17 18.91 
+#17 18.91 [notice] A new release of pip is available: 25.0.1 -> 26.0.1
+#17 18.91 [notice] To update, run: pip install --upgrade pip
+#17 DONE 27.7s
+
+#16 [frontend 4/5] RUN npm install
+#16 27.76 
+#16 27.76 added 245 packages, and audited 246 packages in 25s
+#16 27.76 
+#16 27.76 50 packages are looking for funding
+#16 27.76   run `npm fund` for details
+#16 27.82 
+#16 27.82 5 moderate severity vulnerabilities
+#16 27.82 
+#16 27.82 To address all issues (including breaking changes), run:
+#16 27.82   npm audit fix --force
+#16 27.82 
+#16 27.82 Run `npm audit` for details.
+#16 27.83 npm notice
+#16 27.83 npm notice New major version of npm available! 10.8.2 -> 11.12.1
+#16 27.83 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.1
+#16 27.83 npm notice To update run: npm install -g npm@11.12.1
+#16 27.83 npm notice
+#16 DONE 29.0s
+
+#18 [backend 5/5] COPY . /app
+#18 DONE 1.4s
+
+#19 [frontend 5/5] COPY . /app
+#19 ...
+
+#20 [backend] exporting to image
+#20 exporting layers 5.9s done
+#20 exporting manifest sha256:443235fe1a0b6d19aa1a76a11d109fcd41fbeed8c6f76761cfb0c61f49546654 0.0s done
+#20 exporting config sha256:c4f5a02617aa14cbeb91e26c9e2218ebef4acda32533e890f11e350fd6e7a8d1 0.0s done
+#20 exporting attestation manifest sha256:d2ebe4d2695ad5ad70b973dfd9f7bf0f8b19f6b2a3f22d349c54e7c230bc4f84 0.0s done
+#20 exporting manifest list sha256:26e913d2d5adac9d3efbb56bf87546930658a5a1c27349af1b9f9e4668595938 0.0s done
+#20 naming to docker.io/library/accrediops-backend:latest
+#20 naming to docker.io/library/accrediops-backend:latest done
+#20 unpacking to docker.io/library/accrediops-backend:latest
+#20 unpacking to docker.io/library/accrediops-backend:latest 4.6s done
+#20 DONE 10.8s
+
+#19 [frontend 5/5] COPY . /app
+#19 ...
+
+#21 [backend] resolving provenance for metadata file
+#21 DONE 0.3s
+
+#19 [frontend 5/5] COPY . /app
+#19 DONE 42.3s
+
+#22 [frontend] exporting to image
+#22 exporting layers
+#22 exporting layers 39.9s done
+#22 exporting manifest sha256:075e3fe0074c98b111b5943995fc2948da39c050f8b4ef0a885f858b9ff8330a
+#22 exporting manifest sha256:075e3fe0074c98b111b5943995fc2948da39c050f8b4ef0a885f858b9ff8330a 0.0s done
+#22 exporting config sha256:ae31aabc282b492cce1318e00933f5747470f1d381c29a60dd4700d8aca9c3e9 0.0s done
+#22 exporting attestation manifest sha256:4461aed6f2d5c1608c1a925625242bcf9a4e4ce9b3b86941291cb6d940578fd0 0.0s done
+#22 exporting manifest list sha256:82ba5e6cb4df23470556e9d7499820f6e2e98c2fd84dd8c7ba8e125b56feab56 0.0s done
+#22 naming to docker.io/library/accrediops-frontend:latest
+#22 naming to docker.io/library/accrediops-frontend:latest done
+#22 unpacking to docker.io/library/accrediops-frontend:latest
+#22 unpacking to docker.io/library/accrediops-frontend:latest 22.7s done
+#22 DONE 62.8s
+
+#23 [frontend] resolving provenance for metadata file
+#23 DONE 0.0s
+[accrediops] starting stack...
+
+### scripts/devops/reset_stack.sh
+[accrediops] resetting stack...
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [backend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 258B done
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 139B done
+#3 DONE 0.0s
+
+#4 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#4 DONE 0.2s
+
+#5 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 0.2s
+
+#6 [frontend internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [backend internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [backend internal] load build context
+#8 ...
+
+#9 [frontend 1/5] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#9 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.1s done
+#9 DONE 0.1s
+
+#8 [backend internal] load build context
+#8 transferring context: 68.36kB 0.1s done
+#8 DONE 0.2s
+
+#10 [backend 1/5] FROM docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4
+#10 resolve docker.io/library/python:3.12-slim@sha256:3d5ed973e45820f5ba5e46bd065bd88b3a504ff0724d85980dcd05eab361fcf4 0.1s done
+#10 DONE 0.1s
+
+#11 [backend 2/5] WORKDIR /app
+#11 CACHED
+
+#12 [backend 3/5] COPY requirements.txt /app/requirements.txt
+#12 CACHED
+
+#13 [backend 4/5] RUN pip install --no-cache-dir -r /app/requirements.txt
+#13 CACHED
+
+#14 [backend 5/5] COPY . /app
+#14 CACHED
+
+#15 [backend] exporting to image
+#15 exporting layers 0.0s done
+#15 exporting manifest sha256:443235fe1a0b6d19aa1a76a11d109fcd41fbeed8c6f76761cfb0c61f49546654 done
+#15 exporting config sha256:c4f5a02617aa14cbeb91e26c9e2218ebef4acda32533e890f11e350fd6e7a8d1 done
+#15 exporting attestation manifest sha256:3eb0a7a94d87291e719f947d73eb6decfc50bae239e429488e294e7f8c8bf5fd 0.1s done
+#15 exporting manifest list sha256:ed63f5b381a1abf47be27c131ef8bcf59d3a4ee6a6429ae2ffc29e0985e57ae0 0.0s done
+#15 naming to docker.io/library/accrediops-backend:latest
+#15 naming to docker.io/library/accrediops-backend:latest done
+#15 unpacking to docker.io/library/accrediops-backend:latest 0.0s done
+#15 DONE 0.2s
+
+#16 [frontend internal] load build context
+#16 ...
+
+#17 [backend] resolving provenance for metadata file
+#17 DONE 0.0s
+
+#16 [frontend internal] load build context
+#16 transferring context: 23.57MB 2.3s done
+#16 DONE 2.4s
+
+#18 [frontend 2/5] WORKDIR /app
+#18 CACHED
+
+#19 [frontend 3/5] COPY package*.json /app/
+#19 DONE 0.5s
+
+#20 [frontend 4/5] RUN npm install
+#20 3.676 npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+#20 21.78 
+#20 21.78 added 249 packages, and audited 250 packages in 21s
+#20 21.78 
+#20 21.78 52 packages are looking for funding
+#20 21.78   run `npm fund` for details
+#20 21.81 
+#20 21.81 5 moderate severity vulnerabilities
+#20 21.81 
+#20 21.81 To address all issues (including breaking changes), run:
+#20 21.81   npm audit fix --force
+#20 21.81 
+#20 21.81 Run `npm audit` for details.
+#20 21.81 npm notice
+#20 21.81 npm notice New major version of npm available! 10.8.2 -> 11.12.1
+#20 21.81 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.1
+#20 21.81 npm notice To update run: npm install -g npm@11.12.1
+#20 21.81 npm notice
+#20 DONE 30.0s
+
+#21 [frontend 5/5] COPY . /app
+#21 DONE 20.6s
+
+#22 [frontend] exporting to image
+#22 exporting layers

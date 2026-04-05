@@ -1,0 +1,35 @@
+--- FRONTEND SERVICE ---
+# /home/munaim/.config/systemd/user/accrediops-frontend.service
+[Unit]
+Description=AccrediOps frontend (Next.js)
+After=network.target accrediops-backend.service
+Wants=accrediops-backend.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/munaim/srv/apps/accrediops/frontend
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npm run start -- --hostname 127.0.0.1 --port 8013
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+
+--- BACKEND SERVICE ---
+# /home/munaim/.config/systemd/user/accrediops-backend.service
+[Unit]
+Description=AccrediOps backend (Django)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/munaim/srv/apps/accrediops/backend
+Environment=PYTHONUNBUFFERED=1
+ExecStartPre=/usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py migrate --noinput
+ExecStart=/usr/bin/python3 /home/munaim/srv/apps/accrediops/backend/manage.py runserver 127.0.0.1:18000 --noreload
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

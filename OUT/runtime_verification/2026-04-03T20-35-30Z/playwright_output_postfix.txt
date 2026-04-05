@@ -1,0 +1,136 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests/e2e/app-flows.spec.ts:4:7 › AccrediOps end-to-end flows › 1. project list opens (21.4s)
+  ✘  2 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (18.9s)
+  ✘  3 tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens (retry #1) (17.6s)
+  ✓  4 tests/e2e/app-flows.spec.ts:14:7 › AccrediOps end-to-end flows › 3. admin page route resolves (18.8s)
+  ✘  5 tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy (406ms)
+  ✘  6 tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy (retry #1) (815ms)
+
+
+  1) tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens ───────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('AccrediOps sign-in')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('AccrediOps sign-in')[22m
+
+
+       9 |   test("2. login page opens", async ({ page }) => {
+      10 |     await page.goto("/login");
+    > 11 |     await expect(page.getByText("AccrediOps sign-in")).toBeVisible();
+         |                                                        ^
+      12 |   });
+      13 |
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:11:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('AccrediOps sign-in')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('AccrediOps sign-in')[22m
+
+
+       9 |   test("2. login page opens", async ({ page }) => {
+      10 |     await page.goto("/login");
+    > 11 |     await expect(page.getByText("AccrediOps sign-in")).toBeVisible();
+         |                                                        ^
+      12 |   });
+      13 |
+      14 |   test("3. admin page route resolves", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:11:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/app-flows-AccrediOps-end-to-end-flows-2-login-page-opens-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      21 |     const frontend = await request.get("/health/frontend");
+      22 |     expect(backend.ok()).toBeTruthy();
+    > 23 |     expect(frontend.ok()).toBeTruthy();
+         |                           ^
+      24 |   });
+      25 | });
+      26 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:23:27
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-t-2216f-dpoints-reachable-via-proxy/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      21 |     const frontend = await request.get("/health/frontend");
+      22 |     expect(backend.ok()).toBeTruthy();
+    > 23 |     expect(frontend.ok()).toBeTruthy();
+         |                           ^
+      24 |   });
+      25 | });
+      26 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/app-flows.spec.ts:23:27
+
+    Error Context: ../OUT/playwright/app-flows-AccrediOps-end-t-2216f-dpoints-reachable-via-proxy-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/app-flows-AccrediOps-end-t-2216f-dpoints-reachable-via-proxy-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/app-flows-AccrediOps-end-t-2216f-dpoints-reachable-via-proxy-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/app-flows.spec.ts:9:7 › AccrediOps end-to-end flows › 2. login page opens ────────────
+    tests/e2e/app-flows.spec.ts:19:7 › AccrediOps end-to-end flows › 4. health endpoints reachable via proxy 
+  2 passed (1.4m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

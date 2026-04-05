@@ -1,0 +1,16 @@
+
+Running 6 tests using 1 worker
+
+  ✓  1 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (1.3s)
+  ✓  2 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (688ms)
+  ✓  3 tests/e2e/app-flows.spec.ts:31:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (2.2s)
+  ✓  4 tests/e2e/app-flows.spec.ts:37:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (6.6s)
+  ✓  5 tests/e2e/app-flows.spec.ts:57:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (2.8s)
+  ✓  6 tests/e2e/app-flows.spec.ts:66:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (57ms)
+
+  6 passed (16.4s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

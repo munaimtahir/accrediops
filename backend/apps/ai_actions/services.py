@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from apps.ai_actions.models import GeneratedOutput
 from apps.audit.services import log_audit_event, snapshot_instance
+from apps.exports.services import replace_variables
 from apps.workflow.permissions import ensure_project_owner_access
 
 
@@ -26,6 +27,8 @@ def create_generated_output(
         f"Advisory {output_type.lower()} for {project_indicator.indicator.code}. "
         f"Instruction: {user_instruction or 'No extra instruction provided.'}"
     )
+    project = project_indicator.project
+    content = replace_variables(content, project.client_profile)
     generated_output = GeneratedOutput.objects.create(
         project_indicator=project_indicator,
         output_type=output_type,

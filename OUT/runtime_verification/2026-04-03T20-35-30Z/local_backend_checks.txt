@@ -1,0 +1,66 @@
+# backend routes check via local backend 18000
+HTTP/1.1 404 Not Found
+Date: Fri, 03 Apr 2026 20:38:17 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+# local auth session
+HTTP/1.1 404 Not Found
+Date: Fri, 03 Apr 2026 20:38:17 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: DENY
+Content-Length: 179
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+# local admin login page
+HTTP/1.1 200 OK
+Date: Fri, 03 Apr 2026 20:38:17 GMT
+Server: WSGIServer/0.2 CPython/3.12.3
+Content-Type: text/html; charset=utf-8
+Expires: Fri, 03 Apr 2026 20:38:17 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie
+X-Frame-Options: DENY
+Content-Length: 4168
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie:  csrftoken=mWKLvUTlgJ8MGGgzIBLtIUd4RMbIiIaR; expires=Fri, 02 Apr 2027 20:38:17 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+
+/static/admin/css/base.css
+/static/admin/css/dark_mode.css
+/static/admin/js/theme.js
+/static/admin/css/nav_sidebar.css
+/static/admin/js/nav_sidebar.js
+/static/admin/css/login.css
+/static/admin/css/responsive.css
