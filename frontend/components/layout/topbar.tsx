@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
@@ -44,10 +45,19 @@ export function Topbar() {
   const sessionQuery = useAuthSession();
   const logout = useLogout();
 
+  const projectsMap = useMemo(() => {
+    if (!projectsQuery.data?.results) return new Map();
+    const map = new Map();
+    for (const p of projectsQuery.data.results) {
+      map.set(p.id, p);
+    }
+    return map;
+  }, [projectsQuery.data?.results]);
+
   const resolvedProject =
     projectQuery.data ??
     (indicatorQuery.data && !Number.isNaN(indicatorQuery.data.project)
-      ? projectsQuery.data?.results.find((project) => project.id === indicatorQuery.data?.project)
+      ? projectsMap.get(indicatorQuery.data.project)
       : undefined);
 
   async function handleLogout() {
