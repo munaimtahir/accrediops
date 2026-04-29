@@ -47,7 +47,11 @@ export function Topbar() {
 
   const projectsMap = useMemo(() => {
     if (!projectsQuery.data?.results) return new Map();
-    return new Map(projectsQuery.data.results.map((p) => [p.id, p]));
+    const map = new Map();
+    for (const p of projectsQuery.data.results) {
+      map.set(p.id, p);
+    }
+    return map;
   }, [projectsQuery.data?.results]);
 
   const resolvedProject =
