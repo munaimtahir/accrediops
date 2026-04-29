@@ -163,7 +163,7 @@ def clone_project(
     )
     source_items = (
         ProjectIndicator.objects.filter(project=source_project)
-        .select_related("indicator", "owner", "reviewer", "approver", "recurring_requirement")
+        .select_related("recurring_requirement")
         .all()
     )
     source_by_indicator_id = {item.indicator_id: item for item in source_items}
