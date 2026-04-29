@@ -1,0 +1,49 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/project-management-form.test.tsx (1 test) 808ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 804ms
+(node:3171942) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 525ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 522ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 1774ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 1072ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 697ms
+(node:3172055) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-list-screen.test.tsx (2 tests) 322ms
+(node:3172075) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 374ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 371ms
+(node:3172097) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 339ms
+ ✓ tests/sidebar.test.tsx (3 tests) 299ms
+(node:3172142) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 443ms
+   ✓ ProjectWorklistScreen > renders filters and table 437ms
+ ✓ tests/app-shell.test.tsx (1 test) 215ms
+(node:3172206) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 99ms
+(node:3172265) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 314ms
+   ✓ ProjectInspectionScreen > renders inspection mode 311ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 261ms
+ ✓ tests/evidence-form.test.tsx (1 test) 425ms
+   ✓ EvidenceForm > submits with physical evidence fields 422ms
+
+ Test Files  13 passed (13)
+      Tests  18 passed (18)
+   Start at  01:55:03
+   Duration  12.58s (transform 1.59s, setup 1.48s, collect 7.97s, tests 6.20s, environment 11.87s, prepare 2.94s)
+

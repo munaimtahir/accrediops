@@ -1,0 +1,368 @@
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (26.0.1)
+Requirement already satisfied: Django<5.3,>=5.2 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 1)) (5.2.12)
+Requirement already satisfied: djangorestframework<3.17,>=3.16 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 2)) (3.16.1)
+Requirement already satisfied: python-dotenv<2.0,>=1.1 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 3)) (1.2.2)
+Requirement already satisfied: psycopg<4.0,>=3.2 in ./.venv/lib/python3.12/site-packages (from psycopg[binary]<4.0,>=3.2->-r requirements.txt (line 4)) (3.3.3)
+Requirement already satisfied: whitenoise<7.0,>=6.7 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 5)) (6.12.0)
+Requirement already satisfied: pytest<9.0,>=8.3 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 6)) (8.4.2)
+Requirement already satisfied: pytest-django<5.0,>=4.8 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 7)) (4.12.0)
+Requirement already satisfied: pytest-cov<6.0,>=5.0 in ./.venv/lib/python3.12/site-packages (from -r requirements.txt (line 8)) (5.0.0)
+Requirement already satisfied: asgiref>=3.8.1 in ./.venv/lib/python3.12/site-packages (from Django<5.3,>=5.2->-r requirements.txt (line 1)) (3.11.1)
+Requirement already satisfied: sqlparse>=0.3.1 in ./.venv/lib/python3.12/site-packages (from Django<5.3,>=5.2->-r requirements.txt (line 1)) (0.5.5)
+Requirement already satisfied: typing-extensions>=4.6 in ./.venv/lib/python3.12/site-packages (from psycopg<4.0,>=3.2->psycopg[binary]<4.0,>=3.2->-r requirements.txt (line 4)) (4.15.0)
+Requirement already satisfied: iniconfig>=1 in ./.venv/lib/python3.12/site-packages (from pytest<9.0,>=8.3->-r requirements.txt (line 6)) (2.3.0)
+Requirement already satisfied: packaging>=20 in ./.venv/lib/python3.12/site-packages (from pytest<9.0,>=8.3->-r requirements.txt (line 6)) (26.0)
+Requirement already satisfied: pluggy<2,>=1.5 in ./.venv/lib/python3.12/site-packages (from pytest<9.0,>=8.3->-r requirements.txt (line 6)) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in ./.venv/lib/python3.12/site-packages (from pytest<9.0,>=8.3->-r requirements.txt (line 6)) (2.20.0)
+Requirement already satisfied: coverage>=5.2.1 in ./.venv/lib/python3.12/site-packages (from coverage[toml]>=5.2.1->pytest-cov<6.0,>=5.0->-r requirements.txt (line 8)) (7.13.5)
+Requirement already satisfied: psycopg-binary==3.3.3 in ./.venv/lib/python3.12/site-packages (from psycopg[binary]<4.0,>=3.2->-r requirements.txt (line 4)) (3.3.3)
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0
+django: version: 5.2.12, settings: config.accrediops_backend.settings (from ini)
+rootdir: /home/munaim/srv/apps/accrediops/backend
+configfile: pytest.ini
+testpaths: apps
+plugins: cov-5.0.0, django-4.12.0
+collected 31 items
+
+apps/api/tests/test_admin_readiness_inspection_exports.py .........      [ 29%]
+apps/api/tests/test_admin_registry.py .                                  [ 32%]
+apps/api/tests/test_auth_api.py ...                                      [ 41%]
+apps/api/tests/test_clone_project.py .                                   [ 45%]
+apps/api/tests/test_evidence_and_ai.py ...                               [ 54%]
+apps/api/tests/test_frameworks_api.py .                                  [ 58%]
+apps/api/tests/test_governance_hardening.py ...                          [ 67%]
+apps/api/tests/test_mark_met_and_progress.py ..                          [ 74%]
+apps/api/tests/test_physical_evidence.py .                               [ 77%]
+apps/api/tests/test_print_pack.py .                                      [ 80%]
+apps/api/tests/test_project_create_and_initialize.py ..                  [ 87%]
+apps/api/tests/test_project_initialization.py .                          [ 90%]
+apps/api/tests/test_recurring_queue.py ..                                [ 96%]
+apps/api/tests/test_variable_replacement.py .                            [100%]
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                                                                          Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------------------------------------------------------------------
+apps/__init__.py                                                                  0      0      0      0   100%
+apps/accounts/__init__.py                                                         0      0      0      0   100%
+apps/accounts/admin.py                                                           20      0      0      0   100%
+apps/accounts/apps.py                                                             5      0      0      0   100%
+apps/accounts/migrations/0001_initial.py                                          9      0      0      0   100%
+apps/accounts/migrations/0002_clientprofile.py                                    4      0      0      0   100%
+apps/accounts/migrations/__init__.py                                              0      0      0      0   100%
+apps/accounts/models/__init__.py                                                  3      0      0      0   100%
+apps/accounts/models/department.py                                               20      2      0      0    90%   11, 28
+apps/accounts/models/user.py                                                      8      1      0      0    88%   22
+apps/ai_actions/__init__.py                                                       0      0      0      0   100%
+apps/ai_actions/admin.py                                                          8      0      0      0   100%
+apps/ai_actions/apps.py                                                           5      0      0      0   100%
+apps/ai_actions/migrations/0001_initial.py                                        7      0      0      0   100%
+apps/ai_actions/migrations/__init__.py                                            0      0      0      0   100%
+apps/ai_actions/models/__init__.py                                                2      0      0      0   100%
+apps/ai_actions/models/generated_output.py                                       18      1      0      0    94%   38
+apps/ai_actions/services.py                                                      29     10      2      0    61%   52-67
+apps/api/__init__.py                                                              0      0      0      0   100%
+apps/api/apps.py                                                                  5      0      0      0   100%
+apps/api/exception_handler.py                                                    22      5     12      2    68%   35, 49-52
+apps/api/migrations/__init__.py                                                   0      0      0      0   100%
+apps/api/pagination.py                                                            8      0      0      0   100%
+apps/api/responses.py                                                             4      0      0      0   100%
+apps/api/serializers/__init__.py                                                  0      0      0      0   100%
+apps/api/serializers/admin.py                                                    27      0      0      0   100%
+apps/api/serializers/ai_actions.py                                               15      0      0      0   100%
+apps/api/serializers/auth.py                                                     18      1      4      1    91%   17
+apps/api/serializers/common.py                                                   21      0      0      0   100%
+apps/api/serializers/evidence.py                                                 37      0      0      0   100%
+apps/api/serializers/indicator.py                                                 0      0      0      0   100%
+apps/api/serializers/project_indicators.py                                       93     11      4      0    85%   154-157, 160-163, 166, 169, 172
+apps/api/serializers/projects.py                                                 62      0      0      0   100%
+apps/api/serializers/recurring.py                                                26      0      0      0   100%
+apps/api/tests/__init__.py                                                        0      0      0      0   100%
+apps/api/tests/base.py                                                           29      0      0      0   100%
+apps/api/tests/test_admin_readiness_inspection_exports.py                       105      0      4      0   100%
+apps/api/tests/test_admin_registry.py                                            15      0      2      0   100%
+apps/api/tests/test_auth_api.py                                                  30      0      0      0   100%
+apps/api/tests/test_clone_project.py                                             17      0      0      0   100%
+apps/api/tests/test_evidence_and_ai.py                                           45      0      2      0   100%
+apps/api/tests/test_frameworks_api.py                                            11      0      0      0   100%
+apps/api/tests/test_governance_hardening.py                                      77      0      2      0   100%
+apps/api/tests/test_mark_met_and_progress.py                                     46      0      2      0   100%
+apps/api/tests/test_physical_evidence.py                                         14      0      0      0   100%
+apps/api/tests/test_print_pack.py                                                19      0      0      0   100%
+apps/api/tests/test_project_create_and_initialize.py                             16      0      0      0   100%
+apps/api/tests/test_project_initialization.py                                    12      0      0      0   100%
+apps/api/tests/test_recurring_queue.py                                           34      0      0      0   100%
+apps/api/tests/test_variable_replacement.py                                       9      0      0      0   100%
+apps/api/urls.py                                                                 14      0      0      0   100%
+apps/api/views/__init__.py                                                        0      0      0      0   100%
+apps/api/views/admin.py                                                         123     33     18      2    72%   33, 38-41, 44-49, 54-60, 67-68, 71, 76-81, 98-100, 102-104
+apps/api/views/ai_actions.py                                                     29      9      0      0    69%   20-21, 24-25, 38-42
+apps/api/views/auth.py                                                           28      0      0      0   100%
+apps/api/views/dashboard.py                                                      50     13     28     13    67%   55->57, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78-79, 87
+apps/api/views/evidence.py                                                       36      9      0      0    75%   21-22, 25-26, 39-47
+apps/api/views/exports.py                                                        32     16     10      0    38%   11-15, 47-67
+apps/api/views/frameworks.py                                                     26      0      0      0   100%
+apps/api/views/indicator.py                                                       0      0      0      0   100%
+apps/api/views/project_indicators.py                                             53     13      0      0    75%   28-55, 60-68, 73-81
+apps/api/views/projects.py                                                       89      9     18      5    87%   29, 40-41, 44-48, 96->94, 98->92, 112->120, 122, 134->110
+apps/api/views/recurring.py                                                      42      2     10      3    90%   29->31, 32, 34
+apps/api/views/system.py                                                         11      4      0      0    64%   12-15
+apps/api/views/users.py                                                          54     24      4      0    52%   17-31, 34-35, 42, 45-46, 49-52, 57-58, 61-65
+apps/audit/__init__.py                                                            0      0      0      0   100%
+apps/audit/admin.py                                                              10      0      0      0   100%
+apps/audit/apps.py                                                                5      0      0      0   100%
+apps/audit/migrations/0001_initial.py                                             7      0      0      0   100%
+apps/audit/migrations/__init__.py                                                 0      0      0      0   100%
+apps/audit/models/__init__.py                                                     2      0      0      0   100%
+apps/audit/models/audit_event.py                                                 15      1      0      0    93%   25
+apps/audit/services.py                                                           23      3     12      3    83%   15, 19, 25
+apps/evidence/__init__.py                                                         0      0      0      0   100%
+apps/evidence/admin.py                                                            8      0      0      0   100%
+apps/evidence/apps.py                                                             5      0      0      0   100%
+apps/evidence/migrations/0001_initial.py                                          7      0      0      0   100%
+apps/evidence/migrations/0002_evidenceitem_file_label_and_more.py                 4      0      0      0   100%
+apps/evidence/migrations/__init__.py                                              0      0      0      0   100%
+apps/evidence/models/__init__.py                                                  2      0      0      0   100%
+apps/evidence/models/evidence.py                                                 35      5      4      0    77%   72-79, 82
+apps/evidence/services.py                                                        57     18     14      5    62%   31, 33, 94-143, 158, 160, 162
+apps/exports/__init__.py                                                          0      0      0      0   100%
+apps/exports/admin.py                                                            16      0      0      0   100%
+apps/exports/apps.py                                                              4      0      0      0   100%
+apps/exports/migrations/0001_initial.py                                           6      0      0      0   100%
+apps/exports/migrations/0002_importlog_exportjob.py                               6      0      0      0   100%
+apps/exports/migrations/__init__.py                                               0      0      0      0   100%
+apps/exports/models.py                                                           12      1      0      0    92%   25
+apps/exports/models_admin.py                                                     24      2      0      0    92%   28, 41
+apps/exports/services.py                                                         94      1     30      3    97%   127->117, 157, 184->172
+apps/exports/services_admin.py                                                   31      2      4      0    94%   11-12
+apps/frameworks/__init__.py                                                       0      0      0      0   100%
+apps/frameworks/admin.py                                                         21      0      0      0   100%
+apps/frameworks/apps.py                                                           5      0      0      0   100%
+apps/frameworks/migrations/0001_initial.py                                        6      0      0      0   100%
+apps/frameworks/migrations/__init__.py                                            0      0      0      0   100%
+apps/frameworks/models/__init__.py                                                2      0      0      0   100%
+apps/frameworks/models/framework.py                                              35      5      2      0    81%   13, 34, 60-61, 64
+apps/indicators/__init__.py                                                       0      0      0      0   100%
+apps/indicators/admin.py                                                         24      0      0      0   100%
+apps/indicators/apps.py                                                           5      0      0      0   100%
+apps/indicators/migrations/0001_initial.py                                        7      0      0      0   100%
+apps/indicators/migrations/0002_indicator_evidence_reuse_policy_and_more.py       4      0      0      0   100%
+apps/indicators/migrations/__init__.py                                            0      0      0      0   100%
+apps/indicators/models/__init__.py                                                2      0      0      0   100%
+apps/indicators/models/indicator.py                                              88     16     18      2    74%   75-84, 87, 160, 162, 166, 189, 214
+apps/indicators/services.py                                                     135     28     38     10    75%   33, 35, 37, 99-101, 104, 126-142, 153-167, 192, 271, 339, 340->342, 343, 357-358
+apps/indicators/signals.py                                                        0      0      0      0   100%
+apps/masters/__init__.py                                                          0      0      0      0   100%
+apps/masters/admin.py                                                             7      0      0      0   100%
+apps/masters/apps.py                                                              5      0      0      0   100%
+apps/masters/choices.py                                                          87      0      0      0   100%
+apps/masters/migrations/0001_initial.py                                           5      0      0      0   100%
+apps/masters/migrations/__init__.py                                               0      0      0      0   100%
+apps/masters/models.py                                                           14      1      0      0    93%   20
+apps/masters/services.py                                                          7      3      2      0    44%   12, 16-17
+apps/projects/__init__.py                                                         0      0      0      0   100%
+apps/projects/admin.py                                                            7      0      0      0   100%
+apps/projects/apps.py                                                             5      0      0      0   100%
+apps/projects/migrations/0001_initial.py                                          7      0      0      0   100%
+apps/projects/migrations/0002_accreditationproject_client_profile.py              5      0      0      0   100%
+apps/projects/migrations/__init__.py                                              0      0      0      0   100%
+apps/projects/models/__init__.py                                                  2      0      0      0   100%
+apps/projects/models/project.py                                                  20      1      0      0    95%   45
+apps/projects/services.py                                                        67      7     18      4    85%   27-39, 93->95, 101->83, 108->112, 174->176
+apps/recurring/__init__.py                                                        0      0      0      0   100%
+apps/recurring/admin.py                                                          13      0      0      0   100%
+apps/recurring/apps.py                                                            5      0      0      0   100%
+apps/recurring/migrations/0001_initial.py                                         6      0      0      0   100%
+apps/recurring/migrations/__init__.py                                             0      0      0      0   100%
+apps/recurring/models/__init__.py                                                 2      0      0      0   100%
+apps/recurring/models/recurring.py                                               27      2      0      0    93%   25, 62
+apps/recurring/services.py                                                      100     29     44     13    62%   26-31, 37-51, 58, 70->78, 84, 86->88, 125, 126->141, 128, 130, 170, 172->181, 185-190
+apps/workflow/__init__.py                                                         0      0      0      0   100%
+apps/workflow/apps.py                                                             5      0      0      0   100%
+apps/workflow/guards.py                                                          11      0      0      0   100%
+apps/workflow/migrations/__init__.py                                              0      0      0      0   100%
+apps/workflow/permissions.py                                                     43     14     22      4    63%   28, 36, 44, 47, 51-60
+apps/workflow/transitions.py                                                      7      1      2      1    78%   33
+-------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                          2706    303    332     71    85%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+
+======================== 31 passed in 147.10s (0:02:27) ========================
+
+up to date, audited 305 packages in 2s
+
+68 packages are looking for funding
+  run `npm fund` for details
+
+6 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> accrediops-frontend@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.14
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 17.4s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                      Size  First Load JS
+┌ ○ /                                           127 B         102 kB
+├ ○ /_not-found                                 990 B         103 kB
+├ ○ /admin                                    3.86 kB         127 kB
+├ ○ /admin/audit                              5.39 kB         123 kB
+├ ○ /admin/import-logs                        5.63 kB         123 kB
+├ ○ /admin/masters/document-types               128 B         123 kB
+├ ○ /admin/masters/evidence-types               128 B         123 kB
+├ ○ /admin/masters/priorities                   128 B         123 kB
+├ ○ /admin/masters/statuses                     128 B         123 kB
+├ ○ /admin/overrides                          4.81 kB         122 kB
+├ ○ /admin/system-health                      2.37 kB         120 kB
+├ ○ /admin/users                               5.2 kB         123 kB
+├ ƒ /frameworks/[id]/analysis                 2.71 kB         120 kB
+├ ƒ /healthz                                    127 B         102 kB
+├ ○ /login                                    5.42 kB         123 kB
+├ ƒ /project-indicators/[id]                  8.46 kB         140 kB
+├ ○ /projects                                 6.23 kB         133 kB
+├ ƒ /projects/[projectId]                     5.68 kB         141 kB
+├ ƒ /projects/[projectId]/areas-progress       3.4 kB         121 kB
+├ ƒ /projects/[projectId]/client-profile      5.56 kB         127 kB
+├ ƒ /projects/[projectId]/exports             5.37 kB         128 kB
+├ ƒ /projects/[projectId]/inspection          4.53 kB         128 kB
+├ ƒ /projects/[projectId]/print-pack          2.21 kB         123 kB
+├ ƒ /projects/[projectId]/readiness           4.07 kB         127 kB
+├ ƒ /projects/[projectId]/recurring           4.66 kB         131 kB
+├ ƒ /projects/[projectId]/standards-progress  3.44 kB         121 kB
+└ ƒ /projects/[projectId]/worklist            4.31 kB         140 kB
++ First Load JS shared by all                  102 kB
+  ├ chunks/255-38b49df12a94ee57.js              46 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js       54.2 kB
+  └ other shared chunks (total)               1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/indicator-drawer.test.tsx (1 test) 1443ms
+   ✓ IndicatorDrawer > renders sections and opens actions/governance-focused controls in drawer context 1438ms
+(node:240389) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 1389ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 1384ms
+(node:240382) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 2622ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 2613ms
+ ✓ tests/project-print-pack-screen.test.tsx (5 tests) 852ms
+   ✓ ProjectPrintPackScreen > shows empty state with context links before generation 465ms
+(node:240590) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-list-screen.test.tsx (3 tests) 2255ms
+   ✓ ProjectsListScreen > renders project list 1076ms
+   ✓ ProjectsListScreen > shows power table only when toggled 842ms
+   ✓ ProjectsListScreen > disables create project for non-admin and non-lead 326ms
+ ✓ tests/status-semantics.test.tsx (7 tests) 420ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 4753ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 2932ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 1807ms
+ ✓ tests/project-workspace-board.test.tsx (1 test) 1045ms
+   ✓ ProjectWorkspaceBoard > renders area-standard-indicator hierarchy and opens drawer from indicator card 1040ms
+ ✓ tests/project-management-form.test.tsx (1 test) 1917ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 1915ms
+(node:240892) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 807ms
+   ✓ ProjectExportHistoryScreen > renders export history page 575ms
+ ✓ tests/sidebar.test.tsx (3 tests) 1052ms
+   ✓ Sidebar > hides admin and export links for non-admin/non-lead users 749ms
+(node:241006) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 2314ms
+   ✓ ProjectWorklistScreen > renders filters and table 2308ms
+(node:241092) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 1036ms
+   ✓ ProjectReadinessScreen > renders orientation and readiness metrics 923ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 850ms
+   ✓ WorkflowContextStrip > renders context, next step, role hint, and navigation actions 847ms
+(node:241264) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 1498ms
+   ✓ ProjectInspectionScreen > renders inspection mode 1494ms
+(node:241286) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 749ms
+   ✓ ProjectRecurringScreen > renders recurring queue 734ms
+ ✓ tests/app-shell.test.tsx (1 test) 306ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 600ms
+   ✓ AdminDashboardScreen > renders admin metrics 596ms
+ ✓ tests/evidence-form.test.tsx (1 test) 556ms
+   ✓ EvidenceForm > submits with physical evidence fields 554ms
+
+ Test Files  19 passed (19)
+      Tests  36 passed (36)
+   Start at  22:04:08
+   Duration  53.12s (transform 5.54s, setup 7.19s, collect 37.86s, tests 26.46s, environment 55.72s, prepare 10.26s)
+
+
+> accrediops-frontend@0.1.0 test:e2e
+> playwright test -c playwright.config.ts
+
+
+Running 26 tests using 2 workers
+
+  ✓   1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (3.0s)
+  ✓   3 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (2.3s)
+  ✓   4 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (6.3s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:55:7 › Core operational browser journeys › evidence review journey works end-to-end (15.8s)
+  ✓   5 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (9.9s)
+  ✓   7 tests/e2e/app-flows.spec.ts:44:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (6.9s)
+  ✓   8 tests/e2e/app-flows.spec.ts:53:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (65ms)
+  ✓   6 tests/e2e/core-journeys.spec.ts:79:7 › Core operational browser journeys › recurring approval from indicator context works (13.9s)
+  ✓   9 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (4.9s)
+  ✓  11 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (3.1s)
+  ✓  10 tests/e2e/core-journeys.spec.ts:96:7 › Core operational browser journeys › create flow supports client profile linkage (9.6s)
+  ✓  12 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (5.2s)
+  ✓  13 tests/e2e/core-journeys.spec.ts:130:7 › Core operational browser journeys › clone project then open cloned workspace (8.0s)
+  ✓  14 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (6.3s)
+  ✓  15 tests/e2e/core-journeys.spec.ts:151:7 › Core operational browser journeys › admin route access is available after login (4.3s)
+  ✓  16 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead cannot see admin navigation section (3.9s)
+  ✓  18 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (5.9s)
+  ✓  19 tests/e2e/ui-clarity.spec.ts:5:7 › UI clarity › projects page exposes prominent create CTA and guidance (4.8s)
+  ✓  20 tests/e2e/ui-clarity.spec.ts:14:7 › UI clarity › indicator follows ordered workflow sections (6.0s)
+  ✓  21 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (6.8s)
+  ✓  17 tests/e2e/core-journeys.spec.ts:158:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (29.6s)
+  ✓  22 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (5.6s)
+  ✓  23 tests/e2e/core-journeys.spec.ts:196:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (17.8s)
+  ✓  24 tests/e2e/core-journeys.spec.ts:241:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (8.1s)
+  ✓  25 tests/e2e/core-journeys.spec.ts:264:7 › Core operational browser journeys › non-admin user cannot access export history actions (11.3s)
+  ✓  26 tests/e2e/core-journeys.spec.ts:282:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (15.3s)
+
+  26 passed (2.4m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

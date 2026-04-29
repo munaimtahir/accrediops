@@ -1,0 +1,19 @@
+Operations to perform:
+  Apply all migrations: accounts, admin, ai_actions, audit, auth, contenttypes, evidence, exports, frameworks, indicators, masters, projects, recurring, sessions
+Running migrations:
+  No migrations to apply.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 08, 2026 - 06:50:19
+Django version 5.2.12, using settings 'config.accrediops_backend.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[08/Apr/2026 06:50:20] "GET /api/health/ HTTP/1.1" 200 86
+[08/Apr/2026 06:50:35] "GET /api/health/ HTTP/1.1" 200 86
+[08/Apr/2026 06:50:51] "GET /api/health/ HTTP/1.1" 200 86
+[08/Apr/2026 06:51:06] "GET /api/health/ HTTP/1.1" 200 86

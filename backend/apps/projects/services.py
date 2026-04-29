@@ -39,6 +39,21 @@ def update_project(*, project: AccreditationProject, actor, **validated_data) ->
     return project
 
 
+@transaction.atomic
+def delete_project(*, project: AccreditationProject, actor) -> None:
+    ensure_admin_or_lead_access(actor)
+    before = snapshot_instance(project)
+    project_id = project.id
+    project.delete()
+    log_audit_event(
+        actor=actor,
+        event_type="project.deleted",
+        obj=AccreditationProject(id=project_id),
+        before=before,
+        after=None,
+    )
+
+
 def project_summary_counts(project: AccreditationProject) -> dict:
     from apps.recurring.models import RecurringEvidenceInstance
 

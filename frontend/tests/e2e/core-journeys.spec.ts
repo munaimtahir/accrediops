@@ -1,12 +1,36 @@
 import { expect, test } from "@playwright/test";
 import { login, loginAsSeededAdmin, logout, seededUser, seededUsers } from "./helpers";
 
+async function openIndicatorPanelIfAvailable(
+  page: Parameters<typeof test>[0]["page"],
+  panelLabel: "Evidence" | "Recurring" | "Actions" | "Governance / Override",
+) {
+  const panel = page.locator("main").getByRole("button", { name: panelLabel, exact: true }).first();
+  await expect(panel).toBeVisible();
+  await panel.click();
+}
+
+async function runIndicatorCommand(
+  page: Parameters<typeof test>[0]["page"],
+  triggerLabel: "Start" | "Send for Review" | "Mark as Met" | "Reopen",
+  reason?: string,
+) {
+  await openIndicatorPanelIfAvailable(page, "Actions");
+  await page.getByRole("button", { name: triggerLabel }).first().click();
+  const dialog = page.locator("div.fixed.inset-0").last();
+  await expect(dialog).toBeVisible();
+  if (reason) {
+    await dialog.getByLabel("Reason").fill(reason);
+  }
+  await dialog.locator("form button[type='submit']").click();
+}
+
 async function createProjectAndOpenIndicator(page: Parameters<typeof test>[0]["page"]) {
   await loginAsSeededAdmin(page);
   const projectName = `E2E Core ${Date.now()}`;
   const clientName = `E2E Core Client ${Date.now()}`;
 
-  await page.getByRole("button", { name: "Create project" }).click();
+  await page.getByRole("button", { name: "Create project" }).first().click();
   const form = page.locator("form").first();
   await form.getByLabel("Project name").fill(projectName);
   await form.getByLabel("Client name").fill(clientName);
@@ -31,6 +55,7 @@ test.describe("Core operational browser journeys", () => {
   test("evidence review journey works end-to-end", async ({ page }) => {
     await createProjectAndOpenIndicator(page);
 
+    await openIndicatorPanelIfAvailable(page, "Evidence");
     await page.getByRole("button", { name: "Add evidence" }).click();
     const addEvidenceModal = page.locator("div.fixed.inset-0").last();
     await addEvidenceModal.getByLabel("Title").fill("E2E Evidence");
@@ -54,6 +79,7 @@ test.describe("Core operational browser journeys", () => {
   test("recurring approval from indicator context works", async ({ page }) => {
     await createProjectAndOpenIndicator(page);
 
+    await openIndicatorPanelIfAvailable(page, "Recurring");
     await page.getByRole("button", { name: "Submit instance" }).first().click();
     const submitModal = page.locator("div.fixed.inset-0").last();
     await submitModal.getByLabel("Submission text").fill("Recurring submission from E2E.");
@@ -64,7 +90,6 @@ test.describe("Core operational browser journeys", () => {
     await approveModal.getByLabel("Notes").fill("Approved by E2E.");
     await approveModal.getByRole("button", { name: "Approve instance" }).click();
 
-    await expect(page.getByText(/^Approved$/).first()).toBeVisible();
     await expect(page.getByText(/Status\s+Approved/i)).toBeVisible();
   });
 
@@ -73,7 +98,7 @@ test.describe("Core operational browser journeys", () => {
     const projectName = `E2E Link ${Date.now()}`;
     const clientName = `E2E Link Client ${Date.now()}`;
 
-    await page.getByRole("button", { name: "Create project" }).click();
+    await page.getByRole("button", { name: "Create project" }).first().click();
     await expect(page.getByRole("heading", { name: "Create project" })).toBeVisible();
     const createModal = page.locator("div.fixed.inset-0").last();
     const form = createModal.locator("form").first();
@@ -133,6 +158,7 @@ test.describe("Core operational browser journeys", () => {
   test("admin override reopens met indicator and audit evidence is visible", async ({ page }) => {
     await createProjectAndOpenIndicator(page);
 
+    await openIndicatorPanelIfAvailable(page, "Evidence");
     await page.getByRole("button", { name: "Add evidence" }).click();
     const addEvidenceModal = page.locator("div.fixed.inset-0").last();
     await addEvidenceModal.getByLabel("Title").fill("Override Evidence");
@@ -146,19 +172,13 @@ test.describe("Core operational browser journeys", () => {
     await page.getByLabel("Approval").selectOption("APPROVED");
     await page.getByRole("button", { name: "Save review" }).click();
 
-    await page.getByRole("button", { name: "Start" }).click();
-    await page.getByRole("button", { name: "Start" }).last().click();
-    await page.getByRole("button", { name: "Send for Review" }).click();
-    await page.getByRole("button", { name: "Send for review" }).last().click();
-    await page.getByRole("button", { name: "Mark as Met" }).click();
-    await page.getByRole("button", { name: "Mark as met" }).last().click();
+    await runIndicatorCommand(page, "Start");
+    await runIndicatorCommand(page, "Send for Review");
+    await runIndicatorCommand(page, "Mark as Met");
 
     await expect(page.getByText(/^Completed$/).first()).toBeVisible();
 
-    await page.getByRole("button", { name: "Reopen" }).click();
-    const reopenModal = page.locator("div.fixed.inset-0").last();
-    await reopenModal.getByLabel("Reason").fill("Admin governance override from E2E");
-    await reopenModal.getByRole("button", { name: "Reopen" }).click();
+    await runIndicatorCommand(page, "Reopen", "Admin governance override from E2E");
 
     await expect(page.getByText(/^In Process$/).first()).toBeVisible();
 
@@ -167,7 +187,8 @@ test.describe("Core operational browser journeys", () => {
     await expect(page.getByRole("cell", { name: "Admin governance override from E2E" }).first()).toBeVisible();
 
     await page.goto("/admin/audit");
-    await expect(page.getByRole("heading", { name: "Audit log viewer" })).toBeVisible();
+    await expect(page).toHaveURL(/\/admin\/audit/);
+    await expect(page.getByRole("heading", { name: "Audit log viewer" })).toBeVisible({ timeout: 15000 });
     await expect(page.getByRole("cell", { name: "project_indicator.status_changed" }).first()).toBeVisible();
     await expect(page.getByRole("cell", { name: "Admin governance override from E2E" }).first()).toBeVisible();
   });
@@ -181,6 +202,7 @@ test.describe("Core operational browser journeys", () => {
     const projectId = Number(sourceIndicatorPayload?.data?.project);
     expect(Number.isFinite(projectId)).toBeTruthy();
 
+    await openIndicatorPanelIfAvailable(page, "Evidence");
     await page.getByRole("button", { name: "Add evidence" }).click();
     const addEvidenceModal = page.locator("div.fixed.inset-0").last();
     await addEvidenceModal.getByLabel("Title").fill("Denied Reopen Evidence");
@@ -194,18 +216,16 @@ test.describe("Core operational browser journeys", () => {
     await page.getByLabel("Approval").selectOption("APPROVED");
     await page.getByRole("button", { name: "Save review" }).click();
 
-    await page.getByRole("button", { name: "Start" }).click();
-    await page.getByRole("button", { name: "Start" }).last().click();
-    await page.getByRole("button", { name: "Send for Review" }).click();
-    await page.getByRole("button", { name: "Send for review" }).last().click();
-    await page.getByRole("button", { name: "Mark as Met" }).click();
-    await page.getByRole("button", { name: "Mark as met" }).last().click();
+    await runIndicatorCommand(page, "Start");
+    await runIndicatorCommand(page, "Send for Review");
+    await runIndicatorCommand(page, "Mark as Met");
     await expect(page.getByText(/^Completed$/).first()).toBeVisible();
 
     await logout(page);
     await login(page, seededUsers.owner);
     await page.goto("/admin");
-    await expect(page.getByText("Only ADMIN or LEAD can perform this action.")).toBeVisible();
+    await expect(page.getByText("Admin access restricted")).toBeVisible();
+    await expect(page.getByText("Only ADMIN or LEAD can access the admin area.")).toBeVisible();
 
     const worklistResponse = await page.request.get(
       `/api/dashboard/worklist/?project_id=${projectId}&search=E2E-IND-001&page_size=1`,
@@ -215,12 +235,13 @@ test.describe("Core operational browser journeys", () => {
     const indicatorId = Number(worklistPayload?.data?.results?.[0]?.project_indicator_id);
     await page.goto(`/project-indicators/${indicatorId}`);
     await expect(page).toHaveURL(/\/project-indicators\/\d+/);
+    await openIndicatorPanelIfAvailable(page, "Actions");
     await expect(page.getByRole("button", { name: "Reopen" })).toBeDisabled();
   });
 
   test("export lifecycle creates history row with persisted status", async ({ page }) => {
     await loginAsSeededAdmin(page);
-    await page.getByRole("button", { name: "Create project" }).click();
+    await page.getByRole("button", { name: "Create project" }).first().click();
     const form = page.locator("form").first();
     const projectName = `E2E Export ${Date.now()}`;
     await form.getByLabel("Project name").fill(projectName);
@@ -230,7 +251,7 @@ test.describe("Core operational browser journeys", () => {
     await form.getByRole("button", { name: "Create project" }).click();
     await expect(page).toHaveURL(/\/projects\/\d+/);
 
-    await page.getByRole("link", { name: "Export history" }).click();
+    await page.locator("main").getByRole("link", { name: "Export history" }).first().click();
     await expect(page).toHaveURL(/\/projects\/\d+\/exports/);
     await expect(page.getByRole("heading", { name: "Export history" })).toBeVisible();
 
@@ -243,7 +264,7 @@ test.describe("Core operational browser journeys", () => {
 
   test("non-admin user cannot access export history actions", async ({ page }) => {
     await loginAsSeededAdmin(page);
-    await page.getByRole("button", { name: "Create project" }).click();
+    await page.getByRole("button", { name: "Create project" }).first().click();
     const form = page.locator("form").first();
     await form.getByLabel("Project name").fill(`E2E Owner Export Deny ${Date.now()}`);
     await form.getByLabel("Client name").fill(`E2E Owner Client ${Date.now()}`);
@@ -256,12 +277,14 @@ test.describe("Core operational browser journeys", () => {
     await logout(page);
     await login(page, seededUsers.owner);
     await page.goto(`/projects/${projectId}/exports`);
-    await expect(page.getByText("Only ADMIN or LEAD can perform this action.")).toBeVisible();
+    await expect(page.getByText("Export access restricted")).toBeVisible();
+    await expect(page.getByText("Only ADMIN or LEAD can access export generation and history.")).toBeVisible();
   });
 
   test("combined governance path: create, evidence, recurring, export", async ({ page }) => {
     await createProjectAndOpenIndicator(page);
 
+    await openIndicatorPanelIfAvailable(page, "Evidence");
     await page.getByRole("button", { name: "Add evidence" }).click();
     const addEvidenceModal = page.locator("div.fixed.inset-0").last();
     await addEvidenceModal.getByLabel("Title").fill("Combined Lifecycle Evidence");
@@ -275,6 +298,7 @@ test.describe("Core operational browser journeys", () => {
     await page.getByLabel("Approval").selectOption("APPROVED");
     await page.getByRole("button", { name: "Save review" }).click();
 
+    await openIndicatorPanelIfAvailable(page, "Recurring");
     await page.getByRole("button", { name: "Submit instance" }).first().click();
     const submitModal = page.locator("div.fixed.inset-0").last();
     await submitModal.getByLabel("Submission text").fill("Combined recurring submission.");

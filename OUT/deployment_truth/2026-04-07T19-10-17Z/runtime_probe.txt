@@ -1,0 +1,95 @@
+---docker_ps_head---
+CONTAINER ID                                                       IMAGE                   COMMAND                                                                                                                                                                                           CREATED        STATUS                   PORTS                      NAMES
+93fc4d6790c649914d8f9aadfa2b2b0851c57fc1a3726f55258fcd7f21954be0   docker-backend          "sh -c 'python manage.py migrate --noinput &&\n       python manage.py collectstatic --noinput &&\n       gunicorn sims_project.wsgi:application --bind 0.0.0.0:8014 --workers 4 --timeout 60'"   10 hours ago   Up 3 minutes (healthy)   127.0.0.1:8014->8014/tcp   pgsims_backend
+5290d06ea56bd70d9e35f7f9e205876c6637ab83ea0532eab263a33c41003153   postgres:15-alpine      "docker-entrypoint.sh postgres"                                                                                                                                                                   10 hours ago   Up 3 minutes (healthy)   5432/tcp                   pgsims_db
+81c401015f00d2b028490be13c49cce63a51989018b25bed8fd94636dbd89ead   docker-frontend         "docker-entrypoint.sh node server.js"                                                                                                                                                             10 hours ago   Up 3 minutes (healthy)   127.0.0.1:8082->3000/tcp   pgsims_frontend
+460427134e3fcb05d6151170331422453b4962b8db366d762f112a21759f795a   docker-worker           "celery -A sims_project worker -l info --concurrency=2"                                                                                                                                           3 days ago     Up 3 minutes             8014/tcp                   pgsims_worker
+02cee865c288e46782f49fdccacd852e9dbe7f21cbd4b64aae26b6593778cb60   docker-beat             "celery -A sims_project beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"                                                                                                 3 days ago     Up 3 minutes             8014/tcp                   pgsims_beat
+0860d16a5e61f09051f884fed974669dcee2f391f78b9b4550e089e32ab251c1   redis:7-alpine          "docker-entrypoint.sh redis-server --appendonly yes"                                                                                                                                              3 days ago     Up 3 minutes (healthy)   6379/tcp                   pgsims_redis
+a2b3914f8196a9784ec85bd9eb96e9a74a3cdf04f9e43b4627fa5cfccdc36038   phc-phc                 "streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true"                                                                                                         6 days ago     Up 3 minutes (healthy)   127.0.0.1:8501->8501/tcp   phc-accreditation
+9c1d536c4d16fd6678313b06b355ea414ce103771109b42632ac21d60d395ad6   radreport-backend       "/app/scripts/entrypoint.sh"                                                                                                                                                                      8 days ago     Up 3 minutes (healthy)   127.0.0.1:8015->8000/tcp   rims_backend_prod
+47753312b48c415e14b1f5acf02f7c5912bbfe58330f069738bf662b3e8a5b79   radreport-frontend      "/docker-entrypoint.sh nginx -g 'daemon off;'"                                                                                                                                                    8 days ago     Up 3 minutes (healthy)   127.0.0.1:8081->80/tcp     rims_frontend_prod
+2a51e84465468d51499fb728aaa075d7523d052b2427da5c27a9824dac2af13c   postgres:16-alpine      "docker-entrypoint.sh postgres"                                                                                                                                                                   12 days ago    Up 3 minutes (healthy)   5432/tcp                   rims_db_prod
+2682d2353c1412119245a8437f00f0a341ad24c135557802c27b96c71480432a   class-frontend          "docker-entrypoint.sh node server.js"                                                                                                                                                             3 weeks ago    Up 3 minutes             127.0.0.1:9030->3000/tcp   class-frontend-1
+e00bf409b46b27bf91e6ef5cdd9a02927c70cded7848f1396e0105f0c3bd472e   class-backend           "sh -c 'python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120'"                                                                              3 weeks ago    Up 3 minutes             127.0.0.1:9031->8000/tcp   class-backend-1
+107ba03703ce6bcadc5b5151d7d33691c6289a697dd3549f18c0140c01134af2   class-worker            "celery -A config worker -l info"                                                                                                                                                                 3 weeks ago    Up 3 minutes                                        class-worker-1
+089338fd8339bce89f3f66270ad1e0dcc0370661cfdc8ab8dadb61f52bf921de   postgres:16-alpine      "docker-entrypoint.sh postgres"                                                                                                                                                                   3 weeks ago    Up 3 minutes             5432/tcp                   class-postgres-1
+6505bba642679344ad57322c9ae1a0d1565fb4c6d995c6d058e4e8cf4bff83c8   redis:7-alpine          "docker-entrypoint.sh redis-server"                                                                                                                                                               3 weeks ago    Up 3 minutes             6379/tcp                   class-redis-1
+dfad5a81de966048963485a4d0fe5beb3b80e59094a43acb6f2ab6f7bb7f386b   fmu-platform-backend    "/entrypoint.sh gunicorn sims_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3"                                                                                                           4 weeks ago    Up 3 minutes             127.0.0.1:8010->8000/tcp   fmu_backend
+2785f41c3b5c7a657ede22a9fb31211e1cadfb6a8fef453eed60314f3ac0c79b   postgres:16-alpine      "docker-entrypoint.sh postgres"                                                                                                                                                                   4 weeks ago    Up 3 minutes             127.0.0.1:5432->5432/tcp   fmu_db
+c15b25474dff302245fd01d59656d27b3f740064719d5ef16d5a11ebe9fcfc3a   redis:7-alpine          "docker-entrypoint.sh redis-server"                                                                                                                                                               4 weeks ago    Up 3 minutes (healthy)   6379/tcp                   fmu_redis
+89c56f47f7604bff95712eaec1ad06ed693d5d2dfd1d216ad9ae36b0e40ab044   fmu-platform-frontend   "/docker-entrypoint.sh nginx -g 'daemon off;'"                                                                                                                                                    4 weeks ago    Up 3 minutes             127.0.0.1:8080->80/tcp     fmu_frontend
+---docker_images_head---
+REPOSITORY              TAG         IMAGE ID                                                                  CREATED         SIZE
+accrediops-frontend     latest      sha256:bb534073819cb0aaf58e0a899f6f68e38e94a6579f43dc709099fd8897a581cb   8 hours ago     3.58GB
+accrediops-backend      latest      sha256:c1d2a1bffd36255f58a8f2efbddfb868cdaacaa63c516a99a969ccd900cd4859   8 hours ago     449MB
+docker-frontend         latest      sha256:a5aa4aedc4a1240aaa4b6b36d0052ec74cf1fb281889bd421b1d59c4bf7e8592   10 hours ago    227MB
+docker-backend          latest      sha256:33e5d55e3c80bae399845452fed87a03902dab337058abced2171349f8f6d895   11 hours ago    448MB
+docker-worker           latest      sha256:ad5e004deb862181643248da7acb7024170a319abc20aa12eb2a4efee0207d71   3 days ago      447MB
+docker-beat             latest      sha256:9f089b10c5992e59a86ef2fb0de75847a291ec8338b434847fa42267c76d9fd0   3 days ago      447MB
+pgsims-frontend         latest      sha256:a3281533c9d793538c4b626c41dde21863887fed611ee52057c8e53605e50206   5 days ago      226MB
+pgsims-beat             latest      sha256:d6cdc03f3ffa0ec06f79d977fed8488aac16818da4cd3894b5dc6b0d392e40d1   5 days ago      446MB
+pgsims-backend          latest      sha256:f461758be02956fa7574149ceabfa9a6b13f469eac39133a92749d24d4e00404   5 days ago      446MB
+pgsims-worker           latest      sha256:1180bff8a4ddafbd7e122be4d9021433c46fda64ce5ac60fa9ace058c17473b5   5 days ago      446MB
+phc-phc                 latest      sha256:e9c86aa7619036ed61de9742fca2cc43e640fec92167512b3dfb03d9afc18011   6 days ago      1.43GB
+radreport-backend       latest      sha256:fe30569addd8872ab19bcdb2e60f3685aa661f18fd57a0d8e68b3a7595a8c6da   8 days ago      764MB
+radreport-frontend      latest      sha256:d245959a8fa5f4ca97138f53fdae483b7f199461584ecbbaccf269f1f6837c3f   8 days ago      75.5MB
+vexel-pdf               latest      sha256:0d4e28a366fe0f36462dfd29d116a9a4891fcd81ae0c9960211260227c365d4d   12 days ago     556MB
+vexel-operator          latest      sha256:a10ee90275504982d4edef1373f3d61839dde15838b42937d5f42bb56ae01497   12 days ago     307MB
+vexel-admin             latest      sha256:786adfc67ce3f461f909c5a1247fc074f5f0e5ee3f4dfabdbf4ec6f3e50bab7d   12 days ago     305MB
+vexel-worker            latest      sha256:abb4113518c4921c64e8377adcfd9787d489d6faaf889d831baf802008fcbb18   12 days ago     680MB
+vexel-api               latest      sha256:c7464453e255c803a5798f9c5776f8d5c2f07ed1ad8e24303cc3b059b3ef2bd5   12 days ago     924MB
+class-frontend          latest      sha256:67507adc70ab7b3da6b86fd1e131d86dab8146197e68c1e8f9c8e11f1b50e4b9   3 weeks ago     277MB
+---docker_ps_live---
+NAMES                IMAGE                   STATUS                   PORTS
+pgsims_backend       docker-backend          Up 4 minutes (healthy)   127.0.0.1:8014->8014/tcp
+pgsims_db            postgres:15-alpine      Up 5 minutes (healthy)   5432/tcp
+pgsims_frontend      docker-frontend         Up 5 minutes (healthy)   127.0.0.1:8082->3000/tcp
+pgsims_worker        docker-worker           Up 5 minutes             8014/tcp
+pgsims_beat          docker-beat             Up 5 minutes             8014/tcp
+pgsims_redis         redis:7-alpine          Up 5 minutes (healthy)   6379/tcp
+phc-accreditation    phc-phc                 Up 5 minutes (healthy)   127.0.0.1:8501->8501/tcp
+rims_backend_prod    radreport-backend       Up 5 minutes (healthy)   127.0.0.1:8015->8000/tcp
+rims_frontend_prod   radreport-frontend      Up 5 minutes (healthy)   127.0.0.1:8081->80/tcp
+rims_db_prod         postgres:16-alpine      Up 5 minutes (healthy)   5432/tcp
+class-frontend-1     class-frontend          Up 5 minutes             127.0.0.1:9030->3000/tcp
+class-backend-1      class-backend           Up 5 minutes             127.0.0.1:9031->8000/tcp
+class-worker-1       class-worker            Up 5 minutes             
+class-postgres-1     postgres:16-alpine      Up 5 minutes             5432/tcp
+class-redis-1        redis:7-alpine          Up 5 minutes             6379/tcp
+fmu_backend          fmu-platform-backend    Up 5 minutes             127.0.0.1:8010->8000/tcp
+fmu_db               postgres:16-alpine      Up 5 minutes             127.0.0.1:5432->5432/tcp
+fmu_redis            redis:7-alpine          Up 5 minutes (healthy)   6379/tcp
+fmu_frontend         fmu-platform-frontend   Up 5 minutes             127.0.0.1:8080->80/tcp
+---curl8080-head---
+HTTP/1.1 200 OK
+Server: nginx/1.29.5
+Date: Tue, 07 Apr 2026 19:11:43 GMT
+Content-Type: text/html
+Content-Length: 460
+Last-Modified: Sat, 07 Mar 2026 02:32:07 GMT
+Connection: keep-alive
+ETag: "69ab8e27-1cc"
+Expires: Tue, 07 Apr 2026 19:11:42 GMT
+Cache-Control: no-cache
+Cache-Control: no-cache, no-store, must-revalidate, max-age=0
+Pragma: no-cache
+Accept-Ranges: bytes
+
+---curl8082-head---
+HTTP/1.1 200 OK
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding
+x-nextjs-cache: HIT
+X-Powered-By: Next.js
+Cache-Control: s-maxage=31536000, stale-while-revalidate
+ETag: "3vo9fja46w4p7"
+Content-Type: text/html; charset=utf-8
+Content-Length: 6100
+Date: Tue, 07 Apr 2026 19:11:43 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+---title8080---
+<title>sims_frontend</title>
+---title8082---
+<title>FMU - PGR SIMS</title>

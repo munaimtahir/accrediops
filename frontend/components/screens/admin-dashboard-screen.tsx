@@ -36,6 +36,24 @@ export function AdminDashboardScreen() {
             <Link href="/admin/audit" className={cn(buttonVariants({ variant: "secondary", size: "default" }))}>
               Audit
             </Link>
+            <Link href="/admin/overrides" className={cn(buttonVariants({ variant: "secondary", size: "default" }))}>
+              Overrides
+            </Link>
+            <Link href="/admin/frameworks" className={cn(buttonVariants({ variant: "secondary", size: "default" }))}>
+              Frameworks
+            </Link>
+            <Link
+              href="/admin/client-profiles"
+              className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
+            >
+              Client profiles
+            </Link>
+            <Link
+              href="/admin/import-logs"
+              className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
+            >
+              Import logs
+            </Link>
           </>
         }
       />

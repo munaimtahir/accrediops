@@ -24,5 +24,6 @@ describe("AdminDashboardScreen", () => {
     renderWithQueryClient(<AdminDashboardScreen />);
     expect(screen.getByText("Admin dashboard")).toBeInTheDocument();
     expect(screen.getByText("Total projects")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Overrides" })).toBeInTheDocument();
   });
 });

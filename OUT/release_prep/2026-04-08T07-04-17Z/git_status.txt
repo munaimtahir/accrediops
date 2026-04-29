@@ -1,0 +1,287 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   backend/.coverage
+	modified:   backend/.env.example
+	modified:   backend/config/accrediops_backend/settings.py
+	modified:   backend/coverage.xml
+	modified:   docker-compose.yml
+	modified:   frontend/.next_local_checks/BUILD_ID
+	modified:   frontend/.next_local_checks/app-build-manifest.json
+	modified:   frontend/.next_local_checks/app-path-routes-manifest.json
+	modified:   frontend/.next_local_checks/build-manifest.json
+	modified:   frontend/.next_local_checks/cache/.previewinfo
+	modified:   frontend/.next_local_checks/cache/.rscinfo
+	modified:   frontend/.next_local_checks/cache/.tsbuildinfo
+	modified:   frontend/.next_local_checks/cache/webpack/client-production/0.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/1.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/2.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/3.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/4.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/5.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/6.pack
+	modified:   frontend/.next_local_checks/cache/webpack/client-production/index.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/client-production/index.pack.old
+	modified:   frontend/.next_local_checks/cache/webpack/edge-server-production/index.pack
+	modified:   frontend/.next_local_checks/cache/webpack/server-production/0.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/1.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/2.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/3.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/4.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/5.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/6.pack
+	modified:   frontend/.next_local_checks/cache/webpack/server-production/index.pack
+	deleted:    frontend/.next_local_checks/cache/webpack/server-production/index.pack.old
+	modified:   frontend/.next_local_checks/prerender-manifest.json
+	modified:   frontend/.next_local_checks/server/app-paths-manifest.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/audit/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/audit/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/audit/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/import-logs/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/import-logs/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/document-types/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/document-types/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/document-types/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/evidence-types/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/evidence-types/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/evidence-types/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/priorities/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/priorities/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/priorities/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/statuses/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/statuses/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/masters/statuses/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/overrides/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/overrides/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/overrides/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/system-health/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/system-health/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/system-health/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/users/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/users/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/admin/users/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/frameworks/[id]/analysis/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/frameworks/[id]/analysis/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/project-indicators/[id]/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/project-indicators/[id]/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/project-indicators/[id]/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/areas-progress/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/areas-progress/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/areas-progress/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/client-profile/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/client-profile/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/client-profile/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/exports/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/exports/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/exports/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/inspection/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/inspection/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/inspection/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/print-pack/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/print-pack/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/print-pack/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/readiness/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/readiness/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/readiness/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/recurring/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/recurring/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/recurring/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/standards-progress/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/standards-progress/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/standards-progress/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/worklist/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/worklist/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/[projectId]/worklist/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/page.js
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/(workbench)/projects/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/_not-found.html
+	modified:   frontend/.next_local_checks/server/app/_not-found.rsc
+	modified:   frontend/.next_local_checks/server/app/_not-found/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/_not-found/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/admin.html
+	modified:   frontend/.next_local_checks/server/app/admin.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/audit.html
+	modified:   frontend/.next_local_checks/server/app/admin/audit.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/import-logs.html
+	modified:   frontend/.next_local_checks/server/app/admin/import-logs.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/masters/document-types.html
+	modified:   frontend/.next_local_checks/server/app/admin/masters/document-types.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/masters/evidence-types.html
+	modified:   frontend/.next_local_checks/server/app/admin/masters/evidence-types.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/masters/priorities.html
+	modified:   frontend/.next_local_checks/server/app/admin/masters/priorities.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/masters/statuses.html
+	modified:   frontend/.next_local_checks/server/app/admin/masters/statuses.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/overrides.html
+	modified:   frontend/.next_local_checks/server/app/admin/overrides.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/system-health.html
+	modified:   frontend/.next_local_checks/server/app/admin/system-health.rsc
+	modified:   frontend/.next_local_checks/server/app/admin/users.html
+	modified:   frontend/.next_local_checks/server/app/admin/users.rsc
+	modified:   frontend/.next_local_checks/server/app/healthz/route.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/healthz/route_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/index.html
+	modified:   frontend/.next_local_checks/server/app/index.rsc
+	modified:   frontend/.next_local_checks/server/app/login.html
+	modified:   frontend/.next_local_checks/server/app/login.rsc
+	modified:   frontend/.next_local_checks/server/app/login/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/login/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/page.js.nft.json
+	modified:   frontend/.next_local_checks/server/app/page_client-reference-manifest.js
+	modified:   frontend/.next_local_checks/server/app/projects.html
+	modified:   frontend/.next_local_checks/server/app/projects.rsc
+	modified:   frontend/.next_local_checks/server/chunks/858.js
+	deleted:    frontend/.next_local_checks/server/chunks/886.js
+	modified:   frontend/.next_local_checks/server/next-font-manifest.js
+	modified:   frontend/.next_local_checks/server/next-font-manifest.json
+	modified:   frontend/.next_local_checks/server/pages/404.html
+	modified:   frontend/.next_local_checks/server/pages/500.html
+	modified:   frontend/.next_local_checks/server/pages/_app.js.nft.json
+	modified:   frontend/.next_local_checks/server/pages/_document.js.nft.json
+	modified:   frontend/.next_local_checks/server/pages/_error.js.nft.json
+	modified:   frontend/.next_local_checks/server/server-reference-manifest.json
+	deleted:    frontend/.next_local_checks/static/M9ODHssZeAIJQPPJ4OwIG/_buildManifest.js
+	deleted:    frontend/.next_local_checks/static/M9ODHssZeAIJQPPJ4OwIG/_ssgManifest.js
+	deleted:    frontend/.next_local_checks/static/chunks/180-25402377456c24b3.js
+	deleted:    frontend/.next_local_checks/static/chunks/707-c9510566408786bd.js
+	deleted:    frontend/.next_local_checks/static/chunks/773-00bffc6aef6d1e2d.js
+	deleted:    frontend/.next_local_checks/static/chunks/898-599c53f76f58712c.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/audit/page-7db8d767947e62f0.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/import-logs/page-2d93d386369354f0.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/overrides/page-7d23eec57fa33486.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/page-e2da4eac9666b7d9.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/system-health/page-510e1fefc8b9e4fb.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/admin/users/page-a22519780539545d.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/frameworks/[id]/analysis/page-1fa79756ae419a44.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/layout-140193c1d138c7a6.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/project-indicators/[id]/page-e949df0cbb5a4cd2.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/areas-progress/page-4c5851f6baa0589f.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/client-profile/page-88d98203b3780e00.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/exports/page-539c4d9ca25b6ea7.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/inspection/page-c5a639e7a0b247a5.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/page-01119964fa670eb9.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/print-pack/page-bf6fbf05aa1c06fb.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/readiness/page-a4ab812bd010aba0.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/recurring/page-1b78952e1f6df0ba.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/standards-progress/page-f83b81a568f4511c.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/worklist/page-57678141bb643a02.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/(workbench)/projects/page-a56acd4ee2bb58d3.js
+	deleted:    frontend/.next_local_checks/static/chunks/app/login/page-fbe9c184fc54e827.js
+	deleted:    frontend/.next_local_checks/static/css/021a567fb8e041b2.css
+	modified:   frontend/.next_local_checks/trace
+	modified:   frontend/components/common/empty-state.tsx
+	modified:   frontend/components/forms/evidence-review-form.tsx
+	modified:   frontend/components/layout/sidebar.tsx
+	modified:   frontend/components/layout/topbar.tsx
+	modified:   frontend/components/screens/admin-audit-screen.tsx
+	modified:   frontend/components/screens/admin-dashboard-screen.tsx
+	modified:   frontend/components/screens/admin-masters-screen.tsx
+	modified:   frontend/components/screens/admin-overrides-screen.tsx
+	modified:   frontend/components/screens/admin-users-screen.tsx
+	modified:   frontend/components/screens/indicator-detail-screen.tsx
+	modified:   frontend/components/screens/project-client-profile-screen.tsx
+	modified:   frontend/components/screens/project-export-history-screen.tsx
+	modified:   frontend/components/screens/project-inspection-screen.tsx
+	modified:   frontend/components/screens/project-overview-screen.tsx
+	modified:   frontend/components/screens/project-print-pack-screen.tsx
+	modified:   frontend/components/screens/project-readiness-screen.tsx
+	modified:   frontend/components/screens/project-recurring-screen.tsx
+	modified:   frontend/components/screens/project-worklist-screen.tsx
+	modified:   frontend/components/screens/projects-list-screen.tsx
+	modified:   frontend/components/screens/system-health-screen.tsx
+	modified:   frontend/components/worklist/indicator-status-tile.tsx
+	modified:   frontend/components/worklist/status-legend.tsx
+	modified:   frontend/next-env.d.ts
+	modified:   frontend/package-lock.json
+	modified:   frontend/package.json
+	modified:   frontend/tests/admin-dashboard-screen.test.tsx
+	modified:   frontend/tests/app-shell.test.tsx
+	modified:   frontend/tests/e2e/app-flows.spec.ts
+	modified:   frontend/tests/e2e/core-journeys.spec.ts
+	modified:   frontend/tests/export-history-screen.test.tsx
+	modified:   frontend/tests/indicator-detail-screen.test.tsx
+	modified:   frontend/tests/inspection-screen.test.tsx
+	modified:   frontend/tests/project-list-screen.test.tsx
+	modified:   frontend/tests/project-overview-screen.test.tsx
+	modified:   frontend/tests/recurring-screen.test.tsx
+	modified:   frontend/tests/sidebar.test.tsx
+	modified:   frontend/tests/worklist-screen.test.tsx
+	modified:   frontend/tsconfig.json
+	modified:   playwright-report/index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	OUT/deployment_truth/
+	OUT/implementation/2026-04-07T08-24-46Z/
+	OUT/implementation/2026-04-07T12-00-52Z/
+	OUT/prod_domain_fix/
+	OUT/release_prep/
+	OUT/ui_discovery/
+	docs/_deployment_truth/
+	docs/_implementation/2026-04-07T08-24-46Z/
+	docs/_implementation/2026-04-07T12-00-52Z/
+	docs/_ui_discovery/
+	docs/_ux_discovery/
+	frontend/.next_implementation/
+	frontend/.next_local_checks/server/chunks/177.js
+	frontend/.next_local_checks/server/chunks/856.js
+	frontend/.next_local_checks/static/OscZa7XX8US3OHbkdJOTM/
+	frontend/.next_local_checks/static/chunks/28-cd180962078fac1e.js
+	frontend/.next_local_checks/static/chunks/469-b8fe2d9e303ab520.js
+	frontend/.next_local_checks/static/chunks/501-5fa4d1a0ddbdbb3c.js
+	frontend/.next_local_checks/static/chunks/707-25b4042afdb9887c.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/audit/page-b76a373ea03a7416.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/import-logs/page-48d079d0dcc2a118.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/overrides/page-62fd96ed6e77973b.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/page-0a070611a915ea76.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/system-health/page-4dc9ad9206253687.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/admin/users/page-ca26dc32647934dd.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/frameworks/[id]/analysis/page-029e3f9dc6b1b064.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/layout-0dee5fbc6d96d1e4.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/project-indicators/[id]/page-042aef911576dfa4.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/areas-progress/page-bd72da19f28b006d.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/client-profile/page-9115e7aa5775568c.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/exports/page-c2b1af6e856e9b62.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/inspection/page-164398b7138f485c.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/page-d48c4b4bca134731.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/print-pack/page-c0482a6eaa40ddb9.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/readiness/page-e9a63d491c11bf2e.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/recurring/page-8f4981265d31bb3f.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/standards-progress/page-9802d9809d872af5.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/[projectId]/worklist/page-dbc6c16d4ed17f98.js
+	frontend/.next_local_checks/static/chunks/app/(workbench)/projects/page-19bbdf5c940dc4ef.js
+	frontend/.next_local_checks/static/chunks/app/login/page-24a5eb3ba3668fb2.js
+	frontend/.next_local_checks/static/css/7264c07b9042a2ca.css
+	frontend/.next_release/
+	frontend/.next_ui_discovery/
+	frontend/components/common/drawer.tsx
+	frontend/components/common/global-status-legend.tsx
+	frontend/components/common/onboarding-callout.tsx
+	frontend/components/common/permission-hint.tsx
+	frontend/components/common/status-semantic-badge.tsx
+	frontend/components/common/workflow-context-strip.tsx
+	frontend/components/screens/indicator-drawer.tsx
+	frontend/components/screens/project-workspace-board.tsx
+	frontend/tests/e2e/cta-discoverability.spec.ts
+	frontend/tests/e2e/role-visibility.spec.ts
+	frontend/tests/e2e/ui-clarity.spec.ts
+	frontend/tests/e2e/workflow-guidance.spec.ts
+	frontend/tests/indicator-drawer.test.tsx
+	frontend/tests/project-print-pack-screen.test.tsx
+	frontend/tests/project-workspace-board.test.tsx
+	frontend/tests/readiness-screen.test.tsx
+	frontend/tests/status-semantics.test.tsx
+	frontend/tests/workflow-context-strip.test.tsx
+	frontend/utils/status-semantics.ts
+
+no changes added to commit (use "git add" and/or "git commit -a")

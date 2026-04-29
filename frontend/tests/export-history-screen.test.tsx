@@ -7,6 +7,7 @@ import { renderWithQueryClient } from "./test-utils";
 
 const mutateAsync = vi.fn();
 const pushToast = vi.fn();
+const authState = { role: "ADMIN" };
 
 vi.mock("@/lib/hooks/use-readiness", () => ({
   useExportHistory: () => ({
@@ -23,11 +24,22 @@ vi.mock("@/lib/hooks/use-readiness", () => ({
     data: null,
     refetch: vi.fn(),
   }),
+  useProjectReadiness: () => ({
+    isLoading: false,
+    error: null,
+    data: {
+      overall_score: 100,
+      percent_met: 100,
+      recurring_compliance_score: 100,
+      high_risk_indicators: [],
+    },
+  }),
 }));
 
 vi.mock("@/lib/hooks/use-auth", () => ({
   useAuthSession: () => ({
-    data: { authenticated: true, user: { role: "ADMIN" } },
+    isLoading: false,
+    data: { authenticated: true, user: { role: authState.role } },
   }),
 }));
 
@@ -39,11 +51,16 @@ describe("ProjectExportHistoryScreen", () => {
   beforeEach(() => {
     mutateAsync.mockReset();
     pushToast.mockReset();
+    authState.role = "ADMIN";
   });
 
   it("renders export history page", () => {
     renderWithQueryClient(<ProjectExportHistoryScreen projectId={1} />);
     expect(screen.getByText("Export history")).toBeInTheDocument();
+    expect(screen.getByText("Where you are")).toBeInTheDocument();
+    expect(screen.getByText("The project is ready for governed export generation.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to project" })).toHaveAttribute("href", "/projects/1");
+    expect(screen.getByText(/Generate and track print-bundle, excel, and physical retrieval outputs/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Generate/i })).toBeInTheDocument();
   });
 
@@ -56,5 +73,14 @@ describe("ProjectExportHistoryScreen", () => {
 
     expect(mutateAsync).toHaveBeenCalledWith({ type: "print-bundle", parameters: {} });
     expect(pushToast).toHaveBeenCalledWith("Export job created for print-bundle.", "success");
+  });
+
+  it("renders explicit restricted state for unauthorized roles", () => {
+    authState.role = "OWNER";
+    renderWithQueryClient(<ProjectExportHistoryScreen projectId={1} />);
+
+    expect(screen.getByText("Export access restricted")).toBeInTheDocument();
+    expect(screen.getByText("Only ADMIN or LEAD can access export generation and history.")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Generate/i })).not.toBeInTheDocument();
   });
 });

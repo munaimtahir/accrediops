@@ -1,0 +1,9 @@
+{
+  "url": "http://127.0.0.1:18080/projects",
+  "errors": [
+    {
+      "type": "pageerror",
+      "text": "Error: Minified React error #310; visit https://react.dev/errors/310 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at ao (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:52410)\n    at Object.aq [as useMemo] (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:59613)\n    at t.useMemo (http://127.0.0.1:18080/_next/static/chunks/255-38b49df12a94ee57.js:1:21069)\n    at M (http://127.0.0.1:18080/_next/static/chunks/app/(workbench)/projects/page-20df98b36a031b00.js:1:17975)\n    at l9 (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:51124)\n    at o_ (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:70984)\n    at oq (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:82014)\n    at ik (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:114676)\n    at http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:114521\n    at ib (http://127.0.0.1:18080/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:114529)"
+    }
+  ]
+}

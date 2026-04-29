@@ -1,0 +1,16 @@
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 06:51:15 GMT
+referrer-policy: same-origin
+server: Caddy
+server: WSGIServer/0.2 CPython/3.12.13
+set-cookie: csrftoken=6xktq4WpX91VMyE2vmzVjdEFQNlaRyBJ; expires=Wed, 07 Apr 2027 06:51:15 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-length: 59
+

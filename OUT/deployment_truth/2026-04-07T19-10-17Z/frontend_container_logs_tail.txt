@@ -1,0 +1,77 @@
+
+up to date, audited 305 packages in 3s
+
+68 packages are looking for funding
+  run `npm fund` for details
+
+6 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> accrediops-frontend@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.14
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 29.9s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                      Size  First Load JS
+┌ ○ /                                           127 B         102 kB
+├ ○ /_not-found                                 991 B         103 kB
+├ ○ /admin                                    3.81 kB         127 kB
+├ ○ /admin/audit                              5.34 kB         123 kB
+├ ○ /admin/import-logs                        5.57 kB         123 kB
+├ ○ /admin/masters/document-types               128 B         123 kB
+├ ○ /admin/masters/evidence-types               128 B         123 kB
+├ ○ /admin/masters/priorities                   128 B         123 kB
+├ ○ /admin/masters/statuses                     128 B         123 kB
+├ ○ /admin/overrides                          4.76 kB         122 kB
+├ ○ /admin/system-health                      2.32 kB         120 kB
+├ ○ /admin/users                              5.15 kB         123 kB
+├ ƒ /frameworks/[id]/analysis                 2.65 kB         120 kB
+├ ƒ /healthz                                    127 B         102 kB
+├ ○ /login                                    5.37 kB         123 kB
+├ ƒ /project-indicators/[id]                  8.46 kB         140 kB
+├ ○ /projects                                 6.23 kB         133 kB
+├ ƒ /projects/[projectId]                     5.68 kB         141 kB
+├ ƒ /projects/[projectId]/areas-progress      3.35 kB         121 kB
+├ ƒ /projects/[projectId]/client-profile      5.56 kB         126 kB
+├ ƒ /projects/[projectId]/exports             5.32 kB         128 kB
+├ ƒ /projects/[projectId]/inspection          4.48 kB         127 kB
+├ ƒ /projects/[projectId]/print-pack          2.21 kB         123 kB
+├ ƒ /projects/[projectId]/readiness           4.01 kB         127 kB
+├ ƒ /projects/[projectId]/recurring           4.66 kB         131 kB
+├ ƒ /projects/[projectId]/standards-progress  3.39 kB         121 kB
+└ ƒ /projects/[projectId]/worklist             4.3 kB         140 kB
++ First Load JS shared by all                  102 kB
+  ├ chunks/255-38b49df12a94ee57.js              46 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js       54.2 kB
+  └ other shared chunks (total)               1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> accrediops-frontend@0.1.0 start
+> next start --hostname 0.0.0.0 --port 3000
+
+   ▲ Next.js 15.5.14
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+
+ ✓ Starting...
+ ✓ Ready in 1284ms

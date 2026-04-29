@@ -6,11 +6,13 @@ from apps.api.pagination import EnvelopePagination
 from apps.api.serializers.project_indicators import DashboardWorklistSerializer
 from apps.exports.services import classify_indicator_risk
 from apps.indicators.models import ProjectIndicator
+from apps.workflow.permissions import ExplicitAuthenticatedPermission
 
 
 class DashboardWorklistView(ListAPIView):
     serializer_class = DashboardWorklistSerializer
     pagination_class = EnvelopePagination
+    permission_classes = [ExplicitAuthenticatedPermission]
 
     def get_queryset(self):
         params = self.request.query_params
@@ -70,6 +72,16 @@ class DashboardWorklistView(ListAPIView):
             queryset = queryset.filter(approver_id=params["approver_id"])
         if params.get("recurring") in {"true", "false"}:
             queryset = queryset.filter(indicator__is_recurring=params["recurring"] == "true")
+        for field in (
+            "evidence_type",
+            "ai_assistance_level",
+            "evidence_frequency",
+            "primary_action_required",
+            "classification_review_status",
+            "classification_confidence",
+        ):
+            if params.get(field):
+                queryset = queryset.filter(**{f"indicator__{field}": params[field]})
         if params.get("due_today") == "true":
             queryset = queryset.filter(due_date=today)
         if params.get("overdue") == "true":

@@ -1,16 +1,53 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 
 import { EmptyState } from "@/components/common/empty-state";
 import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
+import { NextActionBanner } from "@/components/common/next-action-banner";
 import { PageHeader } from "@/components/common/page-header";
+import { WorkflowContextStrip } from "@/components/common/workflow-context-strip";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { canViewExports, getRestrictionMessage } from "@/lib/authz";
+import { useAuthSession } from "@/lib/hooks/use-auth";
 import { useProjectExport } from "@/lib/hooks/use-mutations";
+import { useProjectReadiness } from "@/lib/hooks/use-readiness";
+import { cn } from "@/utils/cn";
 
 export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
+  const authQuery = useAuthSession();
+  const canManageExports = canViewExports(authQuery.data?.user);
+  const effectiveProjectId = canManageExports ? projectId : Number.NaN;
   const printBundle = useProjectExport(projectId, "print-bundle");
+  const readiness = useProjectReadiness(effectiveProjectId);
+
+  if (authQuery.isLoading) {
+    return <LoadingSkeleton className="h-40 w-full" />;
+  }
+
+  if (!canManageExports) {
+    return (
+      <EmptyState
+        title="Print pack access restricted"
+        description={getRestrictionMessage("exports")}
+        action={
+          <Link href={`/projects/${projectId}`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}>
+            Back to project
+          </Link>
+        }
+      />
+    );
+  }
+
+  if (readiness.isLoading) {
+    return <LoadingSkeleton className="h-40 w-full" />;
+  }
+  if (readiness.error) {
+    return <ErrorPanel message={readiness.error.message} />;
+  }
 
   const sections = useMemo(() => {
     if (!printBundle.data) {
@@ -18,6 +55,19 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
     }
     return printBundle.data.sections ?? printBundle.data.bundle?.sections ?? [];
   }, [printBundle.data]);
+  const readinessData = (readiness.data ?? {}) as Record<string, unknown>;
+  const exportBlockers = [
+    Number(readinessData.percent_met ?? 0) < 100
+      ? `Project readiness is incomplete: ${Number(readinessData.percent_met ?? 0)}% of indicators are met.`
+      : "",
+    Number(readinessData.recurring_compliance_score ?? 0) < 100
+      ? `Recurring compliance is ${Number(readinessData.recurring_compliance_score ?? 0)}%, not 100%.`
+      : "",
+    Array.isArray(readinessData.high_risk_indicators) && readinessData.high_risk_indicators.length > 0
+      ? `Critical indicators pending: ${readinessData.high_risk_indicators.length}`
+      : "",
+  ].filter(Boolean);
+  const exportReady = exportBlockers.length === 0;
 
   return (
     <div className="space-y-6">
@@ -26,10 +76,36 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
         title="Print pack preview"
         description="Structured print pack with area → standard → indicator → evidence ordering."
         actions={
-          <Button onClick={() => printBundle.mutate()} loading={printBundle.isPending}>
+          <Button
+            onClick={() => printBundle.mutate()}
+            loading={printBundle.isPending}
+            disabled={!exportReady}
+            title={exportReady ? "Generate print pack preview" : "Resolve export blockers before generation."}
+          >
             Generate Print Pack
           </Button>
         }
+      />
+
+      <WorkflowContextStrip
+        scope={`Project ${projectId} · Print pack`}
+        current="Previewing print-bundle structure and evidence ordering."
+        nextStep="Generate the print pack, then verify indicator evidence labels and physical locations."
+        actions={[
+          { label: "Back to project", href: `/projects/${projectId}` },
+          { label: "Open export history", href: `/projects/${projectId}/exports` },
+          { label: "Open worklist", href: `/projects/${projectId}/worklist` },
+        ]}
+      />
+      <NextActionBanner
+        action={exportReady ? "Generate the print pack preview and verify evidence ordering." : "Resolve export blockers before generating the print pack."}
+        reason={
+          exportReady
+            ? "The project is ready for governed print-pack output."
+            : "Print-pack generation is governed by the same readiness and approval rules as other exports."
+        }
+        status={`Sections loaded: ${sections.length} • Readiness score: ${Number(readinessData.overall_score ?? 0)}`}
+        blockers={exportBlockers}
       />
 
       {printBundle.isPending ? (

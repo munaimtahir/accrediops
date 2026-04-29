@@ -1,0 +1,26 @@
+=== AUTH_FLOW ===
+{"success":true,"data":{"authenticated":false,"user":null}}
+{"success":true,"data":{"authenticated":true,"user":{"id":27,"username":"release_smoke_admin","first_name":"","last_name":"","role":"ADMIN"}}}
+{"success":true,"data":{"authenticated":true,"user":{"id":27,"username":"release_smoke_admin","first_name":"","last_name":"","role":"ADMIN"}}}
+{"success":true,"data":{"authenticated":false,"user":null}}
+{"success":true,"data":{"authenticated":false,"user":null}}
+=== PROJECTS_PAGE_HEADERS ===
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+date: Wed, 08 Apr 2026 07:45:52 GMT
+etag: "m4gswz4kci7xp"
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-powered-by: Next.js
+
+

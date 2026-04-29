@@ -1,0 +1,15 @@
+
+Running 5 tests using 2 workers
+
+  ✓  2 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (5.8s)
+  ✓  1 tests/e2e/core-journeys.spec.ts:126:7 › Core operational browser journeys › admin route access is available after login (6.3s)
+  ✓  3 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (11.1s)
+  ✓  4 tests/e2e/core-journeys.spec.ts:175:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (24.7s)
+  ✓  5 tests/e2e/core-journeys.spec.ts:244:7 › Core operational browser journeys › non-admin user cannot access export history actions (13.0s)
+
+  5 passed (51.5s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

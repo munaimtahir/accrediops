@@ -1,0 +1,13 @@
+docs/_ui_discovery/2026-04-05T19-34-55Z/00_executive_ui_discovery_summary.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/01_workflow_confusion_map.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/02_discoverability_failures.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/03_visual_hierarchy_review.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/04_navigation_and_information_architecture.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/05_role_and_permission_clarity_review.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/06_ui_improvement_plan.md
+docs/_ui_discovery/2026-04-05T19-34-55Z/07_final_ui_verdict.md
+OUT/ui_discovery/2026-04-05T19-34-55Z/frontend_build_output.txt
+OUT/ui_discovery/2026-04-05T19-34-55Z/frontend_test_output.txt
+OUT/ui_discovery/2026-04-05T19-34-55Z/playwright_output.txt
+OUT/ui_discovery/2026-04-05T19-34-55Z/ui_review_notes.txt
+OUT/ui_discovery/2026-04-05T19-34-55Z/ui_manifest.txt

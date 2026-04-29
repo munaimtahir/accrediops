@@ -11,10 +11,12 @@ from apps.api.serializers.recurring import (
 )
 from apps.recurring.models import RecurringEvidenceInstance
 from apps.recurring.services import approve_recurring_instance, submit_recurring_instance
+from apps.workflow.permissions import ExplicitAuthenticatedPermission, ensure_project_owner_access, ensure_project_reviewer_access
 
 
 class RecurringQueueView(ListAPIView):
     serializer_class = RecurringEvidenceInstanceSerializer
+    permission_classes = [ExplicitAuthenticatedPermission]
 
     def get_queryset(self):
         params = self.request.query_params
@@ -38,14 +40,22 @@ class RecurringQueueView(ListAPIView):
             queryset = queryset.filter(due_date__lt=today, status__in=["PENDING", "SUBMITTED", "MISSED"])
         return queryset
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
     def list(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_queryset(), many=True)
         return success_response(serializer.data)
 
 
 class RecurringInstanceSubmitView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         recurring_instance = get_object_or_404(RecurringEvidenceInstance, pk=pk)
+        ensure_project_owner_access(request.user, recurring_instance.recurring_requirement.project_indicator)
         serializer = SubmitRecurringInstanceSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         recurring_instance = submit_recurring_instance(
@@ -53,12 +63,15 @@ class RecurringInstanceSubmitView(APIView):
             actor=request.user,
             **serializer.validated_data,
         )
-        return success_response(RecurringEvidenceInstanceSerializer(recurring_instance).data)
+        return success_response(RecurringEvidenceInstanceSerializer(recurring_instance, context={"request": request}).data)
 
 
 class RecurringInstanceApproveView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         recurring_instance = get_object_or_404(RecurringEvidenceInstance, pk=pk)
+        ensure_project_reviewer_access(request.user, recurring_instance.recurring_requirement.project_indicator)
         serializer = ApproveRecurringInstanceSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         recurring_instance = approve_recurring_instance(
@@ -66,4 +79,4 @@ class RecurringInstanceApproveView(APIView):
             actor=request.user,
             **serializer.validated_data,
         )
-        return success_response(RecurringEvidenceInstanceSerializer(recurring_instance).data)
+        return success_response(RecurringEvidenceInstanceSerializer(recurring_instance, context={"request": request}).data)

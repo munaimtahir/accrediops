@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { vi } from "vitest";
 
@@ -66,9 +67,28 @@ describe("ProjectsListScreen", () => {
       </QueryClientProvider>,
     );
     expect(screen.getByText("Project register")).toBeInTheDocument();
+    expect(screen.getByText("Where to start")).toBeInTheDocument();
     expect(screen.getByText("Project Alpha")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Create project" })).toBeEnabled();
-    expect(screen.getByRole("button", { name: "Manage" })).toBeEnabled();
+    expect(screen.getByText(/Framework:/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Open project" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: "Create project" })[0]).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Manage project" })).toBeEnabled();
+  });
+
+  it("shows power table only when toggled", async () => {
+    const user = userEvent.setup();
+    const qc = new QueryClient();
+    render(
+      <QueryClientProvider client={qc}>
+        <ProjectsListScreen />
+      </QueryClientProvider>,
+    );
+    expect(screen.queryByText("Power view")).toBeInTheDocument();
+    expect(screen.queryByRole("columnheader", { name: "Progress" })).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Show power table" }));
+    expect(screen.getByRole("columnheader", { name: "Progress" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Hide power table" }));
+    expect(screen.queryByRole("columnheader", { name: "Progress" })).not.toBeInTheDocument();
   });
 
   it("disables create project for non-admin and non-lead", () => {
@@ -79,7 +99,8 @@ describe("ProjectsListScreen", () => {
         <ProjectsListScreen />
       </QueryClientProvider>,
     );
-    expect(screen.getByRole("button", { name: "Create project" })).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Manage" })).toBeDisabled();
+    expect(screen.getAllByRole("button", { name: /Create project/i })[0]).toBeDisabled();
+    expect(screen.getAllByRole("button", { name: /Manage project/i })[0]).toBeDisabled();
+    expect(screen.getAllByText(/Only ADMIN or LEAD can create or manage projects/i).length).toBeGreaterThan(0);
   });
 });

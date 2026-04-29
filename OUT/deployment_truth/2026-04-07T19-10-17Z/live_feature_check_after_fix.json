@@ -1,0 +1,21 @@
+{
+  "baseURL": "http://127.0.0.1:18080",
+  "checks": {
+    "projects_heading": true,
+    "projects_card_open_link": true,
+    "projects_power_table_hidden_default": true,
+    "projects_power_table_toggle": true,
+    "workspace_next_guidance": true,
+    "workspace_area_heading": true,
+    "workspace_standard_heading": true,
+    "workspace_indicator_heading": true,
+    "drawer_opened": true,
+    "drawer_summary": true,
+    "drawer_evidence": true,
+    "drawer_recurring": true,
+    "drawer_notes": true,
+    "drawer_review": true,
+    "drawer_actions": true
+  },
+  "errors": []
+}

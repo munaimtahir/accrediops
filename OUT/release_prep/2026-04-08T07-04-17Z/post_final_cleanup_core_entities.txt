@@ -1,0 +1,4 @@
+projects [(1, 'Client Alpha 20260402224411546104', 'Client Alpha', 'National Board', 'ACTIVE'), (2, 'P 20260402224448762607', 'C', 'B', 'DRAFT'), (3, 'Project 20260402224510974838', 'Client', 'Board', 'ACTIVE')]
+users [(1, 'admin_20260402224411546104', 'ADMIN', True), (2, 'owner_20260402224411546104', 'OWNER', False), (3, 'reviewer_20260402224411546104', 'REVIEWER', False), (4, 'approver_20260402224411546104', 'APPROVER', False), (5, 'a_20260402224448762607', 'ADMIN', False), (6, 'admin2_20260402224510974838', 'ADMIN', True), (7, 'owner2_20260402224510974838', 'OWNER', False), (8, 'reviewer2_20260402224510974838', 'REVIEWER', False), (9, 'approver2_20260402224510974838', 'APPROVER', False), (10, 'admin', 'OWNER', True), (21, 'munaim', 'OWNER', False)]
+departments [(1, 'Quality 20260402224411546104'), (2, 'Dep 20260402224448762607'), (3, 'QA 20260402224510974838'), (4, 'Operations')]
+client_profiles []

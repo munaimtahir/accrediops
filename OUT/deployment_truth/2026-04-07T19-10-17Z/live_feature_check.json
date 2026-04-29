@@ -1,0 +1,9 @@
+{
+  "baseURL": "http://127.0.0.1:18080",
+  "checks": {
+    "projects_heading": false,
+    "projects_card_open_link": false,
+    "projects_power_table_hidden_default": true,
+    "projects_power_table_toggle": false
+  }
+}

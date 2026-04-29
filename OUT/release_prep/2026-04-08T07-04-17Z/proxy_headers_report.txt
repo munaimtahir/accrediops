@@ -1,0 +1,106 @@
+=== SESSION_PRELOGIN_HEADERS ===
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 07:45:51 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=orDofNkH7ndBTx6c53moBpAAQgpYkggo; expires=Wed, 07 Apr 2027 07:45:51 GMT; Max-Age=31449600; Path=/; SameSite=Lax; Secure
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 59
+
+
+=== LOGIN_HEADERS ===
+HTTP/2 200 
+allow: POST, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 07:45:52 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=pdv4dDdTxUhs4iYn4o3TCzGw0OlPoj5x; expires=Wed, 07 Apr 2027 07:45:52 GMT; Max-Age=31449600; Path=/; SameSite=Lax; Secure
+set-cookie: sessionid=ye1wzprv4d1hucenut412zln60rk3lp6; expires=Wed, 22 Apr 2026 07:45:52 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax; Secure
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 142
+
+
+=== SESSION_POSTLOGIN_HEADERS ===
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 07:45:52 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=pdv4dDdTxUhs4iYn4o3TCzGw0OlPoj5x; expires=Wed, 07 Apr 2027 07:45:52 GMT; Max-Age=31449600; Path=/; SameSite=Lax; Secure
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 142
+
+
+=== PROJECTS_HEADERS ===
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+date: Wed, 08 Apr 2026 07:45:52 GMT
+etag: "m4gswz4kci7xp"
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-powered-by: Next.js
+
+
+=== LOGOUT_HEADERS ===
+HTTP/2 200 
+allow: POST, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 07:45:53 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: sessionid=""; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Path=/; SameSite=Lax
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 59
+
+
+=== SESSION_POSTLOGOUT_HEADERS ===
+HTTP/2 200 
+allow: GET, HEAD, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 07:45:54 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=pdv4dDdTxUhs4iYn4o3TCzGw0OlPoj5x; expires=Wed, 07 Apr 2027 07:45:54 GMT; Max-Age=31449600; Path=/; SameSite=Lax; Secure
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 59
+
+

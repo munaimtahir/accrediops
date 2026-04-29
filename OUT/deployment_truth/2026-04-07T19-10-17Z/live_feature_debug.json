@@ -1,0 +1,13 @@
+{
+  "login_url_initial": "http://127.0.0.1:18080/login",
+  "username_field_count": 1,
+  "password_field_count": 1,
+  "url_after_login_click": "http://127.0.0.1:18080/projects",
+  "headings_after_login": [
+    "Application error: a client-side exception has occurred while loading 127.0.0.1 (see the browser console for more information)."
+  ],
+  "main_text_sample": "",
+  "button_samples": [],
+  "link_samples": [],
+  "open_project_link_count": 0
+}

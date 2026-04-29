@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Cache-Control: s-maxage=31536000
+Content-Type: text/html; charset=utf-8
+Date: Tue, 07 Apr 2026 19:20:10 GMT
+Etag: "m8aj2832iq7xp"
+Server: Caddy
+Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+X-Nextjs-Cache: HIT
+X-Nextjs-Prerender: 1
+X-Nextjs-Prerender: 1
+X-Nextjs-Stale-Time: 300
+X-Powered-By: Next.js
+Transfer-Encoding: chunked
+

@@ -27,6 +27,10 @@ vi.mock("@/lib/hooks/use-users", () => ({
   useUsers: () => ({ data: [], isLoading: false, error: null }),
 }));
 
+vi.mock("@/components/screens/indicator-drawer", () => ({
+  IndicatorDrawer: () => <div>Indicator drawer closed</div>,
+}));
+
 describe("ProjectWorklistScreen", () => {
   it("renders filters and table", () => {
     const qc = new QueryClient();
@@ -36,6 +40,10 @@ describe("ProjectWorklistScreen", () => {
       </QueryClientProvider>,
     );
     expect(screen.getByText("Project worklist")).toBeInTheDocument();
+    expect(screen.getByText("Where you are")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to project" })).toHaveAttribute("href", "/projects/1");
+    expect(screen.getByRole("button", { name: "Clear filters" })).toBeInTheDocument();
     expect(screen.getByText("No worklist rows match the current filter set")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Reset to full queue" })).toBeInTheDocument();
   });
 });

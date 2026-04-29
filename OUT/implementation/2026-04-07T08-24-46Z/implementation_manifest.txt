@@ -1,0 +1,48 @@
+Implementation Manifest — 2026-04-07T08-24-46Z
+
+Outputs captured:
+- backend_test_output.txt
+- backend_coverage_output.txt
+- frontend_test_output.txt
+- frontend_coverage_output.txt
+- frontend_build_output.txt
+- playwright_output.txt
+- coverage_summary.txt
+
+Docs generated:
+- docs/_implementation/2026-04-07T08-24-46Z/01_coverage_closure_plan.md
+- docs/_implementation/2026-04-07T08-24-46Z/02_print_pack_and_status_semantics.md
+- docs/_implementation/2026-04-07T08-24-46Z/03_deeplink_and_orientation_polish.md
+- docs/_implementation/2026-04-07T08-24-46Z/04_coverage_reporting.md
+- docs/_implementation/2026-04-07T08-24-46Z/05_final_polish_verdict.md
+
+Core code additions/updates in this sprint:
+- Added reusable deep-link context primitive:
+  - frontend/components/common/workflow-context-strip.tsx
+- Applied orientation polish:
+  - frontend/components/screens/project-worklist-screen.tsx
+  - frontend/components/screens/project-recurring-screen.tsx
+  - frontend/components/screens/project-inspection-screen.tsx
+  - frontend/components/screens/project-readiness-screen.tsx
+  - frontend/components/screens/project-export-history-screen.tsx
+  - frontend/components/screens/project-print-pack-screen.tsx
+  - frontend/components/screens/indicator-detail-screen.tsx
+- Added/updated coverage tests:
+  - frontend/tests/project-print-pack-screen.test.tsx
+  - frontend/tests/status-semantics.test.tsx
+  - frontend/tests/workflow-context-strip.test.tsx
+  - frontend/tests/readiness-screen.test.tsx
+  - frontend/tests/worklist-screen.test.tsx
+  - frontend/tests/recurring-screen.test.tsx
+  - frontend/tests/inspection-screen.test.tsx
+  - frontend/tests/export-history-screen.test.tsx
+  - frontend/tests/indicator-detail-screen.test.tsx
+  - frontend/tests/e2e/app-flows.spec.ts
+
+Verification summary:
+- Backend manage.py tests: pass (31)
+- Backend pytest coverage: pass (85%)
+- Frontend tests: pass (17 files / 33 tests)
+- Frontend coverage run: pass (50.12% all files)
+- Frontend build: pass
+- Playwright full suite: pass (26)

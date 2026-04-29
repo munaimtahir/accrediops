@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { useToast } from "@/components/common/toaster";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { getSafeErrorMessage } from "@/lib/api/client";
 import { useClientProfiles } from "@/lib/hooks/use-client-profiles";
 import { useFrameworks } from "@/lib/hooks/use-frameworks";
-import { useUpdateProject } from "@/lib/hooks/use-mutations";
+import { useDeleteProject, useUpdateProject } from "@/lib/hooks/use-mutations";
 import { Project, ProjectStatus } from "@/types";
 
 const statusOptions: ProjectStatus[] = ["DRAFT", "ACTIVE", "COMPLETED", "ARCHIVED"];
@@ -18,14 +19,18 @@ const statusOptions: ProjectStatus[] = ["DRAFT", "ACTIVE", "COMPLETED", "ARCHIVE
 export function ProjectManagementForm({
   project,
   onSuccess,
+  onDelete,
 }: {
   project: Project;
   onSuccess?: () => void;
+  onDelete?: () => void;
 }) {
+  const router = useRouter();
   const { pushToast } = useToast();
   const frameworksQuery = useFrameworks();
   const profilesQuery = useClientProfiles();
   const updateProject = useUpdateProject(project.id);
+  const deleteProject = useDeleteProject(project.id);
 
   const [name, setName] = useState(project.name);
   const [clientName, setClientName] = useState(project.client_name);
@@ -58,6 +63,24 @@ export function ProjectManagementForm({
       });
       pushToast("Project details updated.", "success");
       onSuccess?.();
+    } catch (error) {
+      pushToast(getSafeErrorMessage(error), "error");
+    }
+  }
+
+  async function handleDelete() {
+    const confirmed = window.confirm(
+      `Delete project "${project.name}"? This removes the project and its related work items.`,
+    );
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await deleteProject.mutateAsync();
+      pushToast("Project deleted.", "success");
+      onDelete?.();
+      router.push("/projects");
     } catch (error) {
       pushToast(getSafeErrorMessage(error), "error");
     }
@@ -149,7 +172,10 @@ export function ProjectManagementForm({
         <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} />
       </label>
 
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between gap-3">
+        <Button type="button" variant="danger" onClick={handleDelete} loading={deleteProject.isPending}>
+          Delete project
+        </Button>
         <Button type="submit" loading={updateProject.isPending}>
           Save project
         </Button>

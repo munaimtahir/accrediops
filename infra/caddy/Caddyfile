@@ -1,5 +1,12 @@
+# Container listener remains 8080; host canonical port is mapped in docker-compose (18080:8080).
 :8080 {
   encode gzip zstd
+
+  @django_admin_alias path /admin/
+  redir @django_admin_alias /django-admin/ 308
+
+  @django_admin path /django-admin* /static/admin/* /static/rest_framework/*
+  reverse_proxy @django_admin backend:8000
 
   @api path /api/*
   reverse_proxy @api backend:8000
@@ -11,6 +18,10 @@
   @frontend_health path /health/frontend
   rewrite @frontend_health /healthz
   reverse_proxy @frontend_health frontend:3000
+
+  @favicon_ico path /favicon.ico
+  rewrite @favicon_ico /favicon.svg
+  reverse_proxy @favicon_ico frontend:3000
 
   reverse_proxy frontend:3000
 }

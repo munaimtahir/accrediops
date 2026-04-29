@@ -20,6 +20,9 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "AccrediOps",
   description: "Internal accreditation operations workbench.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plexSans.variable} ${plexMono.variable}`}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

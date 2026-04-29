@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "csrftoken",
+      "value": "5FSNGXyCWiNnYGj3B4eIcz0VR8DJ9HBZ",
+      "domain": "127.0.0.1",
+      "path": "/",
+      "expires": 1808848473.554838,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sessionid",
+      "value": "wy7qq7v24xehwuqwvqh3q5skdah9irke",
+      "domain": "127.0.0.1",
+      "path": "/",
+      "expires": 1778608473.501477,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

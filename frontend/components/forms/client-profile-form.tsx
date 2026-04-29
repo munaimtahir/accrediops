@@ -8,29 +8,34 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { getSafeErrorMessage } from "@/lib/api/client";
 import { useSaveClientProfile, useVariablesPreview } from "@/lib/hooks/use-client-profiles";
+import { useUsers } from "@/lib/hooks/use-users";
 import { ClientProfile } from "@/types";
 
 export function ClientProfileForm({
   initialValue,
+  onSaved,
 }: {
   initialValue?: ClientProfile;
+  onSaved?: (profile: ClientProfile) => void;
 }) {
   const { pushToast } = useToast();
   const saveProfile = useSaveClientProfile(initialValue?.id);
   const previewVars = useVariablesPreview(initialValue?.id ?? 0);
+  const usersQuery = useUsers({});
   const [organizationName, setOrganizationName] = useState(initialValue?.organization_name ?? "");
   const [address, setAddress] = useState(initialValue?.address ?? "");
   const [licenseNumber, setLicenseNumber] = useState(initialValue?.license_number ?? "");
   const [registrationNumber, setRegistrationNumber] = useState(initialValue?.registration_number ?? "");
   const [contactPerson, setContactPerson] = useState(initialValue?.contact_person ?? "");
   const [departmentNames, setDepartmentNames] = useState((initialValue?.department_names ?? []).join(", "));
+  const [linkedUserIds, setLinkedUserIds] = useState<number[]>(initialValue?.linked_users.map((user) => user.id) ?? []);
   const [previewText, setPreviewText] = useState("{{organization_name}} - {{license_number}}");
   const [previewOutput, setPreviewOutput] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      await saveProfile.mutateAsync({
+      const savedProfile = await saveProfile.mutateAsync({
         organization_name: organizationName,
         address,
         license_number: licenseNumber,
@@ -40,7 +45,9 @@ export function ClientProfileForm({
           .split(",")
           .map((item) => item.trim())
           .filter(Boolean),
+        linked_user_ids: linkedUserIds,
       });
+      onSaved?.(savedProfile);
       pushToast("Client profile saved.", "success");
     } catch (error) {
       pushToast(getSafeErrorMessage(error), "error");
@@ -58,6 +65,12 @@ export function ClientProfileForm({
     } catch (error) {
       pushToast(getSafeErrorMessage(error), "error");
     }
+  }
+
+  function toggleLinkedUser(userId: number) {
+    setLinkedUserIds((current) =>
+      current.includes(userId) ? current.filter((id) => id !== userId) : [...current, userId],
+    );
   }
 
   return (
@@ -90,6 +103,37 @@ export function ClientProfileForm({
         <span className="font-medium text-slate-700">Department names (comma-separated)</span>
         <Input value={departmentNames} onChange={(event) => setDepartmentNames(event.target.value)} />
       </label>
+      <div className="space-y-2 text-sm">
+        <span className="font-medium text-slate-700">Linked users</span>
+        {usersQuery.isLoading ? <p className="text-slate-600">Loading users...</p> : null}
+        {usersQuery.error ? <p className="text-rose-700">{usersQuery.error.message}</p> : null}
+        {usersQuery.data?.length ? (
+          <div className="grid gap-2 rounded-xl border border-slate-200 p-3 md:grid-cols-2">
+            {usersQuery.data.map((user) => {
+              const label = [user.first_name, user.last_name].filter(Boolean).join(" ") || user.username;
+              return (
+                <label key={user.id} className="flex items-start gap-2 rounded-md border border-slate-200 p-2">
+                  <input
+                    type="checkbox"
+                    checked={linkedUserIds.includes(user.id)}
+                    onChange={() => toggleLinkedUser(user.id)}
+                    className="mt-0.5"
+                  />
+                  <span className="text-sm text-slate-800">
+                    {label}
+                    <span className="block text-xs text-slate-500">
+                      {user.username} • {user.role}
+                    </span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        ) : null}
+        {!usersQuery.isLoading && !usersQuery.error && !usersQuery.data?.length ? (
+          <p className="text-slate-600">No active users available to link.</p>
+        ) : null}
+      </div>
       <div className="flex justify-end">
         <Button type="submit" loading={saveProfile.isPending}>
           Save client profile

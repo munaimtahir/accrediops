@@ -1,0 +1,16 @@
+
+Running 6 tests using 1 worker
+
+  ✓  1 tests/e2e/core-journeys.spec.ts:56:7 › Core operational browser journeys › evidence review journey works end-to-end (9.6s)
+  ✓  2 tests/e2e/core-journeys.spec.ts:80:7 › Core operational browser journeys › recurring approval from indicator context works (10.0s)
+  ✓  3 tests/e2e/core-journeys.spec.ts:160:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (16.8s)
+  ✓  4 tests/e2e/core-journeys.spec.ts:197:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (17.5s)
+  ✓  5 tests/e2e/core-journeys.spec.ts:242:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (7.9s)
+  ✓  6 tests/e2e/core-journeys.spec.ts:265:7 › Core operational browser journeys › non-admin user cannot access export history actions (11.2s)
+
+  6 passed (1.3m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

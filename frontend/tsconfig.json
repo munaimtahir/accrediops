@@ -34,11 +34,15 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next_discovery/types/**/*.ts",
+    ".next_gov_checks/types/**/*.ts",
+    ".next_implementation/types/**/*.ts",
     ".next_live/types/**/*.ts",
     ".next_local_checks/types/**/*.ts",
+    ".next_release/types/**/*.ts",
     ".next_sprint2/types/**/*.ts",
+    ".next_ui_discovery/types/**/*.ts",
     "next-env.d.ts",
-    ".next_gov_checks/types/**/*.ts"
+    ".next_local/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

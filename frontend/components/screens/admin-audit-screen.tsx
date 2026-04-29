@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
-import { PageHeader } from "@/components/common/page-header";
+import { SettingsPageHeader } from "@/components/common/settings-page-header";
 import { WorkbenchTable } from "@/components/common/workbench-table";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -31,7 +31,10 @@ export function AdminAuditScreen() {
   const userOptions = users.data ?? [];
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Admin" title="Audit log viewer" />
+      <SettingsPageHeader
+        title="Audit log viewer"
+        description="Filter governance events by actor, event type, object type, and time window."
+      />
       <div className="grid gap-3 md:grid-cols-5">
         <Select value={user} onChange={(event) => setUser(event.target.value)}>
           <option value="">All users</option>

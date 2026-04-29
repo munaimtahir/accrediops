@@ -12,6 +12,13 @@ from apps.indicators.models import (
     ProjectIndicatorStatusHistory,
 )
 from apps.masters.choices import PriorityChoices
+from apps.workflow.permissions import (
+    can_admin_access,
+    can_admin_or_lead_access,
+    can_project_approver_access,
+    can_project_owner_access,
+    can_project_reviewer_access,
+)
 
 
 class IndicatorMasterSerializer(serializers.ModelSerializer):
@@ -26,6 +33,16 @@ class IndicatorMasterSerializer(serializers.ModelSerializer):
             "text",
             "required_evidence_description",
             "evidence_type",
+            "ai_assistance_level",
+            "evidence_frequency",
+            "primary_action_required",
+            "classification_confidence",
+            "classification_reason",
+            "classification_review_status",
+            "classified_by_ai_at",
+            "classification_reviewed_by",
+            "classification_reviewed_at",
+            "classification_version",
             "document_type",
             "fulfillment_guidance",
             "is_recurring",
@@ -94,6 +111,12 @@ class DashboardWorklistSerializer(serializers.ModelSerializer):
     owner = UserSummarySerializer(read_only=True)
     is_recurring = serializers.BooleanField(source="indicator.is_recurring", read_only=True)
     recurrence_frequency = serializers.CharField(source="indicator.recurrence_frequency", read_only=True)
+    evidence_type = serializers.CharField(source="indicator.evidence_type", read_only=True)
+    ai_assistance_level = serializers.CharField(source="indicator.ai_assistance_level", read_only=True)
+    evidence_frequency = serializers.CharField(source="indicator.evidence_frequency", read_only=True)
+    primary_action_required = serializers.CharField(source="indicator.primary_action_required", read_only=True)
+    classification_confidence = serializers.CharField(source="indicator.classification_confidence", read_only=True)
+    classification_review_status = serializers.CharField(source="indicator.classification_review_status", read_only=True)
     approved_evidence_count = serializers.IntegerField(read_only=True)
     total_evidence_count = serializers.IntegerField(read_only=True)
     pending_recurring_instances_count = serializers.IntegerField(read_only=True)
@@ -118,8 +141,15 @@ class DashboardWorklistSerializer(serializers.ModelSerializer):
             "priority",
             "owner",
             "due_date",
+            "notes",
             "is_recurring",
             "recurrence_frequency",
+            "evidence_type",
+            "ai_assistance_level",
+            "evidence_frequency",
+            "primary_action_required",
+            "classification_confidence",
+            "classification_review_status",
             "approved_evidence_count",
             "total_evidence_count",
             "pending_recurring_instances_count",
@@ -129,6 +159,7 @@ class DashboardWorklistSerializer(serializers.ModelSerializer):
 
 
 class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
+    capabilities = serializers.SerializerMethodField()
     evidence_items = EvidenceItemSerializer(many=True, read_only=True)
     comments = ProjectIndicatorCommentSerializer(many=True, read_only=True)
     status_history = ProjectIndicatorStatusHistorySerializer(many=True, read_only=True)
@@ -140,6 +171,7 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
 
     class Meta(ProjectIndicatorSerializer.Meta):
         fields = ProjectIndicatorSerializer.Meta.fields + (
+            "capabilities",
             "evidence_items",
             "recurring_requirement",
             "recurring_instances",
@@ -170,6 +202,28 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
 
     def get_readiness_flags(self, obj):
         return self.context["readiness_flags"]
+
+    def get_capabilities(self, obj):
+        request = self.context.get("request")
+        user = getattr(request, "user", None)
+        can_owner = can_project_owner_access(user, obj)
+        can_reviewer = can_project_reviewer_access(user, obj)
+
+        return {
+            "can_assign": can_admin_or_lead_access(user),
+            "can_update_working_state": can_owner,
+            "can_start": can_owner,
+            "can_send_for_review": can_owner,
+            "can_mark_met": can_project_approver_access(user, obj),
+            "can_reopen": can_admin_access(user),
+            "can_add_evidence": can_owner,
+            "can_edit_evidence": can_owner,
+            "can_review_evidence": can_reviewer,
+            "can_submit_recurring": can_owner,
+            "can_approve_recurring": can_reviewer,
+            "can_generate_ai": can_owner,
+            "can_accept_ai": can_owner,
+        }
 
 
 class AssignProjectIndicatorSerializer(serializers.Serializer):

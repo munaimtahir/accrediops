@@ -1,0 +1,132 @@
+name: accrediops
+services:
+  backend:
+    build:
+      context: /home/munaim/srv/apps/accrediops/backend
+      dockerfile: Dockerfile
+    command:
+      - sh
+      - -c
+      - |-
+        python manage.py migrate &&
+               python manage.py runserver 0.0.0.0:8000
+    container_name: accrediops-backend
+    environment:
+      DB_ENGINE: django.db.backends.sqlite3
+      DB_NAME: db.sqlite3
+      DJANGO_ALLOWED_HOSTS: 127.0.0.1,localhost,caddy,frontend,backend,ops.alshifalab.pk,api.ops.alshifalab.pk,phc.alshifalab.pk,api.phc.alshifalab.pk
+      DJANGO_CSRF_COOKIE_SAMESITE: Lax
+      DJANGO_CSRF_COOKIE_SECURE: "True"
+      DJANGO_CSRF_TRUSTED_ORIGINS: http://localhost:18080,http://127.0.0.1:18080,https://ops.alshifalab.pk,https://api.ops.alshifalab.pk,https://phc.alshifalab.pk,https://api.phc.alshifalab.pk
+      DJANGO_DEBUG: "False"
+      DJANGO_SESSION_COOKIE_SAMESITE: Lax
+      DJANGO_SESSION_COOKIE_SECURE: "True"
+      DJANGO_SETTINGS_MODULE: config.accrediops_backend.settings
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/', timeout=5).read()
+      timeout: 5s
+      interval: 15s
+      retries: 5
+      start_period: 20s
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: /home/munaim/srv/apps/accrediops/backend
+        target: /app
+        bind: {}
+    working_dir: /app
+  caddy:
+    container_name: accrediops-caddy
+    depends_on:
+      backend:
+        condition: service_healthy
+        required: true
+      frontend:
+        condition: service_healthy
+        required: true
+    image: caddy:2.8
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "18080"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /home/munaim/srv/apps/accrediops/infra/caddy/Caddyfile
+        target: /etc/caddy/Caddyfile
+        read_only: true
+        bind: {}
+      - type: volume
+        source: caddy_data
+        target: /data
+        volume: {}
+      - type: volume
+        source: caddy_config
+        target: /config
+        volume: {}
+  frontend:
+    build:
+      context: /home/munaim/srv/apps/accrediops/frontend
+      dockerfile: Dockerfile
+    command:
+      - sh
+      - -c
+      - npm install --include=dev && npm run build && npm run start -- --hostname 0.0.0.0 --port 3000
+    container_name: accrediops-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+        required: true
+    environment:
+      BACKEND_API_URL: http://backend:8000
+      NEXT_PUBLIC_API_BASE_URL: ""
+      NODE_ENV: production
+    expose:
+      - "3000"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:3000/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+      timeout: 5s
+      interval: 20s
+      retries: 6
+      start_period: 1m30s
+    networks:
+      default: null
+    volumes:
+      - type: bind
+        source: /home/munaim/srv/apps/accrediops/frontend
+        target: /app
+        bind: {}
+      - type: volume
+        source: frontend_node_modules
+        target: /app/node_modules
+        volume: {}
+      - type: volume
+        source: frontend_next_cache
+        target: /app/.next
+        volume: {}
+    working_dir: /app
+networks:
+  default:
+    name: accrediops_default
+volumes:
+  caddy_config:
+    name: accrediops_caddy_config
+  caddy_data:
+    name: accrediops_caddy_data
+  frontend_next_cache:
+    name: accrediops_frontend_next_cache
+  frontend_node_modules:
+    name: accrediops_frontend_node_modules

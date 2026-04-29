@@ -1,0 +1,260 @@
+
+Running 10 tests using 2 workers
+
+  ✓   1 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (4.5s)
+  ✓   2 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (4.7s)
+  ✓   4 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead cannot see admin navigation section (4.0s)
+  ✓   3 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (5.5s)
+  ✘   6 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (4.9s)
+  ✘   7 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (retry #1) (3.8s)
+  ✓   8 tests/e2e/ui-clarity.spec.ts:5:7 › UI clarity › projects page exposes prominent create CTA and guidance (3.0s)
+  ✓   9 tests/e2e/ui-clarity.spec.ts:13:7 › UI clarity › indicator follows ordered workflow sections (4.4s)
+  ✘  10 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (3.5s)
+  ✘  11 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (retry #1) (3.9s)
+  ✓  12 tests/e2e/workflow-guidance.spec.ts:14:7 › Workflow guidance › worklist and recurring screens provide action guidance (4.2s)
+  ✘   5 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (1.1m)
+  ✘  13 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (retry #1) (1.1m)
+
+
+  1) tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Export history' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Export history' }) resolved to 2 elements:
+        1) <a href="/projects/136/exports" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Export History', exact: true })
+        2) <a href="/projects/136/exports" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-8 px-3 py-1.5 text-xs">Export history</a> aka getByRole('link', { name: 'Export history', exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Export history' })[22m
+
+
+      20 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      21 |     await expect(page.getByRole("link", { name: "Print pack preview" })).toBeVisible();
+    > 22 |     await expect(page.getByRole("link", { name: "Export history" })).toBeVisible();
+         |                                                                      ^
+      23 |     await page.getByRole("link", { name: "Print pack preview" }).click();
+      24 |     await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+      25 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:22:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Export history' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Export history' }) resolved to 2 elements:
+        1) <a href="/projects/137/exports" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Export History', exact: true })
+        2) <a href="/projects/137/exports" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-8 px-3 py-1.5 text-xs">Export history</a> aka getByRole('link', { name: 'Export history', exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Export history' })[22m
+
+
+      20 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      21 |     await expect(page.getByRole("link", { name: "Print pack preview" })).toBeVisible();
+    > 22 |     await expect(page.getByRole("link", { name: "Export history" })).toBeVisible();
+         |                                                                      ^
+      23 |     await page.getByRole("link", { name: "Print pack preview" }).click();
+      24 |     await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+      25 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:22:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Username')[22m
+    [2m    - locator resolved to <input value="" required="" autocomplete="username" class="h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"/>[22m
+    [2m    - fill("e2e_owner")[22m
+    [2m  - attempting fill action[22m
+    [2m    - waiting for element to be visible, enabled and editable[22m
+    [2m  - element was detached from the DOM, retrying[22m
+
+
+       at helpers.ts:19
+
+      17 | export async function login(page: Page, username: string, password = seededUser.password) {
+      18 |   await page.goto("/login");
+    > 19 |   await page.getByLabel("Username").fill(username);
+         |                                     ^
+      20 |   await page.getByLabel("Password").fill(password);
+      21 |   await page.getByRole("button", { name: "Sign in" }).click();
+      22 |   await expect(page).toHaveURL(/\/projects/);
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:19:37)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:29:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Username')[22m
+    [2m    - locator resolved to <input value="" required="" autocomplete="username" class="h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"/>[22m
+    [2m    - fill("e2e_owner")[22m
+    [2m  - attempting fill action[22m
+    [2m    - waiting for element to be visible, enabled and editable[22m
+    [2m  - element was detached from the DOM, retrying[22m
+
+
+       at helpers.ts:19
+
+      17 | export async function login(page: Page, username: string, password = seededUser.password) {
+      18 |   await page.goto("/login");
+    > 19 |   await page.getByLabel("Username").fill(username);
+         |                                     ^
+      20 |   await page.getByLabel("Password").fill(password);
+      21 |   await page.getByRole("button", { name: "Sign in" }).click();
+      22 |   await expect(page).toHaveURL(/\/projects/);
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:19:37)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:29:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-912ce-een-shows-guided-deny-state-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Operate indicators')
+    Expected: visible
+    Error: strict mode violation: getByText('Operate indicators') resolved to 2 elements:
+        1) <p class="mt-1">Use Operate indicators to execute evidence work, …</p> aka getByText('Use Operate indicators to')
+        2) <h3 class="text-sm font-semibold text-slate-950">Operate indicators</h3> aka getByRole('heading', { name: 'Operate indicators' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Operate indicators')[22m
+
+
+       7 |     await page.getByRole("link", { name: "Open project" }).first().click();
+       8 |     await expect(page.getByText("Next step guidance")).toBeVisible();
+    >  9 |     await expect(page.getByText("Operate indicators")).toBeVisible();
+         |                                                        ^
+      10 |     await expect(page.getByText("Review readiness")).toBeVisible();
+      11 |     await expect(page.getByText("Export and documentation")).toBeVisible();
+      12 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:9:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Operate indicators')
+    Expected: visible
+    Error: strict mode violation: getByText('Operate indicators') resolved to 2 elements:
+        1) <p class="mt-1">Use Operate indicators to execute evidence work, …</p> aka getByText('Use Operate indicators to')
+        2) <h3 class="text-sm font-semibold text-slate-950">Operate indicators</h3> aka getByRole('heading', { name: 'Operate indicators' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Operate indicators')[22m
+
+
+       7 |     await page.getByRole("link", { name: "Open project" }).first().click();
+       8 |     await expect(page.getByText("Next step guidance")).toBeVisible();
+    >  9 |     await expect(page.getByText("Operate indicators")).toBeVisible();
+         |                                                        ^
+      10 |     await expect(page.getByText("Review readiness")).toBeVisible();
+      11 |     await expect(page.getByText("Export and documentation")).toBeVisible();
+      12 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:9:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+    tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state 
+    tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+  7 passed (2.5m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

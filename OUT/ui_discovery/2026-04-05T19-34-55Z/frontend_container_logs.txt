@@ -1,0 +1,77 @@
+accrediops-frontend  | 
+accrediops-frontend  | up to date, audited 250 packages in 4s
+accrediops-frontend  | 
+accrediops-frontend  | 52 packages are looking for funding
+accrediops-frontend  |   run `npm fund` for details
+accrediops-frontend  | 
+accrediops-frontend  | 5 moderate severity vulnerabilities
+accrediops-frontend  | 
+accrediops-frontend  | To address all issues (including breaking changes), run:
+accrediops-frontend  |   npm audit fix --force
+accrediops-frontend  | 
+accrediops-frontend  | Run `npm audit` for details.
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 build
+accrediops-frontend  | > next build
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.14
+accrediops-frontend  | 
+accrediops-frontend  |    Creating an optimized production build ...
+accrediops-frontend  |  ✓ Compiled successfully in 35.6s
+accrediops-frontend  |    Linting and checking validity of types ...
+accrediops-frontend  |    Collecting page data ...
+accrediops-frontend  |    Generating static pages (0/17) ...
+accrediops-frontend  |    Generating static pages (4/17) 
+accrediops-frontend  |    Generating static pages (8/17) 
+accrediops-frontend  |    Generating static pages (12/17) 
+accrediops-frontend  |  ✓ Generating static pages (17/17)
+accrediops-frontend  |    Finalizing page optimization ...
+accrediops-frontend  |    Collecting build traces ...
+accrediops-frontend  | 
+accrediops-frontend  | Route (app)                                      Size  First Load JS
+accrediops-frontend  | ┌ ○ /                                           127 B         102 kB
+accrediops-frontend  | ├ ○ /_not-found                                 991 B         103 kB
+accrediops-frontend  | ├ ○ /admin                                    3.81 kB         127 kB
+accrediops-frontend  | ├ ○ /admin/audit                              5.36 kB         123 kB
+accrediops-frontend  | ├ ○ /admin/import-logs                        5.58 kB         123 kB
+accrediops-frontend  | ├ ○ /admin/masters/document-types               128 B         123 kB
+accrediops-frontend  | ├ ○ /admin/masters/evidence-types               128 B         123 kB
+accrediops-frontend  | ├ ○ /admin/masters/priorities                   128 B         123 kB
+accrediops-frontend  | ├ ○ /admin/masters/statuses                     128 B         123 kB
+accrediops-frontend  | ├ ○ /admin/overrides                          4.77 kB         122 kB
+accrediops-frontend  | ├ ○ /admin/system-health                      2.33 kB         120 kB
+accrediops-frontend  | ├ ○ /admin/users                              5.16 kB         123 kB
+accrediops-frontend  | ├ ƒ /frameworks/[id]/analysis                 2.65 kB         120 kB
+accrediops-frontend  | ├ ƒ /healthz                                    127 B         102 kB
+accrediops-frontend  | ├ ○ /login                                    5.38 kB         123 kB
+accrediops-frontend  | ├ ƒ /project-indicators/[id]                  12.3 kB         133 kB
+accrediops-frontend  | ├ ○ /projects                                 3.81 kB         132 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]                     3.87 kB         132 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/areas-progress      3.36 kB         121 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/client-profile      3.83 kB         127 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/exports              6.4 kB         124 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/inspection          3.83 kB         127 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/print-pack          4.19 kB         119 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/readiness           3.37 kB         126 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/recurring           3.71 kB         130 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/standards-progress   3.4 kB         121 kB
+accrediops-frontend  | └ ƒ /projects/[projectId]/worklist            6.76 kB         124 kB
+accrediops-frontend  | + First Load JS shared by all                  102 kB
+accrediops-frontend  |   ├ chunks/255-38b49df12a94ee57.js              46 kB
+accrediops-frontend  |   ├ chunks/4bd1b696-c023c6e3521b1417.js       54.2 kB
+accrediops-frontend  |   └ other shared chunks (total)               1.92 kB
+accrediops-frontend  | 
+accrediops-frontend  | 
+accrediops-frontend  | ○  (Static)   prerendered as static content
+accrediops-frontend  | ƒ  (Dynamic)  server-rendered on demand
+accrediops-frontend  | 
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 start
+accrediops-frontend  | > next start --hostname 0.0.0.0 --port 3000
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.14
+accrediops-frontend  |    - Local:        http://localhost:3000
+accrediops-frontend  |    - Network:      http://0.0.0.0:3000
+accrediops-frontend  | 
+accrediops-frontend  |  ✓ Starting...
+accrediops-frontend  |  ✓ Ready in 2s

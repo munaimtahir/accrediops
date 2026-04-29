@@ -2,49 +2,76 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 
 from apps.api.responses import success_response
-from apps.exports.services import build_print_bundle, export_validation_warnings, upsert_print_pack_items
+from apps.exports.services import (
+    build_print_bundle,
+    enforce_export_eligibility,
+    log_export_audit,
+    upsert_print_pack_items,
+)
 from apps.projects.models import AccreditationProject
+from apps.workflow.permissions import AdminOrLeadPermission
 
 
 class ProjectExcelExportView(APIView):
+    permission_classes = [AdminOrLeadPermission]
+
     def get(self, request, project_id):
         project = get_object_or_404(AccreditationProject, pk=project_id)
+        report = enforce_export_eligibility(project, "excel")
         upsert_print_pack_items(project)
         bundle = build_print_bundle(project)
-        warnings = export_validation_warnings(project)
+        log_export_audit(
+            project=project,
+            actor=request.user,
+            export_type="excel",
+            event_type="export.preview_generated",
+            details={"warning_count": len(report["warnings"])},
+        )
         return success_response(
             {
                 "format": "excel",
                 "project_id": project.id,
-                "status": "warning" if warnings else "ready",
+                "status": "ready",
                 "message": "Structured excel export payload generated.",
                 "bundle": bundle,
-                "warnings": warnings,
+                "warnings": [],
             }
         )
 
 
 class ProjectPrintBundleExportView(APIView):
+    permission_classes = [AdminOrLeadPermission]
+
     def get(self, request, project_id):
         project = get_object_or_404(AccreditationProject, pk=project_id)
+        report = enforce_export_eligibility(project, "print-bundle")
         upsert_print_pack_items(project)
         bundle = build_print_bundle(project)
-        warnings = export_validation_warnings(project)
+        log_export_audit(
+            project=project,
+            actor=request.user,
+            export_type="print-bundle",
+            event_type="export.preview_generated",
+            details={"warning_count": len(report["warnings"])},
+        )
         return success_response(
             {
                 "format": "print-bundle",
                 "project_id": project.id,
-                "status": "warning" if warnings else "ready",
+                "status": "ready",
                 "message": "Structured print bundle generated.",
                 "sections": bundle["sections"],
-                "warnings": warnings,
+                "warnings": [],
             }
         )
 
 
 class ProjectPhysicalRetrievalExportView(APIView):
+    permission_classes = [AdminOrLeadPermission]
+
     def get(self, request, project_id):
         project = get_object_or_404(AccreditationProject, pk=project_id)
+        enforce_export_eligibility(project, "physical-retrieval")
         upsert_print_pack_items(project)
         bundle = build_print_bundle(project)
         items = []
@@ -64,6 +91,13 @@ class ProjectPhysicalRetrievalExportView(APIView):
                                     "file_label": evidence["file_label"],
                                 }
                             )
+        log_export_audit(
+            project=project,
+            actor=request.user,
+            export_type="physical-retrieval",
+            event_type="export.preview_generated",
+            details={"item_count": len(items)},
+        )
         return success_response(
             {
                 "format": "physical-retrieval",

@@ -1,0 +1,59 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+(node:832197) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:832204) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 603ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 600ms
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 712ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 709ms
+ ✓ tests/indicator-drawer.test.tsx (1 test) 875ms
+   ✓ IndicatorDrawer > renders sections and opens actions/governance-focused controls in drawer context 871ms
+ ✓ tests/project-print-pack-screen.test.tsx (5 tests) 428ms
+(node:832349) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-list-screen.test.tsx (3 tests) 520ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 1822ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 973ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 846ms
+ ✓ tests/status-semantics.test.tsx (7 tests) 192ms
+ ✓ tests/project-workspace-board.test.tsx (1 test) 433ms
+   ✓ ProjectWorkspaceBoard > renders area-standard-indicator hierarchy and opens drawer from indicator card 429ms
+ ✓ tests/project-management-form.test.tsx (1 test) 816ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 813ms
+(node:832519) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 556ms
+   ✓ ProjectExportHistoryScreen > renders export history page 425ms
+(node:832560) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 427ms
+   ✓ ProjectWorklistScreen > renders filters and table 424ms
+ ✓ tests/sidebar.test.tsx (3 tests) 318ms
+(node:832681) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 295ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 231ms
+(node:832723) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 228ms
+(node:832745) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 220ms
+ ✓ tests/app-shell.test.tsx (1 test) 132ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 172ms
+ ✓ tests/evidence-form.test.tsx (1 test) 467ms
+   ✓ EvidenceForm > submits with physical evidence fields 464ms
+
+ Test Files  19 passed (19)
+      Tests  36 passed (36)
+   Start at  07:33:22
+   Duration  18.15s (transform 2.21s, setup 2.48s, collect 11.75s, tests 9.45s, environment 18.25s, prepare 3.18s)
+

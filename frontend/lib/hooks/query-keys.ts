@@ -10,8 +10,13 @@ export const queryKeys = {
   preInspection: (projectId: number | string) => ["projects", projectId, "pre-inspection-check"] as const,
   exportHistory: (projectId: number | string) => ["projects", projectId, "exports", "history"] as const,
   importLogs: ["admin", "import-logs"] as const,
+  adminFrameworks: ["admin", "frameworks"] as const,
   frameworks: ["frameworks"] as const,
+  frameworkTemplate: ["frameworks", "template"] as const,
+  frameworkExport: (frameworkId: number | string) => ["frameworks", frameworkId, "export"] as const,
   frameworkAnalysis: (frameworkId: number | string) => ["frameworks", frameworkId, "analysis"] as const,
+  frameworkClassification: (frameworkId: number | string, filters: object) =>
+    ["admin", "frameworks", frameworkId, "classification", filters] as const,
   project: (projectId: number | string) => ["projects", projectId] as const,
   worklist: <T extends object>(filters: T) => ["worklist", filters] as const,
   indicator: (indicatorId: number | string) => ["project-indicators", indicatorId] as const,

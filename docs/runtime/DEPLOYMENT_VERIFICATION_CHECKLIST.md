@@ -1,5 +1,7 @@
 # Deployment Verification Checklist
 
+Canonical origin for this stack: `http://127.0.0.1:18080` (or `http://localhost:18080`).
+
 1. `docker compose ps` shows `backend`, `frontend`, `caddy` up and healthy.
 2. `GET /health/frontend` returns JSON with `status=ok`.
 3. `GET /health/backend` returns JSON with `status=ok`.

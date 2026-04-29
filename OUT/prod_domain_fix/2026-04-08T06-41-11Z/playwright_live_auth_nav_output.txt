@@ -1,0 +1,16 @@
+
+> accrediops-frontend@0.1.0 test:e2e
+> playwright test -c playwright.config.ts --grep admin user can login and reach projects page|admin route access is available after login
+
+
+Running 2 tests using 2 workers
+
+  ✓  1 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (5.3s)
+  ✓  2 tests/e2e/core-journeys.spec.ts:151:7 › Core operational browser journeys › admin route access is available after login (5.2s)
+
+  2 passed (12.2s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

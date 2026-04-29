@@ -1,0 +1,33 @@
+ M frontend/components/common/empty-state.tsx
+ M frontend/components/layout/sidebar.tsx
+ M frontend/components/layout/topbar.tsx
+ M frontend/components/screens/admin-audit-screen.tsx
+ M frontend/components/screens/admin-dashboard-screen.tsx
+ M frontend/components/screens/admin-masters-screen.tsx
+ M frontend/components/screens/admin-overrides-screen.tsx
+ M frontend/components/screens/admin-users-screen.tsx
+ M frontend/components/screens/indicator-detail-screen.tsx
+ M frontend/components/screens/project-client-profile-screen.tsx
+ M frontend/components/screens/project-export-history-screen.tsx
+ M frontend/components/screens/project-inspection-screen.tsx
+ M frontend/components/screens/project-overview-screen.tsx
+ M frontend/components/screens/project-readiness-screen.tsx
+ M frontend/components/screens/project-recurring-screen.tsx
+ M frontend/components/screens/project-worklist-screen.tsx
+ M frontend/components/screens/projects-list-screen.tsx
+ M frontend/components/screens/system-health-screen.tsx
+ M frontend/next-env.d.ts
+ M frontend/tests/admin-dashboard-screen.test.tsx
+ M frontend/tests/app-shell.test.tsx
+ M frontend/tests/export-history-screen.test.tsx
+ M frontend/tests/inspection-screen.test.tsx
+ M frontend/tests/project-list-screen.test.tsx
+ M frontend/tests/project-overview-screen.test.tsx
+ M frontend/tests/recurring-screen.test.tsx
+ M frontend/tests/sidebar.test.tsx
+ M frontend/tests/worklist-screen.test.tsx
+ M frontend/tsconfig.json
+ M playwright-report/index.html
+?? OUT/ui_discovery/
+?? docs/_ui_discovery/
+?? frontend/.next_ui_discovery/

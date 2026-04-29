@@ -17,5 +17,5 @@ Primary script: `scripts/devops/smoke_verify.sh`
 
 Optional:
 ```bash
-BASE_URL=http://127.0.0.1:8080 ./scripts/devops/smoke_verify.sh
+BASE_URL=http://127.0.0.1:18080 ./scripts/devops/smoke_verify.sh
 ```

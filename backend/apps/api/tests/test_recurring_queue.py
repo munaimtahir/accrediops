@@ -1,5 +1,6 @@
 from django.utils import timezone
 
+from apps.accounts.models import User
 from apps.api.tests.base import ContractBaseTestCase
 from apps.indicators.services import assign_project_indicator
 from apps.recurring.services import generate_recurring_instances
@@ -72,3 +73,51 @@ class RecurringQueueTest(ContractBaseTestCase):
         )
         self.assertEqual(approve_response.status_code, 200)
         self.assertEqual(approve_response.json()["data"]["status"], "APPROVED")
+
+    def test_recurring_queue_capabilities(self):
+        project_indicators = self.initialize_project()
+        recurring_pi = project_indicators["IND-002"]
+        assign_project_indicator(
+            project_indicator=recurring_pi,
+            actor=self.admin,
+            owner=self.owner,
+            reviewer=self.reviewer,
+            approver=self.approver,
+        )
+        requirement = recurring_pi.recurring_requirement
+        generate_recurring_instances(
+            recurring_requirement=requirement,
+            actor=self.admin,
+            until_date=timezone.localdate(),
+        )
+        instance = requirement.instances.get(due_date=timezone.localdate())
+
+        # Test for assigned owner
+        self.client.force_authenticate(user=self.owner)
+        response = self.client.get(f"/api/recurring/queue/?project_id={self.project.id}")
+        self.assertEqual(response.status_code, 200)
+        instance_data = next((item for item in response.json()["data"] if item["id"] == instance.id), None)
+        self.assertIsNotNone(instance_data)
+        self.assertTrue(instance_data["capabilities"]["can_submit"])
+        self.assertFalse(instance_data["capabilities"]["can_approve"])
+
+        # Test for assigned reviewer
+        self.client.force_authenticate(user=self.reviewer)
+        response = self.client.get(f"/api/recurring/queue/?project_id={self.project.id}")
+        self.assertEqual(response.status_code, 200)
+        instance_data = next((item for item in response.json()["data"] if item["id"] == instance.id), None)
+        self.assertIsNotNone(instance_data)
+        self.assertFalse(instance_data["capabilities"]["can_submit"])
+        self.assertTrue(instance_data["capabilities"]["can_approve"])
+
+        # Test for another user (e.g. another owner, who is not assigned)
+        other_owner = User.objects.create_user(
+            username="otherowner", password="x", first_name="Other", last_name="Owner", role="OWNER"
+        )
+        self.client.force_authenticate(user=other_owner)
+        response = self.client.get(f"/api/recurring/queue/?project_id={self.project.id}")
+        self.assertEqual(response.status_code, 200)
+        instance_data = next((item for item in response.json()["data"] if item["id"] == instance.id), None)
+        self.assertIsNotNone(instance_data)
+        self.assertFalse(instance_data["capabilities"]["can_submit"])
+        self.assertFalse(instance_data["capabilities"]["can_approve"])

@@ -1,15 +1,28 @@
 from django.urls import path
 
 from apps.api.views.auth import AuthLoginView, AuthLogoutView, AuthSessionView
-from apps.api.views.system import BackendHealthView
+from apps.api.views.system import AIHealthView, AITestConnectionView, BackendHealthView
 from apps.api.views.admin import (
     AdminDashboardView,
+    FrameworkAdminListCreateView,
+    FrameworkClassificationBulkReviewView,
+    FrameworkClassificationView,
+    FrameworkClassifyIndicatorsView,
+    FrameworkImportCreateView,
     AdminUserUpdateView,
+    AdminUserPasswordResetView,
     AdminUsersView,
+    AIUsageLogListView,
     AuditLogView,
+    DocumentGenerationQueueView,
+    DocumentDraftGenerateView,
+    DocumentDraftListCreateView,
+    DocumentDraftPromoteToEvidenceView,
+    DocumentDraftRetrieveUpdateView,
     ExportGenerateView,
     ExportHistoryView,
     FrameworkImportValidateView,
+    IndicatorClassificationUpdateView,
     ImportLogListView,
     MasterValueListCreateView,
     MasterValueUpdateView,
@@ -30,6 +43,7 @@ from apps.api.views.exports import (
     ProjectPrintBundleExportView,
 )
 from apps.api.views.frameworks import FrameworkAnalysisView, FrameworkListView
+from apps.api.views.frameworks import FrameworkTemplateView, FrameworkExportView
 from apps.api.views.project_indicators import (
     ProjectIndicatorAssignView,
     ProjectIndicatorDetailView,
@@ -38,6 +52,7 @@ from apps.api.views.project_indicators import (
     ProjectIndicatorSendForReviewView,
     ProjectIndicatorStartView,
     ProjectIndicatorUpdateWorkingStateView,
+    ProjectIndicatorsForProjectListView, # Imported this view
 )
 from apps.api.views.projects import (
     AreasProgressView,
@@ -58,25 +73,50 @@ from apps.api.views.users import (
     ClientProfileListCreateView,
     ClientProfileRetrieveUpdateView,
     ClientProfileVariablesPreviewView,
-    UserListView,
+    UserListCreateView,
 )
 
 
 urlpatterns = [
     path("api/health/", BackendHealthView.as_view(), name="api-health"),
+    path("api/admin/ai/health/", AIHealthView.as_view(), name="admin-ai-health"),
+    path("api/admin/ai/test-connection/", AITestConnectionView.as_view(), name="admin-ai-test-connection"),
     path("api/auth/session/", AuthSessionView.as_view(), name="auth-session"),
     path("api/auth/login/", AuthLoginView.as_view(), name="auth-login"),
     path("api/auth/logout/", AuthLogoutView.as_view(), name="auth-logout"),
-    path("api/users/", UserListView.as_view(), name="user-list"),
+    path("api/users/", UserListCreateView.as_view(), name="user-list"),
     path("api/admin/dashboard/", AdminDashboardView.as_view(), name="admin-dashboard"),
     path("api/admin/masters/<str:key>/", MasterValueListCreateView.as_view(), name="admin-master-list-create"),
     path("api/admin/masters/<str:key>/<int:pk>/", MasterValueUpdateView.as_view(), name="admin-master-update"),
     path("api/admin/users/", AdminUsersView.as_view(), name="admin-users"),
     path("api/admin/users/<int:pk>/", AdminUserUpdateView.as_view(), name="admin-user-update"),
+    path("api/admin/users/<int:pk>/password/", AdminUserPasswordResetView.as_view(), name="admin-user-password-reset"),
     path("api/audit/", AuditLogView.as_view(), name="audit-log"),
     path("api/admin/overrides/", ReopenOverridesView.as_view(), name="admin-overrides"),
     path("api/admin/import/validate-framework/", FrameworkImportValidateView.as_view(), name="framework-import-validate"),
     path("api/admin/import/logs/", ImportLogListView.as_view(), name="import-log-list"),
+    path("api/admin/ai/usage/", AIUsageLogListView.as_view(), name="admin-ai-usage"),
+    path("api/admin/queues/document-generation/", DocumentGenerationQueueView.as_view(), name="admin-queue-document-generation"),
+    path(
+        "api/admin/queues/document-generation/<int:indicator_id>/generate-draft/",
+        DocumentDraftGenerateView.as_view(),
+        name="admin-document-draft-generate",
+    ),
+    path(
+        "api/admin/document-drafts/",
+        DocumentDraftListCreateView.as_view(),
+        name="admin-document-drafts",
+    ),
+    path(
+        "api/admin/document-drafts/<int:pk>/",
+        DocumentDraftRetrieveUpdateView.as_view(),
+        name="admin-document-draft-detail",
+    ),
+    path(
+        "api/admin/document-drafts/<int:pk>/promote-to-evidence/",
+        DocumentDraftPromoteToEvidenceView.as_view(),
+        name="admin-document-draft-promote-to-evidence",
+    ),
     path("api/client-profiles/", ClientProfileListCreateView.as_view(), name="client-profile-list-create"),
     path("api/client-profiles/<int:pk>/", ClientProfileRetrieveUpdateView.as_view(), name="client-profile-detail"),
     path(
@@ -86,7 +126,31 @@ urlpatterns = [
     ),
     path("api/projects/", ProjectListCreateView.as_view(), name="project-list-create"),
     path("api/frameworks/", FrameworkListView.as_view(), name="framework-list"),
+    path("api/frameworks/template/", FrameworkTemplateView.as_view(), name="framework-template"),
+    path("api/frameworks/<int:framework_id>/export/", FrameworkExportView.as_view(), name="framework-export"),
     path("api/frameworks/<int:framework_id>/analysis/", FrameworkAnalysisView.as_view(), name="framework-analysis"),
+    path("api/admin/frameworks/", FrameworkAdminListCreateView.as_view(), name="admin-frameworks"),
+    path("api/admin/frameworks/import/", FrameworkImportCreateView.as_view(), name="admin-frameworks-import"),
+    path(
+        "api/admin/frameworks/<int:framework_id>/classification/",
+        FrameworkClassificationView.as_view(),
+        name="admin-framework-classification",
+    ),
+    path(
+        "api/admin/frameworks/<int:framework_id>/classify-indicators/",
+        FrameworkClassifyIndicatorsView.as_view(),
+        name="admin-framework-classify-indicators",
+    ),
+    path(
+        "api/admin/frameworks/<int:framework_id>/classification/bulk-review/",
+        FrameworkClassificationBulkReviewView.as_view(),
+        name="admin-framework-classification-bulk-review",
+    ),
+    path(
+        "api/admin/indicators/<int:indicator_id>/classification/",
+        IndicatorClassificationUpdateView.as_view(),
+        name="admin-indicator-classification-update",
+    ),
     path("api/projects/<int:pk>/", ProjectRetrieveUpdateView.as_view(), name="project-detail"),
     path(
         "api/projects/<int:project_id>/initialize-from-framework/",
@@ -94,6 +158,7 @@ urlpatterns = [
         name="project-initialize-from-framework",
     ),
     path("api/projects/<int:project_id>/clone/", ProjectCloneView.as_view(), name="project-clone"),
+    path("api/projects/<int:project_id>/project-indicators/", ProjectIndicatorsForProjectListView.as_view(), name="project-indicators-for-project"),
     path("api/projects/<int:project_id>/readiness/", ProjectReadinessView.as_view(), name="project-readiness"),
     path("api/projects/<int:project_id>/inspection-view/", ProjectInspectionView.as_view(), name="project-inspection-view"),
     path(

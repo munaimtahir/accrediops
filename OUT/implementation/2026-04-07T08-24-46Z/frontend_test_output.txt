@@ -1,0 +1,59 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/project-print-pack-screen.test.tsx (5 tests) 628ms
+   ✓ ProjectPrintPackScreen > shows empty state with context links before generation 347ms
+(node:3603552) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 842ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 839ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 2749ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 1737ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 1007ms
+ ✓ tests/status-semantics.test.tsx (7 tests) 189ms
+ ✓ tests/project-management-form.test.tsx (1 test) 821ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 819ms
+(node:3603806) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-list-screen.test.tsx (2 tests) 492ms
+   ✓ ProjectsListScreen > renders project list 374ms
+(node:3603828) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 445ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 441ms
+(node:3603869) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 534ms
+   ✓ ProjectExportHistoryScreen > renders export history page 391ms
+ ✓ tests/sidebar.test.tsx (3 tests) 648ms
+   ✓ Sidebar > shows admin and export links for admin users 307ms
+(node:3603913) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 329ms
+   ✓ ProjectReadinessScreen > renders orientation and readiness metrics 309ms
+(node:3604075) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 380ms
+   ✓ ProjectWorklistScreen > renders filters and table 377ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 296ms
+(node:3604209) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 297ms
+(node:3604256) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 255ms
+ ✓ tests/app-shell.test.tsx (1 test) 196ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 211ms
+ ✓ tests/evidence-form.test.tsx (1 test) 452ms
+   ✓ EvidenceForm > submits with physical evidence fields 449ms
+
+ Test Files  17 passed (17)
+      Tests  33 passed (33)
+   Start at  08:51:11
+   Duration  20.84s (transform 2.81s, setup 2.57s, collect 14.25s, tests 9.76s, environment 20.61s, prepare 4.13s)
+

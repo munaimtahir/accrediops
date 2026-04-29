@@ -1,0 +1,6 @@
+projects 0
+project_indicators 0
+evidence 0
+recurring_requirements 0
+recurring_instances 0
+fk_violations 0

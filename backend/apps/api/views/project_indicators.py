@@ -21,9 +21,18 @@ from apps.indicators.services import (
     update_project_indicator_working_state,
     validate_project_indicator_readiness,
 )
+from apps.workflow.permissions import (
+    ExplicitAuthenticatedPermission,
+    ensure_admin_access,
+    ensure_admin_or_lead_access,
+    ensure_project_approver_access,
+    ensure_project_owner_access,
+)
 
 
 class ProjectIndicatorDetailView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def get(self, request, pk):
         project_indicator = get_object_or_404(
             ProjectIndicator.objects.select_related(
@@ -48,6 +57,7 @@ class ProjectIndicatorDetailView(APIView):
         serializer = ProjectIndicatorDetailSerializer(
             project_indicator,
             context={
+                "request": request,
                 "readiness_flags": validate_project_indicator_readiness(project_indicator),
                 "audit_summary": recent_audit_summary(project_indicator),
             },
@@ -56,8 +66,11 @@ class ProjectIndicatorDetailView(APIView):
 
 
 class ProjectIndicatorAssignView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_admin_or_lead_access(request.user)
         serializer = AssignProjectIndicatorSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = assign_project_indicator(
@@ -69,8 +82,11 @@ class ProjectIndicatorAssignView(APIView):
 
 
 class ProjectIndicatorUpdateWorkingStateView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_project_owner_access(request.user, project_indicator)
         serializer = UpdateWorkingStateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = update_project_indicator_working_state(
@@ -82,8 +98,11 @@ class ProjectIndicatorUpdateWorkingStateView(APIView):
 
 
 class ProjectIndicatorStartView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_project_owner_access(request.user, project_indicator)
         serializer = WorkflowActionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = start_project_indicator(
@@ -95,8 +114,11 @@ class ProjectIndicatorStartView(APIView):
 
 
 class ProjectIndicatorSendForReviewView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_project_owner_access(request.user, project_indicator)
         serializer = WorkflowActionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = send_project_indicator_for_review(
@@ -108,8 +130,11 @@ class ProjectIndicatorSendForReviewView(APIView):
 
 
 class ProjectIndicatorMarkMetView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_project_approver_access(request.user, project_indicator)
         serializer = WorkflowActionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = mark_project_indicator_met(
@@ -121,8 +146,11 @@ class ProjectIndicatorMarkMetView(APIView):
 
 
 class ProjectIndicatorReopenView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def post(self, request, pk):
         project_indicator = get_object_or_404(ProjectIndicator, pk=pk)
+        ensure_admin_access(request.user)
         serializer = ReopenWorkflowActionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         project_indicator = reopen_project_indicator(

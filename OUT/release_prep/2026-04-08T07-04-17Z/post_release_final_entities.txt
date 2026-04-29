@@ -1,0 +1,8 @@
+users [(10, 'admin', 'ADMIN', True), (21, 'munaim', 'OWNER', True)]
+projects []
+frameworks [(1, 'Hospital Accreditation')]
+areas [(1, 'A6104', 'Patient Safety', 1)]
+standards [(1, 'S6104', 'Medication Governance', 1)]
+indicators [(1, 'IND-6104', False, True), (2, 'RIND-6104', True, True)]
+audit_count 0
+admin_log_count 5

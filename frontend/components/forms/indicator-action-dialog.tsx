@@ -46,16 +46,17 @@ export function IndicatorActionDialog({
   return (
     <Modal open={open} title={title} description={description} onClose={onClose}>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <label className="space-y-2 text-sm">
-          <span className="font-medium text-slate-700">
+        <div className="space-y-2 text-sm">
+          <label htmlFor="action-reason" className="font-medium text-slate-700">
             {reasonRequired ? "Reason" : "Reason or operator note"}
-          </span>
+          </label>
           <Textarea
+            id="action-reason"
             value={reason}
             onChange={(event) => setReason(event.target.value)}
             required={reasonRequired}
           />
-        </label>
+        </div>
         <div className="flex justify-end gap-2">
           <Button type="button" variant="secondary" onClick={onClose}>
             Cancel

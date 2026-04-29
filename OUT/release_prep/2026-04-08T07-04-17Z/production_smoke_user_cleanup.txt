@@ -1,0 +1,1 @@
+smoke_user_deleted=release_smoke_admin

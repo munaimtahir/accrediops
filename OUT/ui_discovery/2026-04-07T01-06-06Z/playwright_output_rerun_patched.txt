@@ -1,0 +1,18 @@
+
+Running 8 tests using 2 workers
+
+  ✓  1 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (4.8s)
+  ✓  2 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (4.7s)
+  ✓  4 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead cannot see admin navigation section (5.0s)
+  ✓  3 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (5.4s)
+  ✓  5 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (6.5s)
+  ✓  6 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (6.7s)
+  ✓  7 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (3.4s)
+  ✓  8 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (4.0s)
+
+  8 passed (30.7s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

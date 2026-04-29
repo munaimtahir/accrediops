@@ -74,11 +74,11 @@ export function CreateProjectForm({
           },
         });
         pushToast(
-          `Project created and initialized (${initResult.created_project_indicators} indicators).`,
+          `Project created and initialized (${initResult.created_project_indicators} indicators). Next Action: open worklist to assign owners and start evidence collection.`,
           "success",
         );
       } else {
-        pushToast("Project created as draft.", "success");
+        pushToast("Project created as draft. Next Action: initialize from framework when ready.", "success");
       }
 
       onSuccess?.(project.id);

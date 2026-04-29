@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] tests/e2e/ui-clarity.spec.ts:5:7 › UI clarity › projects page exposes prominent create CTA and guidance
+[1A[2K[2/2] tests/e2e/ui-clarity.spec.ts:14:7 › UI clarity › indicator follows ordered workflow sections
+[1A[2K  2 passed (13.4s)

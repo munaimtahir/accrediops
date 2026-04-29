@@ -1,0 +1,36 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+ ✓ tests/project-management-form.test.tsx (1 test) 779ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 777ms
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 1415ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 1405ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 3240ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 1225ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 2007ms
+ ✓ tests/project-list-screen.test.tsx (2 tests) 380ms
+ ✓ tests/project-overview-screen.test.tsx (1 test) 465ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 459ms
+ ✓ tests/export-history-screen.test.tsx (2 tests) 516ms
+   ✓ ProjectExportHistoryScreen > renders export history page 363ms
+ ✓ tests/worklist-screen.test.tsx (1 test) 412ms
+   ✓ ProjectWorklistScreen > renders filters and table 406ms
+ ✓ tests/sidebar.test.tsx (2 tests) 299ms
+ ✓ tests/app-shell.test.tsx (1 test) 148ms
+ ✓ tests/recurring-screen.test.tsx (1 test) 266ms
+ ✓ tests/inspection-screen.test.tsx (1 test) 329ms
+   ✓ ProjectInspectionScreen > renders inspection mode 323ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 430ms
+   ✓ AdminDashboardScreen > renders admin metrics 428ms
+ ✓ tests/evidence-form.test.tsx (1 test) 491ms
+   ✓ EvidenceForm > submits with physical evidence fields 488ms
+
+ Test Files  13 passed (13)
+      Tests  17 passed (17)
+   Start at  22:08:07
+   Duration  16.00s (transform 1.80s, setup 1.76s, collect 9.24s, tests 9.17s, environment 14.71s, prepare 3.89s)
+

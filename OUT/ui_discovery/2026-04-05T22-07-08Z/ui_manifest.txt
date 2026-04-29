@@ -1,0 +1,25 @@
+UI/UX Follow-up Sprint Manifest
+Timestamp: 2026-04-05T22-07-08Z
+
+Docs created
+- docs/_ui_discovery/2026-04-05T22-07-08Z/06_ui_improvement_plan.md
+- docs/_ui_discovery/2026-04-05T22-07-08Z/07_final_ui_verdict.md
+
+Outputs captured
+- OUT/ui_discovery/2026-04-05T22-07-08Z/frontend_test_output.txt
+- OUT/ui_discovery/2026-04-05T22-07-08Z/frontend_build_output.txt
+- OUT/ui_discovery/2026-04-05T22-07-08Z/playwright_output.txt
+- OUT/ui_discovery/2026-04-05T22-07-08Z/ui_review_notes.txt
+- OUT/ui_discovery/2026-04-05T22-07-08Z/ui_manifest.txt
+
+Verification status
+- Unit/integration tests: pass
+- Frontend build: pass
+- Targeted Playwright governance/workflow journeys: pass
+
+Primary UX risk closures implemented
+- Indicator progressive disclosure finalized with section navigation and focused panel rendering.
+- Inline permission clarity expanded for evidence, recurring, and command sections.
+- Role-aware onboarding callouts normalized across major operational screens.
+- Indicator recurring modal evidence linkage improved with evidence selector dropdown.
+- Playwright selectors hardened to match updated UI hierarchy and avoid strict-mode ambiguity.

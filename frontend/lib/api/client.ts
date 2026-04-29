@@ -7,6 +7,7 @@ import {
 import { compactObject } from "@/utils/query";
 
 const DEFAULT_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+export const AUTH_REQUIRED_EVENT = "accrediops:auth-required";
 
 export class ApiClientError extends Error {
   code: string;
@@ -57,11 +58,29 @@ function getCsrfToken() {
   return match ? decodeURIComponent(match[1]) : "";
 }
 
-async function parseResponse<T>(response: Response): Promise<T> {
+function notifyAuthRequired(nextPath: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+  const fallbackPath = `${window.location.pathname}${window.location.search}` || "/projects";
+  const targetPath = nextPath.startsWith("/") ? nextPath : fallbackPath;
+  window.dispatchEvent(
+    new CustomEvent(AUTH_REQUIRED_EVENT, {
+      detail: {
+        nextPath: targetPath,
+      },
+    }),
+  );
+}
+
+async function parseResponse<T>(response: Response, path: string): Promise<T> {
   const contentType = response.headers.get("content-type") ?? "";
   const body = contentType.includes("application/json") ? await response.json() : null;
 
   if (!response.ok) {
+    if (response.status === 401) {
+      notifyAuthRequired(typeof window !== "undefined" ? `${window.location.pathname}${window.location.search}` : path);
+    }
     const errorEnvelope = body as ApiErrorEnvelope | null;
     const error: ApiErrorPayload | undefined = errorEnvelope?.error;
     throw new ApiClientError(error?.message ?? "Request failed.", {
@@ -90,8 +109,9 @@ async function request<T>(
 ): Promise<T> {
   const method = init.method ?? "GET";
   const headers = new Headers(init.headers);
+  const isFormData = typeof FormData !== "undefined" && init.body instanceof FormData;
 
-  if (!headers.has("Content-Type") && init.body) {
+  if (!headers.has("Content-Type") && init.body && !isFormData) {
     headers.set("Content-Type", "application/json");
   }
 
@@ -106,9 +126,10 @@ async function request<T>(
     ...init,
     headers,
     credentials: "include",
+    cache: "no-store",
   });
 
-  return parseResponse<T>(response);
+  return parseResponse<T>(response, path);
 }
 
 export const apiClient = {
@@ -122,6 +143,15 @@ export const apiClient = {
       },
       params,
     ),
+  postForm: <T>(path: string, body: FormData, params?: object) =>
+    request<T>(
+      path,
+      {
+        method: "POST",
+        body,
+      },
+      params,
+    ),
   patch: <T>(path: string, body?: unknown, params?: object) =>
     request<T>(
       path,
@@ -131,6 +161,7 @@ export const apiClient = {
       },
       params,
     ),
+  delete: <T>(path: string, params?: object) => request<T>(path, { method: "DELETE" }, params),
 };
 
 export function isPaginatedResult<T>(value: T | PaginatedResult<unknown>): value is PaginatedResult<unknown> {

@@ -1,7 +1,9 @@
 import re
 
+from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 
+from apps.audit.services import log_audit_event, snapshot_instance
 from apps.evidence.models import EvidenceItem
 from apps.exports.models import ExportJob, ImportLog, PrintPackItem
 from apps.projects.models import AccreditationProject
@@ -194,18 +196,96 @@ def export_validation_warnings(project: AccreditationProject) -> list[dict]:
     return warnings
 
 
-def create_export_job(*, project: AccreditationProject, actor, export_type: str, parameters: dict | None = None) -> ExportJob:
+def export_eligibility_report(project: AccreditationProject, export_type: str) -> dict:
+    from apps.exports.services_admin import project_readiness
+
+    readiness = project_readiness(project)
     warnings = export_validation_warnings(project)
-    status = "READY" if not warnings else "WARNING"
-    return ExportJob.objects.create(
+    pending_indicators = list(
+        project.project_indicators.select_related("indicator")
+        .exclude(current_status="MET")
+        .order_by("indicator__code")
+    )
+    reasons: list[str] = []
+
+    if pending_indicators:
+        pending_preview = ", ".join(item.indicator.code for item in pending_indicators[:3])
+        reasons.append(
+            f"project has {len(pending_indicators)} indicator(s) still pending approval or completion ({pending_preview})."
+        )
+    if readiness["high_risk_indicators"]:
+        reasons.append(
+            f"project has {len(readiness['high_risk_indicators'])} critical high-risk indicator(s) pending."
+        )
+    if readiness["recurring_compliance_score"] < 100:
+        reasons.append(
+            f"recurring compliance is {readiness['recurring_compliance_score']}% and must be 100%."
+        )
+    if warnings:
+        reasons.append(
+            f"approval completeness is not satisfied for {len(warnings)} indicator(s)."
+        )
+
+    return {
+        "eligible": not reasons,
+        "export_type": export_type,
+        "project_id": project.id,
+        "readiness": readiness,
+        "warnings": warnings,
+        "pending_indicator_count": len(pending_indicators),
+        "reasons": reasons,
+    }
+
+
+def enforce_export_eligibility(project: AccreditationProject, export_type: str) -> dict:
+    report = export_eligibility_report(project, export_type)
+    if report["eligible"]:
+        return report
+    raise PermissionDenied(f"Export blocked: {' '.join(report['reasons'])}")
+
+
+def log_export_audit(*, project: AccreditationProject, actor, export_type: str, event_type: str, details: dict | None = None):
+    payload = {
+        "project_id": project.id,
+        "export_type": export_type,
+        **(details or {}),
+    }
+    return log_audit_event(
+        actor=actor,
+        event_type=event_type,
+        obj=project,
+        before=None,
+        after=payload,
+        reason=export_type,
+    )
+
+
+def create_export_job(*, project: AccreditationProject, actor, export_type: str, parameters: dict | None = None) -> ExportJob:
+    report = enforce_export_eligibility(project, export_type)
+    job = ExportJob.objects.create(
         project=project,
         type=export_type,
         created_by=actor if getattr(actor, "is_authenticated", False) else None,
-        status=status,
+        status="READY",
         file_name=f"{project.name}-{export_type}.json",
-        parameters=parameters or {},
-        warnings=warnings,
+        parameters={
+            **(parameters or {}),
+            "eligibility_snapshot": {
+                "pending_indicator_count": report["pending_indicator_count"],
+                "reasons": report["reasons"],
+            },
+        },
+        warnings=[],
     )
+    log_audit_event(
+        actor=actor,
+        event_type="export.job_created",
+        obj=job,
+        before=None,
+        after=snapshot_instance(job),
+        reason=export_type,
+    )
+    return job
 
 
 def validate_framework_import_rows(rows: list[dict]) -> dict:

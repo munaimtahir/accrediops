@@ -1,0 +1,16 @@
+UI Discovery Sprint
+Timestamp: 2026-04-05T19-34-55Z
+
+Verification summary
+- frontend build: pass
+- frontend tests: pass
+- playwright targeted: pass
+
+Manual review notes
+- Create Project CTA is visible in Projects header with role guidance banner and empty-state CTA.
+- Project Overview now uses a 3-card workflow grouping (Operate / Review readiness / Export).
+- Sidebar now has Operational / Current project / Admin groups plus "Viewing as ROLE" context.
+- Worklist includes usage guidance and clear-filters actions.
+- Recurring submission supports evidence dropdown when indicator evidence exists.
+- Inspection and Readiness screens now include actionable navigation to worklist/recurring.
+- Export, indicator command buttons, and management actions now provide permission rationale via titles and copy.

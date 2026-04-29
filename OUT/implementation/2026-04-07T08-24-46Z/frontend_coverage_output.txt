@@ -1,0 +1,230 @@
+
+> accrediops-frontend@0.1.0 test:coverage
+> vitest run --coverage
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+      Coverage enabled with v8
+
+ ✓ tests/project-print-pack-screen.test.tsx (5 tests) 1034ms
+   ✓ ProjectPrintPackScreen > shows empty state with context links before generation 487ms
+(node:3604553) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 1820ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 1811ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 4895ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 2957ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 1930ms
+ ✓ tests/status-semantics.test.tsx (7 tests) 583ms
+   ✓ status semantics components > renders badge label and meaning tooltip from tone 305ms
+ ✓ tests/project-management-form.test.tsx (1 test) 2058ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 2047ms
+ ✓ tests/project-list-screen.test.tsx (2 tests) 945ms
+   ✓ ProjectsListScreen > renders project list 754ms
+(node:3605406) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3605604) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 908ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 904ms
+(node:3605722) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 636ms
+   ✓ ProjectExportHistoryScreen > renders export history page 440ms
+ ✓ tests/sidebar.test.tsx (3 tests) 539ms
+(node:3605925) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 766ms
+   ✓ ProjectReadinessScreen > renders orientation and readiness metrics 720ms
+(node:3605947) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 985ms
+   ✓ ProjectWorklistScreen > renders filters and table 979ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 340ms
+   ✓ WorkflowContextStrip > renders context, next step, role hint, and navigation actions 333ms
+(node:3606104) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 525ms
+   ✓ ProjectInspectionScreen > renders inspection mode 519ms
+(node:3606269) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 386ms
+   ✓ ProjectRecurringScreen > renders recurring queue 380ms
+ ✓ tests/app-shell.test.tsx (1 test) 271ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 864ms
+   ✓ AdminDashboardScreen > renders admin metrics 858ms
+ ✓ tests/evidence-form.test.tsx (1 test) 596ms
+   ✓ EvidenceForm > submits with physical evidence fields 593ms
+
+ Test Files  17 passed (17)
+      Tests  33 passed (33)
+   Start at  08:51:34
+   Duration  33.78s (transform 3.50s, setup 4.00s, collect 18.12s, tests 18.15s, environment 29.10s, prepare 5.17s)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   50.12 |    45.95 |   23.83 |   50.12 |                   
+ frontend          |       0 |       50 |      50 |       0 |                   
+  next.config.ts   |       0 |      100 |     100 |       0 | 3-31              
+  ...ght.config.ts |       0 |        0 |       0 |       0 | 1-19              
+  ...css.config.js |       0 |        0 |       0 |       0 | 1-6               
+  ...ind.config.ts |       0 |      100 |     100 |       0 | 3-36              
+ frontend/app      |       0 |        0 |       0 |       0 |                   
+  layout.tsx       |       0 |        0 |       0 |       0 | 1-37              
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...pp/(workbench) |       0 |        0 |       0 |       0 |                   
+  layout.tsx       |       0 |        0 |       0 |       0 | 1-12              
+ ...rkbench)/admin |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...h)/admin/audit |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...in/import-logs |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...document-types |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...evidence-types |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...ers/priorities |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...sters/statuses |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...dmin/overrides |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ .../system-health |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...h)/admin/users |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ .../[id]/analysis |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...ndicators/[id] |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...ench)/projects |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-5               
+ ...ts/[projectId] |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...areas-progress |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...client-profile |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...ectId]/exports |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...Id]/inspection |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...Id]/print-pack |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...tId]/readiness |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-10              
+ ...tId]/recurring |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...dards-progress |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...ctId]/worklist |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-11              
+ ...nd/app/healthz |       0 |        0 |       0 |       0 |                   
+  route.ts         |       0 |        0 |       0 |       0 | 1-8               
+ ...tend/app/login |       0 |        0 |       0 |       0 |                   
+  page.tsx         |       0 |        0 |       0 |       0 | 1-18              
+ ...ponents/badges |    92.3 |    66.66 |     100 |    92.3 |                   
+  ...ity-badge.tsx |     100 |      100 |     100 |     100 |                   
+  ...ing-badge.tsx |   73.68 |    33.33 |     100 |   73.68 | 20-24             
+  risk-badge.tsx   |     100 |      100 |     100 |     100 |                   
+  status-badge.tsx |     100 |      100 |     100 |     100 |                   
+ ...ponents/common |   83.37 |    78.84 |   72.72 |   83.37 |                   
+  empty-state.tsx  |     100 |      100 |     100 |     100 |                   
+  error-panel.tsx  |     100 |      100 |     100 |     100 |                   
+  filter-bar.tsx   |     100 |      100 |     100 |     100 |                   
+  ...us-legend.tsx |     100 |      100 |     100 |     100 |                   
+  ...-skeleton.tsx |     100 |      100 |     100 |     100 |                   
+  metric-card.tsx  |     100 |       50 |     100 |     100 | 18                
+  modal.tsx        |   77.77 |    33.33 |     100 |   77.77 | 24-29             
+  ...g-callout.tsx |   74.41 |       50 |      50 |   74.41 | 25,29-30,43-50    
+  page-header.tsx  |      95 |       60 |     100 |      95 | 19                
+  ...-controls.tsx |     100 |      100 |   33.33 |     100 |                   
+  ...sion-hint.tsx |     100 |      100 |     100 |     100 |                   
+  ...tic-badge.tsx |     100 |      100 |     100 |     100 |                   
+  toaster.tsx      |   20.83 |    66.66 |      50 |   20.83 | 21-39,42-66,77-78 
+  user-pill.tsx    |      25 |      100 |       0 |      25 | 5-11              
+  ...nch-table.tsx |     100 |     87.5 |     100 |     100 | 55                
+  ...ext-strip.tsx |   97.05 |       80 |     100 |   97.05 | 47                
+ ...mponents/forms |   52.92 |    56.33 |    41.3 |   52.92 |                   
+  ...ment-form.tsx |    2.72 |      100 |       0 |    2.72 | 17-23,26-137      
+  ...file-form.tsx |       0 |        0 |       0 |       0 | 1-115             
+  ...ject-form.tsx |    5.55 |      100 |       0 |    5.55 | 12-51             
+  ...ject-form.tsx |   94.52 |       76 |   69.23 |   94.52 | ...2,95-96,99-100 
+  ...ence-form.tsx |   98.54 |     37.5 |   38.46 |   98.54 | 76-77             
+  ...view-form.tsx |    5.95 |      100 |       0 |    5.95 | 32-118            
+  ...on-dialog.tsx |   79.16 |      100 |   33.33 |   79.16 | 34-44             
+  ...ment-form.tsx |   93.75 |       50 |   36.36 |   93.75 | ...68,71-72,75-76 
+  ...tate-form.tsx |    5.66 |      100 |       0 |    5.66 | 16-75             
+ ...ponents/layout |   85.58 |    38.46 |      80 |   85.58 |                   
+  app-shell.tsx    |     100 |      100 |     100 |     100 |                   
+  sidebar.tsx      |   96.63 |       75 |     100 |   96.63 | 88,111,136,152    
+  topbar.tsx       |   68.88 |     9.09 |   66.66 |   68.88 | ...4-76,82-95,101 
+ ...ents/providers |       0 |        0 |       0 |       0 |                   
+  ...providers.tsx |       0 |        0 |       0 |       0 | 1-30              
+  auth-guard.tsx   |       0 |        0 |       0 |       0 | 1-55              
+ ...onents/screens |    53.8 |    36.27 |   14.86 |    53.8 |                   
+  ...it-screen.tsx |       0 |        0 |       0 |       0 | 1-68              
+  ...rd-screen.tsx |   91.48 |       10 |   14.28 |   91.48 | 17-18,20-21       
+  ...gs-screen.tsx |       0 |        0 |       0 |       0 | 1-51              
+  ...rs-screen.tsx |       0 |        0 |       0 |       0 | 1-55              
+  ...es-screen.tsx |       0 |        0 |       0 |       0 | 1-33              
+  ...rs-screen.tsx |       0 |        0 |       0 |       0 | 1-68              
+  ...ss-screen.tsx |       0 |        0 |       0 |       0 | 1-82              
+  ...is-screen.tsx |       0 |        0 |       0 |       0 | 1-32              
+  ...il-screen.tsx |    46.3 |       26 |       6 |    46.3 | ...1128,1140-1144 
+  login-screen.tsx |       0 |        0 |       0 |       0 | 1-82              
+  ...le-screen.tsx |       0 |        0 |       0 |       0 | 1-84              
+  ...ry-screen.tsx |   80.48 |    13.33 |   18.18 |   80.48 | ...,68,87,129-131 
+  ...on-screen.tsx |    55.1 |     7.69 |     100 |    55.1 | ...6-70,89,91-117 
+  ...ew-screen.tsx |   82.56 |     12.5 |    8.33 |   82.56 | ...33-335,348-349 
+  ...ck-screen.tsx |     100 |    73.91 |     100 |     100 | 20,78,84-87       
+  ...ss-screen.tsx |     100 |    22.22 |     100 |     100 | 17,19-63          
+  ...ng-screen.tsx |   66.52 |     9.09 |       5 |   66.52 | ...24,249-260,271 
+  ...st-screen.tsx |   74.21 |    38.09 |   17.64 |   74.21 | ...80-282,350-359 
+  ...st-screen.tsx |      89 |    86.11 |   43.75 |      89 | ...25-227,237-242 
+  ...ss-screen.tsx |       0 |        0 |       0 |       0 | 1-87              
+  ...th-screen.tsx |       0 |        0 |       0 |       0 | 1-43              
+ .../components/ui |     100 |      100 |     100 |     100 |                   
+  button.tsx       |     100 |      100 |     100 |     100 |                   
+  card.tsx         |     100 |      100 |     100 |     100 |                   
+  input.tsx        |     100 |      100 |     100 |     100 |                   
+  select.tsx       |     100 |      100 |     100 |     100 |                   
+  textarea.tsx     |     100 |      100 |     100 |     100 |                   
+ ...nents/worklist |    12.9 |      100 |      20 |    12.9 |                   
+  area-section.tsx |    6.45 |      100 |       0 |    6.45 | 13-46             
+  ...s-summary.tsx |      10 |      100 |       0 |      10 | 5-26              
+  ...atus-tile.tsx |    9.52 |      100 |       0 |    9.52 | 6-29              
+  ...d-section.tsx |   11.76 |      100 |       0 |   11.76 | 7-25              
+  ...us-legend.tsx |     100 |      100 |     100 |     100 |                   
+ frontend/lib/api  |   10.16 |      100 |       0 |   10.16 |                   
+  client.ts        |   10.16 |      100 |       0 |   10.16 | ...37-138,141-150 
+ ...tend/lib/hooks |   11.75 |    16.66 |     3.7 |   11.75 |                   
+  query-keys.ts    |     100 |      100 |    6.66 |     100 |                   
+  use-admin.ts     |       0 |        0 |       0 |       0 | 1-83              
+  use-auth.ts      |       0 |        0 |       0 |       0 | 1-47              
+  ...t-profiles.ts |   16.66 |      100 |       0 |   16.66 | ...23,26-39,42-46 
+  use-evidence.ts  |       0 |        0 |       0 |       0 | 1-15              
+  ...k-analysis.ts |       0 |        0 |       0 |       0 | 1-14              
+  ...frameworks.ts |   28.57 |      100 |       0 |   28.57 | 10-14             
+  use-health.ts    |       0 |        0 |       0 |       0 | 1-13              
+  use-indicator.ts |      60 |      100 |   33.33 |      60 | 18-23             
+  use-mutations.ts |    9.09 |      100 |       0 |    9.09 | ...38-249,252-277 
+  use-progress.ts  |       0 |        0 |       0 |       0 | 1-23              
+  use-projects.ts  |       0 |        0 |       0 |       0 | 1-22              
+  use-readiness.ts |       0 |        0 |       0 |       0 | 1-61              
+  ...ring-queue.ts |       0 |        0 |       0 |       0 | 1-14              
+  use-users.ts     |   28.57 |      100 |       0 |   28.57 | 9-13              
+  use-worklist.ts  |       0 |        0 |       0 |       0 | 1-14              
+ frontend/types    |       0 |        0 |       0 |       0 |                   
+  index.ts         |       0 |        0 |       0 |       0 |                   
+ frontend/utils    |   80.47 |    77.41 |   71.42 |   80.47 |                   
+  cn.ts            |     100 |      100 |     100 |     100 |                   
+  format.ts        |   63.46 |    44.44 |      60 |   63.46 | ...45,49-50,61-62 
+  ...tor-status.ts |    87.8 |       50 |   66.66 |    87.8 | 79-80,95-102      
+  query.ts         |    7.69 |      100 |       0 |    7.69 | 2-15              
+  ...-semantics.ts |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------

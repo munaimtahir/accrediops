@@ -18,7 +18,14 @@ test.describe("AccrediOps end-to-end flows", () => {
   test("3. admin user can login and reach projects page", async ({ page }) => {
     await loginAsSeededAdmin(page);
     await expect(page.getByRole("heading", { name: "Project register" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Create project" })).toBeEnabled();
+    await expect(page.locator("main").getByRole("button", { name: "Create project" }).first()).toBeEnabled();
+  });
+
+  test("3b. expired session redirects protected navigation to login", async ({ page, context }) => {
+    await loginAsSeededAdmin(page);
+    await context.clearCookies();
+    await page.goto("/projects");
+    await expect(page).toHaveURL(/\/login\?next=%2Fprojects/);
   });
 
   test("4. create project and initialize from framework flow works", async ({ page }) => {
@@ -26,7 +33,7 @@ test.describe("AccrediOps end-to-end flows", () => {
     const projectName = `E2E Project ${Date.now()}`;
     const clientName = `E2E Client ${Date.now()}`;
 
-    await page.getByRole("button", { name: "Create project" }).click();
+    await page.locator("main").getByRole("button", { name: "Create project" }).first().click();
     await expect(page.getByRole("heading", { name: "Create project" })).toBeVisible();
     const form = page.locator("form").first();
     await form.getByLabel("Project name").fill(projectName);
@@ -43,9 +50,9 @@ test.describe("AccrediOps end-to-end flows", () => {
 
   test("5. post-login operational journey route opens from project home", async ({ page }) => {
     await loginAsSeededAdmin(page);
-    await page.getByRole("link", { name: "Open project" }).first().click();
+    await page.locator("main").getByRole("link", { name: "Open project" }).first().click();
     await expect(page).toHaveURL(/\/projects\/\d+/);
-    await page.getByRole("link", { name: "Go to recurring" }).click();
+    await page.getByRole("link", { name: "Go to recurring" }).first().click();
     await expect(page).toHaveURL(/\/projects\/\d+\/recurring/);
     await expect(page.getByRole("heading", { name: "Recurring evidence queue" })).toBeVisible();
   });

@@ -1,0 +1,74 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/munaim/srv/apps/accrediops/frontend
+
+(node:3810302) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/indicator-drawer.test.tsx (1 test) 1933ms
+   ✓ IndicatorDrawer > renders sections and opens actions/governance-focused controls in drawer context 1928ms
+(node:3810309) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-overview-screen.test.tsx (1 test) 1603ms
+   ✓ ProjectOverviewScreen > shows clone action disabled for non-admin and non-lead roles 1595ms
+ ✓ tests/indicator-detail-screen.test.tsx (1 test) 2100ms
+   ✓ IndicatorDetailScreen governance controls > disables admin-only reopen and shows governance trail sections for non-admin users 2095ms
+(node:3811029) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/project-list-screen.test.tsx (3 tests) 4091ms
+   ✓ ProjectsListScreen > renders project list 2179ms
+   ✓ ProjectsListScreen > shows power table only when toggled 1493ms
+   ✓ ProjectsListScreen > disables create project for non-admin and non-lead 401ms
+ ✓ tests/project-print-pack-screen.test.tsx (5 tests) 2634ms
+   ✓ ProjectPrintPackScreen > shows empty state with context links before generation 1304ms
+   ✓ ProjectPrintPackScreen > triggers generation from primary CTA 508ms
+   ✓ ProjectPrintPackScreen > renders structured print-pack rows including physical evidence data 317ms
+ ✓ tests/create-project-form.test.tsx (2 tests) 8328ms
+   ✓ CreateProjectForm > creates and initializes project when checkbox is enabled 5042ms
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 3260ms
+ ✓ tests/status-semantics.test.tsx (7 tests) 681ms
+ ✓ tests/project-workspace-board.test.tsx (1 test) 614ms
+   ✓ ProjectWorkspaceBoard > renders area-standard-indicator hierarchy and opens drawer from indicator card 605ms
+ ✓ tests/project-management-form.test.tsx (1 test) 1369ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 1366ms
+(node:3811676) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 1039ms
+   ✓ ProjectExportHistoryScreen > renders export history page 864ms
+(node:3811703) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 1434ms
+   ✓ ProjectWorklistScreen > renders filters and table 1419ms
+ ✓ tests/sidebar.test.tsx (3 tests) 2310ms
+   ✓ Sidebar > hides admin and export links for non-admin/non-lead users 473ms
+   ✓ Sidebar > shows admin and export links for admin users 1271ms
+   ✓ Sidebar > hides admin links for lead users 513ms
+(node:3811874) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 503ms
+   ✓ ProjectReadinessScreen > renders orientation and readiness metrics 451ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 624ms
+   ✓ WorkflowContextStrip > renders context, next step, role hint, and navigation actions 617ms
+(node:3812045) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 513ms
+   ✓ ProjectInspectionScreen > renders inspection mode 511ms
+(node:3812130) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 708ms
+   ✓ ProjectRecurringScreen > renders recurring queue 702ms
+ ✓ tests/app-shell.test.tsx (1 test) 375ms
+   ✓ AppShell > renders shell with child content 366ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 387ms
+   ✓ AdminDashboardScreen > renders admin metrics 382ms
+ ✓ tests/evidence-form.test.tsx (1 test) 1968ms
+   ✓ EvidenceForm > submits with physical evidence fields 1962ms
+
+ Test Files  19 passed (19)
+      Tests  36 passed (36)
+   Start at  12:04:36
+   Duration  57.93s (transform 6.66s, setup 6.63s, collect 42.06s, tests 33.21s, environment 50.69s, prepare 12.42s)
+

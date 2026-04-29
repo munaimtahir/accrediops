@@ -1,3 +1,5 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
+
 from apps.api.tests.base import ContractBaseTestCase
 from apps.indicators.models import ProjectIndicator
 from apps.indicators.services import assign_project_indicator
@@ -117,11 +119,11 @@ class AdminReadinessInspectionExportsTest(ContractBaseTestCase):
             {"type": "print-bundle", "parameters": {"include_notes": True}},
             format="json",
         )
-        self.assertEqual(create_response.status_code, 201)
-        self.assertEqual(create_response.json()["data"]["type"], "print-bundle")
+        self.assertEqual(create_response.status_code, 403)
+        self.assertTrue(create_response.json()["error"]["message"].startswith("Export blocked:"))
         history_response = self.client.get(f"/api/exports/projects/{self.project.id}/history/")
         self.assertEqual(history_response.status_code, 200)
-        self.assertGreaterEqual(len(history_response.json()["data"]), 1)
+        self.assertEqual(len(history_response.json()["data"]), 0)
 
     def test_audit_filters_by_user_and_event_type(self):
         project_indicators = self._assign_all()
@@ -151,32 +153,20 @@ class AdminReadinessInspectionExportsTest(ContractBaseTestCase):
 
     def test_framework_import_validation_and_logs(self):
         self.client.force_authenticate(user=self.admin)
+        csv_text = "\n".join(
+            [
+                "area_code,area_name,standard_code,standard_name,indicator_code,indicator_text",
+                "A1,Area,S1,Standard,IND-001,A",
+                "A1,Area,S1,Standard,IND-001,A duplicate",
+                "A2,Area 2,,Missing standard,IND-003,Missing standard row",
+            ]
+        )
         response = self.client.post(
             "/api/admin/import/validate-framework/",
             {
-                "file_name": "test-import.json",
-                "rows": [
-                    {
-                        "area_code": "A1",
-                        "standard_code": "S1",
-                        "indicator_code": "IND-001",
-                        "indicator_text": "A",
-                    },
-                    {
-                        "area_code": "A1",
-                        "standard_code": "S1",
-                        "indicator_code": "IND-001",
-                        "indicator_text": "A duplicate",
-                    },
-                    {
-                        "area_code": "A2",
-                        "standard_code": "",
-                        "indicator_code": "IND-003",
-                        "indicator_text": "Missing standard",
-                    },
-                ],
+                "framework_id": self.framework.id,
+                "file": SimpleUploadedFile("test-import.csv", csv_text.encode("utf-8"), content_type="text/csv"),
             },
-            format="json",
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["data"]["rows_processed"], 3)
@@ -184,6 +174,21 @@ class AdminReadinessInspectionExportsTest(ContractBaseTestCase):
         logs_response = self.client.get("/api/admin/import/logs/")
         self.assertEqual(logs_response.status_code, 200)
         self.assertGreaterEqual(len(logs_response.json()["data"]), 1)
+
+    def test_admin_framework_create_and_list(self):
+        self.client.force_authenticate(user=self.admin)
+        create_response = self.client.post(
+            "/api/admin/frameworks/",
+            {"name": "Admin Framework Create", "description": "Admin created"},
+            format="json",
+        )
+        self.assertEqual(create_response.status_code, 201)
+        self.assertEqual(create_response.json()["data"]["name"], "Admin Framework Create")
+
+        list_response = self.client.get("/api/admin/frameworks/")
+        self.assertEqual(list_response.status_code, 200)
+        names = [row["name"] for row in list_response.json()["data"]]
+        self.assertIn("Admin Framework Create", names)
 
     def test_worklist_row_contains_risk_payload(self):
         project_indicators = self._assign_all()
@@ -195,3 +200,12 @@ class AdminReadinessInspectionExportsTest(ContractBaseTestCase):
         self.assertGreaterEqual(len(rows), 2)
         self.assertTrue(all("risk" in row for row in rows))
         self.assertTrue(all("risk_level" in row["risk"] for row in rows))
+
+    def test_worklist_accepts_show_all_page_size_without_server_error(self):
+        self._assign_all()
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.get(f"/api/dashboard/worklist/?project_id={self.project.id}&page_size=all")
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()["data"]
+        self.assertIn("results", payload)
+        self.assertGreaterEqual(payload["count"], len(payload["results"]))

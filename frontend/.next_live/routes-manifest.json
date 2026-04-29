@@ -17,8 +17,13 @@
     "beforeFiles": [],
     "afterFiles": [
       {
+        "source": "/api/:path*/",
+        "destination": "http://127.0.0.1:8000/api/:path*/",
+        "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?/(?:/)?$"
+      },
+      {
         "source": "/api/:path*",
-        "destination": "http://127.0.0.1:8000/api/:path*",
+        "destination": "http://127.0.0.1:8000/api/:path*/",
         "regex": "^/api(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
       }
     ],
@@ -80,6 +85,14 @@
         "nxtPprojectId": "nxtPprojectId"
       },
       "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/inspection(?:/)?$"
+    },
+    {
+      "page": "/projects/[projectId]/pending-actions",
+      "regex": "^/projects/([^/]+?)/pending\\-actions(?:/)?$",
+      "routeKeys": {
+        "nxtPprojectId": "nxtPprojectId"
+      },
+      "namedRegex": "^/projects/(?<nxtPprojectId>[^/]+?)/pending\\-actions(?:/)?$"
     },
     {
       "page": "/projects/[projectId]/print-pack",
@@ -148,6 +161,24 @@
       "namedRegex": "^/admin/audit(?:/)?$"
     },
     {
+      "page": "/admin/client-profiles",
+      "regex": "^/admin/client\\-profiles(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/client\\-profiles(?:/)?$"
+    },
+    {
+      "page": "/admin/frameworks",
+      "regex": "^/admin/frameworks(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/frameworks(?:/)?$"
+    },
+    {
+      "page": "/admin/frameworks/classification",
+      "regex": "^/admin/frameworks/classification(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/frameworks/classification(?:/)?$"
+    },
+    {
       "page": "/admin/import-logs",
       "regex": "^/admin/import\\-logs(?:/)?$",
       "routeKeys": {},
@@ -182,6 +213,12 @@
       "regex": "^/admin/overrides(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/admin/overrides(?:/)?$"
+    },
+    {
+      "page": "/admin/system-health",
+      "regex": "^/admin/system\\-health(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/system\\-health(?:/)?$"
     },
     {
       "page": "/admin/users",

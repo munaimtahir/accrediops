@@ -1,0 +1,8 @@
+[PASS] frontend root -> http://127.0.0.1:18080/
+[PASS] frontend health -> http://127.0.0.1:18080/health/frontend
+[PASS] backend health (proxy) -> http://127.0.0.1:18080/health/backend
+[PASS] backend health (api) -> http://127.0.0.1:18080/api/health/
+[PASS] projects page -> http://127.0.0.1:18080/projects
+[PASS] api auth session endpoint -> http://127.0.0.1:18080/api/auth/session/ (status 200)
+[PASS] api projects endpoint -> http://127.0.0.1:18080/api/projects/ (status 403)
+Smoke verify: SUCCESS

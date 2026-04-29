@@ -1,0 +1,23 @@
+UI Discovery / UX Completeness Manifest
+Timestamp: 2026-04-07T01-06-06Z
+
+Documentation
+- docs/_ux_discovery/2026-04-07T01-06-06Z/01_user_journey_map.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/02_ui_breakpoints.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/03_missing_actions.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/04_role_confusion_matrix.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/05_navigation_truth_map.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/06_feature_test_matrix.md
+- docs/_ux_discovery/2026-04-07T01-06-06Z/07_ux_final_verdict.md
+
+Verification outputs
+- OUT/ui_discovery/2026-04-07T01-06-06Z/frontend_test_output.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/frontend_build_output.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/playwright_output.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/backend_test_output.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/ui_review_notes.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/ui_manifest.txt
+
+Additional rerun traces (retained)
+- OUT/ui_discovery/2026-04-07T01-06-06Z/playwright_output_rerun.txt
+- OUT/ui_discovery/2026-04-07T01-06-06Z/playwright_output_rerun_patched.txt

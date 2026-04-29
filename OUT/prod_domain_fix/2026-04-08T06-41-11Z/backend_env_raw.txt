@@ -1,0 +1,14 @@
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,caddy,frontend,backend,ops.alshifalab.pk,api.ops.alshifalab.pk,phc.alshifalab.pk,api.phc.alshifalab.pk
+DJANGO_CSRF_TRUSTED_ORIGINS=http://localhost:18080,http://127.0.0.1:18080,https://ops.alshifalab.pk,https://api.ops.alshifalab.pk,https://phc.alshifalab.pk,https://api.phc.alshifalab.pk
+DB_ENGINE=django.db.backends.sqlite3
+DB_NAME=db.sqlite3
+DJANGO_SETTINGS_MODULE=config.accrediops_backend.settings
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+LANG=C.UTF-8
+GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305
+PYTHON_VERSION=3.12.13
+PYTHON_SHA256=c08bc65a81971c1dd5783182826503369466c7e67374d1646519adf05207b684
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+

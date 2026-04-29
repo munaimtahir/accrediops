@@ -1,0 +1,15 @@
+DJANGO_SECRET_KEY=l6oSaGwxbHEWOwo1xU6kJDAfhCYMGJAV-_Jd1ElcyIqr5HMuy0Id1h9pET7Bgt6Q8tU
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,ops.alshifalab.pk,api.ops.alshifalab.pk,phc.alshifalab.pk,api.phc.alshifalab.pk
+DJANGO_CSRF_TRUSTED_ORIGINS=https://ops.alshifalab.pk,https://api.ops.alshifalab.pk,https://phc.alshifalab.pk,https://api.phc.alshifalab.pk
+DJANGO_USE_X_FORWARDED_HOST=True
+DJANGO_SESSION_COOKIE_SECURE=True
+DJANGO_CSRF_COOKIE_SECURE=True
+DJANGO_SESSION_COOKIE_SAMESITE=Lax
+DJANGO_CSRF_COOKIE_SAMESITE=Lax
+DB_ENGINE=django.db.backends.sqlite3
+DB_NAME=db.sqlite3
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=

@@ -1,0 +1,13 @@
+final_cleanup_counts
+export_jobs_deleted 2
+print_pack_deleted 3
+ai_outputs_deleted 0
+recurring_instances_deleted 9
+recurring_requirements_deleted 10
+status_history_deleted 7
+comments_deleted 0
+evidence_deleted 6
+project_indicators_deleted 10
+projects_deleted 10
+users_deleted 5
+audit_events_deleted 56

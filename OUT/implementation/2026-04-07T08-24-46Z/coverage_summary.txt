@@ -1,0 +1,16 @@
+Coverage Summary — 2026-04-07T08-24-46Z
+
+Measured metrics:
+- Backend pytest-cov total: 85% (31 passed)
+- Frontend vitest coverage "All files": 50.12% (17 files / 33 tests passed)
+- Playwright E2E: 26 passed
+- Frontend build: passed
+
+Interpretation:
+- Backend and frontend do not reach 90% formal line coverage in this run.
+- Practical confidence for core operator journeys is high due to green E2E + targeted behavior tests.
+- Coverage closure in this sprint specifically improved:
+  - print-pack screen direct tests
+  - status-semantics helper/component direct tests
+  - deep-link orientation surfaces
+  - indicator long-session orientation behavior

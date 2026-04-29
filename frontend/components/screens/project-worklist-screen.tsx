@@ -7,11 +7,17 @@ import { EmptyState } from "@/components/common/empty-state";
 import { ErrorPanel } from "@/components/common/error-panel";
 import { FilterBar } from "@/components/common/filter-bar";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
+import { NextActionBanner } from "@/components/common/next-action-banner";
+import { OnboardingCallout } from "@/components/common/onboarding-callout";
 import { PageHeader } from "@/components/common/page-header";
+import { WorkflowContextStrip } from "@/components/common/workflow-context-strip";
 import { PaginationControls } from "@/components/common/pagination-controls";
+import { IndicatorDrawer } from "@/components/screens/indicator-drawer";
 import { AreaSection } from "@/components/worklist/area-section";
 import { StatusLegend } from "@/components/worklist/status-legend";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
 import { useProgress } from "@/lib/hooks/use-progress";
 import { useUsers } from "@/lib/hooks/use-users";
@@ -19,7 +25,8 @@ import { useWorklist } from "@/lib/hooks/use-worklist";
 import { DashboardRow, IndicatorStatus, Priority, StandardProgress, WorklistFilters } from "@/types";
 import { formatUserName } from "@/utils/format";
 
-const pageSize = 25;
+const defaultPageSize = 25;
+const pageSizeOptions: Array<number | "all"> = [25, 50, 100, "all"];
 const indicatorStatuses: IndicatorStatus[] = [
   "NOT_STARTED",
   "IN_PROGRESS",
@@ -42,6 +49,17 @@ function parseBoolean(value: string | null) {
   if (value === "true") return true;
   if (value === "false") return false;
   return undefined;
+}
+
+function parsePageSize(value: string | null): number | "all" {
+  if (value === "all") {
+    return "all";
+  }
+  const parsed = Number(value);
+  if ([25, 50, 100].includes(parsed)) {
+    return parsed;
+  }
+  return defaultPageSize;
 }
 
 function WorklistLoading() {
@@ -67,7 +85,9 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
+  const [activeIndicatorId, setActiveIndicatorId] = useState<number | null>(null);
   const deferredSearch = useDeferredValue(search);
+  const selectedPageSize = parsePageSize(searchParams.get("page_size"));
 
   useEffect(() => {
     setSearch(searchParams.get("search") ?? "");
@@ -100,8 +120,8 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
     due_today: searchParams.get("due_today") === "true",
     overdue: searchParams.get("overdue") === "true",
     search: deferredSearch || undefined,
-    page: parseNumber(searchParams.get("page")) ?? 1,
-    page_size: pageSize,
+    page: selectedPageSize === "all" ? 1 : parseNumber(searchParams.get("page")) ?? 1,
+    page_size: selectedPageSize,
   };
 
   const worklistQuery = useWorklist(filters);
@@ -119,6 +139,10 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
       params.delete("page");
     }
     router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  function clearFilters() {
+    router.replace(pathname);
   }
 
   const rows = worklistQuery.data?.results ?? [];
@@ -165,8 +189,26 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
   }
 
   function openIndicator(projectIndicatorId: number) {
-    router.push(`/project-indicators/${projectIndicatorId}`);
+    setActiveIndicatorId(projectIndicatorId);
   }
+
+  const overdueRows = rows.filter((row) => row.due_date && new Date(row.due_date) < new Date());
+  const reviewRows = rows.filter((row) => row.current_status === "UNDER_REVIEW");
+  const nextWorklistAction = overdueRows.length
+    ? "Open overdue indicators and resolve blocked evidence first."
+    : reviewRows.length
+      ? "Open indicators under review and close readiness blockers."
+      : rows.length
+        ? "Open the next in-progress indicator and continue evidence work."
+        : "Clear filters or move to recurring queue for the next governed task.";
+  const nextWorklistReason = overdueRows.length
+    ? `${overdueRows.length} indicator(s) in this view are overdue.`
+    : reviewRows.length
+      ? `${reviewRows.length} indicator(s) are waiting in review.`
+      : rows.length
+        ? `${rows.length} indicator(s) match the current worklist filter.`
+        : "No indicators match the current filter set.";
+  const worklistStatus = `Filtered indicators: ${rows.length} • Areas: ${groupedRows.length}`;
 
   return (
     <div className="space-y-6">
@@ -174,6 +216,25 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
         eyebrow="Primary Screen"
         title="Project worklist"
         description="Inspection-first indicator dashboard grouped by Area and Standard with status-driven tiles for rapid accreditation scanning."
+      />
+
+      <WorkflowContextStrip
+        scope={`Project ${projectId} · Worklist`}
+        current="Browsing grouped indicators with workflow and overdue filters."
+        nextStep="Open an indicator, complete evidence work, then run governed command actions."
+        actions={[
+          { label: "Back to project", href: `/projects/${projectId}` },
+          { label: "Open recurring queue", href: `/projects/${projectId}/recurring` },
+          { label: "Readiness view", href: `/projects/${projectId}/readiness` },
+        ]}
+      />
+
+      <NextActionBanner action={nextWorklistAction} reason={nextWorklistReason} status={worklistStatus} />
+
+      <OnboardingCallout
+        storageKey={`worklist-${projectId}`}
+        title="Fast operator path"
+        description="Filter by Overdue or Under Review first, then open indicators to complete evidence review and workflow commands."
       />
 
       <FilterBar>
@@ -286,6 +347,21 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
           </Select>
         </label>
 
+        <label className="space-y-2 text-sm">
+          <span className="font-medium text-slate-700">Page size</span>
+          <Select
+            data-testid="worklist-page-size"
+            value={String(selectedPageSize)}
+            onChange={(event) => updateParam("page_size", event.target.value || undefined)}
+          >
+            {pageSizeOptions.map((option) => (
+              <option key={String(option)} value={String(option)}>
+                {option === "all" ? "Show all" : option}
+              </option>
+            ))}
+          </Select>
+        </label>
+
         <label className="space-y-2 text-sm md:col-span-2 xl:col-span-4">
           <span className="font-medium text-slate-700">Search</span>
           <Input
@@ -294,14 +370,33 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
             placeholder="Indicator code, text, area, standard, or project"
           />
         </label>
+
+        <div className="flex items-end">
+          <Button variant="secondary" onClick={clearFilters}>
+            Clear filters
+          </Button>
+        </div>
       </FilterBar>
 
       <StatusLegend />
 
+      <Card className="border-indigo-200 bg-indigo-50/60 p-4">
+        <h2 className="text-base font-semibold text-indigo-950">Area → Standard → Indicator workbench</h2>
+        <p className="mt-1 text-sm text-indigo-900">
+          Use cards below as your primary navigation model. Click any indicator card to open the update drawer without
+          leaving this workspace.
+        </p>
+      </Card>
+
       {rows.length === 0 ? (
         <EmptyState
           title="No worklist rows match the current filter set"
-          description="Adjust the filter bar to widen the operational queue."
+          description="Adjust filters or clear them to return to the full operational queue."
+          action={
+            <Button variant="secondary" onClick={clearFilters}>
+              Reset to full queue
+            </Button>
+          }
         />
       ) : (
         <div className="space-y-4">
@@ -318,10 +413,14 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
 
       <PaginationControls
         page={filters.page ?? 1}
-        pageSize={pageSize}
+        pageSize={selectedPageSize === "all" ? Math.max(worklistQuery.data?.count ?? rows.length, 1) : selectedPageSize}
         total={worklistQuery.data?.count ?? 0}
         onPageChange={(page) => updateParam("page", String(page), false)}
       />
+
+      {activeIndicatorId ? (
+        <IndicatorDrawer indicatorId={activeIndicatorId} open onClose={() => setActiveIndicatorId(null)} />
+      ) : null}
     </div>
   );
 }

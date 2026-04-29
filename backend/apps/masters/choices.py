@@ -58,12 +58,53 @@ class PriorityChoices(models.TextChoices):
 
 
 class EvidenceTypeChoices(models.TextChoices):
-    DOCUMENT = "DOCUMENT", "Document"
-    POLICY = "POLICY", "Policy"
-    REPORT = "REPORT", "Report"
-    IMAGE = "IMAGE", "Image"
-    URL = "URL", "URL"
-    OTHER = "OTHER", "Other"
+    DOCUMENT_POLICY = "DOCUMENT_POLICY", "Document / Policy"
+    RECORD_REGISTER = "RECORD_REGISTER", "Record / Register"
+    PHYSICAL_FACILITY = "PHYSICAL_FACILITY", "Physical / Facility"
+    LICENSE_CERTIFICATE = "LICENSE_CERTIFICATE", "License / Certificate"
+    STAFF_TRAINING = "STAFF_TRAINING", "Staff / Training"
+    PROCESS_WORKFLOW = "PROCESS_WORKFLOW", "Process / Workflow"
+    AUDIT_QUALITY = "AUDIT_QUALITY", "Audit / Quality"
+    MIXED_EVIDENCE = "MIXED_EVIDENCE", "Mixed Evidence"
+    MANUAL_REVIEW = "MANUAL_REVIEW", "Manual Review Needed"
+
+
+class AIAssistanceLevelChoices(models.TextChoices):
+    FULL_AI = "FULL_AI", "Full AI"
+    PARTIAL_AI = "PARTIAL_AI", "Partial AI"
+    NO_AI = "NO_AI", "No AI"
+
+
+class EvidenceFrequencyChoices(models.TextChoices):
+    ONE_TIME = "ONE_TIME", "One-time"
+    RECURRING = "RECURRING", "Recurring"
+    EVENT_BASED = "EVENT_BASED", "Event-based"
+
+
+class PrimaryActionRequiredChoices(models.TextChoices):
+    GENERATE_DOCUMENT = "GENERATE_DOCUMENT", "Generate Document"
+    COLLECT_RECORD = "COLLECT_RECORD", "Collect Record"
+    UPLOAD_PHOTO = "UPLOAD_PHOTO", "Upload Photo"
+    ARRANGE_PHYSICAL_COMPLIANCE = "ARRANGE_PHYSICAL_COMPLIANCE", "Arrange Physical Compliance"
+    OBTAIN_CERTIFICATE = "OBTAIN_CERTIFICATE", "Obtain Certificate"
+    TRAIN_STAFF = "TRAIN_STAFF", "Train Staff"
+    MAINTAIN_LOG = "MAINTAIN_LOG", "Maintain Log"
+    REVIEW_EXISTING_EVIDENCE = "REVIEW_EXISTING_EVIDENCE", "Review Existing Evidence"
+    MANUAL_DECISION = "MANUAL_DECISION", "Manual Decision"
+
+
+class ClassificationReviewStatusChoices(models.TextChoices):
+    UNCLASSIFIED = "UNCLASSIFIED", "Unclassified"
+    AI_SUGGESTED = "AI_SUGGESTED", "AI Suggested"
+    HUMAN_REVIEWED = "HUMAN_REVIEWED", "Human Reviewed"
+    MANUALLY_CHANGED = "MANUALLY_CHANGED", "Manually Changed"
+    NEEDS_REVIEW = "NEEDS_REVIEW", "Needs Review"
+
+
+class ClassificationConfidenceChoices(models.TextChoices):
+    HIGH = "HIGH", "High"
+    MEDIUM = "MEDIUM", "Medium"
+    LOW = "LOW", "Low"
 
 
 class EvidenceSourceTypeChoices(models.TextChoices):

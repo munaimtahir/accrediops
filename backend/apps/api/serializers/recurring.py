@@ -5,6 +5,9 @@ from apps.masters.choices import EvidenceApprovalStatusChoices
 from apps.recurring.models import RecurringEvidenceInstance, RecurringRequirement
 
 
+from apps.workflow.permissions import can_project_owner_access, can_project_reviewer_access
+
+
 class RecurringRequirementSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecurringRequirement
@@ -31,6 +34,7 @@ class RecurringEvidenceInstanceSerializer(serializers.ModelSerializer):
     indicator_id = serializers.IntegerField(source="recurring_requirement.project_indicator.indicator_id", read_only=True)
     indicator_code = serializers.CharField(source="recurring_requirement.project_indicator.indicator.code", read_only=True)
     indicator_text = serializers.CharField(source="recurring_requirement.project_indicator.indicator.text", read_only=True)
+    capabilities = serializers.SerializerMethodField()
 
     class Meta:
         model = RecurringEvidenceInstance
@@ -50,7 +54,23 @@ class RecurringEvidenceInstanceSerializer(serializers.ModelSerializer):
             "submitted_at",
             "approved_at",
             "notes",
+            "capabilities",
         )
+
+    def get_capabilities(self, obj: RecurringEvidenceInstance) -> dict:
+        request = self.context.get("request")
+        if not request or not request.user.is_authenticated:
+            return {
+                "can_submit": False,
+                "can_approve": False,
+            }
+
+        project_indicator = obj.recurring_requirement.project_indicator
+        return {
+            "can_submit": can_project_owner_access(request.user, project_indicator),
+            "can_approve": can_project_reviewer_access(request.user, project_indicator),
+        }
+
 
 
 class SubmitRecurringInstanceSerializer(serializers.Serializer):

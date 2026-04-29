@@ -1,0 +1,81 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   backend/.coverage
+	modified:   backend/coverage.xml
+	modified:   frontend/components/common/empty-state.tsx
+	modified:   frontend/components/forms/evidence-review-form.tsx
+	modified:   frontend/components/layout/sidebar.tsx
+	modified:   frontend/components/layout/topbar.tsx
+	modified:   frontend/components/screens/admin-audit-screen.tsx
+	modified:   frontend/components/screens/admin-dashboard-screen.tsx
+	modified:   frontend/components/screens/admin-masters-screen.tsx
+	modified:   frontend/components/screens/admin-overrides-screen.tsx
+	modified:   frontend/components/screens/admin-users-screen.tsx
+	modified:   frontend/components/screens/indicator-detail-screen.tsx
+	modified:   frontend/components/screens/project-client-profile-screen.tsx
+	modified:   frontend/components/screens/project-export-history-screen.tsx
+	modified:   frontend/components/screens/project-inspection-screen.tsx
+	modified:   frontend/components/screens/project-overview-screen.tsx
+	modified:   frontend/components/screens/project-print-pack-screen.tsx
+	modified:   frontend/components/screens/project-readiness-screen.tsx
+	modified:   frontend/components/screens/project-recurring-screen.tsx
+	modified:   frontend/components/screens/project-worklist-screen.tsx
+	modified:   frontend/components/screens/projects-list-screen.tsx
+	modified:   frontend/components/screens/system-health-screen.tsx
+	modified:   frontend/components/worklist/indicator-status-tile.tsx
+	modified:   frontend/components/worklist/status-legend.tsx
+	modified:   frontend/next-env.d.ts
+	modified:   frontend/package-lock.json
+	modified:   frontend/package.json
+	modified:   frontend/tests/admin-dashboard-screen.test.tsx
+	modified:   frontend/tests/app-shell.test.tsx
+	modified:   frontend/tests/e2e/app-flows.spec.ts
+	modified:   frontend/tests/e2e/core-journeys.spec.ts
+	modified:   frontend/tests/export-history-screen.test.tsx
+	modified:   frontend/tests/indicator-detail-screen.test.tsx
+	modified:   frontend/tests/inspection-screen.test.tsx
+	modified:   frontend/tests/project-list-screen.test.tsx
+	modified:   frontend/tests/project-overview-screen.test.tsx
+	modified:   frontend/tests/recurring-screen.test.tsx
+	modified:   frontend/tests/sidebar.test.tsx
+	modified:   frontend/tests/worklist-screen.test.tsx
+	modified:   frontend/tsconfig.json
+	modified:   playwright-report/index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	OUT/deployment_truth/
+	OUT/implementation/2026-04-07T08-24-46Z/
+	OUT/implementation/2026-04-07T12-00-52Z/
+	OUT/ui_discovery/
+	docs/_implementation/2026-04-07T08-24-46Z/
+	docs/_implementation/2026-04-07T12-00-52Z/
+	docs/_ui_discovery/
+	docs/_ux_discovery/
+	frontend/.next_implementation/
+	frontend/.next_ui_discovery/
+	frontend/components/common/drawer.tsx
+	frontend/components/common/global-status-legend.tsx
+	frontend/components/common/onboarding-callout.tsx
+	frontend/components/common/permission-hint.tsx
+	frontend/components/common/status-semantic-badge.tsx
+	frontend/components/common/workflow-context-strip.tsx
+	frontend/components/screens/indicator-drawer.tsx
+	frontend/components/screens/project-workspace-board.tsx
+	frontend/tests/e2e/cta-discoverability.spec.ts
+	frontend/tests/e2e/role-visibility.spec.ts
+	frontend/tests/e2e/ui-clarity.spec.ts
+	frontend/tests/e2e/workflow-guidance.spec.ts
+	frontend/tests/indicator-drawer.test.tsx
+	frontend/tests/project-print-pack-screen.test.tsx
+	frontend/tests/project-workspace-board.test.tsx
+	frontend/tests/readiness-screen.test.tsx
+	frontend/tests/status-semantics.test.tsx
+	frontend/tests/workflow-context-strip.test.tsx
+	frontend/utils/status-semantics.ts
+
+no changes added to commit (use "git add" and/or "git commit -a")

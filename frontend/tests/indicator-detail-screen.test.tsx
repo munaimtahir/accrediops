@@ -1,4 +1,5 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
 import { IndicatorDetailScreen } from "@/components/screens/indicator-detail-screen";
@@ -10,6 +11,7 @@ const authState = {
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
 }));
 
 vi.mock("@/lib/hooks/use-auth", () => ({
@@ -71,6 +73,20 @@ vi.mock("@/lib/hooks/use-indicator", () => ({
       status_history: [],
       ai_outputs: [],
       audit_summary: [],
+      capabilities: {
+        can_assign: true,
+        can_update_working_state: true,
+        can_add_evidence: true,
+        can_edit_evidence: true,
+        can_review_evidence: true,
+        can_submit_recurring: true,
+        can_approve_recurring: true,
+        can_use_ai_assist: true,
+        can_start: true,
+        can_send_for_review: true,
+        can_mark_met: true,
+        can_reopen: false,
+      },
       readiness_flags: {
         approved_evidence_count: 0,
         total_current_evidence_count: 0,
@@ -122,14 +138,23 @@ vi.mock("@/components/common/toaster", () => ({
 }));
 
 describe("IndicatorDetailScreen governance controls", () => {
-  it("disables admin-only reopen and shows governance trail sections for non-admin users", () => {
+  it("disables admin-only reopen and shows governance trail sections for non-admin users", async () => {
     authState.role = "OWNER";
     renderWithQueryClient(<IndicatorDetailScreen indicatorId={10} />);
 
+    const user = userEvent.setup();
+    expect(screen.getByText("Session orientation")).toBeInTheDocument();
+    expect(screen.getByText("Current section: Readiness status")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to project" })).toHaveAttribute("href", "/projects/1");
+    expect(screen.getByRole("link", { name: "Back to worklist" })).toHaveAttribute("href", "/projects/1/worklist");
+    await user.click(screen.getByRole("button", { name: "Actions" }));
+    expect(screen.getByText("Current section: Actions")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Reopen" })).toBeDisabled();
-    expect(screen.getByText("Section 7 — Governance trail")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Governance / Override" }));
+    expect(screen.getByText("Current section: Governance / Override")).toBeInTheDocument();
+    expect(screen.getByText("Section 8 — Governance / Override")).toBeInTheDocument();
     expect(screen.getByText("Status transition history")).toBeInTheDocument();
     expect(screen.getByText("Recent audited actions")).toBeInTheDocument();
   });
 });
-

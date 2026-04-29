@@ -10,12 +10,20 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils/cn";
 import { formatDate, formatUserName } from "@/utils/format";
 import { useToast } from "@/components/common/toaster";
+import { GlobalStatusLegend } from "@/components/common/global-status-legend";
 
 function getPageLabel(pathname: string) {
   if (pathname.endsWith("/worklist")) return "Worklist";
   if (pathname.endsWith("/recurring")) return "Recurring Queue";
   if (pathname.endsWith("/standards-progress")) return "Standards Progress";
   if (pathname.endsWith("/areas-progress")) return "Areas Progress";
+  if (pathname.endsWith("/exports")) return "Export History";
+  if (pathname.endsWith("/print-pack")) return "Print Pack";
+  if (pathname.endsWith("/pending-actions")) return "Pending Actions";
+  if (pathname.endsWith("/readiness")) return "Readiness";
+  if (pathname.endsWith("/inspection")) return "Inspection Mode";
+  if (pathname.endsWith("/client-profile")) return "Client Profile";
+  if (pathname.startsWith("/admin")) return "Admin";
   if (pathname.startsWith("/project-indicators/")) return "Indicator Detail";
   if (pathname === "/projects") return "Project Register";
   if (pathname.startsWith("/projects/")) return "Project Overview";
@@ -85,17 +93,26 @@ export function Topbar() {
               >
                 Open Worklist
               </Link>
+              <Link
+                href={`/projects/${resolvedProject.id}/pending-actions`}
+                className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
+              >
+                Pending actions
+              </Link>
             </>
           ) : null}
           {sessionQuery.data?.user ? (
             <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-700">
-              {formatUserName(sessionQuery.data.user)}
+              {formatUserName(sessionQuery.data.user)} • {sessionQuery.data.user.role}
             </span>
           ) : null}
           <Button variant="secondary" onClick={handleLogout} loading={logout.isPending}>
             Sign out
           </Button>
         </div>
+      </div>
+      <div className="mt-4">
+        <GlobalStatusLegend compact />
       </div>
     </header>
   );

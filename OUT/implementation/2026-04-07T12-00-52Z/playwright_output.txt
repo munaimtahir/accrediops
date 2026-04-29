@@ -1,0 +1,36 @@
+
+Running 26 tests using 2 workers
+
+  ✓   1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (3.6s)
+  ✓   3 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (3.2s)
+  ✓   4 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (7.6s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:55:7 › Core operational browser journeys › evidence review journey works end-to-end (18.0s)
+  ✓   5 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (11.2s)
+  ✓   6 tests/e2e/core-journeys.spec.ts:79:7 › Core operational browser journeys › recurring approval from indicator context works (16.6s)
+  ✓   7 tests/e2e/app-flows.spec.ts:44:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (9.3s)
+  ✓   9 tests/e2e/app-flows.spec.ts:53:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (187ms)
+  ✓  10 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (6.1s)
+  ✓   8 tests/e2e/core-journeys.spec.ts:96:7 › Core operational browser journeys › create flow supports client profile linkage (11.1s)
+  ✓  11 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (5.7s)
+  ✓  12 tests/e2e/core-journeys.spec.ts:130:7 › Core operational browser journeys › clone project then open cloned workspace (10.8s)
+  ✓  13 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (9.8s)
+  ✓  14 tests/e2e/core-journeys.spec.ts:151:7 › Core operational browser journeys › admin route access is available after login (6.0s)
+  ✓  15 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (7.8s)
+  ✓  17 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead cannot see admin navigation section (6.0s)
+  ✓  18 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (8.1s)
+  ✓  19 tests/e2e/ui-clarity.spec.ts:5:7 › UI clarity › projects page exposes prominent create CTA and guidance (9.3s)
+  ✓  20 tests/e2e/ui-clarity.spec.ts:14:7 › UI clarity › indicator follows ordered workflow sections (13.3s)
+  ✓  16 tests/e2e/core-journeys.spec.ts:158:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (43.2s)
+  ✓  21 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (6.1s)
+  ✓  23 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (8.1s)
+  ✓  22 tests/e2e/core-journeys.spec.ts:196:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (21.6s)
+  ✓  24 tests/e2e/core-journeys.spec.ts:241:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (9.1s)
+  ✓  25 tests/e2e/core-journeys.spec.ts:264:7 › Core operational browser journeys › non-admin user cannot access export history actions (12.0s)
+  ✓  26 tests/e2e/core-journeys.spec.ts:282:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (18.2s)
+
+  26 passed (3.1m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

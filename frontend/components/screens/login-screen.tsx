@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { ErrorPanel } from "@/components/common/error-panel";
@@ -17,21 +17,21 @@ export function LoginScreen() {
   const { pushToast } = useToast();
   const sessionQuery = useAuthSession();
   const login = useLogin();
-  const nextPath = searchParams.get("next") || "/projects";
+  const requestedNextPath = searchParams.get("next") || "/projects";
+  const nextPath = requestedNextPath.startsWith("/") ? requestedNextPath : "/projects";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    if (sessionQuery.data?.authenticated) {
-      router.replace(nextPath);
-    }
-  }, [nextPath, router, sessionQuery.data?.authenticated]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
       await login.mutateAsync({ username, password });
+      const refreshedSession = await sessionQuery.refetch();
+      if (!refreshedSession.data?.authenticated) {
+        pushToast("Sign-in did not establish a persistent session.", "error");
+        return;
+      }
       pushToast("Signed in.", "success");
       router.replace(nextPath);
     } catch (error) {
@@ -40,7 +40,7 @@ export function LoginScreen() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[linear-gradient(180deg,#dbe7f3_0%,#f5f7fb_50%,#eef2f7_100%)] p-6">
+    <div id="main-content" tabIndex={-1} className="flex min-h-screen items-center justify-center bg-[linear-gradient(180deg,#dbe7f3_0%,#f5f7fb_50%,#eef2f7_100%)] p-6 outline-none">
       <Card className="w-full max-w-md p-6">
         <div className="border-b border-slate-200 pb-5">
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">Internal Access</p>
@@ -51,25 +51,29 @@ export function LoginScreen() {
         </div>
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-          <label className="space-y-2 text-sm">
-            <span className="font-medium text-slate-700">Username</span>
+          <div className="space-y-2 text-sm">
+            <label htmlFor="username-input" className="font-medium text-slate-700">Username</label>
             <Input
+              id="username-input"
+              name="username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               autoComplete="username"
               required
             />
-          </label>
-          <label className="space-y-2 text-sm">
-            <span className="font-medium text-slate-700">Password</span>
+          </div>
+          <div className="space-y-2 text-sm">
+            <label htmlFor="password-input" className="font-medium text-slate-700">Password</label>
             <Input
+              id="password-input"
+              name="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="current-password"
               required
             />
-          </label>
+          </div>
           <Button type="submit" className="w-full" loading={login.isPending}>
             Sign in
           </Button>

@@ -1,3 +1,7 @@
+"""Tests for evidence and AI generation integration."""
+
+from unittest.mock import patch
+
 from apps.ai_actions.models import GeneratedOutput
 from apps.accounts.models import ClientProfile
 from apps.api.tests.base import ContractBaseTestCase
@@ -73,15 +77,18 @@ class EvidenceAndAITest(ContractBaseTestCase):
         self.assertEqual(review_response.status_code, 200)
 
         self.client.force_authenticate(user=self.owner)
-        ai_response = self.client.post(
-            "/api/ai/generate/",
-            {
-                "project_indicator_id": project_indicator.id,
-                "output_type": "GUIDANCE",
-                "user_instruction": "Summarize the evidence gap.",
-            },
-            format="json",
-        )
+        with patch("apps.ai_actions.services.generation._call_gemini_api") as mock_gemini:
+            mock_gemini.return_value = "AI guidance on this indicator."
+            
+            ai_response = self.client.post(
+                "/api/ai/generate/",
+                {
+                    "project_indicator_id": project_indicator.id,
+                    "output_type": "GUIDANCE",
+                    "user_instruction": "Summarize the evidence gap.",
+                },
+                format="json",
+            )
         self.assertEqual(ai_response.status_code, 201)
         project_indicator.refresh_from_db()
         self.assertEqual(project_indicator.current_status, "NOT_STARTED")
@@ -109,15 +116,20 @@ class EvidenceAndAITest(ContractBaseTestCase):
             approver=self.approver,
         )
         self.client.force_authenticate(user=self.owner)
-        response = self.client.post(
-            "/api/ai/generate/",
-            {
-                "project_indicator_id": project_indicator.id,
-                "output_type": "GUIDANCE",
-                "user_instruction": "Include {{organization_name}} and {{license_number}} in the draft.",
-            },
-            format="json",
-        )
+        
+        with patch("apps.ai_actions.services.generation._call_gemini_api") as mock_gemini:
+            mock_gemini.return_value = "Generated for {{organization_name}} with license {{license_number}}."
+            
+            response = self.client.post(
+                "/api/ai/generate/",
+                {
+                    "project_indicator_id": project_indicator.id,
+                    "output_type": "GUIDANCE",
+                    "user_instruction": "Include {{organization_name}} and {{license_number}} in the draft.",
+                },
+                format="json",
+            )
         self.assertEqual(response.status_code, 201)
-        self.assertIn("Acme Health", response.json()["data"]["content"])
-        self.assertIn("LIC-123", response.json()["data"]["content"])
+        content = response.json()["data"]["content"]
+        self.assertIn("Acme Health", content)
+        self.assertIn("LIC-123", content)

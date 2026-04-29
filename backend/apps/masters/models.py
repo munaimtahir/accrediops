@@ -18,3 +18,18 @@ class MasterValue(models.Model):
 
     def __str__(self) -> str:
         return f"{self.key}:{self.code}"
+
+
+class PolicyDecision(models.Model):
+    code = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    value = models.CharField(max_length=255, blank=True)
+    is_enforced = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["code"]
+
+    def __str__(self) -> str:
+        return self.code

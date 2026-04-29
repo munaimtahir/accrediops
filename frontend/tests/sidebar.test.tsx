@@ -20,22 +20,29 @@ vi.mock("@/lib/hooks/use-auth", () => ({
 }));
 
 describe("Sidebar", () => {
-  it("hides admin and export links for non-admin/non-lead users", () => {
+  it("shows restricted admin and export items as disabled for non-admin/non-lead users", () => {
     authState.role = "OWNER";
     renderWithQueryClient(<Sidebar />);
 
-    expect(screen.queryByText("Admin Dashboard")).not.toBeInTheDocument();
-    expect(screen.queryByText("Admin Overrides")).not.toBeInTheDocument();
-    expect(screen.queryByText("Export History")).not.toBeInTheDocument();
+    expect(screen.queryByText("Admin")).not.toBeInTheDocument();
+    expect(screen.queryByText("Settings")).not.toBeInTheDocument();
   });
 
   it("shows admin and export links for admin users", () => {
     authState.role = "ADMIN";
     renderWithQueryClient(<Sidebar />);
 
-    expect(screen.getByText("Admin Dashboard")).toBeInTheDocument();
-    expect(screen.getByText("Admin Overrides")).toBeInTheDocument();
-    expect(screen.getByText("Export History")).toBeInTheDocument();
+    expect(screen.getByText("Admin")).toBeInTheDocument();
+    expect(screen.getByText("Settings")).toBeInTheDocument();
+    expect(screen.getByText("AI Classification")).toBeInTheDocument();
+  });
+
+  it("shows admin and export links for lead users", () => {
+    authState.role = "LEAD";
+    renderWithQueryClient(<Sidebar />);
+
+    expect(screen.getByText("Admin")).toBeInTheDocument();
+    expect(screen.getByText("Settings")).toBeInTheDocument();
+    expect(screen.getByText("AI Classification")).toBeInTheDocument();
   });
 });
-

@@ -1,0 +1,23 @@
+UX review notes (2026-04-07T01-06-06Z)
+
+1. Discoverability improvements validated:
+- /projects now presents two clear Create project triggers (header + sticky primary action).
+- Non-privileged users see disabled CTA state with explicit role rationale.
+
+2. Workflow clarity validated:
+- Indicator screen exposes ordered section navigation:
+  Readiness → Summary → Actions → Evidence → Recurring → AI/Assist → Governance/Override.
+- Worklist, recurring, exports, and project overview include next-step/guidance framing.
+
+3. Role clarity validated:
+- Sidebar admin region hidden for non-admin roles in UI.
+- Export generation denial path for owner role is explicit and non-silent.
+
+4. Verification summary:
+- frontend tests: pass
+- frontend build: pass
+- Playwright (core + UX suites): pass
+- targeted backend governance/feature tests: pass
+
+5. Remaining minor risks:
+- Add dedicated frontend unit tests for print-pack screen rendering and status-semantic components to close test-depth gaps.

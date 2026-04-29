@@ -5,11 +5,14 @@ from rest_framework.generics import ListAPIView
 from apps.api.responses import success_response
 from apps.api.serializers.common import FrameworkSummarySerializer
 from apps.frameworks.models import Framework
+from apps.frameworks.services import framework_export_payload, framework_template_payload
 from apps.indicators.models import Indicator
+from apps.workflow.permissions import ExplicitAuthenticatedPermission
 
 
 class FrameworkListView(ListAPIView):
     serializer_class = FrameworkSummarySerializer
+    permission_classes = [ExplicitAuthenticatedPermission]
 
     def get_queryset(self):
         return Framework.objects.order_by("name")
@@ -20,6 +23,8 @@ class FrameworkListView(ListAPIView):
 
 
 class FrameworkAnalysisView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
     def get(self, request, framework_id):
         framework = get_object_or_404(Framework, pk=framework_id)
         indicators = Indicator.objects.filter(framework=framework, is_active=True)
@@ -30,7 +35,7 @@ class FrameworkAnalysisView(APIView):
         registers = indicators.filter(
             text__iregex=r"(register|log)"
         ).count()
-        document = indicators.filter(evidence_type="DOCUMENT").count()
+        document = indicators.filter(evidence_type="DOCUMENT_POLICY").count()
         meeting_minutes = indicators.filter(
             text__iregex=r"(meeting|minutes)"
         ).count()
@@ -47,3 +52,18 @@ class FrameworkAnalysisView(APIView):
                 "meeting_minutes_indicators": meeting_minutes,
             }
         )
+
+
+class FrameworkTemplateView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
+    def get(self, request):
+        return success_response(framework_template_payload())
+
+
+class FrameworkExportView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
+    def get(self, request, framework_id):
+        framework = get_object_or_404(Framework, pk=framework_id)
+        return success_response(framework_export_payload(framework))

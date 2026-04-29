@@ -10,9 +10,13 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     environment:
       DJANGO_SETTINGS_MODULE: config.accrediops_backend.settings
-      DJANGO_DEBUG: "True"
-      DJANGO_ALLOWED_HOSTS: "127.0.0.1,localhost,caddy,frontend,backend"
-      DJANGO_CSRF_TRUSTED_ORIGINS: "http://localhost:18080,http://127.0.0.1:18080"
+      DJANGO_DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "127.0.0.1,localhost,caddy,frontend,backend,phc.alshifalab.pk,api.phc.alshifalab.pk"
+      DJANGO_CSRF_TRUSTED_ORIGINS: "http://localhost:18080,http://127.0.0.1:18080,https://phc.alshifalab.pk,https://api.phc.alshifalab.pk"
+      DJANGO_SESSION_COOKIE_SECURE: "True"
+      DJANGO_CSRF_COOKIE_SECURE: "True"
+      DJANGO_SESSION_COOKIE_SAMESITE: "Lax"
+      DJANGO_CSRF_COOKIE_SAMESITE: "Lax"
       DB_ENGINE: django.db.backends.sqlite3
       DB_NAME: db.sqlite3
     volumes:

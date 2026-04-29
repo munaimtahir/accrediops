@@ -1,0 +1,9 @@
+.git
+.next
+.next*
+coverage
+node_modules
+test-results
+playwright-report
+OUT
+*.tsbuildinfo

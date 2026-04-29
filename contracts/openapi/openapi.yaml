@@ -342,7 +342,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/FrameworkImportValidateRequest"
       responses:
@@ -2065,24 +2065,41 @@ components:
     FrameworkImportValidateRequest:
       type: object
       properties:
+        project_id: { type: integer }
+        file: { type: string, format: binary }
+      required: [project_id, file]
+    FrameworkImportValidateResult:
+      type: object
+      properties:
+        project_id: { type: integer }
         file_name: { type: string }
-        rows:
+        rows_processed: { type: integer }
+        normalized_rows: { type: integer }
+        missing_headers:
+          type: array
+          items: { type: string }
+        missing_required_values: { type: integer }
+        duplicate_warnings:
           type: array
           items:
             type: object
             additionalProperties: true
-      required: [rows]
-    FrameworkImportValidateResult:
-      type: object
-      properties:
-        rows_processed: { type: integer }
         errors:
           type: array
           items:
             type: object
             additionalProperties: true
         log_id: { type: integer }
-      required: [rows_processed, errors, log_id]
+      required:
+        - project_id
+        - file_name
+        - rows_processed
+        - normalized_rows
+        - missing_headers
+        - missing_required_values
+        - duplicate_warnings
+        - errors
+        - log_id
     MasterValue:
       type: object
       properties:

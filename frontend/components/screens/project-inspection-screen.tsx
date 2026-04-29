@@ -1,12 +1,22 @@
 "use client";
 
+import Link from "next/link";
+
 import { ErrorPanel } from "@/components/common/error-panel";
 import { EmptyState } from "@/components/common/empty-state";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
+import { OnboardingCallout } from "@/components/common/onboarding-callout";
 import { PageHeader } from "@/components/common/page-header";
+import { WorkflowContextStrip } from "@/components/common/workflow-context-strip";
+import { buttonVariants } from "@/components/ui/button";
+import { canViewReadiness } from "@/lib/authz";
+import { useAuthSession } from "@/lib/hooks/use-auth";
 import { useInspectionView, usePreInspectionCheck } from "@/lib/hooks/use-readiness";
+import { cn } from "@/utils/cn";
 
 export function ProjectInspectionScreen({ projectId }: { projectId: number }) {
+  const authQuery = useAuthSession();
+  const canAccessReadiness = canViewReadiness(authQuery.data?.user);
   const preCheck = usePreInspectionCheck(projectId);
   const inspection = useInspectionView(projectId);
 
@@ -31,10 +41,43 @@ export function ProjectInspectionScreen({ projectId }: { projectId: number }) {
         title="Inspection mode"
         description="Inspection-day view with only MET indicators, ordered by print pack structure."
       />
+      <WorkflowContextStrip
+        scope={`Project ${projectId} · Inspection mode`}
+        current="Reviewing MET-only evidence structure for inspection execution."
+        nextStep="Resolve blockers in worklist first, then return for final inspection traceability check."
+        actions={
+          canAccessReadiness
+            ? [
+                { label: "Back to project", href: `/projects/${projectId}` },
+                { label: "Open worklist", href: `/projects/${projectId}/worklist` },
+                { label: "Open readiness", href: `/projects/${projectId}/readiness` },
+              ]
+            : [
+                { label: "Back to project", href: `/projects/${projectId}` },
+                { label: "Open worklist", href: `/projects/${projectId}/worklist` },
+              ]
+        }
+      />
+      <OnboardingCallout
+        storageKey={`inspection-${projectId}`}
+        title="Inspection prep flow"
+        description="Resolve blocking warnings first, then return here to verify MET-only evidence ordering for inspection use."
+      />
       {hasBlocking ? (
         <div className="rounded-lg border border-rose-300 bg-rose-50 p-4 text-sm text-rose-900">
-          Blocking warnings: missing evidence {missing}, unapproved items {unapproved}, overdue recurring {overdue},
-          high-risk indicators {highRisk}.
+          <p className="font-semibold">Blocking warnings detected</p>
+          <p className="mt-1">
+            Missing evidence {missing}, unapproved items {unapproved}, overdue recurring {overdue}, high-risk indicators{" "}
+            {highRisk}.
+          </p>
+          <div className="mt-3">
+            <Link
+              href={`/projects/${projectId}/worklist?overdue=true`}
+              className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}
+            >
+              Open worklist with overdue filter
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-sm text-emerald-900">
@@ -44,7 +87,15 @@ export function ProjectInspectionScreen({ projectId }: { projectId: number }) {
       {!sections.length ? (
         <EmptyState
           title="No MET indicators available"
-          description="Inspection view will render once indicators are marked MET."
+          description="Inspection view appears after indicators are marked MET through governed workflow."
+          action={
+            <Link
+              href={`/projects/${projectId}/worklist`}
+              className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}
+            >
+              Open worklist
+            </Link>
+          }
         />
       ) : null}
       {sections.map((section) => (

@@ -1,0 +1,9 @@
+projects_by_status
+{'status': 'ACTIVE', 'c': 248}
+{'status': 'DRAFT', 'c': 27}
+users_by_role
+{'role': 'ADMIN', 'c': 5}
+{'role': 'APPROVER', 'c': 4}
+{'role': 'LEAD', 'c': 2}
+{'role': 'OWNER', 'c': 6}
+{'role': 'REVIEWER', 'c': 4}

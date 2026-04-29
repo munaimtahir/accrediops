@@ -2,10 +2,15 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from apps.masters.choices import (
+    AIAssistanceLevelChoices,
+    ClassificationConfidenceChoices,
+    ClassificationReviewStatusChoices,
     DocumentTypeChoices,
+    EvidenceFrequencyChoices,
     EvidenceReusePolicyChoices,
     EvidenceTypeChoices,
     IndicatorCommentTypeChoices,
+    PrimaryActionRequiredChoices,
     PriorityChoices,
     ProjectIndicatorStatusChoices,
     RecurrenceFrequencyChoices,
@@ -34,10 +39,50 @@ class Indicator(models.Model):
     text = models.TextField()
     required_evidence_description = models.TextField(blank=True)
     evidence_type = models.CharField(
-        max_length=20,
+        max_length=32,
         choices=EvidenceTypeChoices.choices,
-        default=EvidenceTypeChoices.DOCUMENT,
+        default=EvidenceTypeChoices.MANUAL_REVIEW,
     )
+    ai_assistance_level = models.CharField(
+        max_length=20,
+        choices=AIAssistanceLevelChoices.choices,
+        blank=True,
+        default="",
+    )
+    evidence_frequency = models.CharField(
+        max_length=20,
+        choices=EvidenceFrequencyChoices.choices,
+        blank=True,
+        default="",
+    )
+    primary_action_required = models.CharField(
+        max_length=40,
+        choices=PrimaryActionRequiredChoices.choices,
+        blank=True,
+        default="",
+    )
+    classification_confidence = models.CharField(
+        max_length=10,
+        choices=ClassificationConfidenceChoices.choices,
+        blank=True,
+        default="",
+    )
+    classification_reason = models.TextField(blank=True)
+    classification_review_status = models.CharField(
+        max_length=20,
+        choices=ClassificationReviewStatusChoices.choices,
+        default=ClassificationReviewStatusChoices.UNCLASSIFIED,
+    )
+    classified_by_ai_at = models.DateTimeField(null=True, blank=True)
+    classification_reviewed_by = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="reviewed_indicator_classifications",
+    )
+    classification_reviewed_at = models.DateTimeField(null=True, blank=True)
+    classification_version = models.PositiveIntegerField(default=0)
     document_type = models.CharField(
         max_length=20,
         choices=DocumentTypeChoices.choices,

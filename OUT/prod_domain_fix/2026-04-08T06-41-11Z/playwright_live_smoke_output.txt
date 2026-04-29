@@ -1,0 +1,17 @@
+
+> accrediops-frontend@0.1.0 test:e2e
+> playwright test -c playwright.config.ts --grep admin user can login and reach projects page|login page opens with expected form|protected routes redirect unauthenticated users to login
+
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (2.4s)
+  ✓  2 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (730ms)
+  ✓  3 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (3.0s)
+
+  3 passed (15.9s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

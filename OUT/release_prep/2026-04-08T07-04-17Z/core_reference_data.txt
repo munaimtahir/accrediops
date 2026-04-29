@@ -1,0 +1,28 @@
+=== DEPARTMENTS ===
+1 Quality 20260402224411546104
+2 Dep 20260402224448762607
+3 QA 20260402224510974838
+4 Operations
+5 E2E
+
+=== CLIENT_PROFILES ===
+1 E2E Client Profile E2E Address E2E-LIC-001 E2E-REG-001 E2E Contact ['E2E QA', 'Compliance']
+
+=== FRAMEWORK STRUCTURE ===
+FW 1: Hospital Accreditation 20260402224411546104
+  AREA 1: A6104 Patient Safety
+    STD 1: S6104 Medication Governance
+      IND 1: IND-6104 recurring=False active=True
+      IND 2: RIND-6104 recurring=True active=True
+FW 2: F 20260402224448762607
+  AREA 2: A2607 Area
+    STD 2: S2607 Std
+      IND 3: I2607 recurring=False active=True
+FW 3: Framework 20260402224510974838
+  AREA 3: A4838 Area
+    STD 3: S4838 Standard
+      IND 4: IND4838 recurring=False active=True
+FW 4: E2E Framework
+  AREA 4: E2E-A1 E2E Area
+    STD 4: E2E-S1 E2E Standard
+      IND 5: E2E-IND-001 recurring=True active=True

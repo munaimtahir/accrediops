@@ -13,10 +13,25 @@ export function useProjects() {
   });
 }
 
+export function useAdminProjects() {
+  return useQuery({
+    queryKey: ["admin", "projects"],
+    queryFn: () => apiClient.get<Project[]>("/api/projects/?is_active=true"),
+  });
+}
+
 export function useProject(projectId: number) {
   return useQuery({
     queryKey: queryKeys.project(projectId),
     queryFn: () => apiClient.get<Project>(`/api/projects/${projectId}/`),
+    enabled: Number.isFinite(projectId),
+  });
+}
+
+export function useProjectIndicatorsForProject(projectId: number) {
+  return useQuery({
+    queryKey: ["project-indicators", { projectId }],
+    queryFn: () => apiClient.get<Record<string, unknown>[]>(`/api/projects/${projectId}/project-indicators/`),
     enabled: Number.isFinite(projectId),
   });
 }

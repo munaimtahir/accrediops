@@ -18,6 +18,11 @@ class ClientProfile(models.Model):
     registration_number = models.CharField(max_length=120, blank=True)
     contact_person = models.CharField(max_length=255, blank=True)
     department_names = models.JSONField(default=list, blank=True)
+    linked_users = models.ManyToManyField(
+        "accounts.User",
+        blank=True,
+        related_name="client_profiles",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

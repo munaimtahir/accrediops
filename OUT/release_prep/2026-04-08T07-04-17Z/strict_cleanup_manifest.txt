@@ -1,0 +1,16 @@
+strict_cleanup_counts
+export_jobs_deleted 0
+print_pack_items_deleted 0
+ai_outputs_deleted 1
+recurring_instances_deleted 2
+recurring_requirements_deleted 1
+status_history_deleted 3
+comments_deleted 0
+evidence_deleted 4
+project_indicators_deleted 4
+projects_deleted 3
+users_deleted 9
+client_profiles_deleted 0
+import_logs_deleted 0
+sessions_deleted 655
+audit_events_deleted 114

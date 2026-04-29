@@ -10,9 +10,10 @@ export function AuthGuard({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const sessionQuery = useAuthSession();
+  const authCheckPending = sessionQuery.isLoading;
 
   useEffect(() => {
-    if (sessionQuery.isLoading) {
+    if (authCheckPending) {
       return;
     }
 
@@ -31,9 +32,9 @@ export function AuthGuard({ children }: { children: ReactNode }) {
         }, 150);
       }
     }
-  }, [pathname, router, sessionQuery.data?.authenticated, sessionQuery.isLoading]);
+  }, [authCheckPending, pathname, router, sessionQuery.data?.authenticated]);
 
-  if (sessionQuery.isLoading) {
+  if (authCheckPending) {
     return (
       <div className="min-h-screen space-y-4 p-6">
         <LoadingSkeleton className="h-16 w-full" />

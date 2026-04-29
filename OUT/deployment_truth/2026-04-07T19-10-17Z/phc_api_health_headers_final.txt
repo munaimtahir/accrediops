@@ -1,0 +1,11 @@
+HTTP/2 400 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Tue, 07 Apr 2026 22:07:49 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+

@@ -1,0 +1,11 @@
+== docker compose ps ==
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED         STATUS                        PORTS
+accrediops-backend    accrediops-backend    "sh -c 'python manag…"   backend    3 minutes ago   Up 2 minutes (healthy)        8000/tcp
+accrediops-caddy      caddy:2.8             "caddy run --config …"   caddy      8 hours ago     Up 27 seconds                 80/tcp, 443/tcp, 2019/tcp, 443/udp, 0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   2 minutes ago   Up About a minute (healthy)   3000/tcp
+
+== health checks ==
+{"status":"ok","service":"accrediops-frontend"}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+Base URL: http://127.0.0.1:18080

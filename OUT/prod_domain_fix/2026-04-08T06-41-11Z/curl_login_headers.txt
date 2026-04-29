@@ -1,0 +1,16 @@
+HTTP/2 200 
+allow: POST, OPTIONS
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+cross-origin-opener-policy: same-origin
+date: Wed, 08 Apr 2026 06:52:28 GMT
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: csrftoken=iz8u0RGZmwXDvNLPO4A8p0hK0vjaxMmh; expires=Wed, 07 Apr 2027 06:52:28 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+set-cookie: sessionid=xsfsvc7c9tp6zgd4vhxg3wm841xc61v0; expires=Wed, 22 Apr 2026 06:52:28 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept, Cookie
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+content-length: 132
+

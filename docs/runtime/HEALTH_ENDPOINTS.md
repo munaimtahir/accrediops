@@ -4,6 +4,7 @@
 - Frontend direct: `/healthz`
 - Proxy backend check: `/health/backend`
 - Proxy frontend check: `/health/frontend`
+- Canonical proxy base URL: `http://127.0.0.1:18080`
 
 Expected response shape:
 ```json

@@ -1,0 +1,2 @@
+db_backup=/home/munaim/srv/apps/accrediops/OUT/release_prep/2026-04-08T07-04-17Z/backups/db.sqlite3.pre_cleanup.bak
+media_backup=not_present

@@ -11,3 +11,4 @@ Rules:
 Result:
 - API and UI coexist under one browser origin.
 - Client-side route refreshes are served by frontend service instead of returning proxy-level 404s.
+- Canonical host origin for this stack is `http://127.0.0.1:18080`.

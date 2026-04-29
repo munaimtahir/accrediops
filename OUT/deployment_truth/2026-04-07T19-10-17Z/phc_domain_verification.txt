@@ -1,0 +1,84 @@
+=== caddy phc excerpt ===
+# PHC
+# PHC
+phc.alshifalab.pk {
+	encode gzip zstd
+	import std_log phc
+	import std_headers
+
+	handle {
+		reverse_proxy 127.0.0.1:18080 {
+			import std_proxy
+		}
+	}
+}
+
+api.phc.alshifalab.pk {
+	encode gzip zstd
+	import std_log api_phc
+
+	handle /healthz {
+		reverse_proxy 127.0.0.1:18080 {
+			import std_proxy
+		}
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:18080 {
+			import std_proxy
+		}
+	}
+}
+
+# SENAITE
+=== domain checks ===
+HTTP/1.1 308 Permanent Redirect
+Connection: close
+Location: https://phc.alshifalab.pk/projects
+Server: Caddy
+Date: Tue, 07 Apr 2026 21:32:30 GMT
+
+---
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+cache-control: s-maxage=31536000
+content-type: text/html; charset=utf-8
+date: Tue, 07 Apr 2026 21:32:30 GMT
+etag: "1hmy41nml67xp"
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-powered-by: Next.js
+content-length: 10285
+
+---
+HTTP/2 200 
+alt-svc: h3=":443"; ma=2592000
+content-type: application/json
+date: Tue, 07 Apr 2026 21:32:30 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+---
+HTTP/2 400 
+alt-svc: h3=":443"; ma=2592000
+content-type: text/html; charset=utf-8
+cross-origin-opener-policy: same-origin
+date: Tue, 07 Apr 2026 21:32:30 GMT
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+via: 1.1 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+

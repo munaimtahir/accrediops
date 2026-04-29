@@ -1,0 +1,80 @@
+   ✓ CreateProjectForm > creates draft only when initialize is unchecked 1807ms
+ ✓ tests/project-workspace-board.test.tsx (1 test) 1045ms
+   ✓ ProjectWorkspaceBoard > renders area-standard-indicator hierarchy and opens drawer from indicator card 1040ms
+ ✓ tests/project-management-form.test.tsx (1 test) 1917ms
+   ✓ ProjectManagementForm > updates project details and client profile linkage 1915ms
+(node:240892) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/export-history-screen.test.tsx (2 tests) 807ms
+   ✓ ProjectExportHistoryScreen > renders export history page 575ms
+ ✓ tests/sidebar.test.tsx (3 tests) 1052ms
+   ✓ Sidebar > hides admin and export links for non-admin/non-lead users 749ms
+(node:241006) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/worklist-screen.test.tsx (1 test) 2314ms
+   ✓ ProjectWorklistScreen > renders filters and table 2308ms
+(node:241092) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/readiness-screen.test.tsx (2 tests) 1036ms
+   ✓ ProjectReadinessScreen > renders orientation and readiness metrics 923ms
+ ✓ tests/workflow-context-strip.test.tsx (1 test) 850ms
+   ✓ WorkflowContextStrip > renders context, next step, role hint, and navigation actions 847ms
+(node:241264) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/inspection-screen.test.tsx (1 test) 1498ms
+   ✓ ProjectInspectionScreen > renders inspection mode 1494ms
+(node:241286) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/recurring-screen.test.tsx (1 test) 749ms
+   ✓ ProjectRecurringScreen > renders recurring queue 734ms
+ ✓ tests/app-shell.test.tsx (1 test) 306ms
+ ✓ tests/admin-dashboard-screen.test.tsx (1 test) 600ms
+   ✓ AdminDashboardScreen > renders admin metrics 596ms
+ ✓ tests/evidence-form.test.tsx (1 test) 556ms
+   ✓ EvidenceForm > submits with physical evidence fields 554ms
+
+ Test Files  19 passed (19)
+      Tests  36 passed (36)
+   Start at  22:04:08
+   Duration  53.12s (transform 5.54s, setup 7.19s, collect 37.86s, tests 26.46s, environment 55.72s, prepare 10.26s)
+
+
+> accrediops-frontend@0.1.0 test:e2e
+> playwright test -c playwright.config.ts
+
+
+Running 26 tests using 2 workers
+
+  ✓   1 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (3.0s)
+  ✓   3 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (2.3s)
+  ✓   4 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (6.3s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:55:7 › Core operational browser journeys › evidence review journey works end-to-end (15.8s)
+  ✓   5 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (9.9s)
+  ✓   7 tests/e2e/app-flows.spec.ts:44:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (6.9s)
+  ✓   8 tests/e2e/app-flows.spec.ts:53:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (65ms)
+  ✓   6 tests/e2e/core-journeys.spec.ts:79:7 › Core operational browser journeys › recurring approval from indicator context works (13.9s)
+  ✓   9 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (4.9s)
+  ✓  11 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (3.1s)
+  ✓  10 tests/e2e/core-journeys.spec.ts:96:7 › Core operational browser journeys › create flow supports client profile linkage (9.6s)
+  ✓  12 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (5.2s)
+  ✓  13 tests/e2e/core-journeys.spec.ts:130:7 › Core operational browser journeys › clone project then open cloned workspace (8.0s)
+  ✓  14 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (6.3s)
+  ✓  15 tests/e2e/core-journeys.spec.ts:151:7 › Core operational browser journeys › admin route access is available after login (4.3s)
+  ✓  16 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead cannot see admin navigation section (3.9s)
+  ✓  18 tests/e2e/role-visibility.spec.ts:18:7 › Role visibility and gating › owner export screen shows guided deny state (5.9s)
+  ✓  19 tests/e2e/ui-clarity.spec.ts:5:7 › UI clarity › projects page exposes prominent create CTA and guidance (4.8s)
+  ✓  20 tests/e2e/ui-clarity.spec.ts:14:7 › UI clarity › indicator follows ordered workflow sections (6.0s)
+  ✓  21 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (6.8s)
+  ✓  17 tests/e2e/core-journeys.spec.ts:158:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (29.6s)
+  ✓  22 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (5.6s)
+  ✓  23 tests/e2e/core-journeys.spec.ts:196:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (17.8s)
+  ✓  24 tests/e2e/core-journeys.spec.ts:241:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (8.1s)
+  ✓  25 tests/e2e/core-journeys.spec.ts:264:7 › Core operational browser journeys › non-admin user cannot access export history actions (11.3s)
+  ✓  26 tests/e2e/core-journeys.spec.ts:282:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (15.3s)
+
+  26 passed (2.4m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report ../playwright-report[39m
+[36m[39m

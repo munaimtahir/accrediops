@@ -25,10 +25,14 @@ DEBUG = env_bool("DJANGO_DEBUG", True)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,testserver")
 CSRF_TRUSTED_ORIGINS = env_list(
     "DJANGO_CSRF_TRUSTED_ORIGINS",
-    "https://ops.alshifalab.pk,https://api.ops.alshifalab.pk",
+    "http://localhost:18080,http://127.0.0.1:18080",
 )
 USE_X_FORWARDED_HOST = env_bool("DJANGO_USE_X_FORWARDED_HOST", True)
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SESSION_COOKIE_SECURE = env_bool("DJANGO_SESSION_COOKIE_SECURE", not DEBUG)
+CSRF_COOKIE_SECURE = env_bool("DJANGO_CSRF_COOKIE_SECURE", not DEBUG)
+SESSION_COOKIE_SAMESITE = os.getenv("DJANGO_SESSION_COOKIE_SAMESITE", "Lax")
+CSRF_COOKIE_SAMESITE = os.getenv("DJANGO_CSRF_COOKIE_SAMESITE", "Lax")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -137,3 +141,10 @@ REST_FRAMEWORK = {
     ],
     "EXCEPTION_HANDLER": "apps.api.exception_handler.accrediops_exception_handler",
 }
+
+AI_PROVIDER = os.getenv("AI_PROVIDER", "").strip().lower()
+AI_MODEL = os.getenv("AI_MODEL", "").strip()
+AI_DEMO_MODE = env_bool("AI_DEMO_MODE", False)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "").strip()

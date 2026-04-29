@@ -6,6 +6,7 @@ import { useToast } from "@/components/common/toaster";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { StatusSemanticBadge } from "@/components/common/status-semantic-badge";
 import { getSafeErrorMessage } from "@/lib/api/client";
 import {
   EvidenceApprovalStatus,
@@ -14,6 +15,7 @@ import {
   EvidenceReviewPayload,
   EvidenceValidityStatus,
 } from "@/types";
+import { getEvidenceApprovalTone } from "@/utils/status-semantics";
 
 interface EvidenceReviewFormProps {
   evidence: EvidenceItem;
@@ -99,6 +101,12 @@ export function EvidenceReviewForm({
         <span className="font-medium text-slate-700">Review notes</span>
         <Textarea value={reviewNotes} onChange={(event) => setReviewNotes(event.target.value)} />
       </label>
+      <div>
+        <p className="text-xs text-slate-500">Current approval semantic</p>
+        <div className="mt-1">
+          <StatusSemanticBadge tone={getEvidenceApprovalTone(approval)} />
+        </div>
+      </div>
 
       <div className="flex justify-end">
         <Button type="submit" loading={loading}>

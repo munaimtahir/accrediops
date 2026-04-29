@@ -20,3 +20,5 @@
 2. `scripts/devops/status_check.sh`
 3. `scripts/devops/smoke_verify.sh`
 4. Open `/projects` and target changed route in browser.
+
+Canonical browser origin: `http://127.0.0.1:18080`.

@@ -7,9 +7,9 @@
 - Orchestration: `docker-compose.yml`
 
 ## Services, containers, ports
-- `frontend` → container `accrediops-frontend` → internal `3000` → external via Caddy `8080`
-- `backend` → container `accrediops-backend` → internal `8000` → external via Caddy `8080/api/*`
-- `caddy` → container `accrediops-caddy` → internal/external `8080`
+- `frontend` → container `accrediops-frontend` → internal `3000` → external via Caddy `18080`
+- `backend` → container `accrediops-backend` → internal `8000` → external via Caddy `18080/api/*`
+- `caddy` → container `accrediops-caddy` → internal `8080` (published as host `18080`)
 
 ## Internal URLs
 - Frontend to backend: `http://backend:8000`
@@ -17,11 +17,16 @@
 - Caddy to backend: `http://backend:8000`
 
 ## Browser-facing URLs
-- App root: `http://localhost:8080/`
-- API: `http://localhost:8080/api/...`
-- Frontend health: `http://localhost:8080/health/frontend`
-- Backend health: `http://localhost:8080/health/backend`
+- App root: `http://localhost:18080/`
+- API: `http://localhost:18080/api/...`
+- Frontend health: `http://localhost:18080/health/frontend`
+- Backend health: `http://localhost:18080/health/backend`
 - Protected API endpoints may return 401/403 if unauthenticated (expected).
+
+## Host-domain ingress mapping
+- `https://phc.alshifalab.pk` -> host Caddy -> `127.0.0.1:18080` (AccrediOps app)
+- `https://api.phc.alshifalab.pk` -> host Caddy -> `127.0.0.1:18080` (AccrediOps app/API path routing)
+- There is no separate PHC Streamlit target in active routing for AccrediOps.
 
 ## Frontend API base behavior
 - Frontend calls `/api/*`.

@@ -1,0 +1,14 @@
+UI Follow-up Sprint
+Timestamp: 2026-04-05T22-07-08Z
+
+Verification summary
+- frontend tests: pass
+- frontend build: pass
+- playwright targeted UX/governance journeys: pass
+
+Manual review notes
+- Indicator detail now supports explicit section-first workflow (Readiness → Summary → Operations → Evidence → Recurring → AI → Commands → Governance).
+- Role gating is now explained inline at section level for evidence/recurring/commands, not only via disabled button titles.
+- Dismissible onboarding guidance is consistent across worklist, recurring queue, readiness, inspection, exports, and indicator detail.
+- Indicator recurring submit modal now supports evidence selection by dropdown when evidence exists.
+- Playwright operator journeys remain stable with selector updates aligned to revised UI hierarchy.

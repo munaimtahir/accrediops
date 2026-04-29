@@ -1,0 +1,4 @@
+Representative pre-fix behavior (before this fix):
+- phc /api/auth/session returned HTTP 400
+- phc /api/auth/login returned HTTP 400
+- backend emitted DisallowedHost for phc.alshifalab.pk / api.phc.alshifalab.pk

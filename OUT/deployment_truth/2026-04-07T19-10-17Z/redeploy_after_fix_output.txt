@@ -1,0 +1,149 @@
+[accrediops] rebuilding frontend/backend for UI refresh...
+ Image accrediops-backend Building 
+ Image accrediops-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [backend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 258B done
+#2 DONE 0.1s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 139B done
+#3 DONE 0.1s
+
+#4 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#4 DONE 0.4s
+
+#5 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 0.5s
+
+#6 [frontend internal] load .dockerignore
+#6 transferring context: 2B 0.0s done
+#6 DONE 0.1s
+
+#7 [backend internal] load .dockerignore
+#7 transferring context: 2B 0.0s done
+#7 DONE 0.1s
+
+#8 [frontend internal] load build context
+#8 ...
+
+#9 [frontend 1/5] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#9 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.1s done
+#9 DONE 0.1s
+
+#10 [backend 1/5] FROM docker.io/library/python:3.12-slim@sha256:5072b08ad74609c5329ab4085a96dfa873de565fb4751a4cfcd7dcc427661df0
+#10 resolve docker.io/library/python:3.12-slim@sha256:5072b08ad74609c5329ab4085a96dfa873de565fb4751a4cfcd7dcc427661df0 0.1s done
+#10 DONE 0.1s
+
+#8 [frontend internal] load build context
+#8 ...
+
+#11 [backend internal] load build context
+#11 transferring context: 2.45MB 2.7s done
+#11 DONE 2.8s
+
+#12 [backend 2/5] WORKDIR /app
+#12 CACHED
+
+#13 [backend 3/5] COPY requirements.txt /app/requirements.txt
+#13 CACHED
+
+#14 [backend 4/5] RUN pip install --no-cache-dir -r /app/requirements.txt
+#14 CACHED
+
+#8 [frontend internal] load build context
+#8 transferring context: 2.15MB 4.2s done
+#8 DONE 4.3s
+
+#15 [backend 5/5] COPY . /app
+#15 ...
+
+#16 [frontend 2/5] WORKDIR /app
+#16 CACHED
+
+#17 [frontend 3/5] COPY package*.json /app/
+#17 CACHED
+
+#18 [frontend 4/5] RUN npm install
+#18 CACHED
+
+#19 [frontend 5/5] COPY . /app
+#19 ...
+
+#15 [backend 5/5] COPY . /app
+#15 DONE 33.5s
+
+#20 [backend] exporting to image
+#20 exporting layers
+#20 ...
+
+#19 [frontend 5/5] COPY . /app
+#19 DONE 46.7s
+
+#20 [backend] exporting to image
+#20 ...
+
+#21 [frontend] exporting to image
+#21 exporting layers
+#21 ...
+
+#20 [backend] exporting to image
+#20 exporting layers 19.3s done
+#20 exporting manifest sha256:66117a56d7ba7bc430fde5e55b127d48bb60e709b64de4e7cd46d811d5bd0196 0.0s done
+#20 exporting config sha256:0b9009bd86a6a22924507be2de18d32f340c5d1539eec1f2fb27cac98e969686 0.0s done
+#20 exporting attestation manifest sha256:7978f39d042ab849513ceb51aeafaf77f27b759f20680c740b39e0078e29cd8f 0.0s done
+#20 exporting manifest list sha256:27cd3319b977834534807b693572e2e1ac85cde0968778fd1672dbbeeda9b3e9 0.0s done
+#20 naming to docker.io/library/accrediops-backend:latest done
+#20 unpacking to docker.io/library/accrediops-backend:latest 4.6s done
+#20 DONE 24.1s
+
+#22 [backend] resolving provenance for metadata file
+#22 DONE 0.0s
+
+#21 [frontend] exporting to image
+#21 exporting layers 77.3s done
+#21 exporting manifest sha256:6d543b01953eccad16d0b0c3ec486b76f61d31ffc27ae0ce571d1bd31e8ab625
+#21 exporting manifest sha256:6d543b01953eccad16d0b0c3ec486b76f61d31ffc27ae0ce571d1bd31e8ab625 0.0s done
+#21 exporting config sha256:9d5bdb5aa282d66fc2cd17aa415eff19fb219e2d8ed773c3f44fb07b9dd8b567 0.0s done
+#21 exporting attestation manifest sha256:51c2c3d7b132fb45d2a0f4da46132fcc0406aa176eb2e7127334752a2b322a48 0.0s done
+#21 exporting manifest list sha256:c6d144b52b2c21c29c76abfeb787dbd9ebeaaf05da332300bb4798e5044d21dc 0.0s done
+#21 naming to docker.io/library/accrediops-frontend:latest
+#21 naming to docker.io/library/accrediops-frontend:latest done
+#21 unpacking to docker.io/library/accrediops-frontend:latest
+#21 unpacking to docker.io/library/accrediops-frontend:latest 22.4s done
+#21 DONE 100.8s
+
+#23 [frontend] resolving provenance for metadata file
+#23 DONE 0.0s
+ Image accrediops-frontend Built 
+ Image accrediops-backend Built 
+ Container accrediops-backend Recreate 
+ Container accrediops-backend Recreated 
+ Container accrediops-frontend Recreate 
+ Container accrediops-frontend Recreated 
+ Container accrediops-caddy Running 
+ Container accrediops-backend Starting 
+ Container accrediops-backend Started 
+ Container accrediops-backend Waiting 
+ Container accrediops-backend Healthy 
+ Container accrediops-frontend Starting 
+ Container accrediops-frontend Started 
+ Container accrediops-backend Waiting 
+ Container accrediops-frontend Waiting 
+ Container accrediops-backend Healthy 
+ Container accrediops-frontend Healthy 
+[accrediops] waiting for service readiness...
+== docker compose ps ==
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+accrediops-backend    accrediops-backend    "sh -c 'python manag…"   backend    2 minutes ago        Up About a minute (healthy)   8000/tcp
+accrediops-caddy      caddy:2.8             "caddy run --config …"   caddy      8 hours ago          Up 9 minutes                  80/tcp, 443/tcp, 2019/tcp, 443/udp, 0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   About a minute ago   Up About a minute (healthy)   3000/tcp
+
+== health checks ==
+{"status":"ok","service":"accrediops-frontend"}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+Base URL: http://127.0.0.1:18080

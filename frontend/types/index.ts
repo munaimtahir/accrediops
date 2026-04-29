@@ -12,6 +12,36 @@ export type AIOutputType = "GUIDANCE" | "DRAFT" | "ASSESSMENT";
 export type UserRole = "ADMIN" | "LEAD" | "OWNER" | "REVIEWER" | "APPROVER";
 export type EvidenceReusePolicy = "NONE" | "MANUAL_REVIEW" | "AUTO_ALLOWED";
 export type PhysicalLocationType = "BINDER" | "CABINET" | "ROOM" | "OTHER" | "";
+export type EvidenceType =
+  | "DOCUMENT_POLICY"
+  | "RECORD_REGISTER"
+  | "PHYSICAL_FACILITY"
+  | "LICENSE_CERTIFICATE"
+  | "STAFF_TRAINING"
+  | "PROCESS_WORKFLOW"
+  | "AUDIT_QUALITY"
+  | "MIXED_EVIDENCE"
+  | "MANUAL_REVIEW";
+export type AIAssistanceLevel = "FULL_AI" | "PARTIAL_AI" | "NO_AI" | "";
+export type EvidenceFrequency = "ONE_TIME" | "RECURRING" | "EVENT_BASED" | "";
+export type PrimaryActionRequired =
+  | "GENERATE_DOCUMENT"
+  | "COLLECT_RECORD"
+  | "UPLOAD_PHOTO"
+  | "ARRANGE_PHYSICAL_COMPLIANCE"
+  | "OBTAIN_CERTIFICATE"
+  | "TRAIN_STAFF"
+  | "MAINTAIN_LOG"
+  | "REVIEW_EXISTING_EVIDENCE"
+  | "MANUAL_DECISION"
+  | "";
+export type ClassificationReviewStatus =
+  | "UNCLASSIFIED"
+  | "AI_SUGGESTED"
+  | "HUMAN_REVIEWED"
+  | "MANUALLY_CHANGED"
+  | "NEEDS_REVIEW";
+export type ClassificationConfidence = "HIGH" | "MEDIUM" | "LOW" | "";
 
 export interface UserSummary {
   id: number;
@@ -22,6 +52,12 @@ export interface UserSummary {
 }
 
 export interface ProjectSummary {
+  id: number;
+  name: string;
+  client_name: string;
+}
+
+export interface Project extends ProjectSummary {
   total_indicators: number;
   met_indicators: number;
   pending_indicators: number;
@@ -53,7 +89,17 @@ export interface IndicatorMaster {
   code: string;
   text: string;
   required_evidence_description: string;
-  evidence_type: string;
+  evidence_type: EvidenceType;
+  ai_assistance_level: AIAssistanceLevel;
+  evidence_frequency: EvidenceFrequency;
+  primary_action_required: PrimaryActionRequired;
+  classification_confidence: ClassificationConfidence;
+  classification_reason: string;
+  classification_review_status: ClassificationReviewStatus;
+  classified_by_ai_at: string | null;
+  classification_reviewed_by: number | null;
+  classification_reviewed_at: string | null;
+  classification_version: number;
   document_type: string;
   fulfillment_guidance: string;
   is_recurring: boolean;
@@ -119,6 +165,10 @@ export interface RecurringInstance {
   submitted_at: string | null;
   approved_at: string | null;
   notes: string;
+  capabilities?: {
+    can_submit: boolean;
+    can_approve: boolean;
+  };
 }
 
 export interface AIOutput {
@@ -208,7 +258,24 @@ export interface IndicatorReadinessFlags {
   };
 }
 
+export interface ProjectIndicatorCapabilities {
+  can_assign: boolean;
+  can_update_working_state: boolean;
+  can_start: boolean;
+  can_send_for_review: boolean;
+  can_mark_met: boolean;
+  can_reopen: boolean;
+  can_add_evidence: boolean;
+  can_edit_evidence: boolean;
+  can_review_evidence: boolean;
+  can_submit_recurring: boolean;
+  can_approve_recurring: boolean;
+  can_generate_ai: boolean;
+  can_accept_ai: boolean;
+}
+
 export interface ProjectIndicatorDetail extends ProjectIndicator {
+  capabilities: ProjectIndicatorCapabilities;
   evidence_items: EvidenceItem[];
   recurring_requirement: RecurringRequirement | null;
   recurring_instances: RecurringInstance[];
@@ -235,8 +302,15 @@ export interface DashboardRow {
   priority: Priority;
   owner: UserSummary | null;
   due_date: string | null;
+  notes: string;
   is_recurring: boolean;
   recurrence_frequency: RecurrenceFrequency;
+  evidence_type: EvidenceType;
+  ai_assistance_level: AIAssistanceLevel;
+  evidence_frequency: EvidenceFrequency;
+  primary_action_required: PrimaryActionRequired;
+  classification_confidence: ClassificationConfidence;
+  classification_review_status: ClassificationReviewStatus;
   approved_evidence_count: number;
   total_evidence_count: number;
   pending_recurring_instances_count: number;
@@ -250,6 +324,42 @@ export interface DashboardRow {
     in_review_long_time: boolean;
   };
   last_updated_at: string;
+}
+
+export interface IndicatorClassification extends IndicatorMaster {
+  area_id: number;
+  area_code: string;
+  area_name: string;
+  standard_id: number;
+  standard_code: string;
+  standard_name: string;
+  classification_reviewed_by_username: string;
+}
+
+export interface ClassificationSummary {
+  total: number;
+  unclassified: number;
+  ai_suggested: number;
+  needs_review: number;
+  human_reviewed: number;
+  full_ai: number;
+  recurring: number;
+  physical_no_ai: number;
+}
+
+export interface FrameworkClassificationPayload {
+  framework: FrameworkSummary;
+  summary: ClassificationSummary;
+  results: IndicatorClassification[];
+}
+
+export interface ClassificationRunResult {
+  total_requested: number;
+  classified_count: number;
+  skipped_count: number;
+  failed_count: number;
+  needs_review_count: number;
+  errors: Array<Record<string, unknown>>;
 }
 
 export interface StandardProgress {
@@ -321,7 +431,7 @@ export interface WorklistFilters {
   overdue?: boolean;
   search?: string;
   page?: number;
-  page_size?: number;
+  page_size?: number | "all";
 }
 
 export interface RecurringQueueFilters {
@@ -464,6 +574,8 @@ export interface ClientProfile {
   registration_number: string;
   contact_person: string;
   department_names: string[];
+  linked_users: UserSummary[];
+  linked_user_ids?: number[];
   created_at: string;
   updated_at: string;
 }
@@ -472,6 +584,96 @@ export interface FrameworkSummary {
   id: number;
   name: string;
   description: string;
+}
+
+export interface FrameworkTemplatePayload {
+  version: string;
+  columns: string[];
+  required_columns: string[];
+  sample_rows: Record<string, unknown>[];
+  template_csv: string;
+}
+
+export interface FrameworkExportPayload {
+  framework: FrameworkSummary;
+  columns: string[];
+  rows: Record<string, unknown>[];
+  row_count: number;
+  export_csv: string;
+}
+
+export interface FrameworkImportValidatePayload {
+  framework_id: number;
+  file: File;
+}
+
+export interface FrameworkImportValidateResult {
+  framework_id: number;
+  file_name: string;
+  rows_processed: number;
+  normalized_rows: number;
+  missing_headers: string[];
+  missing_required_values: number;
+  duplicate_warnings: Record<string, unknown>[];
+  errors: Record<string, unknown>[];
+  log_id: number;
+}
+
+export interface FrameworkImportCreatePayload {
+  framework_id: number;
+  file: File;
+}
+
+export interface FrameworkImportCreateResult {
+  framework_id: number;
+  file_name: string;
+  framework_name: string;
+  areas_count: number;
+  standards_count: number;
+  indicators_count: number;
+  rows_processed: number;
+  errors: Record<string, unknown>[];
+}
+
+export interface BulkClassificationReviewPayload {
+  mode?: "selected" | "ai_suggested" | "filtered";
+  indicator_ids?: number[];
+  action: "approve" | "set_needs_review";
+  updates?: object;
+  filters?: Record<string, unknown>;
+}
+
+export interface DocumentDraft {
+  id: number;
+  framework: number;
+  indicator: number;
+  project: number | null;
+  project_indicator: number | null;
+  title: string;
+  document_type: string;
+  draft_content: string;
+  prompt_snapshot: Record<string, unknown>;
+  source: string;
+  provider: string;
+  model: string;
+  ai_usage_log: number | null;
+  version: number;
+  parent_draft: number | null;
+  review_status: "DRAFT" | "HUMAN_REVIEW_REQUIRED" | "HUMAN_REVIEWED" | "PROMOTED_TO_EVIDENCE" | "ARCHIVED";
+  is_advisory: boolean;
+  generated_by: number | null;
+  generated_at: string;
+  last_edited_by: number | null;
+  last_edited_at: string | null;
+  promoted_by: number | null;
+  promoted_at: string | null;
+  promoted_evidence: number | null;
+  framework_name: string;
+  indicator_code: string;
+  project_name: string | null;
+  project_indicator_id: number | null; // This is a number in the serializer, but was object before
+  generated_by_username: string;
+  last_edited_by_username: string | null;
 }
 
 export interface VariablesPreviewPayload {

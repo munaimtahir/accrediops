@@ -28,6 +28,11 @@ describe("ProjectInspectionScreen", () => {
   it("renders inspection mode", () => {
     renderWithQueryClient(<ProjectInspectionScreen projectId={1} />);
     expect(screen.getByText("Inspection mode")).toBeInTheDocument();
+    expect(screen.getByText("Where you are")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Back to project" })).toHaveAttribute("href", "/projects/1");
     expect(screen.getByText("Pre-inspection checks clear.")).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("link", { name: "Open worklist" }).some((link) => link.getAttribute("href") === "/projects/1/worklist"),
+    ).toBe(true);
   });
 });

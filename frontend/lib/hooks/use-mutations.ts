@@ -248,6 +248,19 @@ export function useUpdateProject(projectId: number) {
   });
 }
 
+export function useDeleteProject(projectId: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => apiClient.delete<{ id: number; deleted: boolean }>(`/api/projects/${projectId}/`),
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: queryKeys.project(projectId) }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.projects }),
+      ]);
+    },
+  });
+}
+
 export function useInitializeProjectFromFramework() {
   const queryClient = useQueryClient();
   return useMutation({

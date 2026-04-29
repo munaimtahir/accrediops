@@ -21,7 +21,7 @@
 - `NEXT_PUBLIC_API_BASE_URL` (for explicit public API host usage)
 
 ## Defaults
-- Local compose defaults route browser traffic through `http://localhost:8080`.
+- Local compose defaults route browser traffic through `http://localhost:18080`.
 - Frontend API requests use `/api/*` and are rewritten/proxied.
 
 ## Production-sensitive notes
