@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useMemo } from "react";
 
 import { PriorityBadge } from "@/components/badges/priority-badge";
 import { RecurringBadge } from "@/components/badges/recurring-badge";
@@ -178,7 +178,16 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
   const evidenceItems = evidenceQuery.data ?? indicator.evidence_items;
   const aiOutputs = aiOutputsQuery.data ?? indicator.ai_outputs;
   const standards = Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [];
-  const currentStandard = standards.find((item) => item.standard_id === indicator.indicator.standard);
+
+  const standardsMap = useMemo(() => {
+    const map = new Map<number, StandardProgress>();
+    for (const standard of standards) {
+      map.set(standard.standard_id, standard);
+    }
+    return map;
+  }, [standards]);
+
+  const currentStandard = standardsMap.get(indicator.indicator.standard);
   const areaName = currentStandard?.area_name ?? `Area #${indicator.indicator.area}`;
   const standardName = currentStandard?.standard_name ?? `Standard #${indicator.indicator.standard}`;
   const readiness = indicator.readiness_flags;
