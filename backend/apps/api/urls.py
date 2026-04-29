@@ -52,7 +52,6 @@ from apps.api.views.project_indicators import (
     ProjectIndicatorSendForReviewView,
     ProjectIndicatorStartView,
     ProjectIndicatorUpdateWorkingStateView,
-    ProjectIndicatorsForProjectListView, # Imported this view
 )
 from apps.api.views.projects import (
     AreasProgressView,
@@ -158,7 +157,6 @@ urlpatterns = [
         name="project-initialize-from-framework",
     ),
     path("api/projects/<int:project_id>/clone/", ProjectCloneView.as_view(), name="project-clone"),
-    path("api/projects/<int:project_id>/project-indicators/", ProjectIndicatorsForProjectListView.as_view(), name="project-indicators-for-project"),
     path("api/projects/<int:project_id>/readiness/", ProjectReadinessView.as_view(), name="project-readiness"),
     path("api/projects/<int:project_id>/inspection-view/", ProjectInspectionView.as_view(), name="project-inspection-view"),
     path(
