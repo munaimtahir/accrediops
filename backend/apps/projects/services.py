@@ -197,7 +197,7 @@ def clone_project(
     # Use zip to avoid project_indicator.indicator lazy-loading queries
     for indicator, project_indicator in zip(indicators, created_project_indicators):
         if indicator.is_recurring:
-            source_item = source_by_indicator_id.get(indicator.id)
+            source_item = indicator._source_item
             # With select_related("recurring_requirement"), this is safe and doesn't trigger queries
             source_requirement = source_item.recurring_requirement if source_item else None
 
