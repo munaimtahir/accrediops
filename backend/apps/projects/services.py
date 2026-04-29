@@ -163,43 +163,70 @@ def clone_project(
     )
     source_items = (
         ProjectIndicator.objects.filter(project=source_project)
-        .select_related("indicator", "owner", "reviewer", "approver")
+        .select_related("indicator", "owner", "reviewer", "approver", "recurring_requirement")
         .all()
     )
     source_by_indicator_id = {item.indicator_id: item for item in source_items}
-    indicators = Indicator.objects.filter(
-        framework=source_project.framework,
-        is_active=True,
-    ).select_related("area", "standard")
+    indicators = list(
+        Indicator.objects.filter(
+            framework=source_project.framework,
+            is_active=True,
+        ).select_related("area", "standard")
+    )
+
+    project_indicators_to_create = []
+    indicator_to_source_item = {}
+
     for indicator in indicators:
         source_item = source_by_indicator_id.get(indicator.id)
-        project_indicator = ProjectIndicator.objects.create(
-            project=project,
-            indicator=indicator,
-            owner=source_item.owner if source_item else None,
-            reviewer=source_item.reviewer if source_item else None,
-            approver=source_item.approver if source_item else None,
-            priority=source_item.priority if source_item else "MEDIUM",
-            due_date=project.target_date,
-            notes="",
-            last_updated_by=actor,
-        )
-        if indicator.is_recurring:
-            source_requirement = None
-            if source_item and hasattr(source_item, "recurring_requirement"):
-                source_requirement = source_item.recurring_requirement
-            RecurringRequirement.objects.create(
-                project_indicator=project_indicator,
-                frequency=source_requirement.frequency if source_requirement else indicator.recurrence_frequency,
-                mode=source_requirement.mode if source_requirement else indicator.recurrence_mode,
-                start_date=project.start_date,
-                end_date=project.target_date,
-                is_active=True,
-                instructions=source_requirement.instructions if source_requirement else indicator.fulfillment_guidance,
-                expected_title_template=(
-                    source_requirement.expected_title_template if source_requirement else indicator.code
-                ),
+        indicator_to_source_item[indicator.id] = source_item
+        project_indicators_to_create.append(
+            ProjectIndicator(
+                project=project,
+                indicator=indicator,
+                owner=source_item.owner if source_item else None,
+                reviewer=source_item.reviewer if source_item else None,
+                approver=source_item.approver if source_item else None,
+                priority=source_item.priority if source_item else "MEDIUM",
+                due_date=project.target_date,
+                notes="",
+                last_updated_by=actor,
             )
+        )
+
+    created_project_indicators = ProjectIndicator.objects.bulk_create(project_indicators_to_create)
+
+    recurring_requirements_to_create = []
+    for project_indicator in created_project_indicators:
+        indicator = project_indicator.indicator
+        if indicator.is_recurring:
+            source_item = indicator_to_source_item.get(indicator.id)
+            source_requirement = None
+            if source_item:
+                try:
+                    source_requirement = source_item.recurring_requirement
+                except RecurringRequirement.DoesNotExist:
+                    source_requirement = None
+
+            recurring_requirements_to_create.append(
+                RecurringRequirement(
+                    project_indicator=project_indicator,
+                    frequency=source_requirement.frequency if source_requirement else indicator.recurrence_frequency,
+                    mode=source_requirement.mode if source_requirement else indicator.recurrence_mode,
+                    start_date=project.start_date,
+                    end_date=project.target_date,
+                    is_active=True,
+                    instructions=(
+                        source_requirement.instructions if source_requirement else indicator.fulfillment_guidance
+                    ),
+                    expected_title_template=(
+                        source_requirement.expected_title_template if source_requirement else indicator.code
+                    ),
+                )
+            )
+
+    if recurring_requirements_to_create:
+        RecurringRequirement.objects.bulk_create(recurring_requirements_to_create)
 
     log_audit_event(
         actor=actor,
