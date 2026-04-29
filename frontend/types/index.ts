@@ -57,6 +57,12 @@ export interface ProjectSummary {
   client_name: string;
 }
 
+export interface ProjectIndicatorSummary {
+  id: number;
+  indicator_code: string;
+  indicator_text: string;
+}
+
 export interface Project extends ProjectSummary {
   total_indicators: number;
   met_indicators: number;
