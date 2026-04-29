@@ -171,7 +171,7 @@ def clone_project(
         Indicator.objects.filter(
             framework=source_project.framework,
             is_active=True,
-        ).select_related("area", "standard")
+        )
     )
 
     project_indicators_to_create = []
