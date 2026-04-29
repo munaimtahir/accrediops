@@ -60,13 +60,13 @@ class BenchmarkCloneProject(TestCase):
         ])
 
     def test_benchmark_clone_project(self):
-        start_time = time.time()
+        start_time = time.perf_counter()
         clone_project(
             source_project=self.source_project,
             actor=self.admin,
             name="Cloned Project",
             client_name="Cloned Client"
         )
-        end_time = time.time()
+        end_time = time.perf_counter()
         duration = end_time - start_time
         print(f"\nBenchmark: clone_project took {duration:.4f} seconds for 100 indicators")
