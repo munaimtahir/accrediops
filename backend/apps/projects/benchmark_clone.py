@@ -49,13 +49,15 @@ class BenchmarkCloneProject(TestCase):
         )
         # Initialize source project indicators
         source_indicators = Indicator.objects.filter(framework=self.framework)
-        for indicator in source_indicators:
-            ProjectIndicator.objects.create(
+        ProjectIndicator.objects.bulk_create([
+            ProjectIndicator(
                 project=self.source_project,
                 indicator=indicator,
                 priority="MEDIUM",
                 due_date=self.source_project.target_date,
             )
+            for indicator in source_indicators
+        ])
 
     def test_benchmark_clone_project(self):
         start_time = time.time()
