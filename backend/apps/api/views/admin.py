@@ -726,7 +726,7 @@ class FrameworkClassificationBulkReviewView(APIView):
                 indicators_to_update.append(indicator)
 
             if indicators_to_update:
-                Indicator.objects.bulk_update(indicators_to_update, fields=list(update_fields))
+                Indicator.objects.bulk_update(indicators_to_update, fields=list(update_fields), batch_size=500)
         
         return success_response(
             {
