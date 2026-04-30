@@ -15,7 +15,7 @@ class CloneProjectServiceTest(ContractBaseTestCase):
         source_pi.owner = self.owner
         source_pi.reviewer = self.reviewer
         source_pi.approver = self.approver
-        source_pi.priority = "HIGH"
+        source_pi.priority = PriorityChoices.HIGH
         source_pi.notes = "These are some notes that shouldn't be cloned"
         source_pi.save()
 
