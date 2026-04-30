@@ -121,6 +121,9 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
         # Now ready
         readiness = validate_project_indicator_readiness(self.project_indicator)
         self.assertTrue(readiness["ready_for_met"])
+        self.assertEqual(readiness["approved_evidence_count"], 1)
+        self.assertTrue(readiness["has_minimum_required_evidence"])
+        self.assertTrue(readiness["recurring_requirements_clear"])
 
     def test_mark_project_indicator_met_success(self):
         self._setup_assignments()
