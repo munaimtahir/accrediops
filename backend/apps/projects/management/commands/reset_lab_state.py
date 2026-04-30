@@ -103,4 +103,3 @@ class Command(BaseCommand):
                 transaction.set_rollback(True)
             else:
                 self.stdout.write(self.style.SUCCESS("\nClean slate reset complete."))
-Clean slate reset complete."))
