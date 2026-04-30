@@ -117,3 +117,7 @@ class CloneProjectServiceTest(ContractBaseTestCase):
         self.assertEqual(
             cloned_req.expected_title_template, self.recurring_indicator.code
         )
+        self.assertEqual(cloned_req.start_date, cloned_project.start_date)
+        self.assertEqual(cloned_req.end_date, cloned_project.target_date)
+        self.assertTrue(cloned_req.is_active)
+        self.assertEqual(cloned_recurring_pi.last_updated_by, self.admin)
