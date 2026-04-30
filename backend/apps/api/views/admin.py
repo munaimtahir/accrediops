@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.db import transaction
+from django.db import transaction, models
 from django.db.models import Count, Q
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
@@ -361,20 +361,26 @@ class DocumentGenerationQueueView(APIView):
             ),
         )
 
+        draft_ids_to_fetch = [
+            indicator.latest_draft_id for indicator in queryset if indicator.latest_draft_id
+        ]
+        drafts_dict = DocumentDraft.objects.in_bulk(draft_ids_to_fetch)
+
         indicators = []
         for indicator in queryset:
             data = IndicatorClassificationSerializer(indicator).data
             data['latest_draft'] = None
             data['draft_count'] = indicator.draft_count
             if indicator.latest_draft_id:
-                latest_draft = DocumentDraft.objects.get(id=indicator.latest_draft_id)
-                data['latest_draft'] = {
-                    'id': latest_draft.id,
-                    'title': latest_draft.title,
-                    'review_status': latest_draft.review_status,
-                    'generated_at': latest_draft.generated_at,
-                    'version': latest_draft.version,
-                }
+                latest_draft = drafts_dict.get(indicator.latest_draft_id)
+                if latest_draft:
+                    data['latest_draft'] = {
+                        'id': latest_draft.id,
+                        'title': latest_draft.title,
+                        'review_status': latest_draft.review_status,
+                        'generated_at': latest_draft.generated_at,
+                        'version': latest_draft.version,
+                    }
             indicators.append(data)
 
         return success_response({
