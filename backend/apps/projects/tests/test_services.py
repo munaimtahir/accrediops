@@ -1,9 +1,7 @@
 from apps.api.tests.base import ContractBaseTestCase
 from apps.indicators.models import ProjectIndicator
-from apps.masters.choices import ProjectStatusChoices
-from apps.projects.models import AccreditationProject
+from apps.masters.choices import PriorityChoices, ProjectStatusChoices
 from apps.projects.services import clone_project
-from apps.recurring.models import RecurringRequirement
 from django.core.exceptions import PermissionDenied
 
 
