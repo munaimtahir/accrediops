@@ -51,23 +51,12 @@ class CreateProjectTestCase(ContractBaseTestCase):
         self.assertEqual(project.name, "New Test Project")
         self.assertEqual(project.created_by, self.lead)
 
-    def test_create_project_owner_denied(self):
-        # Owner cannot create a project
-        with self.assertRaisesMessage(
-            PermissionDenied, "Only ADMIN or LEAD can perform this action."
-        ):
-            create_project(actor=self.owner, **self.valid_data)
-
-    def test_create_project_reviewer_denied(self):
-        # Reviewer cannot create a project
-        with self.assertRaisesMessage(
-            PermissionDenied, "Only ADMIN or LEAD can perform this action."
-        ):
-            create_project(actor=self.reviewer, **self.valid_data)
-
-    def test_create_project_approver_denied(self):
-        # Approver cannot create a project
-        with self.assertRaisesMessage(
-            PermissionDenied, "Only ADMIN or LEAD can perform this action."
-        ):
-            create_project(actor=self.approver, **self.valid_data)
+    def test_create_project_denied_roles(self):
+        # Non-admin/lead roles cannot create a project
+        denied_actors = [self.owner, self.reviewer, self.approver]
+        for actor in denied_actors:
+            with self.subTest(role=actor.role):
+                with self.assertRaisesMessage(
+                    PermissionDenied, "Only ADMIN or LEAD can perform this action."
+                ):
+                    create_project(actor=actor, **self.valid_data)
