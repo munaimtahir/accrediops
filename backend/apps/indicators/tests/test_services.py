@@ -29,15 +29,15 @@ class MarkProjectIndicatorMetServiceTest(ContractBaseTestCase):
             actor=self.owner,
             title="Medication Policy",
             description="Policy document",
-            source_type="URL",
+            source_type=EvidenceSourceTypeChoices.URL,
             file_or_url="https://files.example/policy.pdf",
         )
         review_evidence_item(
             evidence_item=evidence_item,
             actor=self.reviewer,
-            validity_status="VALID",
-            completeness_status="COMPLETE",
-            approval_status="APPROVED",
+            validity_status=EvidenceValidityStatusChoices.VALID,
+            completeness_status=EvidenceCompletenessStatusChoices.COMPLETE,
+            approval_status=EvidenceApprovalStatusChoices.APPROVED,
         )
 
         # Transition status
