@@ -22,6 +22,7 @@ import { FileText, Wand2 } from "lucide-react";
 import Link from "next/link";
 import { DocumentDraft, FrameworkSummary, ProjectSummary, ProjectIndicatorSummary } from "@/types";
 import { Modal } from "@/components/common/modal";
+import { SafeHTML } from "@/components/common/safe-html";
 import { Textarea } from "@/components/ui/textarea";
 import { FormEvent } from "react";
 import { getSafeErrorMessage } from "@/lib/api/client";
@@ -120,7 +121,10 @@ function ViewDraftModal({ draftId, open, onClose }: { draftId: number; open: boo
 
   return (
     <Modal open={open} title={draft.title} description={`Version ${draft.version} | Status: ${draft.review_status}`} onClose={onClose} size="xl">
-      <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: draft.draft_content as string }} />
+      <SafeHTML
+        html={draft.draft_content as string}
+        className="prose prose-sm max-w-none"
+      />
     </Modal>
   );
 }
