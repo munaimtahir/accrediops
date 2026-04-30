@@ -55,9 +55,10 @@ class MarkProjectIndicatorMetServiceTest(ContractBaseTestCase):
             reason="All conditions met",
         )
 
-        self.assertEqual(result.current_status, ProjectIndicatorStatusChoices.MET)
-        self.assertTrue(result.is_met)
-        self.assertTrue(result.is_finalized)
+        self.project_indicator.refresh_from_db()
+        self.assertEqual(self.project_indicator.current_status, ProjectIndicatorStatusChoices.MET)
+        self.assertTrue(self.project_indicator.is_met)
+        self.assertTrue(self.project_indicator.is_finalized)
 
     def test_mark_met_permission_denied(self):
         with self.assertRaisesMessage(
