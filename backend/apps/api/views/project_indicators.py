@@ -159,3 +159,14 @@ class ProjectIndicatorReopenView(APIView):
             reason=serializer.validated_data["reason"],
         )
         return success_response(ProjectIndicatorSerializer(project_indicator).data)
+
+class ProjectIndicatorsForProjectListView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
+    def get(self, request, project_id):
+        project_indicators = ProjectIndicator.objects.filter(project_id=project_id).select_related(
+            "indicator",
+            "indicator__area",
+            "indicator__standard"
+        )
+        return success_response(ProjectIndicatorSerializer(project_indicators, many=True).data)
