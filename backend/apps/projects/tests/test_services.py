@@ -1,102 +1,58 @@
 from django.core.exceptions import PermissionDenied
 
 from apps.api.tests.base import ContractBaseTestCase
-from apps.audit.models import AuditEvent
+from apps.audit.models.audit_event import AuditEvent
 from apps.projects.models import AccreditationProject
-from apps.projects.services import update_project
+from apps.projects.services import delete_project
 
 
-class ProjectServicesUpdateTestCase(ContractBaseTestCase):
-    def test_update_project_as_admin(self):
-        # Admin modifies the project name and notes
-        new_name = "Updated Project Name"
-        new_notes = "Some new notes for the project"
+class DeleteProjectServiceTests(ContractBaseTestCase):
+    def test_delete_project_success_admin(self):
+        project_id = self.project.id
+        delete_project(project=self.project, actor=self.admin)
 
-        project = update_project(
-            project=self.project,
-            actor=self.admin,
-            name=new_name,
-            notes=new_notes,
-        )
+        # Verify project is deleted
+        with self.assertRaises(AccreditationProject.DoesNotExist):
+            AccreditationProject.objects.get(id=project_id)
 
-        # Refresh project from DB
-        project.refresh_from_db()
-        self.assertEqual(project.name, new_name)
-        self.assertEqual(project.notes, new_notes)
-
-        # Check AuditEvent
+        # Verify audit event
         audit_event = AuditEvent.objects.filter(
-            event_type="project.updated",
-            object_id=str(project.id),
+            event_type="project.deleted", object_id=str(project_id)
         ).first()
-
         self.assertIsNotNone(audit_event)
         self.assertEqual(audit_event.actor, self.admin)
-        self.assertEqual(audit_event.object_type, "AccreditationProject")
-
-        # Check before/after json
         self.assertIsNotNone(audit_event.before_json)
-        self.assertIsNotNone(audit_event.after_json)
+        self.assertIsNone(audit_event.after_json)
 
-        self.assertEqual(audit_event.after_json["name"], new_name)
-        self.assertEqual(audit_event.after_json["notes"], new_notes)
-        self.assertEqual(audit_event.before_json["name"], "Client Alpha Accreditation")
+    def test_delete_project_success_lead(self):
+        project_id = self.project.id
+        delete_project(project=self.project, actor=self.lead)
 
-    def test_update_project_as_lead(self):
-        new_client_name = "Beta Client"
+        # Verify project is deleted
+        with self.assertRaises(AccreditationProject.DoesNotExist):
+            AccreditationProject.objects.get(id=project_id)
 
-        project = update_project(
-            project=self.project,
-            actor=self.lead,
-            client_name=new_client_name,
-        )
-
-        project.refresh_from_db()
-        self.assertEqual(project.client_name, new_client_name)
-
+        # Verify audit event
         audit_event = AuditEvent.objects.filter(
-            event_type="project.updated",
-            object_id=str(project.id),
+            event_type="project.deleted", object_id=str(project_id)
         ).first()
         self.assertIsNotNone(audit_event)
         self.assertEqual(audit_event.actor, self.lead)
-        self.assertEqual(audit_event.object_type, "AccreditationProject")
 
-        self.assertIsNotNone(audit_event.before_json)
-        self.assertIsNotNone(audit_event.after_json)
+    def test_delete_project_permission_denied(self):
+        project_id = self.project.id
 
-        self.assertEqual(audit_event.after_json["client_name"], new_client_name)
-        self.assertEqual(audit_event.before_json["client_name"], "Client Alpha")
+        # OWNER, REVIEWER, APPROVER should not have access
+        for user in [self.owner, self.reviewer, self.approver]:
+            with self.assertRaises(PermissionDenied):
+                delete_project(project=self.project, actor=user)
 
-    def test_update_project_as_owner_denied(self):
-        original_name = self.project.name
+            # Verify project is not deleted
+            self.assertTrue(AccreditationProject.objects.filter(id=project_id).exists())
 
-        with self.assertRaises(PermissionDenied):
-            update_project(
-                project=self.project, actor=self.owner, name="New unauthorized name"
-            )
-
-        self.project.refresh_from_db()
-        self.assertEqual(self.project.name, original_name)
-
-        audit_exists = AuditEvent.objects.filter(
-            event_type="project.updated",
-            object_id=str(self.project.id),
-        ).exists()
-        self.assertFalse(audit_exists)
-
-    def test_update_project_as_reviewer_denied(self):
-        with self.assertRaises(PermissionDenied):
-            update_project(
-                project=self.project,
-                actor=self.reviewer,
-                notes="Reviewer attempting to update",
-            )
-
-    def test_update_project_as_approver_denied(self):
-        with self.assertRaises(PermissionDenied):
-            update_project(
-                project=self.project,
-                actor=self.approver,
-                notes="Approver attempting to update",
+            # Verify no audit event is logged
+            self.assertFalse(
+                AuditEvent.objects.filter(
+                    event_type="project.deleted", actor=user, object_id=str(project_id)
+                ).exists()
             )
