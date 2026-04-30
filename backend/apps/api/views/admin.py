@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.db import transaction
+from django.db import transaction, models
 from django.db.models import Count, Q
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
@@ -361,20 +361,26 @@ class DocumentGenerationQueueView(APIView):
             ),
         )
 
+        draft_ids_to_fetch = [
+            indicator.latest_draft_id for indicator in queryset if indicator.latest_draft_id
+        ]
+        drafts_dict = DocumentDraft.objects.in_bulk(draft_ids_to_fetch)
+
         indicators = []
         for indicator in queryset:
             data = IndicatorClassificationSerializer(indicator).data
             data['latest_draft'] = None
             data['draft_count'] = indicator.draft_count
             if indicator.latest_draft_id:
-                latest_draft = DocumentDraft.objects.get(id=indicator.latest_draft_id)
-                data['latest_draft'] = {
-                    'id': latest_draft.id,
-                    'title': latest_draft.title,
-                    'review_status': latest_draft.review_status,
-                    'generated_at': latest_draft.generated_at,
-                    'version': latest_draft.version,
-                }
+                latest_draft = drafts_dict.get(indicator.latest_draft_id)
+                if latest_draft:
+                    data['latest_draft'] = {
+                        'id': latest_draft.id,
+                        'title': latest_draft.title,
+                        'review_status': latest_draft.review_status,
+                        'generated_at': latest_draft.generated_at,
+                        'version': latest_draft.version,
+                    }
             indicators.append(data)
 
         return success_response({
@@ -692,6 +698,18 @@ class FrameworkClassificationBulkReviewView(APIView):
         indicators = list(queryset.select_related("area", "standard", "classification_reviewed_by"))
         skipped_count = 0
         
+        indicators_to_update = []
+        updates = payload.get("updates") or {}
+        update_fields = set(updates.keys())
+        update_fields.update([
+            "classification_review_status",
+            "classification_reviewed_by",
+            "classification_reviewed_at",
+            "classification_version"
+        ])
+
+        now = timezone.now()
+
         with transaction.atomic():
             for indicator in indicators:
                 # Protect manually changed rows in bulk modes
@@ -699,7 +717,6 @@ class FrameworkClassificationBulkReviewView(APIView):
                     skipped_count += 1
                     continue
 
-                updates = payload.get("updates") or {}
                 for field, value in updates.items():
                     setattr(indicator, field, value)
                 
@@ -709,9 +726,13 @@ class FrameworkClassificationBulkReviewView(APIView):
                     else ClassificationReviewStatusChoices.NEEDS_REVIEW
                 )
                 indicator.classification_reviewed_by = request.user
-                indicator.classification_reviewed_at = timezone.now()
+                indicator.classification_reviewed_at = now
                 indicator.classification_version = (indicator.classification_version or 0) + 1
-                indicator.save()
+
+                indicators_to_update.append(indicator)
+
+            if indicators_to_update:
+                Indicator.objects.bulk_update(indicators_to_update, fields=list(update_fields), batch_size=500)
         
         return success_response(
             {

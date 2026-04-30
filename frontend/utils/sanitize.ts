@@ -16,15 +16,36 @@ export function sanitizeHtml(html: string): string {
     "PRE", "CODE", "TABLE", "THEAD", "TBODY", "TR", "TH", "TD", "HR"
   ];
 
+  // Tags that should be removed entirely including their content
+  const STRIP_TAGS = ["SCRIPT", "STYLE", "IFRAME", "OBJECT", "EMBED", "APPLET"];
+
   const ALLOWED_ATTRS = ["HREF", "TITLE", "TARGET", "CLASS"];
 
   const traverse = (node: Node) => {
+    // 1. First, sanitize all children recursively
+    const children = Array.from(node.childNodes);
+    for (const child of children) {
+      traverse(child);
+    }
+
+    // 2. Then, sanitize the current node
     if (node.nodeType === Node.ELEMENT_NODE) {
       const el = node as Element;
       const tagName = el.tagName.toUpperCase();
 
+      // Skip root containers
+      if (tagName === "BODY" || tagName === "HTML") {
+        return;
+      }
+
+      if (STRIP_TAGS.includes(tagName)) {
+        // Entirely remove dangerous tags and their content
+        el.parentNode?.removeChild(el);
+        return;
+      }
+
       if (!ALLOWED_TAGS.includes(tagName)) {
-        // If the tag is not allowed, we move its children out and remove the tag itself
+        // For other non-allowed tags, we unwrap them (preserve already sanitized children)
         while (el.firstChild) {
           el.parentNode?.insertBefore(el.firstChild, el);
         }
@@ -32,7 +53,7 @@ export function sanitizeHtml(html: string): string {
         return;
       }
 
-      // Remove dangerous or non-allowed attributes
+      // Remove dangerous or non-allowed attributes from allowed tags
       const attrs = Array.from(el.attributes);
       for (const attr of attrs) {
         const attrName = attr.name.toUpperCase();
@@ -46,11 +67,6 @@ export function sanitizeHtml(html: string): string {
           el.removeAttribute(attr.name);
         }
       }
-    }
-
-    const children = Array.from(node.childNodes);
-    for (const child of children) {
-      traverse(child);
     }
   };
 

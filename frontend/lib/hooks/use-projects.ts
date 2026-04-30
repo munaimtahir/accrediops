@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { apiClient } from "@/lib/api/client";
 import { queryKeys } from "@/lib/hooks/query-keys";
-import { PaginatedResult, Project } from "@/types";
+import { PaginatedResult, Project, ProjectIndicatorSummary } from "@/types";
 
 export function useProjects() {
   return useQuery({
@@ -31,7 +31,7 @@ export function useProject(projectId: number) {
 export function useProjectIndicatorsForProject(projectId: number) {
   return useQuery({
     queryKey: ["project-indicators", { projectId }],
-    queryFn: () => apiClient.get<Record<string, unknown>[]>(`/api/projects/${projectId}/project-indicators/`),
+    queryFn: () => apiClient.get<ProjectIndicatorSummary[]>(`/api/projects/${projectId}/project-indicators/`),
     enabled: Number.isFinite(projectId),
   });
 }

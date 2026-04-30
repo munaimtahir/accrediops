@@ -24,6 +24,7 @@ import { Dialog } from "@headlessui/react";
 import { Check, Clipboard, Save } from "lucide-react";
 import { DocumentTypeChoices, EvidenceTypeChoices } from "@/lib/constants";
 import { useForm } from "react-hook-form";
+import { ProjectIndicatorSummary } from "@/types";
 
 
 function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: boolean; onClose: () => void }) {
@@ -95,7 +96,7 @@ function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: bo
           <span className="font-medium text-slate-700">Project Indicator</span>
           <Select {...register("project_indicator_id", { required: true })} disabled={!selectedProjectId}>
             <option value="">Select an indicator</option>
-            {projectIndicators.map((pi: any) => (
+            {projectIndicators.map((pi: ProjectIndicatorSummary) => (
               <option key={pi.id} value={pi.id}>
                 {pi.indicator_code} - {pi.indicator_text.substring(0, 50)}...
               </option>

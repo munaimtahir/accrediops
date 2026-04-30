@@ -30,7 +30,7 @@ export function SafeHTML({ html, className }: SafeHTMLProps) {
 
   return (
     <div
-      className={`${className} whitespace-pre-wrap`}
+      className={className}
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   );

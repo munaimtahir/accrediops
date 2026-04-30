@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from django.utils import timezone
+from django.db.models import Count, Q
 
 from apps.api.pagination import EnvelopePagination
 from apps.api.responses import success_response
@@ -133,83 +134,56 @@ class PreInspectionCheckView(APIView):
         missing_evidence = []
         unapproved_items = []
         overdue_recurring = []
-        for item in project.project_indicators.select_related("indicator").prefetch_related("evidence_items"):
-            approved_count = item.evidence_items.filter(is_current=True, approval_status="APPROVED").count()
-            if approved_count < item.indicator.minimum_required_evidence_count:
-                missing_evidence.append(
-                    {
-                        "project_indicator_id": item.id,
-                        "indicator_code": item.indicator.code,
-                        "missing_count": item.indicator.minimum_required_evidence_count - approved_count,
-                    }
-                )
-            non_approved = item.evidence_items.filter(is_current=True).exclude(approval_status="APPROVED").count()
-            if non_approved:
-                unapproved_items.append(
-                    {
-                        "project_indicator_id": item.id,
-                        "indicator_code": item.indicator.code,
-                        "unapproved_count": non_approved,
-                    }
-                )
-            if hasattr(item, "recurring_requirement"):
-                overdue = item.recurring_requirement.instances.filter(
-                    status__in=["PENDING", "SUBMITTED", "MISSED"],
-                    due_date__lt=timezone.localdate(),
-                ).count()
-                if overdue:
-                    overdue_recurring.append(
-                        {
-                            "project_indicator_id": item.id,
-                            "indicator_code": item.indicator.code,
-                            "overdue_count": overdue,
-                        }
-                    )
-        return success_response(
-            {
-                "missing_evidence": missing_evidence,
-                "unapproved_items": unapproved_items,
-                "overdue_recurring": overdue_recurring,
-                "high_risk_indicators": readiness["high_risk_indicators"],
-            }
+
+        project_indicators = project.project_indicators.select_related("indicator").annotate(
+            approved_count=Count(
+                "evidence_items",
+                filter=Q(evidence_items__is_current=True, evidence_items__approval_status="APPROVED"),
+                distinct=True
+            ),
+            non_approved_count=Count(
+                "evidence_items",
+                filter=Q(evidence_items__is_current=True) & ~Q(evidence_items__approval_status="APPROVED"),
+                distinct=True
+            ),
+            overdue_count=Count(
+                "recurring_requirement__instances",
+                filter=Q(
+                    recurring_requirement__instances__status__in=["PENDING", "SUBMITTED", "MISSED"],
+                    recurring_requirement__instances__due_date__lt=timezone.localdate(),
+                ),
+                distinct=True
+            )
         )
-        project = get_object_or_404(AccreditationProject, pk=project_id)
-        readiness = project_readiness(project)
-        missing_evidence = []
-        unapproved_items = []
-        overdue_recurring = []
-        for item in project.project_indicators.select_related("indicator").prefetch_related("evidence_items"):
-            approved_count = item.evidence_items.filter(is_current=True, approval_status="APPROVED").count()
-            if approved_count < item.indicator.minimum_required_evidence_count:
+
+        for item in project_indicators:
+            if item.approved_count < item.indicator.minimum_required_evidence_count:
                 missing_evidence.append(
                     {
                         "project_indicator_id": item.id,
                         "indicator_code": item.indicator.code,
-                        "missing_count": item.indicator.minimum_required_evidence_count - approved_count,
+                        "missing_count": item.indicator.minimum_required_evidence_count - item.approved_count,
                     }
                 )
-            non_approved = item.evidence_items.filter(is_current=True).exclude(approval_status="APPROVED").count()
-            if non_approved:
+
+            if item.non_approved_count:
                 unapproved_items.append(
                     {
                         "project_indicator_id": item.id,
                         "indicator_code": item.indicator.code,
-                        "unapproved_count": non_approved,
+                        "unapproved_count": item.non_approved_count,
                     }
                 )
-            if hasattr(item, "recurring_requirement"):
-                overdue = item.recurring_requirement.instances.filter(
-                    status__in=["PENDING", "SUBMITTED", "MISSED"],
-                    due_date__lt=timezone.localdate(),
-                ).count()
-                if overdue:
-                    overdue_recurring.append(
-                        {
-                            "project_indicator_id": item.id,
-                            "indicator_code": item.indicator.code,
-                            "overdue_count": overdue,
-                        }
-                    )
+
+            if item.overdue_count:
+                overdue_recurring.append(
+                    {
+                        "project_indicator_id": item.id,
+                        "indicator_code": item.indicator.code,
+                        "overdue_count": item.overdue_count,
+                    }
+                )
+
         return success_response(
             {
                 "missing_evidence": missing_evidence,
