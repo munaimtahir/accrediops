@@ -1,6 +1,5 @@
 from django.core.exceptions import PermissionDenied
-from django.test import TestCase
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from apps.api.tests.base import ContractBaseTestCase
 from apps.exports.services import enforce_export_eligibility
