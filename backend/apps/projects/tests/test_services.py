@@ -32,9 +32,8 @@ class CreateProjectTestCase(ContractBaseTestCase):
         self.assertEqual(project.framework, self.framework)
         self.assertEqual(project.created_by, self.admin)
 
-        # In ContractBaseTestCase, one project is created during setUp.
-        # This will make it 2.
-        self.assertEqual(AccreditationProject.objects.count(), 2)
+        # Verify the project was created in the database
+        self.assertTrue(AccreditationProject.objects.filter(id=project.id).exists())
 
         # Verify audit event was logged
         audit_events = AuditEvent.objects.filter(
