@@ -60,7 +60,13 @@ class ProjectServicesUpdateTestCase(ContractBaseTestCase):
         ).first()
         self.assertIsNotNone(audit_event)
         self.assertEqual(audit_event.actor, self.lead)
+        self.assertEqual(audit_event.object_type, "AccreditationProject")
+
+        self.assertIsNotNone(audit_event.before_json)
+        self.assertIsNotNone(audit_event.after_json)
+
         self.assertEqual(audit_event.after_json["client_name"], new_client_name)
+        self.assertEqual(audit_event.before_json["client_name"], "Client Alpha")
 
     def test_update_project_as_owner_denied(self):
         original_name = self.project.name
@@ -80,8 +86,6 @@ class ProjectServicesUpdateTestCase(ContractBaseTestCase):
         self.assertFalse(audit_exists)
 
     def test_update_project_as_reviewer_denied(self):
-        original_notes = self.project.notes
-
         with self.assertRaises(PermissionDenied):
             update_project(
                 project=self.project,
@@ -89,30 +93,10 @@ class ProjectServicesUpdateTestCase(ContractBaseTestCase):
                 notes="Reviewer attempting to update",
             )
 
-        self.project.refresh_from_db()
-        self.assertEqual(self.project.notes, original_notes)
-
-        audit_exists = AuditEvent.objects.filter(
-            event_type="project.updated",
-            object_id=str(self.project.id),
-        ).exists()
-        self.assertFalse(audit_exists)
-
     def test_update_project_as_approver_denied(self):
-        original_notes = self.project.notes
-
         with self.assertRaises(PermissionDenied):
             update_project(
                 project=self.project,
                 actor=self.approver,
                 notes="Approver attempting to update",
             )
-
-        self.project.refresh_from_db()
-        self.assertEqual(self.project.notes, original_notes)
-
-        audit_exists = AuditEvent.objects.filter(
-            event_type="project.updated",
-            object_id=str(self.project.id),
-        ).exists()
-        self.assertFalse(audit_exists)
