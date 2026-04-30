@@ -1,113 +1,128 @@
-from datetime import timedelta
 from unittest.mock import patch
 
-from django.utils import timezone
-
 from apps.api.tests.base import ContractBaseTestCase
-from apps.evidence.services import create_evidence_item, review_evidence_item
-from apps.exports.services import export_validation_warnings
-from apps.indicators.services import assign_project_indicator
-from apps.recurring.services import generate_recurring_instances
+from apps.exports.services import export_eligibility_report
+from apps.indicators.models import ProjectIndicator
 
 
-class ExportValidationWarningsTests(ContractBaseTestCase):
+class ExportEligibilityReportTests(ContractBaseTestCase):
     def setUp(self):
         super().setUp()
         self.project_indicators = self.initialize_project()
-        self.primary = self.project_indicators["IND-001"]
-        self.recurring = self.project_indicators["IND-002"]
 
-        for item in (self.primary, self.recurring):
-            assign_project_indicator(
-                project_indicator=item,
-                actor=self.admin,
-                owner=self.owner,
-                reviewer=self.reviewer,
-                approver=self.approver,
-            )
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_happy_path(self, mock_readiness, mock_warnings):
+        # Setup mocks for a perfect project
+        mock_readiness.return_value = {
+            "high_risk_indicators": [],
+            "recurring_compliance_score": 100,
+        }
+        mock_warnings.return_value = []
 
-    def test_no_warnings_for_perfect_project(self):
-        # Make IND-001 perfect (1 approved evidence)
-        evidence = create_evidence_item(
-            project_indicator=self.primary,
-            actor=self.owner,
-            title="Good Policy",
-            source_type="URL",
-            file_or_url="https://example.com/good.pdf",
-        )
-        review_evidence_item(
-            evidence_item=evidence,
-            actor=self.reviewer,
-            validity_status="VALID",
-            completeness_status="COMPLETE",
-            approval_status="APPROVED",
-        )
+        # Mark all indicators as MET
+        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
 
-        # We need IND-002 (recurring) to be perfect as well, or just delete it for simplicity
-        self.recurring.delete()
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
 
-        warnings = export_validation_warnings(self.project)
-        self.assertEqual(len(warnings), 0)
+        self.assertTrue(report["eligible"])
+        self.assertEqual(report["reasons"], [])
+        self.assertEqual(report["pending_indicator_count"], 0)
+        self.assertEqual(report["warnings"], [])
+        self.assertEqual(report["export_type"], "FULL_PRINT_PACK")
 
-    def test_warning_for_missing_evidence(self):
-        # IND-001 has no evidence
-        self.recurring.delete()
-        warnings = export_validation_warnings(self.project)
-        self.assertEqual(len(warnings), 1)
-        self.assertEqual(warnings[0]["project_indicator_id"], self.primary.id)
-        self.assertEqual(warnings[0]["missing_evidence_count"], 1)
-        self.assertEqual(warnings[0]["unapproved_evidence_count"], 0)
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_with_pending_indicators(self, mock_readiness, mock_warnings):
+        mock_readiness.return_value = {
+            "high_risk_indicators": [],
+            "recurring_compliance_score": 100,
+        }
+        mock_warnings.return_value = []
 
-    def test_warning_for_unapproved_evidence(self):
-        evidence = create_evidence_item(
-            project_indicator=self.primary,
-            actor=self.owner,
-            title="Good Policy",
-            source_type="URL",
-            file_or_url="https://example.com/good.pdf",
-        )
-        # Not yet approved (UNDER_REVIEW by default)
+        # At least one indicator is pending (default status is usually NOT_STARTED or similar, not MET)
+        pending_count = ProjectIndicator.objects.filter(project=self.project).exclude(current_status="MET").count()
+        self.assertGreater(pending_count, 0)
 
-        self.recurring.delete()
-        warnings = export_validation_warnings(self.project)
-        self.assertEqual(len(warnings), 1)
-        self.assertEqual(warnings[0]["project_indicator_id"], self.primary.id)
-        self.assertEqual(warnings[0]["missing_evidence_count"], 1)
-        self.assertEqual(warnings[0]["unapproved_evidence_count"], 1)
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
 
-    def test_warning_for_overdue_recurring_instance(self):
-        # Setup perfect primary
-        evidence = create_evidence_item(
-            project_indicator=self.primary,
-            actor=self.owner,
-            title="Good Policy",
-            source_type="URL",
-            file_or_url="https://example.com/good.pdf",
-        )
-        review_evidence_item(
-            evidence_item=evidence,
-            actor=self.reviewer,
-            validity_status="VALID",
-            completeness_status="COMPLETE",
-            approval_status="APPROVED",
-        )
+        self.assertFalse(report["eligible"])
+        self.assertEqual(report["pending_indicator_count"], pending_count)
+        self.assertEqual(len(report["reasons"]), 1)
+        self.assertIn(f"project has {pending_count} indicator(s) still pending approval or completion", report["reasons"][0])
 
-        # Setup overdue recurring requirement
-        requirement = self.recurring.recurring_requirement
-        generate_recurring_instances(
-            recurring_requirement=requirement,
-            actor=self.admin,
-            until_date=self.project.target_date,
-        )
-        instance = requirement.instances.first()
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_with_high_risk_indicators(self, mock_readiness, mock_warnings):
+        mock_readiness.return_value = {
+            "high_risk_indicators": [{"id": 1}],
+            "recurring_compliance_score": 100,
+        }
+        mock_warnings.return_value = []
 
-        # Force overdue date
-        past_date = timezone.localdate() - timedelta(days=5)
-        instance.due_date = past_date
-        instance.status = "PENDING"
-        instance.save(update_fields=["due_date", "status"])
+        # Mark all indicators as MET so pending count is 0
+        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
 
-        warnings = export_validation_warnings(self.project)
-        self.assertEqual(len(warnings), 1)
-        self.assertEqual(warnings[0]["project_indicator_id"], self.recurring.id)
-        self.assertEqual(warnings[0]["overdue_recurring_count"], 1)
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
+
+        self.assertFalse(report["eligible"])
+        self.assertEqual(len(report["reasons"]), 1)
+        self.assertIn("project has 1 critical high-risk indicator(s) pending", report["reasons"][0])
+
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_with_low_recurring_compliance(self, mock_readiness, mock_warnings):
+        mock_readiness.return_value = {
+            "high_risk_indicators": [],
+            "recurring_compliance_score": 95,
+        }
+        mock_warnings.return_value = []
+
+        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
+
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
+
+        self.assertFalse(report["eligible"])
+        self.assertEqual(len(report["reasons"]), 1)
+        self.assertIn("recurring compliance is 95% and must be 100%", report["reasons"][0])
+
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_with_validation_warnings(self, mock_readiness, mock_warnings):
+        mock_readiness.return_value = {
+            "high_risk_indicators": [],
+            "recurring_compliance_score": 100,
+        }
+        mock_warnings.return_value = [{"project_indicator_id": 1}, {"project_indicator_id": 2}]
+
+        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
+
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
+
+        self.assertFalse(report["eligible"])
+        self.assertEqual(len(report["reasons"]), 1)
+        self.assertIn("approval completeness is not satisfied for 2 indicator(s)", report["reasons"][0])
+
+    @patch("apps.exports.services.export_validation_warnings")
+    @patch("apps.exports.services_admin.project_readiness")
+    def test_eligibility_with_multiple_reasons(self, mock_readiness, mock_warnings):
+        mock_readiness.return_value = {
+            "high_risk_indicators": [{"id": 1}],
+            "recurring_compliance_score": 95,
+        }
+        mock_warnings.return_value = [{"project_indicator_id": 1}]
+
+        # Keep pending indicators active (do not mark as MET)
+        pending_count = ProjectIndicator.objects.filter(project=self.project).exclude(current_status="MET").count()
+        self.assertGreater(pending_count, 0)
+
+        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
+
+        self.assertFalse(report["eligible"])
+        self.assertEqual(len(report["reasons"]), 4) # pending, high risk, low recurring compliance, validation warnings
+
+        reasons_str = " ".join(report["reasons"])
+        self.assertIn(f"project has {pending_count} indicator(s) still pending approval or completion", reasons_str)
+        self.assertIn("project has 1 critical high-risk indicator(s) pending", reasons_str)
+        self.assertIn("recurring compliance is 95% and must be 100%", reasons_str)
+        self.assertIn("approval completeness is not satisfied for 1 indicator(s)", reasons_str)
