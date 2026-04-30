@@ -167,6 +167,9 @@ class ProjectIndicatorsForProjectListView(APIView):
         project_indicators = ProjectIndicator.objects.filter(project_id=project_id).select_related(
             "indicator",
             "indicator__area",
-            "indicator__standard"
+            "indicator__standard",
+            "owner",
+            "reviewer",
+            "approver"
         )
         return success_response(ProjectIndicatorSerializer(project_indicators, many=True).data)
