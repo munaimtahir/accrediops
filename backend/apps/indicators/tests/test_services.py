@@ -40,11 +40,11 @@ class AssignProjectIndicatorTests(ContractBaseTestCase):
         self.assertEqual(self.project_indicator.last_updated_by, self.admin)
 
         # Verify audit log
-        audit_event = AuditEvent.objects.filter(
+        audit_event = AuditEvent.objects.get(
             object_type="ProjectIndicator",
             object_id=str(self.project_indicator.id),
             event_type="project_indicator.assignment_updated",
-        ).first()
+        )
         self.assertIsNotNone(audit_event)
         self.assertEqual(audit_event.actor, self.admin)
 
