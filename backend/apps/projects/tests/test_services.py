@@ -80,12 +80,23 @@ class ProjectServicesUpdateTestCase(ContractBaseTestCase):
         self.assertFalse(audit_exists)
 
     def test_update_project_as_reviewer_denied(self):
+        original_notes = self.project.notes
+
         with self.assertRaises(PermissionDenied):
             update_project(
                 project=self.project,
                 actor=self.reviewer,
                 notes="Reviewer attempting to update",
             )
+
+        self.project.refresh_from_db()
+        self.assertEqual(self.project.notes, original_notes)
+
+        audit_exists = AuditEvent.objects.filter(
+            event_type="project.updated",
+            object_id=str(self.project.id),
+        ).exists()
+        self.assertFalse(audit_exists)
 
     def test_update_project_as_approver_denied(self):
         original_notes = self.project.notes
