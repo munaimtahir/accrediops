@@ -1,13 +1,12 @@
+from django.db.models import F, Q
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 
 from apps.api.responses import success_response
-from apps.exports.services import (
-    build_print_bundle,
-    enforce_export_eligibility,
-    log_export_audit,
-    upsert_print_pack_items,
-)
+from apps.evidence.models import EvidenceItem
+from apps.exports.services import (build_print_bundle,
+                                   enforce_export_eligibility,
+                                   log_export_audit, upsert_print_pack_items)
 from apps.projects.models import AccreditationProject
 from apps.workflow.permissions import AdminOrLeadPermission
 
@@ -73,24 +72,48 @@ class ProjectPhysicalRetrievalExportView(APIView):
         project = get_object_or_404(AccreditationProject, pk=project_id)
         enforce_export_eligibility(project, "physical-retrieval")
         upsert_print_pack_items(project)
-        bundle = build_print_bundle(project)
-        items = []
-        for section in bundle["sections"]:
-            for standard in section["standards"]:
-                for indicator in standard["indicators"]:
-                    for evidence in indicator["evidence_list"]:
-                        if evidence["is_physical_copy_available"] or evidence["physical_location_type"]:
-                            items.append(
-                                {
-                                    "area": section["name"],
-                                    "standard": standard["name"],
-                                    "indicator_code": indicator["indicator_code"],
-                                    "evidence_title": evidence["title"],
-                                    "binder_or_location": evidence["physical_location_type"],
-                                    "location_details": evidence["location_details"],
-                                    "file_label": evidence["file_label"],
-                                }
-                            )
+
+        evidence_items = (
+            EvidenceItem.objects.filter(
+                project_indicator__project_id=project.id,
+                is_current=True,
+            )
+            .filter(Q(is_physical_copy_available=True) | ~Q(physical_location_type=""))
+            .annotate(pack_order=F("print_pack_items__order"))
+            .order_by(
+                "project_indicator__indicator__area__sort_order",
+                "project_indicator__indicator__area__name",
+                "project_indicator__indicator__standard__sort_order",
+                "project_indicator__indicator__standard__name",
+                "project_indicator__indicator__code",
+                "pack_order",
+                "id",
+            )
+            .values(
+                "project_indicator__indicator__area__name",
+                "project_indicator__indicator__standard__name",
+                "project_indicator__indicator__code",
+                "title",
+                "physical_location_type",
+                "location_details",
+                "file_label",
+            )
+            .distinct()
+        )
+
+        items = [
+            {
+                "area": evidence["project_indicator__indicator__area__name"],
+                "standard": evidence["project_indicator__indicator__standard__name"],
+                "indicator_code": evidence["project_indicator__indicator__code"],
+                "evidence_title": evidence["title"],
+                "binder_or_location": evidence["physical_location_type"],
+                "location_details": evidence["location_details"],
+                "file_label": evidence["file_label"],
+            }
+            for evidence in evidence_items
+        ]
+
         log_export_audit(
             project=project,
             actor=request.user,
