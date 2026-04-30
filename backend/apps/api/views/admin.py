@@ -698,6 +698,18 @@ class FrameworkClassificationBulkReviewView(APIView):
         indicators = list(queryset.select_related("area", "standard", "classification_reviewed_by"))
         skipped_count = 0
         
+        indicators_to_update = []
+        updates = payload.get("updates") or {}
+        update_fields = set(updates.keys())
+        update_fields.update([
+            "classification_review_status",
+            "classification_reviewed_by",
+            "classification_reviewed_at",
+            "classification_version"
+        ])
+
+        now = timezone.now()
+
         with transaction.atomic():
             for indicator in indicators:
                 # Protect manually changed rows in bulk modes
@@ -705,7 +717,6 @@ class FrameworkClassificationBulkReviewView(APIView):
                     skipped_count += 1
                     continue
 
-                updates = payload.get("updates") or {}
                 for field, value in updates.items():
                     setattr(indicator, field, value)
                 
@@ -715,9 +726,13 @@ class FrameworkClassificationBulkReviewView(APIView):
                     else ClassificationReviewStatusChoices.NEEDS_REVIEW
                 )
                 indicator.classification_reviewed_by = request.user
-                indicator.classification_reviewed_at = timezone.now()
+                indicator.classification_reviewed_at = now
                 indicator.classification_version = (indicator.classification_version or 0) + 1
-                indicator.save()
+
+                indicators_to_update.append(indicator)
+
+            if indicators_to_update:
+                Indicator.objects.bulk_update(indicators_to_update, fields=list(update_fields), batch_size=500)
         
         return success_response(
             {
