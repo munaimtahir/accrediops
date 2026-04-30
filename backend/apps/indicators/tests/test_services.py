@@ -39,7 +39,7 @@ class ValidateProjectIndicatorReadinessTests(ContractBaseTestCase):
         readiness = validate_project_indicator_readiness(self.project_indicator)
         self.assertEqual(readiness["approved_evidence_count"], 0)
         self.assertEqual(readiness["total_current_evidence_count"], 0)
-        self.assertEqual(readiness["minimum_required_evidence_count"], 1)
+        self.assertEqual(readiness["minimum_required_evidence_count"], self.project_indicator.indicator.minimum_required_evidence_count)
         self.assertFalse(readiness["has_minimum_required_evidence"])
         self.assertFalse(readiness["all_current_evidence_approved"])
         self.assertTrue(readiness["no_rejected_current_evidence"])
