@@ -103,9 +103,9 @@ class ExportValidationWarningsTests(ContractBaseTestCase):
 
         # Force overdue date
         past_date = timezone.localdate() - timedelta(days=5)
-        type(instance).objects.filter(id=instance.id).update(
-            due_date=past_date, status="PENDING"
-        )
+        instance.due_date = past_date
+        instance.status = "PENDING"
+        instance.save(update_fields=["due_date", "status"])
 
         warnings = export_validation_warnings(self.project)
         self.assertEqual(len(warnings), 1)
