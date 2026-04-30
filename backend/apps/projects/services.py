@@ -163,7 +163,7 @@ def clone_project(
     )
     source_items = (
         ProjectIndicator.objects.filter(project=source_project)
-        .select_related("recurring_requirement")
+        .select_related("indicator", "owner", "reviewer", "approver", "recurring_requirement")
         .all()
     )
     source_by_indicator_id = {item.indicator_id: item for item in source_items}
@@ -171,12 +171,15 @@ def clone_project(
         Indicator.objects.filter(
             framework=source_project.framework,
             is_active=True,
-        )
+        ).select_related("area", "standard")
     )
 
     project_indicators_to_create = []
+    indicator_to_source_item = {}
+
     for indicator in indicators:
         source_item = source_by_indicator_id.get(indicator.id)
+        indicator_to_source_item[indicator.id] = source_item
         project_indicators_to_create.append(
             ProjectIndicator(
                 project=project,
@@ -194,12 +197,16 @@ def clone_project(
     created_project_indicators = ProjectIndicator.objects.bulk_create(project_indicators_to_create)
 
     recurring_requirements_to_create = []
-    # Use zip to avoid project_indicator.indicator lazy-loading queries
-    for indicator, project_indicator in zip(indicators, created_project_indicators):
+    for project_indicator in created_project_indicators:
+        indicator = project_indicator.indicator
         if indicator.is_recurring:
-            source_item = indicator._source_item
-            # With select_related("recurring_requirement"), this is safe and doesn't trigger queries
-            source_requirement = source_item.recurring_requirement if source_item else None
+            source_item = indicator_to_source_item.get(indicator.id)
+            source_requirement = None
+            if source_item:
+                try:
+                    source_requirement = source_item.recurring_requirement
+                except RecurringRequirement.DoesNotExist:
+                    source_requirement = None
 
             recurring_requirements_to_create.append(
                 RecurringRequirement(

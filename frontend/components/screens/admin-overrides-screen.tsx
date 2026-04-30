@@ -35,7 +35,8 @@ export function AdminOverridesScreen() {
   const canRunOverrides = canExecuteOverrides(authQuery.data?.user);
 
   const indicatorOptions = useMemo(() => metIndicatorsQuery.data?.results ?? [], [metIndicatorsQuery.data?.results]);
-  const selectedIndicator = indicatorOptions.find((row) => row.project_indicator_id === Number(selectedIndicatorId));
+  const indicatorMap = useMemo(() => new Map(indicatorOptions.map(row => [row.project_indicator_id, row])), [indicatorOptions]);
+  const selectedIndicator = indicatorMap.get(Number(selectedIndicatorId));
   const executionBlockers = [
     !canRunOverrides ? getRestrictionMessage("overrideExecution") : "",
     !selectedIndicatorId ? "No indicator selected." : "",

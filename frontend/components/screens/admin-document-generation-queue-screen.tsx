@@ -20,8 +20,9 @@ import { useToast } from "@/components/common/toaster";
 import { Button } from "@/components/ui/button";
 import { FileText, Wand2 } from "lucide-react";
 import Link from "next/link";
-import { DocumentDraft, FrameworkSummary, ProjectSummary } from "@/types";
+import { DocumentDraft, FrameworkSummary, ProjectSummary, ProjectIndicatorSummary } from "@/types";
 import { Modal } from "@/components/common/modal";
+import { SafeHTML } from "@/components/common/safe-html";
 import { Textarea } from "@/components/ui/textarea";
 import { FormEvent } from "react";
 import { getSafeErrorMessage } from "@/lib/api/client";
@@ -93,7 +94,7 @@ function GenerateDraftModal({ indicatorId, open, onClose, onGenerated }: { indic
                 <span className="font-medium text-slate-700">Select Project Indicator</span>
                 <Select value={selectedProjectIndicatorId ?? ""} onChange={(e) => setSelectedProjectIndicatorId(Number(e.target.value))}>
                   <option value="">Select an indicator</option>
-                  {projectIndicators.map((pi: any) => ( // TODO: Define ProjectIndicatorSummary type
+                  {projectIndicators.map((pi: ProjectIndicatorSummary) => (
                     <option key={pi.id} value={pi.id}>{pi.indicator_code} - {pi.indicator_text.substring(0, 50)}...</option>
                   ))}
                 </Select>
@@ -120,7 +121,10 @@ function ViewDraftModal({ draftId, open, onClose }: { draftId: number; open: boo
 
   return (
     <Modal open={open} title={draft.title} description={`Version ${draft.version} | Status: ${draft.review_status}`} onClose={onClose} size="xl">
-      <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: draft.draft_content as string }} />
+      <SafeHTML
+        html={draft.draft_content as string}
+        className="prose prose-sm max-w-none"
+      />
     </Modal>
   );
 }
