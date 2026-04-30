@@ -30,13 +30,14 @@ class AssignProjectIndicatorTests(ContractBaseTestCase):
             notes=notes,
         )
 
-        self.assertEqual(result.owner, self.owner)
-        self.assertEqual(result.reviewer, self.reviewer)
-        self.assertEqual(result.approver, self.approver)
-        self.assertEqual(result.priority, PriorityChoices.HIGH)
-        self.assertEqual(result.due_date, due_date)
-        self.assertEqual(result.notes, notes)
-        self.assertEqual(result.last_updated_by, self.admin)
+        self.project_indicator.refresh_from_db()
+        self.assertEqual(self.project_indicator.owner, self.owner)
+        self.assertEqual(self.project_indicator.reviewer, self.reviewer)
+        self.assertEqual(self.project_indicator.approver, self.approver)
+        self.assertEqual(self.project_indicator.priority, PriorityChoices.HIGH)
+        self.assertEqual(self.project_indicator.due_date, due_date)
+        self.assertEqual(self.project_indicator.notes, notes)
+        self.assertEqual(self.project_indicator.last_updated_by, self.admin)
 
         # Verify audit log
         audit_event = AuditEvent.objects.filter(
