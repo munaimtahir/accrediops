@@ -56,7 +56,7 @@ class CloneProjectServiceTest(ContractBaseTestCase):
         self.assertEqual(cloned_pi.owner, self.owner)
         self.assertEqual(cloned_pi.reviewer, self.reviewer)
         self.assertEqual(cloned_pi.approver, self.approver)
-        self.assertEqual(cloned_pi.priority, "HIGH")
+        self.assertEqual(cloned_pi.priority, PriorityChoices.HIGH)
         self.assertEqual(cloned_pi.notes, "")
         self.assertEqual(cloned_pi.due_date, cloned_project.target_date)
 
