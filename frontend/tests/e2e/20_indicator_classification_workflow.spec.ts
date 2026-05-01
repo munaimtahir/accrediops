@@ -114,7 +114,7 @@ test.describe("Indicator Classification Workflow", () => {
     await expect(page.getByRole("table").getByText("Manually Changed")).toBeVisible();
 
     await page.locator("tbody input[type='checkbox']").check();
-    await page.getByRole("button", { name: "Bulk Approve Selected" }).click();
+    await page.getByRole("button", { name: "Approve Selected" }).click();
     await expect(page.getByRole("table").getByText("Human Reviewed")).toBeVisible();
 
     await page.getByRole("button", { name: "Physical / Facility" }).click();

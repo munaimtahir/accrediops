@@ -117,10 +117,10 @@ function ViewDraftModal({ draftId, open, onClose }: { draftId: number; open: boo
   if (draftQuery.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (draftQuery.error) return <ErrorPanel message={draftQuery.error.message} />;
 
-  const draft = draftQuery.data as DocumentDraft;
+  const draft = (draftQuery.data as unknown) as DocumentDraft;
 
   return (
-    <Modal open={open} title={draft.title} description={`Version ${draft.version} | Status: ${draft.review_status}`} onClose={onClose} size="xl">
+    <Modal open={open} title={draft.title} description={`Version ${draft.version} | Status: ${draft.review_status}`} onClose={onClose}>
       <SafeHTML
         html={draft.draft_content as string}
         className="prose prose-sm max-w-none"
@@ -147,7 +147,7 @@ export function AdminDocumentGenerationQueueScreen() {
 
   const frameworks = frameworksQuery.data ?? [];
   const rows = queueQuery.data?.results ?? [];
-  const allDrafts = (allDraftsQuery.data ?? []) as DocumentDraft[];
+  const allDrafts = ((allDraftsQuery.data as any)?.results ?? []) as DocumentDraft[];
 
   const fullAICount = rows.filter((row) => row.ai_assistance_level === "FULL_AI").length;
   const partialAICount = rows.filter((row) => row.ai_assistance_level === "PARTIAL_AI").length;
@@ -212,8 +212,8 @@ export function AdminDocumentGenerationQueueScreen() {
           { key: "draft_status", header: "Latest Draft", render: (row) => (
             row.latest_draft ? (
               <div className="text-xs">
-                <div>v{row.latest_draft.version} ({row.latest_draft.review_status})</div>
-                <div className="text-slate-500">{String(row.latest_draft.generated_at).slice(0, 10)}</div>
+                <div>v{(row.latest_draft as any).version} ({(row.latest_draft as any).review_status})</div>
+                <div className="text-slate-500">{String((row.latest_draft as any).generated_at).slice(0, 10)}</div>
               </div>
             ) : (
               <div className="text-xs text-slate-500">No Draft</div>
@@ -228,13 +228,13 @@ export function AdminDocumentGenerationQueueScreen() {
                   <Wand2 className="h-3 w-3" />
                   Generate
                 </Button>
-                {row.latest_draft && (
-                  <Button size="sm" variant="ghost" className="gap-2" onClick={() => setShowViewModal(row.latest_draft.id as number)}>
+                {Boolean(row.latest_draft) && (
+                  <Button size="sm" variant="ghost" className="gap-2" onClick={() => setShowViewModal((row.latest_draft as any).id as number)}>
                     <FileText className="h-3 w-3" />
                     View
                   </Button>
                 )}
-                <Button size="sm" variant="ghost" className="gap-2" asChild>
+                <Button size="sm" variant="ghost" className="gap-2">
                   <Link href={`/projects/1/worklist?indicator_id=${row.indicator_id}`}>Open Indicator</Link>
                 </Button>
               </div>
