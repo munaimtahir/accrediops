@@ -23,6 +23,12 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
   const effectiveProjectId = canManageExports ? projectId : Number.NaN;
   const printBundle = useProjectExport(projectId, "print-bundle");
   const readiness = useProjectReadiness(effectiveProjectId);
+  const sections = useMemo(() => {
+    if (!printBundle.data) {
+      return [];
+    }
+    return printBundle.data.sections ?? printBundle.data.bundle?.sections ?? [];
+  }, [printBundle.data]);
 
   if (authQuery.isLoading) {
     return <LoadingSkeleton className="h-40 w-full" />;
@@ -49,12 +55,6 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
     return <ErrorPanel message={readiness.error.message} />;
   }
 
-  const sections = useMemo(() => {
-    if (!printBundle.data) {
-      return [];
-    }
-    return printBundle.data.sections ?? printBundle.data.bundle?.sections ?? [];
-  }, [printBundle.data]);
   const readinessData = (readiness.data ?? {}) as Record<string, unknown>;
   const exportBlockers = [
     Number(readinessData.percent_met ?? 0) < 100

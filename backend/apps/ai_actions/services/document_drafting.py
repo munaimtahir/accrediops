@@ -1,10 +1,12 @@
+import time
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 
 from apps.ai_actions.models import DocumentDraft
-from apps.ai_actions.services.generation import _call_gemini_api
+from apps.ai_actions.services import generation
 from apps.ai_actions.services.provider import get_ai_config
 from apps.ai_actions.services.usage import log_ai_usage
 from apps.accounts.models import User
@@ -214,7 +216,7 @@ def generate_document_draft(
     
     try:
         if config.provider == "gemini":
-            ai_content = _call_gemini_api(prompt, config.model, config.api_key)
+            ai_content = generation._call_gemini_api(prompt, config.model, config.api_key)
             model_name = config.model
         else:
             raise ValidationError(f"Unknown AI provider: {config.provider}")
@@ -323,11 +325,9 @@ def promote_draft_to_evidence(
         description=document_draft.draft_content, # Draft content becomes evidence description
         source_type="GENERATED", # Mark as AI-generated/promoted
         text_content=document_draft.draft_content,
-        document_type=document_type,
         file_label=final_filename,
         uploaded_by=actor,
         notes=notes,
-        evidence_type=evidence_type,
         approval_status="PENDING", # Always pending, requires human approval
     )
 
@@ -344,7 +344,7 @@ def promote_draft_to_evidence(
         event_type="document_draft.promoted_to_evidence",
         obj=document_draft,
         after=snapshot_instance(document_draft),
-        notes=f"Promoted to EvidenceItem ID: {evidence_item.id}",
+        reason=f"Promoted to EvidenceItem ID: {evidence_item.id}",
     )
 
     return document_draft

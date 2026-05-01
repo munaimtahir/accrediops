@@ -1,45 +1,30 @@
 from datetime import timedelta
 
-from apps.api.tests.base import ContractBaseTestCase
-from apps.evidence.services import create_evidence_item, review_evidence_item
-from apps.indicators.services import (assign_project_indicator,
-                                      validate_project_indicator_readiness)
-from apps.masters.choices import (EvidenceApprovalStatusChoices,
-                                  EvidenceCompletenessStatusChoices,
-                                  EvidenceValidityStatusChoices,
-                                  RecurringInstanceStatusChoices)
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.utils import timezone
 
-
-class ValidateProjectIndicatorReadinessTests(ContractBaseTestCase):
-    def setUp(self):
-        super().setUp()
-        project_indicators = self.initialize_project()
-        self.project_indicator = project_indicators["IND-001"]
-        self.recurring_project_indicator = project_indicators["IND-002"]
-
-        assign_project_indicator(
-            project_indicator=self.project_indicator,
-from django.core.exceptions import ValidationError, PermissionDenied
 from apps.api.tests.base import ContractBaseTestCase
-from apps.indicators.services import (
-    mark_project_indicator_met,
-    assign_project_indicator,
-    start_project_indicator,
-    send_project_indicator_for_review,
-    validate_project_indicator_readiness,
-    reopen_project_indicator,
-    update_project_indicator_working_state,
-    add_project_indicator_comment,
-    standards_progress,
-    areas_progress,
-)
 from apps.evidence.services import create_evidence_item, review_evidence_item
+from apps.indicators.services import (
+    add_project_indicator_comment,
+    areas_progress,
+    assign_project_indicator,
+    mark_project_indicator_met,
+    reopen_project_indicator,
+    send_project_indicator_for_review,
+    standards_progress,
+    start_project_indicator,
+    update_project_indicator_working_state,
+    validate_project_indicator_readiness,
+)
 from apps.masters.choices import (
-    ProjectIndicatorStatusChoices,
-    PriorityChoices,
+    EvidenceApprovalStatusChoices,
+    EvidenceCompletenessStatusChoices,
+    EvidenceValidityStatusChoices,
     IndicatorCommentTypeChoices,
+    PriorityChoices,
+    ProjectIndicatorStatusChoices,
+    RecurringInstanceStatusChoices,
 )
 
 class IndicatorsServiceLayerTest(ContractBaseTestCase):
@@ -47,6 +32,8 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
         super().setUp()
         self.project_indicators = self.initialize_project()
         self.project_indicator = self.project_indicators["IND-001"]
+        self.recurring_project_indicator = self.project_indicators["IND-002"]
+        self._setup_assignments()
 
     def _setup_assignments(self, pi=None):
         pi = pi or self.project_indicator
@@ -121,6 +108,20 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
             title="Policy",
             source_type="URL",
             file_or_url="https://example.com",
+        )
+        review_evidence_item(
+            evidence_item=evidence_item,
+            actor=self.reviewer,
+            validity_status=EvidenceValidityStatusChoices.VALID,
+            completeness_status=EvidenceCompletenessStatusChoices.COMPLETE,
+            approval_status=EvidenceApprovalStatusChoices.REJECTED,
+        )
+        readiness = validate_project_indicator_readiness(self.project_indicator)
+        self.assertEqual(readiness["approved_evidence_count"], 0)
+        self.assertEqual(readiness["total_current_evidence_count"], 1)
+        self.assertFalse(readiness["all_current_evidence_approved"])
+        self.assertFalse(readiness["no_rejected_current_evidence"])
+        self.assertFalse(readiness["ready_for_met"])
     def test_assign_project_indicator_success(self):
         updated_pi = assign_project_indicator(
             project_indicator=self.project_indicator,
@@ -182,6 +183,7 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
         self._setup_assignments()
         self.project_indicator.notes = "Work done"
         self.project_indicator.save()
+        start_project_indicator(project_indicator=self.project_indicator, actor=self.owner)
         updated_pi = send_project_indicator_for_review(
             project_indicator=self.project_indicator,
             actor=self.owner,
@@ -260,26 +262,40 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
         self.assertFalse(readiness["ready_for_met"])
 
     def test_overdue_recurring_not_ready(self):
-        from apps.recurring.models import RecurringEvidenceInstance
-
         evidence_item = create_evidence_item(
             project_indicator=self.recurring_project_indicator,
             actor=self.owner,
             title="Log",
             source_type="URL",
             file_or_url="https://example.com",
-            validity_status="VALID",
-            completeness_status="COMPLETE",
-            approval_status="APPROVED",
+        )
+        review_evidence_item(
+            evidence_item=evidence_item,
+            actor=self.reviewer,
+            validity_status=EvidenceValidityStatusChoices.VALID,
+            completeness_status=EvidenceCompletenessStatusChoices.COMPLETE,
+            approval_status=EvidenceApprovalStatusChoices.APPROVED,
         )
 
-        updated_pi = mark_project_indicator_met(
-            project_indicator=self.project_indicator,
-            actor=self.approver,
-            reason="Verified"
-        )
-        self.assertEqual(updated_pi.current_status, ProjectIndicatorStatusChoices.MET)
-        self.assertTrue(updated_pi.is_met)
+        instance = self.recurring_project_indicator.recurring_requirement.instances.first()
+        today = timezone.localdate()
+        instance.due_date = today - timedelta(days=1)
+        instance.status = RecurringInstanceStatusChoices.PENDING
+        instance.save()
+
+        readiness = validate_project_indicator_readiness(self.recurring_project_indicator)
+        self.assertEqual(readiness["overdue_recurring_instances_count"], 1)
+        self.assertFalse(readiness["recurring_requirements_clear"])
+        self.assertFalse(readiness["ready_for_met"])
+
+        start_project_indicator(project_indicator=self.recurring_project_indicator, actor=self.owner)
+        send_project_indicator_for_review(project_indicator=self.recurring_project_indicator, actor=self.owner)
+        with self.assertRaises(ValidationError):
+            mark_project_indicator_met(
+                project_indicator=self.recurring_project_indicator,
+                actor=self.approver,
+                reason="Verified",
+            )
 
     def test_mark_project_indicator_met_permission_denied(self):
         self._setup_assignments()
@@ -304,10 +320,23 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
 
     def test_reopen_project_indicator_success(self):
         self._setup_assignments()
-        # First mark it as MET
-        self.project_indicator.current_status = ProjectIndicatorStatusChoices.MET
-        self.project_indicator.is_met = True
-        self.project_indicator.save()
+        evidence_item = create_evidence_item(
+            project_indicator=self.project_indicator,
+            actor=self.owner,
+            title="Evidence",
+            source_type="URL",
+            file_or_url="https://example.com",
+        )
+        review_evidence_item(
+            evidence_item=evidence_item,
+            actor=self.reviewer,
+            validity_status=EvidenceValidityStatusChoices.VALID,
+            completeness_status=EvidenceCompletenessStatusChoices.COMPLETE,
+            approval_status=EvidenceApprovalStatusChoices.APPROVED,
+        )
+        start_project_indicator(project_indicator=self.project_indicator, actor=self.owner)
+        send_project_indicator_for_review(project_indicator=self.project_indicator, actor=self.owner)
+        mark_project_indicator_met(project_indicator=self.project_indicator, actor=self.approver, reason="Verified")
 
         updated_pi = reopen_project_indicator(
             project_indicator=self.project_indicator,
@@ -400,15 +429,9 @@ class IndicatorsServiceLayerTest(ContractBaseTestCase):
         self.assertEqual(readiness["overdue_recurring_instances_count"], 1)
         self.assertFalse(readiness["recurring_requirements_clear"])
         self.assertFalse(readiness["ready_for_met"])
-            validity_status="VALID",
-            completeness_status="COMPLETE",
-            approval_status="APPROVED",
-        )
-        mark_project_indicator_met(
-            project_indicator=self.project_indicator,
-            actor=self.approver,
-            reason="Verified"
-        )
+        start_project_indicator(project_indicator=self.project_indicator, actor=self.owner)
+        send_project_indicator_for_review(project_indicator=self.project_indicator, actor=self.owner)
+        mark_project_indicator_met(project_indicator=self.project_indicator, actor=self.approver, reason="Verified")
 
         standards = standards_progress(self.project)
         self.assertEqual(standards[0]["met_indicators"], 1)

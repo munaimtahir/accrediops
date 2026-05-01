@@ -32,7 +32,7 @@ from apps.ai_actions.models import AIUsageLog, DocumentDraft
 from apps.ai_actions.services.classification import run_framework_indicator_classification
 from apps.ai_actions.services.document_drafting import generate_document_draft, promote_draft_to_evidence
 from apps.frameworks.models import Framework
-from apps.indicators.models import Indicator
+from apps.indicators.models import Indicator, ProjectIndicator
 from apps.masters.choices import ClassificationReviewStatusChoices
 from apps.frameworks.services import (
     import_framework_checklist,
@@ -405,9 +405,9 @@ class DocumentDraftGenerateView(APIView):
             project = get_object_or_404(AccreditationProject, pk=project_id)
             project_indicator = get_object_or_404(ProjectIndicator, pk=project_indicator_id, project=project, indicator=indicator)
             if project_indicator.indicator != indicator:
-                raise ValidationError("Project indicator does not match indicator ID.")
+                raise DjangoValidationError("Project indicator does not match indicator ID.")
         elif project_id or project_indicator_id:
-             raise ValidationError("Both project_id and project_indicator_id must be provided for project-specific drafts, or neither for framework drafts.")
+             raise DjangoValidationError("Both project_id and project_indicator_id must be provided for project-specific drafts, or neither for framework drafts.")
 
         draft = generate_document_draft(
             actor=request.user,
@@ -483,8 +483,8 @@ class DocumentDraftPromoteToEvidenceView(APIView):
             evidence_title=payload["evidence_title"],
             evidence_type=payload["evidence_type"],
             document_type=payload["document_type"],
-            final_filename=payload["final_filename"],
-            notes=payload["notes"],
+            final_filename=payload.get("final_filename", ""),
+            notes=payload.get("notes", ""),
         )
         return success_response(DocumentDraftSerializer(promoted_draft).data, response_status=200)
 

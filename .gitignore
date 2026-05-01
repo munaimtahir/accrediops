@@ -9,6 +9,11 @@ backend/.env
 node_modules/
 dist/
 .next/
+.next_live/
+playwright-report/
+OUT/
+backend/.coverage
+frontend/tests/e2e/.auth/
 
 # OS / editors
 .DS_Store

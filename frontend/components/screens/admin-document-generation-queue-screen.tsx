@@ -20,12 +20,13 @@ import { useToast } from "@/components/common/toaster";
 import { Button } from "@/components/ui/button";
 import { FileText, Wand2 } from "lucide-react";
 import Link from "next/link";
-import { DocumentDraft, FrameworkSummary, ProjectSummary, ProjectIndicatorSummary } from "@/types";
+import { DocumentDraft, ProjectSummary, ProjectIndicatorSummary } from "@/types";
 import { Modal } from "@/components/common/modal";
 import { SafeHTML } from "@/components/common/safe-html";
 import { Textarea } from "@/components/ui/textarea";
 import { FormEvent } from "react";
 import { getSafeErrorMessage } from "@/lib/api/client";
+import type { DocumentGenerationQueueRow } from "@/lib/hooks/use-admin";
 
 function GenerateDraftModal({ indicatorId, open, onClose, onGenerated }: { indicatorId: number; open: boolean; onClose: () => void; onGenerated: () => void }) {
   const { pushToast } = useToast();
@@ -111,13 +112,13 @@ function GenerateDraftModal({ indicatorId, open, onClose, onGenerated }: { indic
 }
 
 function ViewDraftModal({ draftId, open, onClose }: { draftId: number; open: boolean; onClose: () => void }) {
-  const { pushToast } = useToast();
   const draftQuery = useRetrieveDocumentDraft(draftId);
 
   if (draftQuery.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (draftQuery.error) return <ErrorPanel message={draftQuery.error.message} />;
 
-  const draft = (draftQuery.data as unknown) as DocumentDraft;
+  const draft = draftQuery.data as DocumentDraft;
+  if (!draft) return <ErrorPanel message="Draft not found." />;
 
   return (
     <Modal open={open} title={draft.title} description={`Version ${draft.version} | Status: ${draft.review_status}`} onClose={onClose}>
@@ -130,7 +131,6 @@ function ViewDraftModal({ draftId, open, onClose }: { draftId: number; open: boo
 }
 
 export function AdminDocumentGenerationQueueScreen() {
-  const { pushToast } = useToast();
   const [frameworkId, setFrameworkId] = useState("");
   const [search, setSearch] = useState("");
   const [showGenerateModal, setShowGenerateModal] = useState<number | null>(null);
@@ -146,8 +146,8 @@ export function AdminDocumentGenerationQueueScreen() {
   if (frameworksQuery.error) return <ErrorPanel message={frameworksQuery.error.message} />;
 
   const frameworks = frameworksQuery.data ?? [];
-  const rows = queueQuery.data?.results ?? [];
-  const allDrafts = ((allDraftsQuery.data as any)?.results ?? []) as DocumentDraft[];
+  const rows: DocumentGenerationQueueRow[] = queueQuery.data?.results ?? [];
+  const allDrafts: DocumentDraft[] = allDraftsQuery.data ?? [];
 
   const fullAICount = rows.filter((row) => row.ai_assistance_level === "FULL_AI").length;
   const partialAICount = rows.filter((row) => row.ai_assistance_level === "PARTIAL_AI").length;
@@ -155,7 +155,6 @@ export function AdminDocumentGenerationQueueScreen() {
   const draftsPendingReview = allDrafts.filter(
     (draft) => draft.review_status === "HUMAN_REVIEW_REQUIRED" || draft.review_status === "DRAFT",
   ).length;
-  const draftsPromoted = allDrafts.filter((draft) => draft.review_status === "PROMOTED_TO_EVIDENCE").length;
 
   return (
     <div className="space-y-6">
@@ -203,7 +202,7 @@ export function AdminDocumentGenerationQueueScreen() {
         </div>
       </Card>
 
-      <WorkbenchTable<Record<string, unknown>>
+      <WorkbenchTable<DocumentGenerationQueueRow>
         columns={[
           { key: "code", header: "Indicator", render: (row) => <div className="font-medium">{String(row.code)}</div> },
           { key: "text", header: "Requirement", render: (row) => <div className="text-xs text-slate-600 line-clamp-2" title={String(row.text)}>{String(row.text)}</div> },
@@ -212,8 +211,8 @@ export function AdminDocumentGenerationQueueScreen() {
           { key: "draft_status", header: "Latest Draft", render: (row) => (
             row.latest_draft ? (
               <div className="text-xs">
-                <div>v{(row.latest_draft as any).version} ({(row.latest_draft as any).review_status})</div>
-                <div className="text-slate-500">{String((row.latest_draft as any).generated_at).slice(0, 10)}</div>
+                <div>v{row.latest_draft.version} ({row.latest_draft.review_status})</div>
+                <div className="text-slate-500">{String(row.latest_draft.generated_at).slice(0, 10)}</div>
               </div>
             ) : (
               <div className="text-xs text-slate-500">No Draft</div>
@@ -224,18 +223,18 @@ export function AdminDocumentGenerationQueueScreen() {
             header: "Actions", 
             render: (row) => (
               <div className="flex items-center gap-2">
-                <Button size="sm" variant="secondary" className="gap-2" onClick={() => setShowGenerateModal(row.indicator_id as number)}>
+                <Button size="sm" variant="secondary" className="gap-2" onClick={() => setShowGenerateModal(row.indicator_id)}>
                   <Wand2 className="h-3 w-3" />
                   Generate
                 </Button>
                 {Boolean(row.latest_draft) && (
-                  <Button size="sm" variant="ghost" className="gap-2" onClick={() => setShowViewModal((row.latest_draft as any).id as number)}>
+                  <Button size="sm" variant="ghost" className="gap-2" onClick={() => setShowViewModal(row.latest_draft?.id ?? null)}>
                     <FileText className="h-3 w-3" />
                     View
                   </Button>
                 )}
                 <Button size="sm" variant="ghost" className="gap-2">
-                  <Link href={`/projects/1/worklist?indicator_id=${row.indicator_id}`}>Open Indicator</Link>
+                  <Link href="/projects">Open Projects</Link>
                 </Button>
               </div>
             )
