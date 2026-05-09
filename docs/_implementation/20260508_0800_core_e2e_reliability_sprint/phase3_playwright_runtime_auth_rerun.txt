@@ -1,0 +1,15 @@
+# Playwright: rerun 00_runtime_and_auth
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1567693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1567693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/00_runtime_and_auth.spec.ts:6:7 › 00 runtime and auth › runtime stays on 18080 and health routes are reachable
+[1A[2K[2/2] tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash
+[1A[2K  2 passed (2.1m)

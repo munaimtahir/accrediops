@@ -6,6 +6,7 @@ import {
   ensureCleanE2EState,
   listProjects,
   seedContract,
+  seededUser,
 } from "./helpers";
 
 test.use({ storageState: authStatePath("admin") });
@@ -19,7 +20,7 @@ test.describe("15 smoke clean new app mode", () => {
     expect(frameworksResponse.ok()).toBeTruthy();
     const frameworks = frameworksPayload.data as Array<{ id: number; name: string }>;
     expect(frameworks).toHaveLength(1);
-    expect(frameworks[0].name).toBe("LAB");
+    expect(frameworks[0].name).toBe(seededUser.frameworkName);
 
     const projects = await listProjects(page);
     expect(projects.results.every((item) => item.name.startsWith("E2E"))).toBeTruthy();
@@ -29,9 +30,9 @@ test.describe("15 smoke clean new app mode", () => {
       `${seedContract.artifactPrefix}SMOKE_FIRST_${Date.now()}`,
       `${seedContract.artifactPrefix}SMOKE_CLIENT_${Date.now()}`,
     );
-    await page.goto(`/projects/${project.id}`);
-    await expect(page.getByRole("heading", { name: project.name }).first()).toBeVisible();
-    await page.goto(`/projects/${project.id}/worklist`);
-    await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
+    await page.goto(`/projects/${project.id}`, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: project.name }).first()).toBeVisible({ timeout: 15000 });
+    await page.goto(`/projects/${project.id}/worklist`, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible({ timeout: 15000 });
   });
 });

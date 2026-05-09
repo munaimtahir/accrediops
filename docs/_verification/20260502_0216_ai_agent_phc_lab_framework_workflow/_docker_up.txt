@@ -1,0 +1,138 @@
+ Image accrediops-frontend Building 
+ Image accrediops-backend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#3 [backend internal] load build definition from Dockerfile
+#3 transferring dockerfile:
+#3 transferring dockerfile: 258B 0.0s done
+#3 DONE 0.7s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 139B 0.2s done
+#2 DONE 0.6s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#4 ...
+
+#5 [frontend internal] load metadata for docker.io/library/node:20-alpine
+#5 DONE 0.3s
+
+#4 [backend internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 0.2s
+
+#6 [backend internal] load .dockerignore
+#6 transferring context: 2B 0.0s done
+#6 DONE 0.1s
+
+#7 [frontend internal] load .dockerignore
+#7 transferring context: 129B 0.1s done
+#7 DONE 0.2s
+
+#8 [backend internal] load build context
+#8 DONE 0.0s
+
+#9 [backend 1/5] FROM docker.io/library/python:3.12-slim@sha256:804ddf3251a60bbf9c92e73b7566c40428d54d0e79d3428194edf40da6521286
+#9 resolve docker.io/library/python:3.12-slim@sha256:804ddf3251a60bbf9c92e73b7566c40428d54d0e79d3428194edf40da6521286
+#9 resolve docker.io/library/python:3.12-slim@sha256:804ddf3251a60bbf9c92e73b7566c40428d54d0e79d3428194edf40da6521286 0.2s done
+#9 DONE 0.2s
+
+#10 [frontend 1/5] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#10 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.1s done
+#10 DONE 0.2s
+
+#11 [frontend internal] load build context
+#11 transferring context: 320.45kB 0.5s done
+#11 DONE 0.6s
+
+#12 [frontend 2/5] WORKDIR /app
+#12 CACHED
+
+#13 [frontend 3/5] COPY package*.json /app/
+#13 CACHED
+
+#14 [frontend 4/5] RUN npm install
+#14 CACHED
+
+#15 [frontend 5/5] COPY . /app
+#15 DONE 2.6s
+
+#16 [frontend] exporting to image
+#16 exporting layers
+#16 exporting layers 0.6s done
+#16 exporting manifest sha256:74067474edd977d2eed4f68b5c66cfb38895da24269ff37ae30e2bc0877126c6 0.1s done
+#16 exporting config sha256:9f9f472fee8ba6634f9923713c80ca77a9350ddcaf3d77ae13f0c05d07b83fb0 0.1s done
+#16 exporting attestation manifest sha256:f256f0f8f5175f74a6d6ae5c4774658a48a400a4116ef92de1dc8731fb6a1861
+#16 exporting attestation manifest sha256:f256f0f8f5175f74a6d6ae5c4774658a48a400a4116ef92de1dc8731fb6a1861 0.1s done
+#16 exporting manifest list sha256:a5b12e660d7ad9dbb35989cafc17db12644838cf829508d194a6f2aed0f262e4 0.0s done
+#16 naming to docker.io/library/accrediops-frontend:latest
+#16 naming to docker.io/library/accrediops-frontend:latest done
+#16 unpacking to docker.io/library/accrediops-frontend:latest
+#16 unpacking to docker.io/library/accrediops-frontend:latest 0.6s done
+#16 DONE 1.9s
+
+#8 [backend internal] load build context
+#8 transferring context: 548.49kB 5.6s
+#8 ...
+
+#17 [frontend] resolving provenance for metadata file
+#17 DONE 0.1s
+
+#8 [backend internal] load build context
+#8 transferring context: 4.27MB 10.8s
+#8 transferring context: 4.27MB 10.8s done
+#8 DONE 10.9s
+
+#18 [backend 2/5] WORKDIR /app
+#18 CACHED
+
+#19 [backend 3/5] COPY requirements.txt /app/requirements.txt
+#19 CACHED
+
+#20 [backend 4/5] RUN pip install --no-cache-dir -r /app/requirements.txt
+#20 CACHED
+
+#21 [backend 5/5] COPY . /app
+#21 DONE 27.6s
+
+#22 [backend] exporting to image
+#22 exporting layers
+#22 exporting layers 12.9s done
+#22 exporting manifest sha256:21537e6931c9bf050a2a97a2a8043daefab9e2ba4dba0c2c4f3834d08cb70dc7 0.1s done
+#22 exporting config sha256:4e8f31a61b1a2f02b21c4a35e2f5a680e17625590784b63bd1f24eb86cb13c0a 0.0s done
+#22 exporting attestation manifest sha256:5a41b6283cb5908a1ff767cc3171c56d5026481c13332089d1681e596998af78 0.1s done
+#22 exporting manifest list sha256:6d21afd65366d391337b05f71402b884415f52ba52b5fa8b2fac64e69e21f761 0.0s done
+#22 naming to docker.io/library/accrediops-backend:latest done
+#22 unpacking to docker.io/library/accrediops-backend:latest
+#22 unpacking to docker.io/library/accrediops-backend:latest 7.2s done
+#22 DONE 20.5s
+
+#23 [backend] resolving provenance for metadata file
+#23 DONE 0.1s
+ Image accrediops-backend Built 
+ Image accrediops-frontend Built 
+ Network accrediops_default Creating 
+ Network accrediops_default Created 
+ Volume accrediops_frontend_node_modules Creating 
+ Volume accrediops_frontend_node_modules Created 
+ Volume accrediops_frontend_next_cache Creating 
+ Volume accrediops_frontend_next_cache Created 
+ Volume accrediops_caddy_data Creating 
+ Volume accrediops_caddy_data Created 
+ Volume accrediops_caddy_config Creating 
+ Volume accrediops_caddy_config Created 
+ Container accrediops-backend Creating 
+ Container accrediops-backend Created 
+ Container accrediops-frontend Creating 
+ Container accrediops-frontend Created 
+ Container accrediops-caddy Creating 
+ Container accrediops-caddy Created 
+ Container accrediops-backend Starting 
+ Container accrediops-backend Started 
+ Container accrediops-backend Waiting 
+ Container accrediops-backend Error dependency backend failed to start
+dependency failed to start: container accrediops-backend is unhealthy

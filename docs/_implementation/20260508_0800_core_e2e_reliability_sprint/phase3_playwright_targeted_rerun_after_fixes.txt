@@ -1,0 +1,692 @@
+# Playwright: targeted rerun (after auth/nav/print-pack fixes)
+
+Running 18 tests using 1 worker
+
+[1A[2K(node:1561877) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1561877) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/18] tests/e2e/00_runtime_and_auth.spec.ts:6:7 › 00 runtime and auth › runtime stays on 18080 and health routes are reachable
+[1A[2K[2/18] tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash
+[1A[2K(node:1563564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1563564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/18] (retries) tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash (retry #1)
+[1A[2K  1) tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/login/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    2 × unexpected value "http://127.0.0.1:18080/projects"[22m
+    [2m    - waiting for" http://127.0.0.1:18080/login?next=%2Fprojects" navigation to finish...[22m
+
+
+      22 |       await expect(page.getByRole("heading", { name: "Project register" })).toBeVisible();
+      23 |       await page.getByRole("button", { name: "Sign out" }).click();
+    > 24 |       await expect(page).toHaveURL(/\/login/);
+         |                          ^
+      25 |     }
+      26 |   });
+      27 | });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/00_runtime_and_auth.spec.ts:24:26
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1565069) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1565069) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[4/18] tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections
+[1A[2K[5/18] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility
+[1A[2Ktests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility
+Detected Project ID: 435
+
+[1A[2K(node:1568628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1568628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[6/18] (retries) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (retry #1)
+[1A[2KDetected Project ID: 437
+
+[1A[2K  2) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-2/traces/8990e2fd3e971968a8b3-db41ad0549a23d7de919-recording1.network'
+
+    Error: page.goto: Test ended.
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/projects/435/recurring", waiting until "load"[22m
+
+
+      27 |     console.log(`Detected Project ID: ${projectId}`);
+      28 |     
+    > 29 |     await adminPage.goto(`/projects/${projectId}/recurring`);
+         |                     ^
+      30 |     
+      31 |     // Check for "Request failed" banner
+      32 |     await expect(adminPage.locator('text="Request failed"')).not.toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:29:21
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-2/7649aa19b6a79e815f1a87f87c1dac88.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> /home/munaim/.cache/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-RZezEO --remote-debugging-pipe --no-startup-window
+    <launched> pid=1568643
+    [pid=1568643][err] [0508/091923.213896:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.
+    [pid=1568643][err] [0508/091924.756943:INFO:CONSOLE:25631] "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold", source: webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (25631)
+    [pid=1568643][err] [0508/091925.870458:INFO:CONSOLE:51] "[Sidebar] pathname: /projects params: [object Object] projectId: undefined", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643][err] [0508/091925.873857:INFO:CONSOLE:51] "[Sidebar] pathname: /projects params: [object Object] projectId: undefined", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643][err] [0508/091930.538344:INFO:CONSOLE:25631] "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold", source: webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (25631)
+    [pid=1568643][err] [0508/091939.470225:INFO:CONSOLE:25631] "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold", source: webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (25631)
+    [pid=1568643][err] [0508/091944.402842:INFO:CONSOLE:51] "[Sidebar] pathname: /projects/437/recurring params: [object Object] projectId: 437", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643][err] [0508/091944.416406:INFO:CONSOLE:51] "[Sidebar] pathname: /projects/437/recurring params: [object Object] projectId: 437", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643][err] [0508/092021.706392:INFO:CONSOLE:25631] "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold", source: webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js (25631)
+    [pid=1568643][err] [0508/092024.059909:INFO:CONSOLE:51] "[Sidebar] pathname: /projects/437/recurring params: [object Object] projectId: 437", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643][err] [0508/092024.068345:INFO:CONSOLE:51] "[Sidebar] pathname: /projects/437/recurring params: [object Object] projectId: 437", source: webpack-internal:///(app-pages-browser)/./components/layout/sidebar.tsx (51)
+    [pid=1568643] <gracefully close start>
+
+      55 |     await expect(approveButtonOwner).toBeDisabled();
+      56 |     
+    > 57 |     await ownerContext.close();
+         |     ^
+      58 |
+      59 |     // 3. Check as Reviewer
+      60 |     const reviewerContext = await browser.newContext({ storageState: path.join(AUTH_DIR, "pw_reviewer.json") });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:57:5
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/trace.zip'
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/error-context.md
+
+
+[1A[2K(node:1570508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1570508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[7/18] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:74:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit
+[1A[2K(node:1572062) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1572062) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[8/18] (retries) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:74:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit (retry #1)
+[1A[2K  3) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:74:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.waitForSelector: Test ended.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Edit")') to be visible[22m
+    [2m    - waiting for" http://127.0.0.1:18080/login?next=%2Fadmin%2Fmasters%2Fstatuses" navigation to finish...[22m
+    [2m    - navigated to "http://127.0.0.1:18080/login?next=%2Fadmin%2Fmasters%2Fstatuses"[22m
+
+
+      78 |
+      79 |     // Click on the first edit button
+    > 80 |     await page.waitForSelector('button:has-text("Edit")');
+         |                ^
+      81 |     await page.locator('button:has-text("Edit")').first().click();
+      82 |
+      83 |     // The modal should be visible - Use h3 as identified in modal.tsx
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:80:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-1f868-bilities-Admin-masters-edit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-1f868-bilities-Admin-masters-edit/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-1f868-bilities-Admin-masters-edit/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/17_recurring_and_masters_c-1f868-bilities-Admin-masters-edit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[9/18] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin
+[1A[2K(node:1573560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1573560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[10/18] (retries) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (retry #1)
+[1A[2K  4) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.waitForURL: Test ended.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+      32 |     await page.goto("/admin");
+      33 |     await Promise.all([
+    > 34 |       page.waitForURL(/.*admin\/frameworks/),
+         |            ^
+      35 |       page.getByRole("link", { name: "Frameworks" }).click(),
+      36 |     ]);
+      37 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:34:12
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[11/18] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:46:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin
+[1A[2K[12/18] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:69:7 › Simplified Navigation and Homepage › Simplified project dashboard
+[1A[2K[13/18] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist
+[1A[2K[14/18] tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel
+[1A[2K[15/18] tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale
+[1A[2K[16/18] tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home
+[1A[2K(node:1576039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1576039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[17/18] (retries) tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (retry #1)
+[1A[2K  5) tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Generate Print Pack' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Generate Print Pack' })[22m
+
+
+      23 |     await expect(main.getByRole("link", { name: "Export history" }).first()).toBeVisible();
+      24 |     await main.getByRole("link", { name: "Print pack preview" }).click();
+    > 25 |     await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+         |                                                                             ^
+      26 |   });
+      27 | });
+      28 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:25:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[18/18] tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval
+[1A[2K(node:1580506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1580506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[19/18] (retries) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval (retry #1)
+[1A[2K  6) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-7/traces/13fa14058284d556c0f3-8901b83c808b2c925456-recording1.trace'
+
+    Error: page.goto: Test ended.
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/project-indicators/51685", waiting until "load"[22m
+
+
+      72 |     await page.context().clearCookies();
+      73 |     await loginAs(page, "reviewer");
+    > 74 |     await page.goto(`/project-indicators/${indicatorId}`);
+         |                ^
+      75 |     await expect(page.getByTestId("next-action-banner").getByText("Action", { exact: true })).toBeVisible();
+      76 |     for (const evidence of [firstEvidence, secondEvidence]) {
+      77 |       await postApi(
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:74:16
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-7/115f686758405688eaa6d658f6f00f91.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext.post: Test timeout of 60000ms exceeded.
+
+       at helpers.ts:187
+
+      185 |   }
+      186 |   if (!page.url().includes("/projects")) {
+    > 187 |     await page.goto("/projects");
+          |                                  ^
+      188 |   }
+      189 |   await expect(page).toHaveURL(/\/projects/);
+      190 | }
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:187:41)
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:171:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:73:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1582598) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1582598) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[20/18] tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation
+[1A[2K[21/18] tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section
+[1A[2K[22/18] tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes
+[1A[2K(node:1584663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1584663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[23/18] (retries) tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes (retry #1)
+[1A[2K  7) tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Readiness' })
+    Expected: disabled
+    Error: strict mode violation: getByRole('button', { name: 'Readiness' }) resolved to 11 elements:
+        1) <button disabled title="Only ADMIN or LEAD can access readiness views." aria-label="Readiness (Only ADMIN or LEAD can access readiness views.)" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-8 px-3 py-1.5 text-xs">Readiness</button> aka getByRole('button', { name: 'Readiness (Only ADMIN or LEAD' })
+        2) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-900 bg-slate-900 text-white">…</button> aka getByRole('button', { name: 'AAC Access, Assessment, and' })
+        3) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'BSBS Bio Safety and Bio' })
+        4) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'COP Care of Patients' })
+        5) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'FMS Facility Management and' })
+        6) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'HRM Human Resource Management' })
+        7) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'MER Management of Equipment' })
+        8) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'PRE Patient Rights and' })
+        9) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'QA Quality Assurance' })
+        10) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'ROM Responsibilities of' })
+        ...
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Readiness' })[22m
+
+
+      21 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      22 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+    > 23 |     await expect(page.getByRole("button", { name: "Readiness", exact: true })).toBeDisabled();
+         |                                                                   ^
+      24 |     await expect(page.getByRole("button", { name: "Export history", exact: true })).toBeDisabled();
+      25 |
+      26 |     await page.goto(`/projects/${projectId}/readiness`);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:23:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Readiness' })
+    Expected: disabled
+    Error: strict mode violation: getByRole('button', { name: 'Readiness' }) resolved to 11 elements:
+        1) <button disabled title="Only ADMIN or LEAD can access readiness views." aria-label="Readiness (Only ADMIN or LEAD can access readiness views.)" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-8 px-3 py-1.5 text-xs">Readiness</button> aka getByRole('button', { name: 'Readiness (Only ADMIN or LEAD' })
+        2) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-900 bg-slate-900 text-white">…</button> aka getByRole('button', { name: 'AAC Access, Assessment, and' })
+        3) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'BSBS Bio Safety and Bio' })
+        4) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'COP Care of Patients' })
+        5) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'FMS Facility Management and' })
+        6) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'HRM Human Resource Management' })
+        7) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'MER Management of Equipment' })
+        8) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'PRE Patient Rights and' })
+        9) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'QA Quality Assurance' })
+        10) <button type="button" class="rounded-xl border p-4 text-left shadow-panel transition border-slate-200 bg-white text-slate-900 hover:border-slate-300">…</button> aka getByRole('button', { name: 'ROM Responsibilities of' })
+        ...
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Readiness' })[22m
+
+
+      21 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      22 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+    > 23 |     await expect(page.getByRole("button", { name: "Readiness", exact: true })).toBeDisabled();
+         |                                                                   ^
+      24 |     await expect(page.getByRole("button", { name: "Export history", exact: true })).toBeDisabled();
+      25 |
+      26 |     await page.goto(`/projects/${projectId}/readiness`);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:23:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1585280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1585280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[24/18] tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways
+[1A[2K(node:1588097) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1588097) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[25/18] (retries) tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (retry #1)
+[1A[2K  8) tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').getByText('Action')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('main').getByText('Action')[22m
+
+
+       7 |     await page.getByRole("link", { name: "Open project" }).first().click();
+       8 |     const main = page.locator("main");
+    >  9 |     await expect(main.getByText("Action")).toBeVisible();
+         |                                            ^
+      10 |     await expect(main.getByText("Reason")).toBeVisible();
+      11 |     await expect(main.getByText("Status")).toBeVisible();
+      12 |     await expect(main.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:9:44
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-11/traces/6794944acd39f37fd900-615809cd86c09639518c.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-11/631223c6d6007e0f58dfedb452111939.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/error-context.md
+
+
+[1A[2K[26/18] tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance
+[1A[2K(node:1589848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1589848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[27/18] (retries) tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance (retry #1)
+[1A[2K  9) tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Recurring queue' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Recurring queue' })[22m
+
+
+      28 |       page.getByRole("link", { name: /Recurring queue/i }).first().click(),
+      29 |     ]);
+    > 30 |     await expect(page.getByRole("heading", { name: "Recurring queue" })).toBeVisible();
+         |                                                                          ^
+      31 |     await expect(page.getByText("Recurring execution tip")).toBeVisible();
+      32 |   });
+      33 | });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:30:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Recurring queue' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Recurring queue' })[22m
+
+
+      28 |       page.getByRole("link", { name: /Recurring queue/i }).first().click(),
+      29 |     ]);
+    > 30 |     await expect(page.getByRole("heading", { name: "Recurring queue" })).toBeVisible();
+         |                                                                          ^
+      31 |     await expect(page.getByText("Recurring execution tip")).toBeVisible();
+      32 |   });
+      33 | });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:30:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  5 failed
+    tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+    tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+    tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+    tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes 
+    tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+  4 flaky
+    tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:74:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit 
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+    tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+    tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+  9 passed (19.5m)

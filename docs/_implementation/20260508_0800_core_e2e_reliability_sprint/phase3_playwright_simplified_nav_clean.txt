@@ -1,0 +1,57 @@
+# Playwright: simplified nav spec (clean rerun)
+
+Running 4 tests using 1 worker
+
+[1A[2K(node:1608815) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1608815) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin
+[1A[2K  1) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/2917348a19c9037641e5-c0813a1ab845bee5968b.network'
+
+      41 |     await expect(page).toHaveURL(/.*admin\/masters\/statuses/);
+      42 |     
+    > 43 |     await adminContext.close();
+         |                        ^
+      44 |   });
+      45 |
+      46 |   test("Simplified navigation for non-admin", async ({ browser }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:43:24
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/fdbaa42a2c01a1a456d32628941c4e09.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/error-context.md
+
+
+[1A[2K(node:1611073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1611073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:46:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin
+[1A[2K[3/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:69:7 › Simplified Navigation and Homepage › Simplified project dashboard
+[1A[2K[4/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist
+[1A[2K  1 failed
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+  3 passed (2.9m)
+[1A[2K[2/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:46:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin
+[1A[2K[3/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:69:7 › Simplified Navigation and Homepage › Simplified project dashboard
+[1A[2K[4/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist
+[1A[2K  1 failed
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+  3 passed (1.9m)

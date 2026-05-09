@@ -1,0 +1,91 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (27.7s)
+  ✘  2 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (retry #1) (14.7s)
+
+
+  1) tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Title' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Title' })[22m
+
+
+      25 |     // Preview shows advisory content and does not claim completion.
+      26 |     const preview = page.getByRole("textbox", { name: "Title" });
+    > 27 |     await expect(preview).toBeVisible();
+         |                           ^
+      28 |     await expect(page.getByText(/AI Advisory Disclaimer/i)).toBeVisible();
+      29 |     await expect(page.getByText("AI-generated draft — requires human review")).toBeVisible();
+      30 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/40_framework_documentation_ai.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox', { name: 'Title' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('textbox', { name: 'Title' })[22m
+
+
+      25 |     // Preview shows advisory content and does not claim completion.
+      26 |     const preview = page.getByRole("textbox", { name: "Title" });
+    > 27 |     await expect(preview).toBeVisible();
+         |                           ^
+      28 |     await expect(page.getByText(/AI Advisory Disclaimer/i)).toBeVisible();
+      29 |     await expect(page.getByText("AI-generated draft — requires human review")).toBeVisible();
+      30 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/40_framework_documentation_ai.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only 

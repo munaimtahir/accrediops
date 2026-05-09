@@ -1,0 +1,106 @@
+
+Running 2 tests using 1 worker
+
+(node:903592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:903592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (1.0m)
+(node:904955) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:904955) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/e2e/core-journeys.spec.ts:236:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (1.0m)
+
+
+  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Mark as Met' }).first()[22m
+    [2m    - locator resolved to <button disabled title="Indicator is not ready to be marked MET yet." class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-10 px-4 py-2">Approve (Mark as Met)</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    4 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 500ms[22m
+
+
+      17 | ) {
+      18 |   await openIndicatorPanelIfAvailable(page, "Actions");
+    > 19 |   await page.getByRole("button", { name: triggerLabel }).first().click();
+         |                                                                  ^
+      20 |   const dialog = page.locator("div.fixed.inset-0").last();
+      21 |   await expect(dialog).toBeVisible();
+      22 |   if (reason) {
+        at runIndicatorCommand (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:19:66)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:214:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:236:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+
+    Error: page.goto: Navigation to "http://127.0.0.1:18080/login" is interrupted by another navigation to "http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F33395"
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/login", waiting until "load"[22m
+
+
+       at helpers.ts:161
+
+      159 |
+      160 | export async function login(page: Page, user: { username: string; password: string }) {
+    > 161 |   await page.goto("/login");
+          |              ^
+      162 |   await page.getByLabel("Username").fill(user.username);
+      163 |   await page.getByLabel("Password").fill(user.password);
+      164 |   await page.getByRole("button", { name: "Sign in" }).click();
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:161:14)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:280:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:236:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 

@@ -1,0 +1,120 @@
+
+Running 3 tests using 1 worker
+
+[1A[2K(node:1226684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1226684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:22:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path)
+[1A[2K(node:1227129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1227129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/3] (retries) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:22:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) (retry #1)
+[1A[2K  1) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:22:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Indicator Requirement')
+    Expected: visible
+    Error: strict mode violation: getByText('Indicator Requirement') resolved to 2 elements:
+        1) <h3 class="font-bold text-slate-900 border-b pb-2">Indicator Requirement</h3> aka getByRole('heading', { name: 'Indicator Requirement' })
+        2) <div class="prose prose-slate max-w-none leading-relaxed whitespace-pre-wrap font-serif text-slate-800">[DEMO MODE] Advisory document draft for IND-001.↵…</div> aka getByText('[DEMO MODE] Advisory document')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Indicator Requirement')[22m
+
+
+      150 |
+      151 |       await page.goto(`/admin/document-drafts/${draftId}`);
+    > 152 |       await expect(page.getByText("Indicator Requirement")).toBeVisible();
+          |                                                             ^
+      153 |       await page.getByRole("button", { name: "Edit Draft" }).click();
+      154 |       await page.getByPlaceholder("Draft content...").fill("E2E edit: verified PHC LAB draft review workflow.\n\n" + Date.now());
+      155 |       await page.getByRole("button", { name: "Save Changes" }).click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:152:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Indicator Requirement')
+    Expected: visible
+    Error: strict mode violation: getByText('Indicator Requirement') resolved to 2 elements:
+        1) <h3 class="font-bold text-slate-900 border-b pb-2">Indicator Requirement</h3> aka getByRole('heading', { name: 'Indicator Requirement' })
+        2) <div class="prose prose-slate max-w-none leading-relaxed whitespace-pre-wrap font-serif text-slate-800">[DEMO MODE] Advisory document draft for IND-001.↵…</div> aka getByText('[DEMO MODE] Advisory document')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Indicator Requirement')[22m
+
+
+      150 |
+      151 |       await page.goto(`/admin/document-drafts/${draftId}`);
+    > 152 |       await expect(page.getByText("Indicator Requirement")).toBeVisible();
+          |                                                             ^
+      153 |       await page.getByRole("button", { name: "Edit Draft" }).click();
+      154 |       await page.getByPlaceholder("Draft content...").fill("E2E edit: verified PHC LAB draft review workflow.\n\n" + Date.now());
+      155 |       await page.getByRole("button", { name: "Save Changes" }).click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:152:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1227506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1227506) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:261:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence
+[1A[2K[4/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:285:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows
+[1A[2K  1 failed
+    tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:22:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+  2 passed (1.1m)
+EXIT_CODE:1

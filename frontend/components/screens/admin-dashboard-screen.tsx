@@ -54,6 +54,12 @@ export function AdminDashboardScreen() {
             >
               Import logs
             </Link>
+            <Link
+              href="/admin/system-health"
+              className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
+            >
+              System health
+            </Link>
           </>
         }
       />

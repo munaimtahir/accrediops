@@ -6,12 +6,12 @@ test.describe("Role visibility and gating", () => {
     await login(page, seededUsers.owner);
     const createButton = page.getByRole("button", { name: "Create project" }).first();
     await expect(createButton).toBeDisabled();
-    await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+    await expect(page.getByText("Only ADMIN or LEAD can create or manage projects.", { exact: true })).toBeVisible();
   });
 
   test("lead sees admin navigation section", async ({ page }) => {
     await login(page, seededUsers.lead);
-    await expect(page.getByText("Admin")).toBeVisible();
+    await expect(page.locator("nav").getByText("Admin", { exact: true }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: "Admin Dashboard" })).toBeVisible();
     await expect(page.getByText("Viewing as LEAD")).toBeVisible();
   });
@@ -20,8 +20,8 @@ test.describe("Role visibility and gating", () => {
     await login(page, seededUsers.owner);
     await page.getByRole("link", { name: "Open project" }).first().click();
     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
-    await expect(page.getByRole("button", { name: "Readiness" })).toBeDisabled();
-    await expect(page.getByRole("button", { name: "Export history" })).toBeDisabled();
+    await expect(page.getByRole("button", { name: /^Readiness/ })).toBeDisabled();
+    await expect(page.getByRole("button", { name: /^Export history/ })).toBeDisabled();
 
     await page.goto(`/projects/${projectId}/readiness`);
     await expect(page.getByText("Readiness access restricted")).toBeVisible();

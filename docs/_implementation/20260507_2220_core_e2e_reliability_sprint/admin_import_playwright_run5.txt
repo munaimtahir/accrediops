@@ -1,0 +1,15 @@
+Error: Auth session not established for storageState user=pw_admin: {"ok":true,"status":200,"body":{"success":true,"data":{"authenticated":false,"user":null}}}
+
+   at global-setup.cjs:163
+
+  161 |         });
+  162 |         if (!sessionResultAfterUiLogin.ok || !sessionResultAfterUiLogin.body?.data?.authenticated) {
+> 163 |           throw new Error(
+      |                 ^
+  164 |             `Auth session not established for storageState user=${username}: ${JSON.stringify(sessionResultAfterUiLogin)}`,
+  165 |           );
+  166 |         }
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:163:17)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:188:3)
+
+[1A[2K

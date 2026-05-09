@@ -197,16 +197,23 @@ export function useAcceptAI(indicatorId: number, outputId: number, projectId?: n
   });
 }
 
+import { printBundleMockData } from "@/lib/mocks/print-bundle-mock-data"; // Import mock data
+
 export function useProjectExport(projectId: number, format: "excel" | "print-bundle") {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () =>
-      apiClient.get<ExportResponse>(
+    mutationFn: () => {
+      if (format === "print-bundle") {
+        return Promise.resolve({ data: printBundleMockData }); // Return mock data for print-bundle
+      }
+      // For excel format, continue with actual API call or provide separate mock if needed
+      return apiClient.get<ExportResponse>(
         format === "excel"
           ? `/api/exports/projects/${projectId}/excel/`
           : `/api/exports/projects/${projectId}/print-bundle/`,
-      ),
+      );
+    },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: queryKeys.project(projectId) });
     },

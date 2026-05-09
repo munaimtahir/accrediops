@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Allow: POST, OPTIONS
+Content-Length: 147
+Content-Type: application/json
+Cross-Origin-Opener-Policy: same-origin
+Date: Fri, 08 May 2026 08:16:09 GMT
+Referrer-Policy: same-origin
+Server: Caddy
+Server: WSGIServer/0.2 CPython/3.12.13
+Set-Cookie: csrftoken=7okMnbZQqgIW3fWBz71xeBgMFs517azz; expires=Fri, 07 May 2027 08:16:09 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+Set-Cookie: sessionid=lc2kogjidxa6ai2dymmdq0fr0b4b55gy; expires=Fri, 22 May 2026 08:16:09 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax
+Vary: Accept, Cookie
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+

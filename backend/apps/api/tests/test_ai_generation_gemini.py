@@ -3,6 +3,9 @@
 import os
 from unittest.mock import MagicMock, patch
 
+# Global mock for Gemini API to prevent hangs if a test misses a local patch
+mock_gemini_global = patch("apps.ai_actions.services.generation._call_gemini_api", return_value="[GLOBAL MOCK] Response").start()
+
 from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
 

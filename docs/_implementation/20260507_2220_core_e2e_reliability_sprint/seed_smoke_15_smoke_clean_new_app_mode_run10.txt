@@ -1,0 +1,96 @@
+
+Running 1 test using 1 worker
+
+[1A[2K(node:1500054) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1500054) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/1] tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth
+[1A[2K(node:1500261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1500261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/1] (retries) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth (retry #1)
+[1A[2K  1) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 
+
+    Error: list frameworks failed (403): {"code":"PERMISSION_DENIED","message":"Authentication credentials were not provided.","details":{"detail":"Authentication credentials were not provided."}}
+
+       at helpers.ts:79
+
+      77 |   const payload = (await response.json()) as ApiEnvelope<T>;
+      78 |   if (!response.ok() || !payload.success) {
+    > 79 |     throw new Error(`${label} failed (${response.status()}): ${JSON.stringify(payload.error ?? payload)}`);
+         |           ^
+      80 |   }
+      81 |   return payload.data;
+      82 | }
+        at readEnvelope (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:79:11)
+        at getLabFrameworkId (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:214:22)
+        at createProjectFromLab (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:281:23)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:16:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: list frameworks failed (403): {"code":"PERMISSION_DENIED","message":"Authentication credentials were not provided.","details":{"detail":"Authentication credentials were not provided."}}
+
+       at helpers.ts:79
+
+      77 |   const payload = (await response.json()) as ApiEnvelope<T>;
+      78 |   if (!response.ok() || !payload.success) {
+    > 79 |     throw new Error(`${label} failed (${response.status()}): ${JSON.stringify(payload.error ?? payload)}`);
+         |           ^
+      80 |   }
+      81 |   return payload.data;
+      82 | }
+        at readEnvelope (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:79:11)
+        at getLabFrameworkId (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:214:22)
+        at createProjectFromLab (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:281:23)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:16:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 

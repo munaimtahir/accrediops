@@ -5,7 +5,7 @@ const AUTH_DIR = path.resolve(__dirname, ".auth");
 
 async function openSeedProject(page: Page) {
   await page.goto("/projects");
-  const projectCard = page.locator(".rounded-xl", { hasText: "E2E Lab Project" });
+  const projectCard = page.locator(".rounded-xl", { hasText: "E2E Lab Project" }).first();
   await projectCard.getByRole("link", { name: "Open project" }).click();
   await page.waitForURL(/\/projects\/\d+/);
   const match = page.url().match(/\/projects\/(\d+)/);
@@ -49,7 +49,7 @@ test.describe("19 accessibility and keyboard navigation", () => {
     await page.keyboard.press("Enter");
     await expect(page.locator("#main-content")).toBeFocused();
 
-    await expect(page.locator("#main-content").getByRole("link", { name: "Open Worklist" })).toBeVisible();
+    await expect(page.locator("#main-content").getByRole("link", { name: /^Open Worklist$/ })).toBeVisible();
     await page.goto(`/projects/${projectId}/worklist`);
     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
     await context.close();

@@ -1,0 +1,25 @@
+
+> accrediops-frontend@0.1.0 lint
+> eslint app components lib tests utils
+
+
+/home/munaim/srv/apps/accrediops/frontend/components/screens/admin-frameworks-screen.tsx
+  84:9  warning  'projectsQuery' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/munaim/srv/apps/accrediops/frontend/components/screens/indicator-drawer.tsx
+   38:22  warning  'formatDateTime' is defined but never used  @typescript-eslint/no-unused-vars
+  113:40  warning  'instanceId' is defined but never used      @typescript-eslint/no-unused-vars
+
+/home/munaim/srv/apps/accrediops/frontend/components/screens/project-worklist-screen.tsx
+  148:9  warning  The 'rows' logical expression could make the dependencies of useMemo Hook (at line 181) change on every render. To fix this, wrap the initialization of 'rows' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+/home/munaim/srv/apps/accrediops/frontend/components/screens/project-workspace-board.tsx
+  11:10  warning  'Card' is defined but never used                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  14:24  warning  'DashboardRow' is defined but never used                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  31:9   warning  The 'areaRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'areaRows' in its own useMemo() Hook  react-hooks/exhaustive-deps
+  32:9   warning  The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook                                 react-hooks/exhaustive-deps
+  32:9   warning  The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 54) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook                                 react-hooks/exhaustive-deps
+
+✖ 9 problems (0 errors, 9 warnings)
+
+EXIT_CODE:0

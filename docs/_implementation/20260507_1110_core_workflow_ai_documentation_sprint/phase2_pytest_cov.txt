@@ -1,0 +1,80 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0
+django: version: 4.2.29, settings: config.accrediops_backend.settings (from ini)
+rootdir: /home/munaim/srv/apps/accrediops/backend
+configfile: pytest.ini
+testpaths: apps
+plugins: cov-7.1.0, django-4.12.0, Faker-40.11.0
+collected 124 items
+
+apps/api/tests/test_admin_readiness_inspection_exports.py ...........    [  8%]
+apps/api/tests/test_admin_registry.py .                                  [  9%]
+apps/api/tests/test_ai_generation_gemini.py ..............               [ 20%]
+apps/api/tests/test_auth_api.py ...                                      [ 23%]
+apps/api/tests/test_benchmark_bulk_update.py .                           [ 24%]
+apps/api/tests/test_clone_project.py .                                   [ 25%]
+apps/api/tests/test_document_drafting.py .....                           [ 29%]
+apps/api/tests/test_evidence_and_ai.py ...                               [ 31%]
+apps/api/tests/test_frameworks_api.py .........                          [ 38%]
+apps/api/tests/test_governance_hardening.py .....                        [ 42%]
+apps/api/tests/test_indicator_classification.py ..............           [ 54%]
+apps/api/tests/test_mark_met_and_progress.py ..                          [ 55%]
+apps/api/tests/test_physical_evidence.py .                               [ 56%]
+apps/api/tests/test_print_pack.py .                                      [ 57%]
+apps/api/tests/test_project_create_and_initialize.py ..                  [ 58%]
+apps/api/tests/test_project_delete_and_client_profiles.py ...            [ 61%]
+apps/api/tests/test_project_initialization.py .                          [ 62%]
+apps/api/tests/test_recurring_queue.py ...                               [ 64%]
+apps/api/tests/test_variable_replacement.py .                            [ 65%]
+apps/exports/tests/test_services.py ......                               [ 70%]
+apps/frameworks/tests/test_services.py ...                               [ 72%]
+apps/indicators/tests/test_services.py .......................           [ 91%]
+apps/projects/tests/test_services.py ........                            [ 97%]
+apps/recurring/tests/test_services.py ...
+INTERNALERROR> Traceback (most recent call last):
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/_pytest/main.py", line 289, in wrap_session
+INTERNALERROR>     session.exitstatus = doit(config, session) or 0
+INTERNALERROR>                          ^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/_pytest/main.py", line 343, in _main
+INTERNALERROR>     config.hook.pytest_runtestloop(session=session)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__
+INTERNALERROR>     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec
+INTERNALERROR>     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_callers.py", line 167, in _multicall
+INTERNALERROR>     raise exception
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_callers.py", line 139, in _multicall
+INTERNALERROR>     teardown.throw(exception)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/_pytest/logging.py", line 801, in pytest_runtestloop
+INTERNALERROR>     return (yield)  # Run all the tests.
+INTERNALERROR>             ^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_callers.py", line 139, in _multicall
+INTERNALERROR>     teardown.throw(exception)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/_pytest/terminal.py", line 688, in pytest_runtestloop
+INTERNALERROR>     result = yield
+INTERNALERROR>              ^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pluggy/_callers.py", line 152, in _multicall
+INTERNALERROR>     teardown.send(result)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pytest_cov/plugin.py", line 362, in pytest_runtestloop
+INTERNALERROR>     self.cov_total = self.cov_controller.summary(self.cov_report)
+INTERNALERROR>                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pytest_cov/engine.py", line 44, in ensure_topdir_wrapper
+INTERNALERROR>     return meth(self, *args, **kwargs)
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/pytest_cov/engine.py", line 189, in summary
+INTERNALERROR>     self.cov.html_report(ignore_errors=True, directory=output)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/coverage/control.py", line 1259, in html_report
+INTERNALERROR>     return reporter.report(morfs)
+INTERNALERROR>            ^^^^^^^^^^^^^^^^^^^^^^
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/coverage/html.py", line 392, in report
+INTERNALERROR>     self.write_html_page(ftr)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/coverage/html.py", line 550, in write_html_page
+INTERNALERROR>     write_html(html_path, html)
+INTERNALERROR>   File "/home/munaim/.local/lib/python3.12/site-packages/coverage/html.py", line 64, in write_html
+INTERNALERROR>     with open(fname, "wb") as fout:
+INTERNALERROR>          ^^^^^^^^^^^^^^^^^
+INTERNALERROR> PermissionError: [Errno 13] Permission denied: 'htmlcov/z_c5c218b747f5afbe_services_py.html'
+
+================== 124 passed, 1 warning in 443.60s (0:07:23) ==================

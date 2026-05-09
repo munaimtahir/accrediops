@@ -25,7 +25,7 @@ import {
 import { Check, Clipboard, Save } from "lucide-react";
 import { DocumentTypeChoices, EvidenceTypeChoices } from "@/lib/constants";
 import { useForm } from "react-hook-form";
-import { Project, ProjectIndicatorSummary } from "@/types";
+import { Project } from "@/types";
 import type { DocumentDraftDetail } from "@/lib/hooks/use-admin";
 
 
@@ -117,8 +117,8 @@ function PromoteToEvidenceModal({
           <span className="font-medium text-slate-700">Project Indicator</span>
           <Select {...register("project_indicator_id", { required: true })} disabled={!selectedProjectId}>
             <option value="">Select an indicator</option>
-            {projectIndicators.map((pi: ProjectIndicatorSummary) => (
-              <option key={pi.id} value={pi.id}>
+            {projectIndicators.map((pi) => (
+              <option key={pi.project_indicator_id} value={pi.project_indicator_id}>
                 {pi.indicator_code} - {pi.indicator_text.substring(0, 50)}...
               </option>
             ))}

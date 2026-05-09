@@ -25,7 +25,6 @@ export function AdminAuditScreen() {
     start: start ? new Date(start).toISOString() : undefined,
     end: end ? new Date(end).toISOString() : undefined,
   });
-  if (query.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (query.error) return <ErrorPanel message={query.error.message} />;
   const rows = query.data ?? [];
   const userOptions = users.data ?? [];
@@ -49,19 +48,31 @@ export function AdminAuditScreen() {
         <Input type="datetime-local" value={start} onChange={(event) => setStart(event.target.value)} />
         <Input type="datetime-local" value={end} onChange={(event) => setEnd(event.target.value)} />
       </div>
-      <WorkbenchTable<Record<string, unknown>>
-        columns={[
-          { key: "actor", header: "Actor", render: (row) => String(row.actor_username ?? "System") },
-          { key: "event", header: "Event", render: (row) => String(row.event_type ?? "") },
-          { key: "object", header: "Object", render: (row) => `${row.object_type}:${row.object_id}` },
-          { key: "before", header: "Before", render: (row) => <pre className="text-xs">{JSON.stringify(row.before_json, null, 2)}</pre> },
-          { key: "after", header: "After", render: (row) => <pre className="text-xs">{JSON.stringify(row.after_json, null, 2)}</pre> },
-          { key: "reason", header: "Reason", render: (row) => String(row.reason ?? "") },
-          { key: "timestamp", header: "Timestamp", render: (row) => String(row.timestamp ?? "") },
-        ]}
-        rows={rows}
-        rowKey={(row) => String(row.id)}
-      />
+      {query.isLoading ? (
+        <LoadingSkeleton className="h-40 w-full" />
+      ) : (
+        <WorkbenchTable<Record<string, unknown>>
+          columns={[
+            { key: "actor", header: "Actor", render: (row) => String(row.actor_username ?? "System") },
+            { key: "event", header: "Event", render: (row) => String(row.event_type ?? "") },
+            { key: "object", header: "Object", render: (row) => `${row.object_type}:${row.object_id}` },
+            {
+              key: "before",
+              header: "Before",
+              render: (row) => <pre className="text-xs">{JSON.stringify(row.before_json, null, 2)}</pre>,
+            },
+            {
+              key: "after",
+              header: "After",
+              render: (row) => <pre className="text-xs">{JSON.stringify(row.after_json, null, 2)}</pre>,
+            },
+            { key: "reason", header: "Reason", render: (row) => String(row.reason ?? "") },
+            { key: "timestamp", header: "Timestamp", render: (row) => String(row.timestamp ?? "") },
+          ]}
+          rows={rows}
+          rowKey={(row) => String(row.id)}
+        />
+      )}
     </div>
   );
 }

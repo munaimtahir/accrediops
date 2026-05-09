@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from datetime import timedelta
+import time
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
+from django.db.utils import OperationalError
 from django.db.models import Q
 from django.utils import timezone
 
@@ -16,6 +18,7 @@ from apps.projects.services import initialize_project_from_framework
 
 
 User = get_user_model()
+TARGET_FRAMEWORK_NAME = "PHC LAB"
 
 
 class Command(BaseCommand):
@@ -31,7 +34,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "--ensure-project",
             action="store_true",
-            help="Ensure deterministic E2E Lab Project exists and points to LAB framework.",
+            help=f"Ensure deterministic E2E Lab Project exists and points to {TARGET_FRAMEWORK_NAME} framework.",
         )
         parser.add_argument(
             "--clean-e2e-records",
@@ -41,11 +44,25 @@ class Command(BaseCommand):
         parser.add_argument(
             "--initialize-project",
             action="store_true",
-            help="When ensuring project, initialize indicators/recurring from LAB framework idempotently.",
+            help=f"When ensuring project, initialize indicators/recurring from {TARGET_FRAMEWORK_NAME} framework idempotently.",
         )
 
-    @transaction.atomic
     def handle(self, *args, **options):
+        # SQLite can transiently lock when the dev server is handling requests (common in Docker-local).
+        # Retrying keeps Playwright seed/setup deterministic without requiring destructive resets.
+        for attempt in range(1, 6):
+            try:
+                return self._handle_atomic(*args, **options)
+            except OperationalError as exc:
+                message = str(exc).lower()
+                if "database is locked" not in message:
+                    raise
+                if attempt == 5:
+                    raise
+                time.sleep(0.5 * attempt)
+
+    @transaction.atomic
+    def _handle_atomic(self, *args, **options):
         password: str = options["password"]
         ensure_client: bool = options["ensure_client"]
         ensure_project: bool = options["ensure_project"]
@@ -67,7 +84,8 @@ class Command(BaseCommand):
         if clean_e2e_records:
             self._clean_e2e_business_records()
             self._clean_non_e2e_project_records()
-            self._clean_non_lab_framework_records()
+            # Intentionally do NOT delete frameworks/indicators. Verification and E2E should
+            # target the existing PHC LAB framework and must not remove other framework data.
 
         if ensure_client or ensure_project:
             client, _ = ClientProfile.objects.get_or_create(
@@ -84,9 +102,9 @@ class Command(BaseCommand):
             client = None
 
         if ensure_project:
-            framework = Framework.objects.filter(name="LAB").first()
+            framework = Framework.objects.filter(name=TARGET_FRAMEWORK_NAME).first()
             if framework is None:
-                raise CommandError("LAB framework does not exist. Run reset_lab_state first.")
+                raise CommandError(f"{TARGET_FRAMEWORK_NAME} framework does not exist.")
             today = timezone.localdate()
             admin = User.objects.get(username="pw_admin")
             project, _ = AccreditationProject.objects.update_or_create(
@@ -118,7 +136,44 @@ class Command(BaseCommand):
                     reviewer=reviewer,
                     approver=approver
                 )
-                
+
+                # Create one deterministic "MET" indicator with approved evidence, so governance override
+                # and role enforcement E2E tests can target a stable completed record.
+                from apps.evidence.models import EvidenceItem
+                from apps.masters.choices import EvidenceSourceTypeChoices, EvidenceApprovalStatusChoices, EvidenceValidityStatusChoices, EvidenceCompletenessStatusChoices
+                from apps.indicators.services import start_project_indicator, send_project_indicator_for_review, mark_project_indicator_met, validate_project_indicator_readiness
+
+                met_targets = list(
+                    ProjectIndicator.objects.filter(
+                        project=project,
+                        indicator__is_recurring=False,
+                        indicator__minimum_required_evidence_count__lte=1,
+                    )
+                    .order_by("id")
+                    .values_list("id", flat=True)[:10]
+                )
+                for target_id in met_targets:
+                    met_target = ProjectIndicator.objects.get(id=target_id)
+                    if met_target.current_status == "MET":
+                        continue
+                    EvidenceItem.objects.filter(project_indicator=met_target).delete()
+                    EvidenceItem.objects.create(
+                        project_indicator=met_target,
+                        title="E2E Seed Evidence (Approved)",
+                        description="Deterministic approved evidence for E2E readiness.",
+                        source_type=EvidenceSourceTypeChoices.TEXT_NOTE,
+                        text_content="Seeded evidence text for readiness.",
+                        uploaded_by=owner,
+                        approval_status=EvidenceApprovalStatusChoices.APPROVED,
+                        validity_status=EvidenceValidityStatusChoices.VALID,
+                        completeness_status=EvidenceCompletenessStatusChoices.COMPLETE,
+                    )
+                    start_project_indicator(project_indicator=met_target, actor=owner, reason="E2E seed start")
+                    send_project_indicator_for_review(project_indicator=met_target, actor=owner, reason="E2E seed review")
+                    readiness = validate_project_indicator_readiness(met_target)
+                    if readiness.get("ready_for_met"):
+                        mark_project_indicator_met(project_indicator=met_target, actor=approver, reason="E2E seed met")
+
                 # Ensure some master values exist for testing
                 MasterValue.objects.get_or_create(key="statuses", code="NOT_STARTED", defaults={"label": "Not Started", "sort_order": 1})
                 MasterValue.objects.get_or_create(key="statuses", code="IN_PROGRESS", defaults={"label": "In Progress", "sort_order": 2})
@@ -210,39 +265,6 @@ class Command(BaseCommand):
             | Q(organization_name="E2E Lab Client")
         )
         e2e_clients.delete()
-
-    def _clean_non_lab_framework_records(self) -> None:
-        from apps.ai_actions.models import GeneratedOutput
-        from apps.evidence.models import EvidenceItem
-        from apps.exports.models import ExportJob, PrintPackItem
-        from apps.frameworks.models import Area, Standard
-        from apps.indicators.models import Indicator, ProjectIndicator, ProjectIndicatorComment, ProjectIndicatorStatusHistory
-        from apps.recurring.models import RecurringEvidenceInstance, RecurringRequirement
-
-        non_lab_project_ids = list(
-            AccreditationProject.objects.exclude(framework__name="LAB").values_list("id", flat=True)
-        )
-        if non_lab_project_ids:
-            project_indicators = ProjectIndicator.objects.filter(project_id__in=non_lab_project_ids)
-            project_indicator_ids = list(project_indicators.values_list("id", flat=True))
-            if project_indicator_ids:
-                RecurringEvidenceInstance.objects.filter(
-                    recurring_requirement__project_indicator_id__in=project_indicator_ids
-                ).delete()
-                RecurringRequirement.objects.filter(project_indicator_id__in=project_indicator_ids).delete()
-                GeneratedOutput.objects.filter(project_indicator_id__in=project_indicator_ids).delete()
-                EvidenceItem.objects.filter(project_indicator_id__in=project_indicator_ids).delete()
-                ProjectIndicatorComment.objects.filter(project_indicator_id__in=project_indicator_ids).delete()
-                ProjectIndicatorStatusHistory.objects.filter(project_indicator_id__in=project_indicator_ids).delete()
-            project_indicators.delete()
-            ExportJob.objects.filter(project_id__in=non_lab_project_ids).delete()
-            PrintPackItem.objects.filter(project_indicator__project_id__in=non_lab_project_ids).delete()
-            AccreditationProject.objects.filter(id__in=non_lab_project_ids).delete()
-
-        Indicator.objects.exclude(framework__name="LAB").delete()
-        Standard.objects.exclude(framework__name="LAB").delete()
-        Area.objects.exclude(framework__name="LAB").delete()
-        Framework.objects.exclude(name="LAB").delete()
 
     def _clean_non_e2e_project_records(self) -> None:
         from apps.ai_actions.models import GeneratedOutput

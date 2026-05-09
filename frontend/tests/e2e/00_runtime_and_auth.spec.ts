@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { loginAs } from "./helpers";
+import { loginAs, logout } from "./helpers";
 
 test.describe("00 runtime and auth", () => {
   test("runtime stays on 18080 and health routes are reachable", async ({ page, request, baseURL }) => {
@@ -20,8 +20,7 @@ test.describe("00 runtime and auth", () => {
     for (const role of ["admin", "lead", "owner"] as const) {
       await loginAs(page, role);
       await expect(page.getByRole("heading", { name: "Project register" })).toBeVisible();
-      await page.getByRole("button", { name: "Sign out" }).click();
-      await expect(page).toHaveURL(/\/login/);
+      await logout(page);
     }
   });
 });

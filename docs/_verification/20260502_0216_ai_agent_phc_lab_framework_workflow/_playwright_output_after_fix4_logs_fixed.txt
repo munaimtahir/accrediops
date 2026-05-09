@@ -1,0 +1,74 @@
+
+Running 3 tests using 1 worker
+
+[1A[2K(node:1235895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1235895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:49:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path)
+[1A[2K  1) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:49:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Promote Draft to Evidence' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Promote Draft to Evidence' })[22m
+
+
+      185 |       // I. Promote draft to evidence
+      186 |       await page.getByRole("button", { name: "Promote to Evidence" }).click();
+    > 187 |       await expect(page.getByRole("heading", { name: "Promote Draft to Evidence" })).toBeVisible();
+          |                                                                                      ^
+      188 |       await page.locator('label:has-text("Project")').locator("select").first().selectOption(String(project.id));
+      189 |       await page.locator('label:has-text("Project Indicator")').locator("select").selectOption(String(indicatorId));
+      190 |       await page.locator('label:has-text("I have reviewed")').locator('input[type="checkbox"]').check();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:187:86
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: browser-logs (text/plain) ───────────────────────────────────────────────────────
+    [requestfailed] GET http://127.0.0.1:18080/api/dashboard/worklist/?project_id=59&page=1&page_size=200 :: net::ERR_ABORTED
+    [requestfailed] GET http://127.0.0.1:18080/admin/frameworks/classification?_rsc=1axp2 :: net::ERR_ABORTED
+    [requestfailed] GET http://127.0.0.1:18080/projects/59?_rsc=1axp2 :: net...
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1236451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1236451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:288:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence
+[1A[2K[3/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:312:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows
+[1A[2K  1 failed
+    tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:49:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+  2 passed (50.6s)
+EXIT_CODE:1

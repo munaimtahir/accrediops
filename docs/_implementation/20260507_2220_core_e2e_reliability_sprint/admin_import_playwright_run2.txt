@@ -1,0 +1,147 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1471242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1471242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload
+[1A[2K(node:1474813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1474813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/2] (retries) tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload (retry #1)
+[1A[2K  1) tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/5c7968dc4a547ada73d0-17d57ff13a52e8d5bf1d.trace'
+
+    Error: page.goto: net::ERR_ABORTED at http://127.0.0.1:18080/admin/import-logs
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/admin/import-logs", waiting until "load"[22m
+
+
+      29 |     const projectId = await ensureProjectId(page);
+      30 |
+    > 31 |     await page.goto("/admin/import-logs");
+         |                ^
+      32 |     const validateButton = page.getByRole("button", { name: "Validate sample" });
+      33 |     await expect(validateButton).toBeDisabled();
+      34 |     await expect(page.getByText("Select a project before validation.")).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/admin-import-validation.spec.ts:31:16
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/e0904e88e5b127db112473317f0b4c0c.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error Context: ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TimeoutError: page.waitForURL: Timeout 15000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+       at helpers.ts:170
+
+      168 |   await page.getByLabel("Password").fill(user.password);
+      169 |   await page.getByRole("button", { name: "Sign in" }).click();
+    > 170 |   await page.waitForURL((url) => url.pathname !== "/login", { timeout: 15000 });
+          |              ^
+      171 |   if (!page.url().includes("/projects")) {
+      172 |     await page.goto("/projects");
+      173 |   }
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:170:14)
+        at loginAsSeededAdmin (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:178:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/admin-import-validation.spec.ts:28:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1475417) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1475417) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/2] tests/e2e/admin-import-validation.spec.ts:56:7 › Admin framework validation parity › authenticated navigation stays on proxy origin
+[1A[2K(node:1476141) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1476141) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[4/2] (retries) tests/e2e/admin-import-validation.spec.ts:56:7 › Admin framework validation parity › authenticated navigation stays on proxy origin (retry #1)
+[1A[2K  2) tests/e2e/admin-import-validation.spec.ts:56:7 › Admin framework validation parity › authenticated navigation stays on proxy origin 
+
+    TimeoutError: page.waitForURL: Timeout 15000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+       at helpers.ts:170
+
+      168 |   await page.getByLabel("Password").fill(user.password);
+      169 |   await page.getByRole("button", { name: "Sign in" }).click();
+    > 170 |   await page.waitForURL((url) => url.pathname !== "/login", { timeout: 15000 });
+          |              ^
+      171 |   if (!page.url().includes("/projects")) {
+      172 |     await page.goto("/projects");
+      173 |   }
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:170:14)
+        at loginAsSeededAdmin (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:178:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/admin-import-validation.spec.ts:57:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-8c7c0-ation-stays-on-proxy-origin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-8c7c0-ation-stays-on-proxy-origin/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/admin-import-validation-Ad-8c7c0-ation-stays-on-proxy-origin/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-8c7c0-ation-stays-on-proxy-origin/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/admin-import-validation-Ad-8c7c0-ation-stays-on-proxy-origin/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload 
+  1 flaky
+    tests/e2e/admin-import-validation.spec.ts:56:7 › Admin framework validation parity › authenticated navigation stays on proxy origin 

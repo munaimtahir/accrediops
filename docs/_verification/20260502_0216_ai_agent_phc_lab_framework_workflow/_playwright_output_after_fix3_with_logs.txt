@@ -1,0 +1,251 @@
+
+Running 3 tests using 1 worker
+
+[1A[2K(node:1234055) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234055) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:44:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path)
+[1A[2K(node:1234159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/3] (retries) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:44:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) (retry #1)
+[1A[2K  1) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:44:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-d0266-end-to-end-core-happy-path--retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1234347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:283:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence
+[1A[2K(node:1234448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[4/3] (retries) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:283:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence (retry #1)
+[1A[2K  2) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:283:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence 
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-bde2e-nce-but-cannot-add-evidence-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1234549) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234549) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[5/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:307:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows
+[1A[2K(node:1234686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1234686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[6/3] (retries) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:307:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows (retry #1)
+[1A[2K  3) tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:307:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows 
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: testInfo.on is not a function
+
+      30 |     });
+      31 |
+    > 32 |     testInfo.on("end", () => {
+         |              ^
+      33 |       if (!logs.length) return;
+      34 |       testInfo.attach("browser-logs", {
+      35 |         body: logs.join("\n"),
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/30_phc_lab_framework_full_-f1e4e-k-met-when-readiness-allows-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:44:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) 
+    tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:283:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence 
+    tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:307:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows 
+EXIT_CODE:1

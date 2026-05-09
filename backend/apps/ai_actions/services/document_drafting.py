@@ -1,13 +1,12 @@
-import time
-
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 
 from apps.ai_actions.models import DocumentDraft
+from apps.ai_actions.models.document_draft import DocumentDraftKindChoices
 from apps.ai_actions.services import generation
-from apps.ai_actions.services.provider import get_ai_config
+from apps.ai_actions.services.provider import AIConfigurationError, get_ai_config, validate_ai_config
 from apps.ai_actions.services.usage import log_ai_usage
 from apps.accounts.models import User
 from apps.frameworks.models import Framework
@@ -19,14 +18,20 @@ from apps.audit.services import log_audit_event, snapshot_instance
 
 
 # Disclaimer to be included in all AI-generated drafts
-AI_DRAFT_DISCLAIMER = (
-    "---AI Advisory Disclaimer---\n"
-    "This is an AI-assisted draft and requires human review before use as accreditation evidence. "
-    "It may contain inaccuracies or omissions. Verify all content against official policies and client context. "
-    "This draft does not claim evidence exists or that the indicator is compliant. "
-    "Client-specific placeholders (e.g., [Institution Name]) must be replaced manually.\n"
-    "---End Disclaimer---\n\n"
-)
+AI_DRAFT_DISCLAIMER = """---AI Advisory Disclaimer---
+This is an AI-assisted draft and requires human review before use as accreditation evidence.
+It may contain inaccuracies or omissions. Verify all content against official policies and client context.
+This draft does not claim evidence exists or that the indicator is compliant.
+Client-specific placeholders (example: [Institution Name]) must be replaced manually.
+---End Disclaimer---
+"""
+
+def _draft_kind_for_document_type(document_type: str) -> str:
+    if document_type == DocumentTypeChoices.SOP:
+        return DocumentDraftKindChoices.SOP
+    if document_type == DocumentTypeChoices.POLICY:
+        return DocumentDraftKindChoices.POLICY
+    return DocumentDraftKindChoices.POLICY
 
 
 def _build_document_draft_prompt(
@@ -78,7 +83,7 @@ def _build_document_draft_prompt(
 
     if project and client_profile:
         prompt_parts.extend([
-            "\nProject and Client Context (incorporate these details where appropriate, using placeholders for missing data):",
+            "Project and Client Context (incorporate these details where appropriate, using placeholders for missing data):",
             f"- Project Name: {context['project_name']}",
             f"- Client/Institution Name: {context['client_name']}",
             f"- Client Address: {context['client_address']}",
@@ -86,9 +91,13 @@ def _build_document_draft_prompt(
             f"- Accreditation Cycle: {context['accreditation_cycle']}",
         ])
 
-    prompt_parts.append(f"\nUser specific instructions: {user_instruction}\n")
+    prompt_parts.append(f"""
+User specific instructions: {user_instruction}
+""")
 
-    prompt_parts.append("\nSuggested structure for the draft (adapt as appropriate for document type):\n")
+    prompt_parts.append("""
+Suggested structure for the draft (adapt as appropriate for document type):
+""")
     if indicator.document_type == DocumentTypeChoices.POLICY:
         prompt_parts.extend([
             "Title: [Document Title] - [Indicator Code]",
@@ -105,7 +114,7 @@ def _build_document_draft_prompt(
             "[Review Date]:",
             "[Approval Authority]:",
         ])
-    elif indicator.document_type == DocumentTypeChoices.PROCEDURE:
+    elif indicator.document_type == DocumentTypeChoices.SOP:
         prompt_parts.extend([
             "Title: [Document Title] - [Indicator Code]",
             "1. Purpose:",
@@ -161,6 +170,23 @@ def generate_document_draft(
         raise ValidationError("Project/ProjectIndicator/Framework/Indicator mismatch.")
 
     config = get_ai_config()
+    if not config.demo_mode:
+        try:
+            validate_ai_config()
+        except AIConfigurationError as exc:
+            error_msg = str(exc)
+            log_ai_usage(
+                user=actor,
+                feature="Document Drafting",
+                config=config,
+                is_success=False,
+                error_message=error_msg,
+                framework=framework,
+                project=project,
+                indicator_code=indicator.code,
+                metadata={"document_type": document_type_override or indicator.document_type},
+            )
+            raise ValidationError(error_msg) from exc
     client_profile = project.client_profile.get_data() if project and project.client_profile else {}
     
     # Build prompt
@@ -176,12 +202,14 @@ def generate_document_draft(
     
     # Handle demo mode
     if config.demo_mode:
-        content = (
-            f"[DEMO MODE] Advisory document draft for {indicator.code}.\n\n"
-            f"Prompt used:\n{prompt[:500]}...\n\n"
-            f"This is placeholder output in demo mode. Real AI would process the full prompt.\n\n"
-            f"{AI_DRAFT_DISCLAIMER}"
-        )
+        content = f"""[DEMO MODE] Advisory document draft for {indicator.code}.
+
+Prompt used:
+{prompt[:500]}...
+
+This is placeholder output in demo mode. Real AI would process the full prompt.
+
+{AI_DRAFT_DISCLAIMER}"""
         draft_title = f"{draft_title_prefix} (DEMO)"
         model_name = "demo-mode"
         ai_usage_log = log_ai_usage(
@@ -193,13 +221,15 @@ def generate_document_draft(
             project=project,
             indicator_code=indicator.code,
         )
-        return DocumentDraft.objects.create(
+        resolved_document_type = document_type_override or indicator.document_type
+        draft = DocumentDraft.objects.create(
             framework=framework,
             indicator=indicator,
             project=project,
             project_indicator=project_indicator,
             title=draft_title,
-            document_type=document_type_override or indicator.document_type,
+            draft_kind=_draft_kind_for_document_type(resolved_document_type),
+            document_type=resolved_document_type,
             draft_content=content,
             prompt_snapshot={"prompt": prompt},
             source="AI",
@@ -209,6 +239,8 @@ def generate_document_draft(
             generated_by=actor,
             version=1, # Demo drafts are always version 1
         )
+        draft.related_indicators.add(indicator)
+        return draft
 
     # Handle actual AI call
     start_time = time.time()
@@ -221,7 +253,9 @@ def generate_document_draft(
         else:
             raise ValidationError(f"Unknown AI provider: {config.provider}")
 
-        full_content = f"{ai_content}\n\n{AI_DRAFT_DISCLAIMER}"
+        full_content = f"""{ai_content}
+
+{AI_DRAFT_DISCLAIMER}"""
         draft_title = f"{draft_title_prefix} - {timezone.now().strftime('%Y-%m-%d %H:%M')}"
         
         ai_usage_log = log_ai_usage(
@@ -253,13 +287,15 @@ def generate_document_draft(
             elif latest_draft and overwrite_existing_draft:
                 version = latest_draft.version # Keep the same version if overwriting
 
-        return DocumentDraft.objects.create(
+        resolved_document_type = document_type_override or indicator.document_type
+        draft = DocumentDraft.objects.create(
             framework=framework,
             indicator=indicator,
             project=project,
             project_indicator=project_indicator,
             title=draft_title,
-            document_type=document_type_override or indicator.document_type,
+            draft_kind=_draft_kind_for_document_type(resolved_document_type),
+            document_type=resolved_document_type,
             draft_content=full_content,
             prompt_snapshot={"prompt": prompt},
             source="AI",
@@ -270,6 +306,8 @@ def generate_document_draft(
             version=version,
             parent_draft=parent_draft,
         )
+        draft.related_indicators.add(indicator)
+        return draft
 
     except Exception as e:
         error_msg = f"AI document drafting failed: {str(e)}"
@@ -296,8 +334,8 @@ def promote_draft_to_evidence(
     project: AccreditationProject,
     project_indicator: ProjectIndicator,
     evidence_title: str,
-    evidence_type: str,
-    document_type: str,
+    evidence_type: str, # This parameter is unused in the current implementation of EvidenceItem creation.
+    document_type: str, # This parameter is unused in the current implementation of EvidenceItem creation.
     final_filename: str = "",
     notes: str = "",
 ) -> DocumentDraft:
@@ -321,6 +359,7 @@ def promote_draft_to_evidence(
     # Create the EvidenceItem
     evidence_item = EvidenceItem.objects.create(
         project_indicator=project_indicator,
+        project_evidence_requirement=document_draft.project_evidence_requirement, # Link to ProjectEvidenceRequirement
         title=evidence_title,
         description=document_draft.draft_content, # Draft content becomes evidence description
         source_type="GENERATED", # Mark as AI-generated/promoted
@@ -333,6 +372,7 @@ def promote_draft_to_evidence(
 
     # Update the document draft status
     document_draft.review_status = "PROMOTED_TO_EVIDENCE"
+    document_draft.is_advisory = False
     document_draft.promoted_by = actor
     document_draft.promoted_at = timezone.now()
     document_draft.promoted_evidence = evidence_item

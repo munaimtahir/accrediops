@@ -1,0 +1,4 @@
+293:accrediops-backend  | [08/May/2026 08:17:12] "POST /api/auth/login/ HTTP/1.1" 500 104
+294:accrediops-backend  | [08/May/2026 08:17:13] "POST /api/auth/login/ HTTP/1.1" 200 147
+295:accrediops-backend  | [08/May/2026 08:17:14] "GET /api/health/ HTTP/1.1" 200 86
+296:accrediops-backend  | [08/May/2026 08:17:15] "GET /api/auth/session/ HTTP/1.1" 200 59

@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from apps.audit.services import log_audit_event, snapshot_instance
 from apps.evidence.models import EvidenceItem
+from apps.indicators.models import ProjectEvidenceRequirement
 from apps.masters.choices import (
     EvidenceApprovalStatusChoices,
     EvidenceCompletenessStatusChoices,
@@ -37,6 +38,7 @@ def _validate_source_fields(*, source_type: str, file_or_url: str, text_content:
 def create_evidence_item(
     *,
     project_indicator,
+    project_evidence_requirement=None,
     actor,
     title: str,
     description: str = "",
@@ -51,9 +53,12 @@ def create_evidence_item(
     is_physical_copy_available: bool = False,
 ) -> EvidenceItem:
     ensure_project_owner_access(actor, project_indicator)
+    if project_evidence_requirement and project_evidence_requirement.project_indicator_id != project_indicator.id:
+        raise ValidationError("Selected evidence requirement does not belong to this project indicator.")
     _validate_source_fields(source_type=source_type, file_or_url=file_or_url, text_content=text_content)
     EvidenceItem.objects.filter(
         project_indicator=project_indicator,
+        project_evidence_requirement=project_evidence_requirement,
         title=title,
         is_current=True,
     ).update(is_current=False)
@@ -97,6 +102,10 @@ def update_evidence_item(
     if reviewed:
         new_item = create_evidence_item(
             project_indicator=evidence_item.project_indicator,
+            project_evidence_requirement=validated_data.get(
+                "project_evidence_requirement",
+                evidence_item.project_evidence_requirement,
+            ),
             actor=actor,
             title=validated_data.get("title", evidence_item.title),
             description=validated_data.get("description", evidence_item.description),
@@ -176,3 +185,31 @@ def review_evidence_item(
         after=snapshot_instance(evidence_item),
     )
     return evidence_item
+
+
+def calculate_project_evidence_readiness(project) -> dict:
+    """
+    Calculates readiness counts for project evidence requirements by status.
+    """
+    
+    # Ensure we are querying ProjectEvidenceRequirement, not EvidenceItem
+    # ProjectEvidenceRequirement tracks the status of a requirement for a project.
+    # EvidenceItem tracks the actual uploaded/generated proof.
+    
+    project_evidence_requirements = ProjectEvidenceRequirement.objects.filter(project=project)
+    
+    readiness_counts = {
+        "total": project_evidence_requirements.count(),
+        "approved": project_evidence_requirements.filter(status="APPROVED").count(),
+        "missing": project_evidence_requirements.filter(status="MISSING").count(),
+        "partial": project_evidence_requirements.filter(status="PARTIAL").count(),
+        "submitted": project_evidence_requirements.filter(status="SUBMITTED").count(),
+        "rejected": project_evidence_requirements.filter(status="REJECTED").count(),
+        "not_applicable": project_evidence_requirements.filter(status="NOT_APPLICABLE").count(),
+        # Include other statuses if they become relevant, e.g., IN_REVIEW
+    }
+    
+    # Add a 'ready_for_inspection' count if applicable, e.g., all mandatory items are approved or N/A.
+    # For now, just returning counts per status.
+    
+    return readiness_counts

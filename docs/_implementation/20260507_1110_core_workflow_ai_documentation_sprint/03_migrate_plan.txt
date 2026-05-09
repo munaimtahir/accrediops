@@ -1,0 +1,3 @@
+Planned operations:
+  No planned migration operations.
+exit_code=0

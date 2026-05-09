@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Allow: GET, HEAD, OPTIONS
+Content-Length: 86
+Content-Type: application/json
+Cross-Origin-Opener-Policy: same-origin
+Date: Thu, 07 May 2026 12:02:20 GMT
+Referrer-Policy: same-origin
+Server: Caddy
+Server: WSGIServer/0.2 CPython/3.12.13
+Vary: Accept, Cookie
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+

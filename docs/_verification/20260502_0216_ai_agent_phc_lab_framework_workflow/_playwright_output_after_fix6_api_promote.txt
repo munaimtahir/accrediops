@@ -1,0 +1,16 @@
+
+Running 3 tests using 1 worker
+
+[1A[2K(node:1268444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1268444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:49:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path)
+[1A[2K[2/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:293:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence
+[1A[2K[3/3] tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:317:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows
+[1A[2K  3 passed (1.7m)
+EXIT_CODE:0

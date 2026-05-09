@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (10.1s)
+
+  1 passed (34.0s)

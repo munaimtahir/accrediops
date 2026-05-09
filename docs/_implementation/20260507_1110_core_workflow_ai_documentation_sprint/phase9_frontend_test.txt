@@ -1,0 +1,13 @@
+
+> accrediops-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.4 /home/munaim/srv/apps/accrediops/frontend
+
+
+ Test Files  27 passed (27)
+      Tests  53 passed (53)
+   Start at  13:17:58
+   Duration  30.11s (transform 3.89s, setup 6.20s, import 21.28s, tests 14.27s, environment 36.26s)
+

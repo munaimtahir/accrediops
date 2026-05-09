@@ -57,3 +57,47 @@ a {
 .skip-link:focus {
   top: 0;
 }
+
+@media print {
+  /* Hide navigation elements */
+  nav,
+  aside,
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Ensure content takes full width */
+  main {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure text is black for readability */
+  body {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Remove box shadows and borders from elements not meant for print */
+  .shadow-panel,
+  .border,
+  .rounded-xl,
+  .rounded-lg,
+  .rounded {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Adjust spacing */
+  .space-y-6 > *,
+  .mt-3 > * {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
+

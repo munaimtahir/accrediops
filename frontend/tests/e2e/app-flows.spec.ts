@@ -52,8 +52,10 @@ test.describe("AccrediOps end-to-end flows", () => {
     await loginAsSeededAdmin(page);
     await page.locator("main").getByRole("link", { name: "Open project" }).first().click();
     await expect(page).toHaveURL(/\/projects\/\d+/);
-    await page.getByRole("link", { name: "Go to recurring" }).first().click();
-    await expect(page).toHaveURL(/\/projects\/\d+\/recurring/);
+    const recurringLink = page.getByRole("link", { name: "Recurring queue" }).first();
+    await expect(recurringLink).toBeVisible({ timeout: 10000 });
+    await recurringLink.click();
+    await expect(page).toHaveURL(/\/projects\/\d+\/recurring/, { timeout: 15000 });
     await expect(page.getByRole("heading", { name: "Recurring evidence queue" })).toBeVisible();
   });
 

@@ -160,3 +160,13 @@ class PhysicalLocationTypeChoices(models.TextChoices):
     CABINET = "CABINET", "Cabinet"
     ROOM = "ROOM", "Room"
     OTHER = "OTHER", "Other"
+
+
+class ProjectEvidenceRequirementStatusChoices(models.TextChoices):
+    MISSING = "MISSING", "Missing"
+    PARTIAL = "PARTIAL", "Partial"
+    COMPLETE = "COMPLETE", "Complete"
+    SUBMITTED = "SUBMITTED", "Submitted"
+    APPROVED = "APPROVED", "Approved"
+    REJECTED = "REJECTED", "Rejected"
+    NOT_APPLICABLE = "NOT_APPLICABLE", "Not Applicable"

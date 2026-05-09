@@ -1,0 +1,78 @@
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions
+
+
+
+
+[1A[2K[2/1] (retries) tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions (retry #1)
+[1A[2K  1) tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Project worklist' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Project worklist' })[22m
+
+
+      52 |     await expect(page.locator("#main-content").getByRole("link", { name: /^Open Worklist$/ })).toBeVisible();
+      53 |     await page.goto(`/projects/${projectId}/worklist`);
+    > 54 |     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
+         |                                                                           ^
+      55 |     await context.close();
+      56 |   });
+      57 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/19_accessibility.spec.ts:54:75
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/26c4d8e96a37401a27b6-ed22950452274b33bbaa.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/1e35cc8888cc2dc4a0fe28ea747f8c70.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/19_accessibility-19-access-d74ab-oard-reachable-main-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: browserContext._wrapApiCall: ENOENT: no such file or directory, copyfile '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/traces/26c4d8e96a37401a27b6-ed22950452274b33bbaa-retry1.network' -> '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/traces/26c4d8e96a37401a27b6-ed22950452274b33bbaa-retry1-pwnetcopy-1.network'
+
+    Error: locator.click: Test ended.
+    Call log:
+    [2m  - waiting for locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })[22m
+
+
+       7 |   await page.goto("/projects");
+       8 |   const projectCard = page.locator(".rounded-xl", { hasText: "E2E Lab Project" }).first();
+    >  9 |   await projectCard.getByRole("link", { name: "Open project" }).click();
+         |                                                                 ^
+      10 |   await page.waitForURL(/\/projects\/\d+/);
+      11 |   const match = page.url().match(/\/projects\/(\d+)/);
+      12 |   if (!match) throw new Error(`Could not extract project ID from URL: ${page.url()}`);
+        at openSeedProject (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/19_accessibility.spec.ts:9:65)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/19_accessibility.spec.ts:37:23
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/281d10637c49839eaf21f6a88bfeff2f.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/19_accessibility-19-access-d74ab-oard-reachable-main-actions-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions 

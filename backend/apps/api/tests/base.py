@@ -111,3 +111,10 @@ class ContractBaseTestCase(TestCase):
             item.indicator.code: item
             for item in ProjectIndicator.objects.filter(project=self.project).select_related("indicator")
         }
+
+    def initialize_project(self):
+        initialize_project_from_framework(project=self.project, actor=self.admin)
+        return {
+            item.indicator.code: item
+            for item in ProjectIndicator.objects.filter(project=self.project).select_related("indicator")
+        }

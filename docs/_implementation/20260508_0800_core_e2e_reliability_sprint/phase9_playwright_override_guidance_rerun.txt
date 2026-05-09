@@ -1,0 +1,57 @@
+# Playwright: rerun core-journeys override + workflow guidance
+
+Running 1 test using 1 worker
+
+[1A[2K(node:1689325) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1689325) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/1] tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance
+[1A[2K  1) tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Recurring queue' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Recurring queue' })[22m
+
+
+      23 |     await expect(page.getByText("Action")).toBeVisible();
+      24 |     await page.goto(`/projects/${projectId}/recurring`);
+    > 25 |     await expect(page.getByRole("heading", { name: "Recurring queue" })).toBeVisible();
+         |                                                                          ^
+      26 |     await expect(page.getByText("Recurring execution tip")).toBeVisible();
+      27 |   });
+      28 | });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:25:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 

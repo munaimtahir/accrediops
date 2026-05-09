@@ -71,9 +71,10 @@ The OpenAPI specification in `contracts/openapi/openapi.yaml` is the source of t
 - **Frontend-Mediated:** Users must only interact with the system via the frontend UI.
 - **Database as Source of Truth:** All governance data resides in the database. Exports and AI outputs are secondary.
 - **Internal Service Layer:** Keep business logic in internal service layers, exposed via DRF views.
+- **Framework Indicator → Evidence Requirement → Project Fulfillment:** This core workflow ensures that framework indicators are translated into project-specific evidence requirements, which are then tracked through fulfillment, review, and approval.
 
 ### 3. AI Usage (Advisory Only)
-AI features are intended for guidance, drafting, and classification support. AI must **never** directly mutate governance state or bypass manual human review for accreditation decisions.
+AI features are intended for guidance, drafting, and classification support. AI must **never** directly mutate governance state or bypass manual human review for accreditation decisions. AI can **classify indicators** and **suggest evidence requirements** based on indicator analysis. These suggestions are saved as drafts and require human review before they can be acted upon.
 
 ### 4. Code Style & Standards
 - Follow standard Django/DRF patterns for the backend.
@@ -88,3 +89,4 @@ AI features are intended for guidance, drafting, and classification support. AI 
 - `contracts/openapi/`: API definitions.
 - `docs/`: Extensive project documentation and architecture details.
 - `infra/caddy/`: Caddy configuration for local and production routing.
+---

@@ -1,0 +1,230 @@
+---
+03_projects_navigation_and_overview.spec.ts
+project list and overview surfaces are navigable with clear next-step guidance
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/error-context.md
+---
+12_admin_surfaces.spec.ts
+admin dashboard/users/masters/audit/import logs/overrides are reachable
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/12_admin_surfaces-12-admin-e29e0-ogs-overrides-are-reachable/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/12_admin_surfaces-12-admin-e29e0-ogs-overrides-are-reachable/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/12_admin_surfaces-12-admin-e29e0-ogs-overrides-are-reachable/error-context.md
+---
+13_role_visibility_and_authorization.spec.ts
+admin has admin discoverability and create CTA
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-d6303-coverability-and-create-CTA/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-d6303-coverability-and-create-CTA/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-d6303-coverability-and-create-CTA/error-context.md
+---
+13_role_visibility_and_authorization.spec.ts
+lead sees admin navigation and can access admin route
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-4d20b--and-can-access-admin-route/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-4d20b--and-can-access-admin-route/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/13_role_visibility_and_aut-4d20b--and-can-access-admin-route/error-context.md
+---
+15_smoke_clean_new_app_mode.spec.ts
+app stays LAB-only and first-project flow remains smooth
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/error-context.md
+---
+17_recurring_and_masters_capability_fix.spec.ts
+Recurring queue row action visibility
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/trace.zip
+---
+18_simplified_navigation_and_homepage.spec.ts
+AI discoverability from worklist
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+---
+18_simplified_navigation_and_homepage.spec.ts
+Simplified navigation for non-admin
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-9223c-ed-navigation-for-non-admin/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-9223c-ed-navigation-for-non-admin/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-9223c-ed-navigation-for-non-admin/trace.zip
+---
+18_simplified_navigation_and_homepage.spec.ts
+Simplified project dashboard
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+---
+19_accessibility.spec.ts
+dashboard exposes skip link and keyboard-reachable main actions
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-d74ab-oard-reachable-main-actions/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-d74ab-oard-reachable-main-actions/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-d74ab-oard-reachable-main-actions/trace.zip
+---
+19_accessibility.spec.ts
+disabled recurring actions are announced as disabled by role
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-b72b3-nounced-as-disabled-by-role/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-b72b3-nounced-as-disabled-by-role/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-b72b3-nounced-as-disabled-by-role/trace.zip
+---
+19_accessibility.spec.ts
+recurring approve modal traps focus, closes with ESC, and submits with ENTER
+Error: locator.click: Error: strict mode violation: locator('.rounded-xl').filter({ hasText: 'E2E Lab Project' }).getByRole('link', { name: 'Open project' }) resolved to 2 elements:
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-75a3c--ESC-and-submits-with-ENTER/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-75a3c--ESC-and-submits-with-ENTER/error-context.md
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/19_accessibility-19-access-75a3c--ESC-and-submits-with-ENTER/trace.zip
+---
+admin-import-validation.spec.ts
+admin validate sample enforces required inputs and completes with CSV upload
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/error-context.md
+---
+app-flows.spec.ts
+5. post-login operational journey route opens from project home
+
+---
+core-journeys.spec.ts
+admin override reopens met indicator and audit evidence is visible
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+---
+core-journeys.spec.ts
+admin route access is available after login
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ac250-ss-is-available-after-login/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ac250-ss-is-available-after-login/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ac250-ss-is-available-after-login/error-context.md
+---
+core-journeys.spec.ts
+clone project then open cloned workspace
+
+---
+core-journeys.spec.ts
+combined governance path: create, evidence, recurring, export
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/error-context.md
+---
+core-journeys.spec.ts
+create flow supports client profile linkage
+
+---
+core-journeys.spec.ts
+evidence review journey works end-to-end
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/error-context.md
+---
+core-journeys.spec.ts
+export lifecycle creates history row with persisted status
+
+---
+core-journeys.spec.ts
+non-admin user cannot reopen met indicator
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+---
+core-journeys.spec.ts
+recurring approval from indicator context works
+Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/error-context.md
+---
+cta-discoverability.spec.ts
+owner sees disabled create CTA with role rationale
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/error-context.md
+---
+cta-discoverability.spec.ts
+print pack and export CTA entry points are visible from project home
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/error-context.md
+---
+cta-visibility.spec.ts
+project create and admin actions are visible
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-visibility-CTA-visibil-1d298-d-admin-actions-are-visible/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-visibility-CTA-visibil-1d298-d-admin-actions-are-visible/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/cta-visibility-CTA-visibil-1d298-d-admin-actions-are-visible/error-context.md
+---
+next-action-consistency.spec.ts
+target screens all show action, reason, and status guidance
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/next-action-consistency-ne-fec9b--reason-and-status-guidance/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/next-action-consistency-ne-fec9b--reason-and-status-guidance/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/next-action-consistency-ne-fec9b--reason-and-status-guidance/error-context.md
+---
+operator-first-time.spec.ts
+first-time operator journey stays explicit across create, evidence, review, and approval
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/error-context.md
+---
+role-based-access.spec.ts
+admin can open admin dashboard
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-based-access-Role-bas-91ef5-in-can-open-admin-dashboard/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-based-access-Role-bas-91ef5-in-can-open-admin-dashboard/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-based-access-Role-bas-91ef5-in-can-open-admin-dashboard/error-context.md
+---
+role-visibility.spec.ts
+lead sees admin navigation section
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/error-context.md
+---
+role-visibility.spec.ts
+owner sees disabled create project CTA with explanation
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/error-context.md
+---
+role-visibility.spec.ts
+owner sees disabled readiness/export CTAs and guarded routes
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/error-context.md
+---
+workflow-completion.spec.ts
+operator can traverse core workflow screens with explicit next action guidance
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-completion-Workfl-8fcd0-plicit-next-action-guidance/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-completion-Workfl-8fcd0-plicit-next-action-guidance/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-completion-Workfl-8fcd0-plicit-next-action-guidance/error-context.md
+---
+workflow-guidance.spec.ts
+project overview shows next-step guidance and grouped pathways
+Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/test-failed-1.png
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/video.webm
+att: /home/munaim/srv/apps/accrediops/OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/error-context.md
+---
+workflow-guidance.spec.ts
+worklist and recurring screens provide action guidance
+

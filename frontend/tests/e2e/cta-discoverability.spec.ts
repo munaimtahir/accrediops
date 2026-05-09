@@ -12,7 +12,7 @@ test.describe("CTA discoverability", () => {
   test("owner sees disabled create CTA with role rationale", async ({ page }) => {
     await login(page, seededUsers.owner);
     await expect(page.getByRole("button", { name: "Create project" }).first()).toBeDisabled();
-    await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+    await expect(page.getByText("Only ADMIN or LEAD can create or manage projects.", { exact: true })).toBeVisible();
   });
 
   test("print pack and export CTA entry points are visible from project home", async ({ page }) => {
@@ -22,6 +22,6 @@ test.describe("CTA discoverability", () => {
     await expect(main.getByRole("link", { name: "Print pack preview" })).toBeVisible();
     await expect(main.getByRole("link", { name: "Export history" }).first()).toBeVisible();
     await main.getByRole("link", { name: "Print pack preview" }).click();
-    await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible({ timeout: 15000 });
   });
 });

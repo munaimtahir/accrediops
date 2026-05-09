@@ -1,0 +1,26 @@
+accrediops-frontend  | 
+accrediops-frontend  | up to date, audited 505 packages in 10s
+accrediops-frontend  | 
+accrediops-frontend  | 178 packages are looking for funding
+accrediops-frontend  |   run `npm fund` for details
+accrediops-frontend  | 
+accrediops-frontend  | 2 moderate severity vulnerabilities
+accrediops-frontend  | 
+accrediops-frontend  | To address all issues (including breaking changes), run:
+accrediops-frontend  |   npm audit fix --force
+accrediops-frontend  | 
+accrediops-frontend  | Run `npm audit` for details.
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 dev
+accrediops-frontend  | > next dev --hostname 0.0.0.0 --port 3000
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.15
+accrediops-frontend  |    - Local:        http://localhost:3000
+accrediops-frontend  |    - Network:      http://0.0.0.0:3000
+accrediops-frontend  | 
+accrediops-frontend  |  ✓ Starting...
+accrediops-frontend  |  ✓ Ready in 6.1s
+accrediops-frontend  |  ○ Compiling /healthz ...
+accrediops-frontend  |  ✓ Compiled /healthz in 9.7s (296 modules)
+accrediops-frontend  |  GET /healthz 200 in 3328ms
+accrediops-frontend  |  GET /healthz 200 in 99ms

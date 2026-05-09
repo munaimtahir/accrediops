@@ -1,0 +1,9 @@
+framework_id 1
+framework_name PHC LAB
+areas 10
+standards 37
+indicators 118
+recurring 44
+sample_indicator_id_code [(1, 'IND-001'), (2, 'IND-002'), (3, 'IND-003'), (4, 'IND-004'), (5, 'IND-005')]
+projects_using_framework 1
+users_top10 [(1, 'admin', 'ADMIN', True), (2, 'pw_admin', 'ADMIN', True), (3, 'pw_lead', 'LEAD', False), (4, 'pw_owner', 'OWNER', False), (5, 'pw_reviewer', 'REVIEWER', False), (6, 'pw_approver', 'APPROVER', False)]

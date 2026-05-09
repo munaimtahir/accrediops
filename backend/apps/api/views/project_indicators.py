@@ -51,6 +51,11 @@ class ProjectIndicatorDetailView(APIView):
                 "status_history__actor",
                 "generated_outputs",
                 "recurring_requirement__instances",
+                "project_evidence_requirements__evidence_requirement",
+                "project_evidence_requirements__assigned_to",
+                "project_evidence_requirements__submitted_by",
+                "project_evidence_requirements__approved_by",
+                "project_evidence_requirements__rejected_by",
             ),
             pk=pk,
         )

@@ -30,7 +30,7 @@ const coreItems: NavItem[] = [
   { href: "/projects", label: "Projects", icon: FolderKanban },
 ];
 
-const settingsItem: NavItem = { href: "/admin", label: "Settings", icon: Settings };
+const settingsItem: NavItem = { href: "/admin", label: "Admin Dashboard", icon: Settings };
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -118,6 +118,21 @@ export function Sidebar() {
               >
                 <ShieldCheck className="h-4 w-4" />
                 AI Classification
+              </Link>
+            )}
+
+            {(role === "ADMIN" || role === "LEAD") && (
+              <Link
+                href="/framework-documentation-ai"
+                className={cn(
+                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  pathname === "/framework-documentation-ai"
+                    ? "bg-white/10 text-white"
+                    : "text-slate-300 hover:bg-white/5 hover:text-white",
+                )}
+              >
+                <FileText className="h-4 w-4" />
+                Framework Documentation AI
               </Link>
             )}
           </div>

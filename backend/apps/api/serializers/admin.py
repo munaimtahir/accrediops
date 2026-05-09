@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from apps.accounts.models import User
 from apps.ai_actions.models import AIUsageLog, DocumentDraft
+from apps.ai_actions.models.document_draft import DocumentDraftKindChoices
 from apps.audit.models import AuditEvent
 from apps.exports.models import ExportJob, ImportLog
 from apps.frameworks.models import Framework
@@ -59,6 +60,28 @@ class PromoteDraftToEvidenceSerializer(serializers.Serializer):
     document_type = serializers.CharField(max_length=20)
     final_filename = serializers.CharField(max_length=255, required=False, allow_blank=True)
     notes = serializers.CharField(required=False, allow_blank=True)
+
+
+class FrameworkDocumentationGenerateSerializer(serializers.Serializer):
+    scope = serializers.ChoiceField(
+        choices=[
+            ("single_indicator", "Single indicator"),
+            ("selected_indicators", "Selected indicators"),
+            ("area", "Area"),
+            ("standard", "Standard"),
+            ("framework", "Full framework"),
+        ]
+    )
+    kind = serializers.ChoiceField(choices=DocumentDraftKindChoices.choices)
+    user_instruction = serializers.CharField(required=False, allow_blank=True, default="")
+    indicator_id = serializers.IntegerField(min_value=1, required=False)
+    indicator_ids = serializers.ListField(
+        child=serializers.IntegerField(min_value=1),
+        required=False,
+        allow_empty=True,
+    )
+    area_id = serializers.IntegerField(min_value=1, required=False)
+    standard_id = serializers.IntegerField(min_value=1, required=False)
 
 
 class UserAdminSerializer(serializers.ModelSerializer):

@@ -1,0 +1,17 @@
+# Frontend: npm run lint
+
+> accrediops-frontend@0.1.0 lint
+> eslint app components lib tests utils
+
+
+/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs
+   29:3   warning  Unused eslint-disable directive (no problems were reported from 'no-constant-condition')
+   41:7   warning  Unused eslint-disable directive (no problems were reported from 'no-await-in-loop')
+   82:21  warning  'seedError' is defined but never used                                                     @typescript-eslint/no-unused-vars
+  106:9   warning  Unused eslint-disable directive (no problems were reported from 'no-await-in-loop')
+  110:9   warning  Unused eslint-disable directive (no problems were reported from 'no-await-in-loop')
+  133:11  warning  Unused eslint-disable directive (no problems were reported from 'no-await-in-loop')
+
+✖ 6 problems (0 errors, 6 warnings)
+  0 errors and 5 warnings potentially fixable with the `--fix` option.
+
