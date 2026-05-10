@@ -3,6 +3,8 @@ from .indicator import (
     ProjectIndicator,
     ProjectIndicatorComment,
     ProjectIndicatorStatusHistory,
+    EvidenceRequirement,
+    ProjectEvidenceRequirement,
 )
 
 __all__ = [
@@ -10,4 +12,6 @@ __all__ = [
     "ProjectIndicator",
     "ProjectIndicatorComment",
     "ProjectIndicatorStatusHistory",
+    "EvidenceRequirement",
+    "ProjectEvidenceRequirement",
 ]

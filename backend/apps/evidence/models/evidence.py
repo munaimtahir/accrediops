@@ -16,6 +16,18 @@ class EvidenceItem(models.Model):
         on_delete=models.PROTECT,
         related_name="evidence_items",
     )
+    evidence_requirement = models.ForeignKey(
+        "indicators.EvidenceRequirement",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    project_evidence_requirement = models.ForeignKey(
+        "indicators.ProjectEvidenceRequirement",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     source_type = models.CharField(max_length=20, choices=EvidenceSourceTypeChoices.choices)

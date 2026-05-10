@@ -6,6 +6,8 @@ from apps.api.serializers.common import AuditEventSerializer, UserSummarySeriali
 from apps.api.serializers.evidence import EvidenceItemSerializer
 from apps.api.serializers.recurring import RecurringEvidenceInstanceSerializer, RecurringRequirementSerializer
 from apps.indicators.models import (
+    EvidenceRequirement,
+    ProjectEvidenceRequirement,
     Indicator,
     ProjectIndicator,
     ProjectIndicatorComment,
@@ -262,3 +264,18 @@ class WorkflowActionSerializer(serializers.Serializer):
 
 class ReopenWorkflowActionSerializer(serializers.Serializer):
     reason = serializers.CharField()
+
+class EvidenceRequirementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EvidenceRequirement
+        fields = "__all__"
+
+class ProjectEvidenceRequirementSerializer(serializers.ModelSerializer):
+    evidence_requirement = EvidenceRequirementSerializer(read_only=True)
+    owner = UserSummarySerializer(read_only=True)
+    approved_by = UserSummarySerializer(read_only=True)
+    rejected_by = UserSummarySerializer(read_only=True)
+
+    class Meta:
+        model = ProjectEvidenceRequirement
+        fields = "__all__"

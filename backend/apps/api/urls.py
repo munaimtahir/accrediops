@@ -262,3 +262,23 @@ urlpatterns = [
         name="project-export-generate",
     ),
 ]
+from apps.api.views.indicator import EvidenceRequirementListCreateView, EvidenceRequirementUpdateView
+from apps.api.views.project_indicators import ProjectEvidenceRequirementUpdateView
+
+urlpatterns.extend([
+    path(
+        "api/indicators/<int:indicator_id>/evidence-requirements/",
+        EvidenceRequirementListCreateView.as_view(),
+        name="evidence-requirements-list-create"
+    ),
+    path(
+        "api/evidence-requirements/<int:pk>/",
+        EvidenceRequirementUpdateView.as_view(),
+        name="evidence-requirement-update"
+    ),
+    path(
+        "api/project-evidence-requirements/<int:pk>/",
+        ProjectEvidenceRequirementUpdateView.as_view(),
+        name="project-evidence-requirement-update"
+    ),
+])

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from apps.masters.choices import DocumentTypeChoices
 
@@ -27,6 +28,18 @@ class DocumentDraft(models.Model):
         "indicators.ProjectIndicator",
         on_delete=models.CASCADE,
         related_name="document_drafts",
+        null=True,
+        blank=True,
+    )
+    evidence_requirement = models.ForeignKey(
+        "indicators.EvidenceRequirement",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    project_evidence_requirement = models.ForeignKey(
+        "indicators.ProjectEvidenceRequirement",
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
