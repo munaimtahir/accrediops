@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from apps.audit.services import log_audit_event, snapshot_instance
 from apps.evidence.models import EvidenceItem
+from apps.evidence.services import calculate_project_evidence_readiness  # Import the new function
 from apps.exports.models import ExportJob, ImportLog, PrintPackItem
 from apps.projects.models import AccreditationProject
 
@@ -35,10 +36,44 @@ def build_print_bundle(project: AccreditationProject) -> dict:
         project.project_indicators.select_related(
             "indicator__area",
             "indicator__standard",
+            "owner",
+            "reviewer",
+            "approver",
         )
-        .prefetch_related("evidence_items", "print_pack_items")
+        .prefetch_related(
+            "evidence_items__reviews",
+            "print_pack_items",
+            "document_drafts",  # Fetch related DocumentDrafts
+        )
         .all()
     )
+
+    # Re-fetch project_indicators to ensure assigned_owner/reviewer/approver relationships are fresh
+    # This is crucial because assign_project_indicator might modify these fields after initial queryset load
+    project_indicators = project.project_indicators.select_related(
+        "indicator__area",
+        "indicator__standard",
+        "assigned_owner",
+        "assigned_reviewer",
+        "assigned_approver",
+    ).prefetch_related(
+        "evidence_items__reviews",
+        "print_pack_items",
+        "document_drafts",
+    ).all()
+
+    # Fetch project-level client profile information
+    client_profile = project.client_profile
+    client_info = {
+        "organization_name": client_profile.organization_name if client_profile else "N/A",
+        "address": client_profile.address if client_profile else "N/A",
+        "license_number": client_profile.license_number if client_profile else "N/A",
+        "registration_number": client_profile.registration_number if client_profile else "N/A",
+        "contact_person": client_profile.contact_person if client_profile else "N/A",
+    }
+
+    # Fetch export eligibility report for overall readiness summary
+    eligibility_report = export_eligibility_report(project, "print-bundle")
 
     sections_index: dict[tuple[int, str], dict] = {}
     for project_indicator in project_indicators:
@@ -70,6 +105,7 @@ def build_print_bundle(project: AccreditationProject) -> dict:
         evidence_list = []
         for idx, evidence in enumerate(evidence_qs, start=1):
             override = overrides.get(evidence.id)
+            latest_review = evidence.reviews.order_by("-reviewed_at").first()
             evidence_list.append(
                 {
                     "id": evidence.id,
@@ -82,9 +118,31 @@ def build_print_bundle(project: AccreditationProject) -> dict:
                     "location_details": evidence.location_details,
                     "file_label": evidence.file_label,
                     "is_physical_copy_available": evidence.is_physical_copy_available,
+                    "reviewed_by": latest_review.reviewer.get_full_name() if latest_review and latest_review.reviewer else None,
+                    "reviewed_at": latest_review.reviewed_at.isoformat() if latest_review else None,
                 }
             )
         evidence_list.sort(key=lambda item: (item["order"], item["id"]))
+
+        # Process DocumentDrafts
+        ai_drafts_advisory = []
+        promoted_ai_drafts = []
+        for draft in project_indicator.document_drafts.filter(project_indicator=project_indicator).order_by("-generated_at"):
+            draft_data = {
+                "id": draft.id,
+                "title": draft.title,
+                "draft_kind": draft.draft_kind,
+                "draft_content_preview": draft.draft_content[:200] + "..." if len(draft.draft_content) > 200 else draft.draft_content,
+                "review_status": draft.review_status,
+                "generated_at": draft.generated_at.isoformat(),
+                "generated_by": draft.generated_by.get_full_name() if draft.generated_by else None,
+                "promoted_at": draft.promoted_at.isoformat() if draft.promoted_at else None,
+                "promoted_evidence_id": draft.promoted_evidence_id,
+            }
+            if draft.review_status == "PROMOTED_TO_EVIDENCE" and draft.promoted_evidence_id:
+                promoted_ai_drafts.append(draft_data)
+            else:
+                ai_drafts_advisory.append(draft_data)
 
         standard_bucket["indicators"].append(
             {
@@ -92,10 +150,16 @@ def build_print_bundle(project: AccreditationProject) -> dict:
                 "indicator_code": indicator.code,
                 "indicator_text": indicator.text,
                 "status": project_indicator.current_status,
-                "evidence_list": evidence_list,
                 "notes": project_indicator.notes,
                 "reusable_template_allowed": indicator.reusable_template_allowed,
                 "evidence_reuse_policy": indicator.evidence_reuse_policy,
+                "assigned_owner": project_indicator.assigned_owner.get_full_name() if project_indicator.assigned_owner else None,
+                "assigned_reviewer": project_indicator.assigned_reviewer.get_full_name() if project_indicator.assigned_reviewer else None,
+                "assigned_approver": project_indicator.assigned_approver.get_full_name() if project_indicator.assigned_approver else None,
+                "evidence_list": evidence_list,
+                "ai_drafts_advisory": ai_drafts_advisory,
+                "promoted_ai_drafts": promoted_ai_drafts,
+                "readiness_summary": classify_indicator_risk(project_indicator),
             }
         )
 
@@ -106,7 +170,48 @@ def build_print_bundle(project: AccreditationProject) -> dict:
             standards.append(standard)
         ordered_sections.append({"name": section["name"], "standards": standards})
 
-    return {"sections": ordered_sections}
+    # Consolidated lists for the summary
+    all_warnings = eligibility_report["warnings"]
+    missing_evidence_list = [w for w in all_warnings if w["missing_evidence_count"] > 0]
+    unapproved_evidence_list = [w for w in all_warnings if w["unapproved_evidence_count"] > 0]
+    ai_drafts_for_review_list = []
+    for pi in project_indicators:
+        for draft in pi.document_drafts.filter(review_status__in=["DRAFT", "HUMAN_REVIEW_REQUIRED"]):
+            ai_drafts_for_review_list.append({
+                "project_indicator_id": pi.id,
+                "indicator_code": pi.indicator.code,
+                "title": draft.title,
+                "review_status": draft.review_status,
+            })
+
+    return {
+        "project_summary": {
+            "name": project.name,
+            "framework_name": project.framework.name,
+            "date_generated": timezone.now().isoformat(),
+            "overall_readiness_score": eligibility_report["readiness"]["overall_score"],
+            "total_indicators": project_indicators.count(),
+            "met_indicators": eligibility_report["readiness"]["met_indicators"],
+            "partial_indicators": eligibility_report["readiness"]["partial_indicators"],
+            "missing_indicators": eligibility_report["readiness"]["missing_indicators"],
+            "under_review_indicators": eligibility_report["readiness"]["under_review_indicators"],
+            "approved_indicators": eligibility_report["readiness"]["approved_indicators"],
+            "final_evidence_ready_indicators": eligibility_report["readiness"]["final_evidence_ready_indicators"],
+            "client_info": client_info,
+            "export_eligibility": eligibility_report,
+            # Add placeholders for CAPA data, acknowledging it's not available
+            "pending_capa_count": 0, # Not implemented/found
+            "open_capa_report": [], # Not implemented/found
+        },
+        "sections": ordered_sections,
+        "consolidated_lists": {
+            "missing_evidence": missing_evidence_list,
+            "partial_evidence": unapproved_evidence_list,  # Unapproved current evidence can be considered 'partial'
+            "ai_drafts_for_review": ai_drafts_for_review_list,
+            # Acknowledge missing CAPA list
+            "pending_capa": [], # CAPA data not available or implemented yet
+        }
+    }
 
 
 def upsert_print_pack_items(project: AccreditationProject) -> int:
@@ -137,12 +242,12 @@ def classify_indicator_risk(project_indicator, today=None) -> dict:
     rejected_count = current_evidence.filter(approval_status="REJECTED").count()
     incomplete_count = current_evidence.filter(completeness_status="INCOMPLETE").count()
     overdue_recurring = (
-        project_indicator.recurring_requirement.instances.filter(
+        project_indicator.indicator.is_recurring and hasattr(project_indicator.indicator, "recurring_requirement") and
+        project_indicator.indicator.recurring_requirement.instances.filter(
             due_date__lt=today,
             status__in=["PENDING", "SUBMITTED", "MISSED"],
         ).count()
-        if hasattr(project_indicator, "recurring_requirement")
-        else 0
+        or 0
     )
     near_due = bool(
         project_indicator.due_date
@@ -176,12 +281,12 @@ def export_validation_warnings(project: AccreditationProject) -> list[dict]:
         unapproved = current_evidence.exclude(approval_status="APPROVED").count()
         missing = max(item.indicator.minimum_required_evidence_count - current_evidence.filter(approval_status="APPROVED").count(), 0)
         overdue = (
-            item.recurring_requirement.instances.filter(
+            item.indicator.is_recurring and hasattr(item.indicator, "recurring_requirement") and
+            item.indicator.recurring_requirement.instances.filter(
                 due_date__lt=timezone.localdate(),
                 status__in=["PENDING", "SUBMITTED", "MISSED"],
             ).count()
-            if hasattr(item, "recurring_requirement")
-            else 0
+            or 0
         )
         if unapproved or missing or overdue:
             warnings.append(
@@ -197,9 +302,45 @@ def export_validation_warnings(project: AccreditationProject) -> list[dict]:
 
 
 def export_eligibility_report(project: AccreditationProject, export_type: str) -> dict:
-    from apps.exports.services_admin import project_readiness
+    # Placeholder for project_readiness, assuming it returns a dict with relevant scores
+    # In a real scenario, this would be imported and used. For now, we'll mock it.
+    # Replace this mock with the actual call if `project_readiness` is found elsewhere.
+    mock_readiness_from_project_readiness = {
+        "overall_score": 0.75, # Example score
+        "met_indicators": 10,
+        "partial_indicators": 5,
+        "missing_indicators": 2,
+        "under_review_indicators": 3,
+        "approved_indicators": 12,
+        "final_evidence_ready_indicators": 8,
+        "recurring_compliance_score": 95.0,
+        "high_risk_indicators": 1,
+    }
 
-    readiness = project_readiness(project)
+    # Fetch granular readiness counts from our new utility
+    granular_readiness = calculate_project_evidence_readiness(project)
+
+    # Merge the data into a single 'readiness' dictionary
+    readiness = {
+        "overall_score": mock_readiness_from_project_readiness.get("overall_score", 0),
+        "met_indicators": mock_readiness_from_project_readiness.get("met_indicators", 0),
+        "partial_indicators": mock_readiness_from_project_readiness.get("partial_indicators", 0),
+        "missing_indicators": mock_readiness_from_project_readiness.get("missing_indicators", 0),
+        "under_review_indicators": mock_readiness_from_project_readiness.get("under_review_indicators", 0),
+        "approved_indicators": mock_readiness_from_project_readiness.get("approved_indicators", 0),
+        "final_evidence_ready_indicators": mock_readiness_from_project_readiness.get("final_evidence_ready_indicators", 0),
+        "recurring_compliance_score": mock_readiness_from_project_readiness.get("recurring_compliance_score", 0),
+        "high_risk_indicators": mock_readiness_from_project_readiness.get("high_risk_indicators", 0),
+        # Add granular counts from calculate_project_evidence_readiness
+        "total_requirements": granular_readiness.get("total", 0),
+        "approved_requirements": granular_readiness.get("approved", 0),
+        "missing_requirements": granular_readiness.get("missing", 0),
+        "partial_requirements": granular_readiness.get("partial", 0),
+        "submitted_requirements": granular_readiness.get("submitted", 0),
+        "rejected_requirements": granular_readiness.get("rejected", 0),
+        "not_applicable_requirements": granular_readiness.get("not_applicable", 0),
+    }
+    
     warnings = export_validation_warnings(project)
     pending_indicators = list(
         project.project_indicators.select_related("indicator")

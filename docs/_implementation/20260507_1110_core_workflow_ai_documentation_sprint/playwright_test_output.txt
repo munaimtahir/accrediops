@@ -1,0 +1,17 @@
+Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:18080/login
+Call log:
+[2m  - navigating to "http://127.0.0.1:18080/login", waiting until "load"[22m
+
+
+   at global-setup.cjs:60
+
+  58 |       const context = await browser.newContext({ baseURL: baseUrl });
+  59 |       const page = await context.newPage();
+> 60 |       await page.goto("/login");
+     |                  ^
+  61 |       
+  62 |       // Wait for hydration/loading to finish
+  63 |       await page.waitForSelector("#username-input", { state: "visible", timeout: 20000 });
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:60:18)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:88:3)
+

@@ -1,0 +1,204 @@
+
+Running 5 tests using 1 worker
+
+  ✓  1 tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance (18.9s)
+  ✘  2 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (11.3s)
+  ✘  3 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (retry #1) (15.2s)
+  ✓  4 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:38:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin (6.0s)
+  ✘  5 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard (6.6s)
+  ✘  6 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard (retry #1) (5.4s)
+  ✘  7 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist (15.8s)
+  ✓  8 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist (retry #1) (13.0s)
+
+
+  1) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*admin\/users/[39m
+    Received string:  [31m"http://127.0.0.1:18080/admin"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/admin"[22m
+
+
+      21 |     // Admin/Lead can navigate to Users
+      22 |     await page.locator("a:has-text('Users')").click();
+    > 23 |     await expect(page).toHaveURL(/.*admin\/users/);
+         |                        ^
+      24 |     
+      25 |     // Admin/Lead can navigate to Framework Setup
+      26 |     await page.goto("/admin");
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:23:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*admin\/frameworks/[39m
+    Received string:  [31m"http://127.0.0.1:18080/admin"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/admin"[22m
+
+
+      26 |     await page.goto("/admin");
+      27 |     await page.locator("a:has-text('Frameworks')").click();
+    > 28 |     await expect(page).toHaveURL(/.*admin\/frameworks/);
+         |                        ^
+      29 |
+      30 |     // Admin/Lead can navigate to Master Lists
+      31 |     await page.goto("/admin");
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:28:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').locator('a:has-text(\'Open Worklist\')')
+    Expected: visible
+    Error: strict mode violation: locator('main').locator('a:has-text(\'Open Worklist\')') resolved to 2 elements:
+        1) <a href="/projects/166/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-10 px-4 py-2">Open Worklist</a> aka locator('#main-content').getByRole('link', { name: 'Open Worklist', exact: true })
+        2) <a href="/projects/166/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open worklist</a> aka getByRole('link', { name: 'Open worklist', exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('main').locator('a:has-text(\'Open Worklist\')')[22m
+
+
+      72 |     // key action buttons exist - use main container to avoid duplicates in sidebar/topbar
+      73 |     const main = page.locator("main");
+    > 74 |     await expect(main.locator("a:has-text('Open Worklist')")).toBeVisible();
+         |                                                               ^
+      75 |
+      76 |     // Open Worklist works
+      77 |     await main.locator("a:has-text('Open Worklist')").click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:74:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').locator('a:has-text(\'Open Worklist\')')
+    Expected: visible
+    Error: strict mode violation: locator('main').locator('a:has-text(\'Open Worklist\')') resolved to 2 elements:
+        1) <a href="/projects/166/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-10 px-4 py-2">Open Worklist</a> aka locator('#main-content').getByRole('link', { name: 'Open Worklist', exact: true })
+        2) <a href="/projects/166/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open worklist</a> aka getByRole('link', { name: 'Open worklist', exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('main').locator('a:has-text(\'Open Worklist\')')[22m
+
+
+      72 |     // key action buttons exist - use main container to avoid duplicates in sidebar/topbar
+      73 |     const main = page.locator("main");
+    > 74 |     await expect(main.locator("a:has-text('Open Worklist')")).toBeVisible();
+         |                                                               ^
+      75 |
+      76 |     // Open Worklist works
+      77 |     await main.locator("a:has-text('Open Worklist')").click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:74:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('h2:has-text(\'Section 7 — AI / Assist\')')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('h2:has-text(\'Section 7 — AI / Assist\')')[22m
+
+
+      104 |
+      105 |     // Expect the AI section header in the detail page
+    > 106 |     await expect(page.locator("h2:has-text('Section 7 — AI / Assist')")).toBeVisible();
+          |                                                                          ^
+      107 |     
+      108 |     await adminContext.close();
+      109 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:106:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+  1 flaky
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist 
+  2 passed (2.2m)

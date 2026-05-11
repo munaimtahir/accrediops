@@ -1,0 +1,100 @@
+
+Running 2 tests using 1 worker
+
+(node:900559) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:900559) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (26.1s)
+(node:901161) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:901161) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/e2e/core-journeys.spec.ts:235:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (1.1m)
+
+
+  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/login/[39m
+    Received string:  [31m"http://127.0.0.1:18080/project-indicators/33277"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    3 × unexpected value "http://127.0.0.1:18080/project-indicators/33277"[22m
+    [2m    - waiting for" http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F33277" navigation to finish...[22m
+    [2m    - navigated to "http://127.0.0.1:18080/login"[22m
+    [2m    - waiting for" http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F33277" navigation to finish...[22m
+
+
+       at helpers.ts:174
+
+      172 | export async function logout(page: Page) {
+      173 |   await page.getByRole("button", { name: "Sign out" }).click();
+    > 174 |   await expect(page).toHaveURL(/\/login/);
+          |                      ^
+      175 | }
+      176 |
+      177 | export async function ensureE2EClient(page: Page) {
+        at logout (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:174:22)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:180:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:235:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Review evidence' }).first()[22m
+
+
+      255 |     await login(page, seededUsers.reviewer);
+      256 |     await page.goto(`/project-indicators/${sourceIndicatorId}`);
+    > 257 |     await page.getByRole("button", { name: "Review evidence" }).first().click();
+          |                                                                         ^
+      258 |     await page.getByLabel("Validity").selectOption("VALID");
+      259 |     await page.getByLabel("Completeness").selectOption("COMPLETE");
+      260 |     await page.getByLabel("Approval").selectOption("APPROVED");
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:257:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:235:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 

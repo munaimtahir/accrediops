@@ -26,11 +26,13 @@ from apps.api.serializers.admin import (
     AIUsageLogSerializer,
     DocumentDraftSerializer,
     DocumentDraftWriteSerializer,
+    FrameworkDocumentationGenerateSerializer,
     PromoteDraftToEvidenceSerializer,
 )
 from apps.ai_actions.models import AIUsageLog, DocumentDraft
 from apps.ai_actions.services.classification import run_framework_indicator_classification
 from apps.ai_actions.services.document_drafting import generate_document_draft, promote_draft_to_evidence
+from apps.ai_actions.services.framework_documentation import generate_framework_documentation_draft
 from apps.frameworks.models import Framework
 from apps.indicators.models import Indicator, ProjectIndicator
 from apps.masters.choices import ClassificationReviewStatusChoices
@@ -369,6 +371,8 @@ class DocumentGenerationQueueView(APIView):
         indicators = []
         for indicator in queryset:
             data = IndicatorClassificationSerializer(indicator).data
+            data["indicator_id"] = indicator.id
+            data["framework_name"] = indicator.framework.name
             data['latest_draft'] = None
             data['draft_count'] = indicator.draft_count
             if indicator.latest_draft_id:
@@ -545,6 +549,28 @@ class FrameworkImportCreateView(APIView):
             "file_name": file_name,
         }
         return success_response(response_payload, response_status=201)
+
+
+class FrameworkDocumentationDraftGenerateView(APIView):
+    permission_classes = [AdminOrLeadPermission]
+
+    def post(self, request, framework_id):
+        framework = get_object_or_404(Framework, pk=framework_id)
+        serializer = FrameworkDocumentationGenerateSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        payload = serializer.validated_data
+        draft = generate_framework_documentation_draft(
+            actor=request.user,
+            framework=framework,
+            scope=payload["scope"],
+            kind=payload["kind"],
+            user_instruction=payload.get("user_instruction", ""),
+            indicator_id=payload.get("indicator_id"),
+            indicator_ids=payload.get("indicator_ids"),
+            area_id=payload.get("area_id"),
+            standard_id=payload.get("standard_id"),
+        )
+        return success_response(DocumentDraftSerializer(draft).data, response_status=201)
 
 
 def _classification_filtered_queryset(framework, params):

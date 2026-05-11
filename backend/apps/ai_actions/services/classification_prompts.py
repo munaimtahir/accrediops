@@ -37,7 +37,11 @@ def build_indicator_classification_prompt(indicators) -> str:
         )
 
     return f"""
-You classify accreditation checklist indicators into saved advisory metadata.
+You classify accreditation checklist indicators and suggest evidence requirements.
+
+For each indicator, provide:
+1.  **Classification Metadata**: (existing fields: evidence_type, ai_assistance_level, etc.)
+2.  **Evidence Requirement Suggestions**: If the indicator lacks sufficient detail or clarity for evidence fulfillment, suggest specific requirements.
 
 Return only valid JSON. Do not use markdown fences. Return an array with one object per indicator:
 [
@@ -49,7 +53,22 @@ Return only valid JSON. Do not use markdown fences. Return an array with one obj
     "evidence_frequency": "ONE_TIME",
     "primary_action_required": "GENERATE_DOCUMENT",
     "classification_confidence": "MEDIUM",
-    "classification_reason": "Short practical reason"
+    "classification_reason": "Short practical reason",
+    "suggested_evidence": [
+        {{
+            "title": "Suggested Evidence Title",
+            "description": "Detailed description of the evidence needed.",
+            "evidence_category": "DOCUMENT_POLICY", # Corresponds to EvidenceTypeChoices
+            "artifact_type": "SOP", # e.g., SOP, Policy, Register, Photo
+            "mandatory": true,
+            "ai_generatable": true,
+            "physical_proof_required": false,
+            "signature_required": false,
+            "ongoing_record_required": false,
+            "default_document_type": "SOP",
+            "primary_action_required": "GENERATE_DOCUMENT"
+        }}
+    ]
   }}
 ]
 
@@ -57,19 +76,23 @@ Allowed evidence_type values: {_choices_text(EvidenceTypeChoices.choices)}
 Allowed ai_assistance_level values: {_choices_text(AIAssistanceLevelChoices.choices)}
 Allowed evidence_frequency values: {_choices_text(EvidenceFrequencyChoices.choices)}
 Allowed primary_action_required values: {_choices_text(PrimaryActionRequiredChoices.choices)}
-Allowed classification_confidence values: {_choices_text(ClassificationConfidenceChoices.choices)}
 
 Rules:
-- Choose from allowed values only.
-- If unclear, use evidence_type MANUAL_REVIEW, primary_action_required MANUAL_DECISION, classification_confidence LOW.
-- Do not invent compliance status.
-- Do not claim evidence exists.
-- Do not mark complete.
-- Do not create evidence.
+- For classification, choose from allowed values only. If unclear, use MANUAL_REVIEW/MANUAL_DECISION/LOW confidence.
+- Do not invent compliance status, claim evidence exists, mark complete, or create evidence directly.
 - Keep classification_reason short and practical.
 - FULL_AI means AI can generate most of the required document/content.
-- PARTIAL_AI means AI can help draft, format, prepare checklist, or guide but human/physical proof remains needed.
+- PARTIAL_AI means AI can help draft, format, prepare checklist, or guide, but human/physical proof is needed.
 - NO_AI means real-world proof, official certificate, photo, equipment, or direct compliance work is needed.
+
+- For **Evidence Requirement Suggestions**:
+    - If the indicator's `required_evidence` or `fulfillment_guidance` is vague or insufficient, provide concrete, actionable suggestions.
+    - Use the indicator's `document_type` and `primary_action_required` to guide the suggestion.
+    - If `mandatory` is true, ensure the suggestion is critical.
+    - If `ai_generatable` is true, the AI can suggest a template or draft.
+    - If `physical_proof_required` is true, suggest a photo, site visit record, or similar.
+    - If `ongoing_record_required` is true, suggest a register, log, or recurring report.
+    - If AI cannot confidently suggest specific requirements, leave `suggested_evidence` empty or as an empty array.
 
 Indicators:
 {rows}

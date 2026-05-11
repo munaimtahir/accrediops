@@ -1,0 +1,18 @@
+TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+============================================================
+
+   at global-setup.cjs:68
+
+  66 |       await page.fill("#password-input", PASSWORD);
+  67 |       await page.getByRole("button", { name: "Sign in" }).click();
+> 68 |       await page.waitForURL(/\/projects/);
+     |                  ^
+  69 |       const storageState = await context.storageState();
+  70 |       const normalized = {
+  71 |         ...storageState,
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:68:18)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:88:3)
+
+[1A[2K

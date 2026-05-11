@@ -1,0 +1,84 @@
+{
+  "config": {
+    "configFile": "/home/munaim/srv/apps/accrediops/frontend/playwright.config.ts",
+    "rootDir": "/home/munaim/srv/apps/accrediops/frontend/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/munaim/srv/apps/accrediops/OUT/playwright",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "/home/munaim/srv/apps/accrediops/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "../playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../OUT/playwright/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:18080/login\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:18080/login\", waiting until \"load\"\u001b[22m\n",
+      "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:18080/login\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:18080/login\", waiting until \"load\"\u001b[22m\n\n    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:60:18)\n    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:88:3)",
+      "location": {
+        "file": "/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs",
+        "column": 18,
+        "line": 60
+      },
+      "snippet": "\u001b[90m   at \u001b[39mglobal-setup.cjs:60\n\n  58 |       const context = await browser.newContext({ baseURL: baseUrl });\n  59 |       const page = await context.newPage();\n> 60 |       await page.goto(\"/login\");\n     |                  ^\n  61 |       \n  62 |       // Wait for hydration/loading to finish\n  63 |       await page.waitForSelector(\"#username-input\", { state: \"visible\", timeout: 20000 });"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-05-07T11:14:40.179Z",
+    "duration": 31659.638,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

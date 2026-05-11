@@ -1,0 +1,4 @@
+ Container accrediops-backend Restarting 
+ Container accrediops-backend Started 
+NAME                 IMAGE                COMMAND                  SERVICE   CREATED         STATUS                                     PORTS
+accrediops-backend   accrediops-backend   "sh -c 'python manag…"   backend   7 minutes ago   Up Less than a second (health: starting)   8000/tcp

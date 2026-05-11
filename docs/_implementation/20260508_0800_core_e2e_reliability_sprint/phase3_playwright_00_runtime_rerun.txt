@@ -1,0 +1,96 @@
+# Playwright: rerun 00_runtime_and_auth
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1567685) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1567685) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/00_runtime_and_auth.spec.ts:6:7 › 00 runtime and auth › runtime stays on 18080 and health routes are reachable
+[1A[2K[2/2] tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash
+[1A[2K(node:1571418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1571418) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/2] (retries) tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash (retry #1)
+[1A[2K  1) tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/52418883b951eab92211-be66a5eadb213a3a85b3-recording2.trace'
+
+    TimeoutError: page.waitForURL: Timeout 15000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+       at helpers.ts:206
+
+      204 | export async function logout(page: Page) {
+      205 |   await page.getByRole("button", { name: "Sign out" }).click();
+    > 206 |   await page.waitForURL(/\/login/, { timeout: 15000 });
+          |              ^
+      207 | }
+      208 |
+      209 | export async function ensureE2EClient(page: Page) {
+        at logout (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:206:14)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/00_runtime_and_auth.spec.ts:23:7
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/608cfd80763d0e9af07c274fe52431cf.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/projects", waiting until "load"[22m
+
+
+       at helpers.ts:192
+
+      190 |       throw new Error(`Login fallback failed (${response.status()}): ${JSON.stringify(payload)}`);
+      191 |     }
+    > 192 |     await page.goto("/projects");
+          |                ^
+      193 |   }
+      194 |   if (!page.url().includes("/projects")) {
+      195 |     await page.goto("/projects");
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:192:16)
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:171:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/00_runtime_and_auth.spec.ts:21:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+  1 passed (4.7m)

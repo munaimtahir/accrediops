@@ -1,0 +1,5 @@
+# Frontend: npm run typecheck
+
+> accrediops-frontend@0.1.0 typecheck
+> tsc --noEmit
+

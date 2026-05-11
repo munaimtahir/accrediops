@@ -1,0 +1,20 @@
+accrediops-frontend  |  ✓ Ready in 2.6s
+accrediops-frontend  | 
+accrediops-frontend  | up to date, audited 505 packages in 6s
+accrediops-frontend  | 
+accrediops-frontend  | 178 packages are looking for funding
+accrediops-frontend  |   run `npm fund` for details
+accrediops-frontend  | 
+accrediops-frontend  | 2 moderate severity vulnerabilities
+accrediops-frontend  | 
+accrediops-frontend  | To address all issues (including breaking changes), run:
+accrediops-frontend  |   npm audit fix --force
+accrediops-frontend  | 
+accrediops-frontend  | Run `npm audit` for details.
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 build
+accrediops-frontend  | > next build
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.15
+accrediops-frontend  | 
+accrediops-frontend  |    Creating an optimized production build ...

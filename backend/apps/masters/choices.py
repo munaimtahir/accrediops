@@ -161,7 +161,7 @@ class PhysicalLocationTypeChoices(models.TextChoices):
     ROOM = "ROOM", "Room"
     OTHER = "OTHER", "Other"
 
-class EvidenceFulfillmentStatusChoices(models.TextChoices):
+class ProjectEvidenceRequirementStatusChoices(models.TextChoices):
     MISSING = "MISSING", "Missing"
     PARTIAL = "PARTIAL", "Partial"
     COMPLETE = "COMPLETE", "Complete"
@@ -169,14 +169,3 @@ class EvidenceFulfillmentStatusChoices(models.TextChoices):
     APPROVED = "APPROVED", "Approved"
     REJECTED = "REJECTED", "Rejected"
     NOT_APPLICABLE = "NOT_APPLICABLE", "Not Applicable"
-
-class EvidenceCategoryChoices(models.TextChoices):
-    AUDIT_QUALITY = "AUDIT_QUALITY", "Audit Quality"
-    DOCUMENT_POLICY = "DOCUMENT_POLICY", "Document Policy"
-    LICENSE_CERTIFICATE = "LICENSE_CERTIFICATE", "License Certificate"
-    MANUAL_REVIEW = "MANUAL_REVIEW", "Manual Review"
-    MIXED_EVIDENCE = "MIXED_EVIDENCE", "Mixed Evidence"
-    PHYSICAL_FACILITY = "PHYSICAL_FACILITY", "Physical Facility"
-    PROCESS_WORKFLOW = "PROCESS_WORKFLOW", "Process Workflow"
-    RECORD_REGISTER = "RECORD_REGISTER", "Record Register"
-    STAFF_TRAINING = "STAFF_TRAINING", "Staff Training"

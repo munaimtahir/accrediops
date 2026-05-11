@@ -1,0 +1,15 @@
+# Playwright: recurring and masters spec (clean rerun)
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1596693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1596693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility
+[1A[2K[2/2] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:41:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit
+[1A[2K  2 passed (1.6m)

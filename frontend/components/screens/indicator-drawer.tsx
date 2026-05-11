@@ -35,7 +35,7 @@ import {
 } from "@/lib/hooks/use-mutations";
 import { EvidenceItem, RecurringInstance } from "@/types";
 import { cn } from "@/utils/cn";
-import { formatDate, formatDateTime, formatEnumLabel } from "@/utils/format";
+import { formatDate, formatEnumLabel } from "@/utils/format";
 import { getEvidenceApprovalTone, getRecurringStatusTone } from "@/utils/status-semantics";
 
 type DrawerSection = "summary" | "evidence" | "recurring" | "notes" | "review" | "actions";
@@ -110,7 +110,7 @@ export function IndicatorDrawer({
   const detailHref = indicator ? `/project-indicators/${indicator.id}` : "#";
   const aiHref = indicator ? `/project-indicators/${indicator.id}?panel=ai` : "#";
 
-  async function handleRecurringSubmit(instanceId: number) {
+  async function handleRecurringSubmit() {
     if (!canSubmitRecurring) {
       pushToast("You are not allowed to submit recurring work for this indicator.", "error");
       return;
@@ -486,7 +486,7 @@ export function IndicatorDrawer({
             <div className="flex justify-end">
               <Button
                 loading={submitRecurring.isPending}
-                onClick={() => handleRecurringSubmit(submittingRecurring.id)}
+                onClick={() => handleRecurringSubmit()}
                 disabled={!canSubmitRecurring}
               >
                 Submit instance

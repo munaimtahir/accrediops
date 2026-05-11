@@ -1,0 +1,5 @@
+SERVICE   #   UID   PID      PPID     C   STIME  TTY  TIME      CMD
+frontend  1   root  1213783  1213757  0   02:21  ?    00:00:00  sh -c npm install --include=dev && npm run build && npm run start -- --hostname 0.0.0.0 --port 3000
+frontend  1   root  1214117  1213783  0   02:22  ?    00:00:00  npm run build
+frontend  1   root  1214131  1214117  3   02:22  ?    00:00:04  node /app/node_modules/.bin/next build
+frontend  1   root  1216021  1214131  99  02:23  ?    00:00:56  /usr/local/bin/node /app/node_modules/next/dist/compiled/jest-worker/processChild.js

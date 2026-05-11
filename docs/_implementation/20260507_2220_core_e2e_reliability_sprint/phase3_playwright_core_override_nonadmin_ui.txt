@@ -1,0 +1,59 @@
+
+Running 2 tests using 1 worker
+
+(node:918873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:918873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (45.2s)
+(node:919854) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:919854) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/e2e/core-journeys.spec.ts:209:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (17.1s)
+
+
+  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('cell', { name: 'Admin governance override from E2E' }).first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('cell', { name: 'Admin governance override from E2E' }).first()[22m
+
+
+      198 |     await page.goto("/admin/overrides");
+      199 |     await expect(page.getByRole("heading", { name: "Overrides & reopen control" })).toBeVisible();
+    > 200 |     await expect(page.getByRole("cell", { name: "Admin governance override from E2E" }).first()).toBeVisible();
+          |                                                                                                  ^
+      201 |
+      202 |     await page.goto("/admin/audit");
+      203 |     await expect(page).toHaveURL(/\/admin\/audit/);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:200:98
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+  1 passed (1.5m)

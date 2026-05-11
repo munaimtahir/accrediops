@@ -1,0 +1,15 @@
+Error: Failed to login for storageState user=pw_admin
+
+   at global-setup.cjs:138
+
+  136 |
+  137 | module.exports = async () => {
+> 138 |   const baseUrl = process.env.PLAYWRIGHT_BASE_URL || DEFAULT_BASE_URL;
+      |               ^
+  139 |   await runDeterministicSeed(baseUrl);
+  140 |   await buildRoleStorageStates(baseUrl);
+  141 | };
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:138:15)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:164:3)
+
+[1A[2K

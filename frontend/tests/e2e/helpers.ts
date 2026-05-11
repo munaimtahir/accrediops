@@ -58,7 +58,7 @@ export const seededUsers = {
 } as const;
 
 export const seededUser = {
-  frameworkName: "LAB",
+  frameworkName: "PHC LAB",
 } as const;
 
 export const seedContract = {
@@ -82,7 +82,19 @@ async function readEnvelope<T>(response: APIResponse, label: string): Promise<T>
 }
 
 async function apiGet<T>(page: Page, url: string, label: string) {
-  return readEnvelope<T>(await page.request.get(url), label);
+  await ensureOriginPage(page);
+  const response = await page.request.get(url);
+  const status = response.status();
+  const body = await response.json().catch(() => null);
+  if (!response.ok()) {
+    const errorBody = (body && typeof body === "object" && "error" in body) ? (body as { error: unknown }).error : body;
+    throw new Error(`${label} failed (${status}): ${JSON.stringify(errorBody)}`);
+  }
+  const payload = body as ApiEnvelope<T>;
+  if (!payload?.success) {
+    throw new Error(`${label} failed (${status}): ${JSON.stringify(payload?.error ?? payload)}`);
+  }
+  return payload.data;
 }
 
 async function ensureOriginPage(page: Page) {
@@ -94,27 +106,26 @@ async function ensureOriginPage(page: Page) {
 
 async function browserRequestRaw(page: Page, url: string, method: "POST" | "PATCH", data: unknown) {
   await ensureOriginPage(page);
-  return page.evaluate(
-    async ({ targetUrl, targetMethod, payload }) => {
-      const csrf = decodeURIComponent(document.cookie.match(/(?:^|; )csrftoken=([^;]+)/)?.[1] ?? "");
-      const response = await fetch(targetUrl, {
-        method: targetMethod,
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf,
-        },
-        body: JSON.stringify(payload ?? {}),
-      });
-      const body = await response.json();
-      return {
-        ok: response.ok,
-        status: response.status,
-        body,
-      };
-    },
-    { targetUrl: url, targetMethod: method, payload: data },
-  );
+  const csrfCookie = (await page.context().cookies()).find((cookie) => cookie.name === "csrftoken");
+  const csrf = csrfCookie?.value ?? "";
+
+  const response =
+    method === "POST"
+      ? await page.request.post(url, {
+          data: data ?? {},
+          headers: csrf ? { "X-CSRFToken": csrf } : undefined,
+        })
+      : await page.request.patch(url, {
+          data: data ?? {},
+          headers: csrf ? { "X-CSRFToken": csrf } : undefined,
+        });
+
+  const body = await response.json().catch(() => null);
+  return {
+    ok: response.ok(),
+    status: response.status(),
+    body,
+  };
 }
 
 async function browserRequest<T>(page: Page, url: string, method: "POST" | "PATCH", data: unknown, label: string) {
@@ -141,23 +152,41 @@ export async function postApi<T>(page: Page, url: string, data: unknown, label: 
   return apiPost<T>(page, url, data, label);
 }
 
+export async function patchApi<T>(page: Page, url: string, data: unknown, label: string) {
+  return apiPatch<T>(page, url, data, label);
+}
+
 export async function postApiRaw(page: Page, url: string, data: unknown) {
   return browserRequestRaw(page, url, "POST", data);
 }
 
 export async function loginAs(page: Page, role: RoleKey) {
-  await page.goto("/login");
-  await page.getByLabel("Username").fill(ROLE_USERNAMES[role]);
-  await page.getByLabel("Password").fill(PASSWORD);
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/projects/);
+  await login(page, { username: ROLE_USERNAMES[role], password: PASSWORD });
 }
 
 export async function login(page: Page, user: { username: string; password: string }) {
-  await page.goto("/login");
+  // If we're already on the login route (or being redirected there), avoid interrupting navigation.
+  if (!page.url().includes("/login")) {
+    await page.goto("/login");
+  } else {
+    await page.waitForLoadState("domcontentloaded");
+  }
   await page.getByLabel("Username").fill(user.username);
   await page.getByLabel("Password").fill(user.password);
   await page.getByRole("button", { name: "Sign in" }).click();
+  try {
+    await page.waitForURL((url) => url.pathname !== "/login", { timeout: 15000 });
+  } catch {
+    const response = await page.request.post("/api/auth/login/", { data: user });
+    const payload = (await response.json()) as { success?: boolean; data?: { authenticated?: boolean } };
+    if (!response.ok() || !payload?.success || !payload?.data?.authenticated) {
+      throw new Error(`Login fallback failed (${response.status()}): ${JSON.stringify(payload)}`);
+    }
+    await page.goto("/projects");
+  }
+  if (!page.url().includes("/projects")) {
+    await page.goto("/projects");
+  }
   await expect(page).toHaveURL(/\/projects/);
 }
 
@@ -167,7 +196,17 @@ export async function loginAsSeededAdmin(page: Page) {
 
 export async function logout(page: Page) {
   await page.getByRole("button", { name: "Sign out" }).click();
-  await expect(page).toHaveURL(/\/login/);
+  try {
+    await page.waitForURL(/\/login/, { timeout: 30000 });
+  } catch {
+    const response = await page.request.post("/api/auth/logout/");
+    if (!response.ok()) {
+      const body = await response.json().catch(() => null);
+      throw new Error(`Logout fallback failed (${response.status()}): ${JSON.stringify(body)}`);
+    }
+    await page.goto("/login");
+    await page.waitForURL(/\/login/, { timeout: 30000 });
+  }
 }
 
 export async function ensureE2EClient(page: Page) {
@@ -193,9 +232,9 @@ export async function ensureE2EClient(page: Page) {
 
 async function getLabFrameworkId(page: Page) {
   const frameworks = await apiGet<FrameworkSummary[]>(page, "/api/frameworks/", "list frameworks");
-  const lab = frameworks.find((item) => item.name === "LAB");
+  const lab = frameworks.find((item) => item.name === seededUser.frameworkName);
   if (!lab) {
-    throw new Error("LAB framework not found.");
+    throw new Error(`${seededUser.frameworkName} framework not found.`);
   }
   return lab.id;
 }

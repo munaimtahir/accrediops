@@ -1,0 +1,36 @@
+failed_specs: 35
+03_projects_navigation_and_overview.spec.ts	project list and overview surfaces are navigable with clear next-step guidance
+12_admin_surfaces.spec.ts	admin dashboard/users/masters/audit/import logs/overrides are reachable
+13_role_visibility_and_authorization.spec.ts	admin has admin discoverability and create CTA
+13_role_visibility_and_authorization.spec.ts	lead sees admin navigation and can access admin route
+15_smoke_clean_new_app_mode.spec.ts	app stays LAB-only and first-project flow remains smooth
+17_recurring_and_masters_capability_fix.spec.ts	Recurring queue row action visibility
+18_simplified_navigation_and_homepage.spec.ts	AI discoverability from worklist
+18_simplified_navigation_and_homepage.spec.ts	Simplified navigation for non-admin
+18_simplified_navigation_and_homepage.spec.ts	Simplified project dashboard
+19_accessibility.spec.ts	dashboard exposes skip link and keyboard-reachable main actions
+19_accessibility.spec.ts	disabled recurring actions are announced as disabled by role
+19_accessibility.spec.ts	recurring approve modal traps focus, closes with ESC, and submits with ENTER
+admin-import-validation.spec.ts	admin validate sample enforces required inputs and completes with CSV upload
+app-flows.spec.ts	5. post-login operational journey route opens from project home
+core-journeys.spec.ts	admin override reopens met indicator and audit evidence is visible
+core-journeys.spec.ts	admin route access is available after login
+core-journeys.spec.ts	clone project then open cloned workspace
+core-journeys.spec.ts	combined governance path: create, evidence, recurring, export
+core-journeys.spec.ts	create flow supports client profile linkage
+core-journeys.spec.ts	evidence review journey works end-to-end
+core-journeys.spec.ts	export lifecycle creates history row with persisted status
+core-journeys.spec.ts	non-admin user cannot reopen met indicator
+core-journeys.spec.ts	recurring approval from indicator context works
+cta-discoverability.spec.ts	owner sees disabled create CTA with role rationale
+cta-discoverability.spec.ts	print pack and export CTA entry points are visible from project home
+cta-visibility.spec.ts	project create and admin actions are visible
+next-action-consistency.spec.ts	target screens all show action, reason, and status guidance
+operator-first-time.spec.ts	first-time operator journey stays explicit across create, evidence, review, and approval
+role-based-access.spec.ts	admin can open admin dashboard
+role-visibility.spec.ts	lead sees admin navigation section
+role-visibility.spec.ts	owner sees disabled create project CTA with explanation
+role-visibility.spec.ts	owner sees disabled readiness/export CTAs and guarded routes
+workflow-completion.spec.ts	operator can traverse core workflow screens with explicit next action guidance
+workflow-guidance.spec.ts	project overview shows next-step guidance and grouped pathways
+workflow-guidance.spec.ts	worklist and recurring screens provide action guidance

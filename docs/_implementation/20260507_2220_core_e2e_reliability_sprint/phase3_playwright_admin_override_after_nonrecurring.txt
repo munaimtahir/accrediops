@@ -1,0 +1,48 @@
+
+Running 1 test using 1 worker
+
+(node:907371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:907371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (1.0m)
+
+
+  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/project-indicators/33513", waiting until "load"[22m
+
+
+      211 |     await logout(page);
+      212 |     await login(page, seededUsers.approver);
+    > 213 |     await page.goto(`/project-indicators/${indicatorId}`);
+          |                ^
+      214 |     await runIndicatorCommand(page, "Mark as Met");
+      215 |     await expect(page.getByText(/^Completed$/).first()).toBeVisible();
+      216 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:213:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 

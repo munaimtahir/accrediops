@@ -1,0 +1,195 @@
+# Playwright: sanity rerun previously failing specs (post-fix)
+
+Running 16 tests using 1 worker
+
+[1A[2K(node:1696288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1696288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/16] tests/e2e/core-journeys.spec.ts:69:7 › Core operational browser journeys › evidence review journey works end-to-end
+[1A[2K[2/16] tests/e2e/core-journeys.spec.ts:93:7 › Core operational browser journeys › recurring approval from indicator context works
+[1A[2K[3/16] tests/e2e/core-journeys.spec.ts:110:7 › Core operational browser journeys › create flow supports client profile linkage
+[1A[2K[4/16] tests/e2e/core-journeys.spec.ts:146:7 › Core operational browser journeys › clone project then open cloned workspace
+[1A[2K[5/16] tests/e2e/core-journeys.spec.ts:167:7 › Core operational browser journeys › admin route access is available after login
+[1A[2K[6/16] tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible
+[1A[2K  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('main').locator('section').locator('button[title]').first()[22m
+
+
+      194 |       await dismissCallout.click();
+      195 |     }
+    > 196 |     await completedTile.click({ force: true });
+          |                         ^
+      197 |     const openFull = page.getByRole("link", { name: "Open full detail" }).first();
+      198 |     const detailHref = await openFull.getAttribute("href");
+      199 |     expect(detailHref).toBeTruthy();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:196:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1699229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1699229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[7/16] tests/e2e/core-journeys.spec.ts:220:7 › Core operational browser journeys › non-admin user cannot reopen met indicator
+[1A[2K[8/16] tests/e2e/core-journeys.spec.ts:248:7 › Core operational browser journeys › export lifecycle creates history row with persisted status
+[1A[2K[9/16] tests/e2e/core-journeys.spec.ts:272:7 › Core operational browser journeys › non-admin user cannot access export history actions
+[1A[2K  2) tests/e2e/core-journeys.spec.ts:272:7 › Core operational browser journeys › non-admin user cannot access export history actions 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects\/\d+/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/projects"[22m
+
+
+      279 |     await expect(page.getByText("Export access restricted")).toBeVisible();
+      280 |     await expect(page.getByText("Only ADMIN or LEAD can access export generation and history.")).toBeVisible();
+    > 281 |   });
+          |      ^
+      282 |
+      283 |   test("combined governance path: create, evidence, recurring, export", async ({ page }) => {
+      284 |     const { projectId } = await createProjectAndOpenIndicator(page, { requireRecurring: true });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:281:24
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/traces/a8c2e1e956c46778ae9b-e62bad1fe0b0f895837d-recording2.network'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/df668f0ff28f9ef0397e276e9e596518.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-d3528-cess-export-history-actions/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-d3528-cess-export-history-actions/error-context.md
+
+
+[1A[2K(node:1701947) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1701947) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[10/16] tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export
+[1A[2K  3) tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1704128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1704128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[11/16] tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval
+[1A[2K[12/16] tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation
+[1A[2K[13/16] tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section
+[1A[2K[14/16] tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes
+[1A[2K[15/16] tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways
+[1A[2K[16/16] tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance
+[1A[2K  4) tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Recurring queue' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Recurring queue' })[22m
+
+
+      23 |     await expect(page.getByText("Action")).toBeVisible();
+      24 |     await page.goto(`/projects/${projectId}/recurring`);
+    > 25 |     await expect(page.getByRole("heading", { name: "Recurring queue" })).toBeVisible();
+         |                                                                          ^
+      26 |     await expect(page.getByText("Recurring execution tip")).toBeVisible();
+      27 |   });
+      28 | });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:25:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:272:7 › Core operational browser journeys › non-admin user cannot access export history actions 
+    tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+    tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+  12 passed (8.1m)

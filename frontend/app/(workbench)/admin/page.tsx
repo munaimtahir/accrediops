@@ -43,7 +43,7 @@ const adminSections = [
         title: "Governance",
         links: [
             { href: "/admin/audit", label: "Audit Log", icon: History },
-            { href: "admin/overrides", label: "Advanced Controls", icon: RotateCcw },
+            { href: "/admin/overrides", label: "Advanced Controls", icon: RotateCcw },
         ],
     },
     {
@@ -58,9 +58,9 @@ export default function SettingsPage() {
     return (
         <div className="space-y-6">
             <PageHeader
-                eyebrow="Settings"
-                title="Admin Settings"
-                description="Manage users, frameworks, and system settings."
+                eyebrow="Admin"
+                title="Admin dashboard"
+                description="Manage users, frameworks, master lists, and system settings."
             />
             <div className="space-y-8">
                 {adminSections.map((section) => (

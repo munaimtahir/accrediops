@@ -8,12 +8,11 @@ from apps.masters.choices import (
     DocumentTypeChoices,
     EvidenceFrequencyChoices,
     EvidenceReusePolicyChoices,
-    EvidenceCategoryChoices,
-    EvidenceFulfillmentStatusChoices,
     EvidenceTypeChoices,
     IndicatorCommentTypeChoices,
     PrimaryActionRequiredChoices,
     PriorityChoices,
+    ProjectEvidenceRequirementStatusChoices,
     ProjectIndicatorStatusChoices,
     RecurrenceFrequencyChoices,
     RecurrenceModeChoices,
@@ -134,6 +133,109 @@ class Indicator(models.Model):
         return self.code
 
 
+class EvidenceRequirement(models.Model):
+    indicator = models.ForeignKey(
+        "indicators.Indicator",
+        on_delete=models.CASCADE,
+        related_name="evidence_requirements",
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    evidence_category = models.CharField(
+        max_length=32,
+        choices=EvidenceTypeChoices.choices,
+        default=EvidenceTypeChoices.MANUAL_REVIEW,
+    )
+    artifact_type = models.CharField(max_length=100, blank=True)
+    mandatory = models.BooleanField(default=True)
+    ai_generatable = models.BooleanField(default=False)
+    physical_proof_required = models.BooleanField(default=False)
+    signature_required = models.BooleanField(default=False)
+    ongoing_record_required = models.BooleanField(default=False)
+    default_document_type = models.CharField(
+        max_length=20,
+        choices=DocumentTypeChoices.choices,
+        blank=True,
+        default="",
+    )
+    primary_action_required = models.CharField(
+        max_length=40,
+        choices=PrimaryActionRequiredChoices.choices,
+        blank=True,
+        default="",
+    )
+    display_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["indicator__sort_order", "display_order", "id"]
+
+    def __str__(self) -> str:
+        return f"{self.indicator.code} / {self.title}"
+
+
+# New model to store AI-suggested evidence requirements
+class EvidenceRequirementSuggestion(models.Model):
+    indicator = models.ForeignKey(
+        "indicators.Indicator",
+        on_delete=models.CASCADE,
+        related_name="ai_suggested_requirements",
+    )
+    suggested_by = models.ForeignKey(
+        "accounts.User", # Assuming suggestions are linked to the user running the classification
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="suggested_evidence_requirements",
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    evidence_category = models.CharField(
+        max_length=32,
+        choices=EvidenceTypeChoices.choices,
+        default=EvidenceTypeChoices.MANUAL_REVIEW,
+    )
+    artifact_type = models.CharField(max_length=100, blank=True)
+    mandatory = models.BooleanField(default=True)
+    ai_generatable = models.BooleanField(default=False)
+    physical_proof_required = models.BooleanField(default=False)
+    signature_required = models.BooleanField(default=False)
+    ongoing_record_required = models.BooleanField(default=False)
+    default_document_type = models.CharField(
+        max_length=20,
+        choices=DocumentTypeChoices.choices,
+        blank=True,
+        default="",
+    )
+    primary_action_required = models.CharField(
+        max_length=40,
+        choices=PrimaryActionRequiredChoices.choices,
+        blank=True,
+        default="",
+    )
+    review_status = models.CharField(
+        max_length=30,
+        choices=[
+            ("SUGGESTED", "Suggested"),
+            ("ACCEPTED", "Accepted"),
+            ("REJECTED", "Rejected"),
+        ],
+        default="SUGGESTED",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["indicator__sort_order", "title"]
+        verbose_name = "Evidence Requirement Suggestion"
+        verbose_name_plural = "Evidence Requirement Suggestions"
+
+    def __str__(self) -> str:
+        return f"{self.indicator.code} / {self.title} (Suggested)"
+
+
 class ProjectIndicator(models.Model):
     project = models.ForeignKey(
         "projects.AccreditationProject",
@@ -213,6 +315,107 @@ class ProjectIndicator(models.Model):
         return f"{self.project.name} / {self.indicator.code}"
 
 
+class ProjectEvidenceRequirement(models.Model):
+    project = models.ForeignKey(
+        "projects.AccreditationProject",
+        on_delete=models.CASCADE,
+        related_name="project_evidence_requirements",
+    )
+    project_indicator = models.ForeignKey(
+        "indicators.ProjectIndicator",
+        on_delete=models.CASCADE,
+        related_name="project_evidence_requirements",
+    )
+    framework_indicator = models.ForeignKey(
+        "indicators.Indicator",
+        on_delete=models.PROTECT,
+        related_name="project_evidence_requirements",
+    )
+    evidence_requirement = models.ForeignKey(
+        "indicators.EvidenceRequirement",
+        on_delete=models.PROTECT,
+        related_name="project_fulfillments",
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=ProjectEvidenceRequirementStatusChoices.choices,
+        default=ProjectEvidenceRequirementStatusChoices.MISSING,
+    )
+    assigned_to = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="assigned_project_evidence_requirements",
+    )
+    due_date = models.DateField(null=True, blank=True)
+    notes = models.TextField(blank=True)
+    gap_summary = models.TextField(blank=True)
+    review_notes = models.TextField(blank=True)
+    submitted_by = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="submitted_project_evidence_requirements",
+    )
+    submitted_at = models.DateTimeField(null=True, blank=True)
+    approved_by = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="approved_project_evidence_requirements",
+    )
+    approved_at = models.DateTimeField(null=True, blank=True)
+    rejected_by = models.ForeignKey(
+        "accounts.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="rejected_project_evidence_requirements",
+    )
+    rejected_at = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = [
+            "project__name",
+            "project_indicator__indicator__area__sort_order",
+            "project_indicator__indicator__standard__sort_order",
+            "project_indicator__indicator__sort_order",
+            "evidence_requirement__display_order",
+            "id",
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["project_indicator", "evidence_requirement"],
+                name="unique_project_indicator_evidence_requirement",
+            ),
+        ]
+
+    def clean(self):
+        if self.project_indicator_id and self.project_id and self.project_indicator.project_id != self.project_id:
+            raise ValidationError("Project evidence requirement must belong to the project indicator's project.")
+        if (
+            self.framework_indicator_id
+            and self.project_indicator_id
+            and self.project_indicator.indicator_id != self.framework_indicator_id
+        ):
+            raise ValidationError("Framework indicator must match project indicator's framework indicator.")
+        if (
+            self.evidence_requirement_id
+            and self.framework_indicator_id
+            and self.evidence_requirement.indicator_id != self.framework_indicator_id
+        ):
+            raise ValidationError("Evidence requirement must belong to the selected framework indicator.")
+
+    def __str__(self) -> str:
+        return f"{self.project_indicator_id} / {self.evidence_requirement_id}"
+
+
 class ProjectIndicatorComment(models.Model):
     project_indicator = models.ForeignKey(
         "indicators.ProjectIndicator",
@@ -259,109 +462,3 @@ class ProjectIndicatorStatusHistory(models.Model):
 
     def __str__(self) -> str:
         return f"{self.project_indicator_id}: {self.from_status} -> {self.to_status}"
-
-class EvidenceRequirement(models.Model):
-    framework_indicator = models.ForeignKey(
-        Indicator,
-        on_delete=models.CASCADE,
-        related_name="evidence_requirements",
-    )
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    evidence_category = models.CharField(
-        max_length=50,
-        choices=EvidenceCategoryChoices.choices,
-        default=EvidenceCategoryChoices.DOCUMENT_POLICY,
-    )
-    mandatory = models.BooleanField(default=True)
-    ai_generatable = models.BooleanField(default=False)
-    physical_proof_required = models.BooleanField(default=False)
-    signature_required = models.BooleanField(default=False)
-    ongoing_record_required = models.BooleanField(default=False)
-    default_document_type = models.CharField(
-        max_length=20,
-        choices=DocumentTypeChoices.choices,
-        default=DocumentTypeChoices.OTHER,
-    )
-    primary_action_required = models.CharField(
-        max_length=40,
-        choices=PrimaryActionRequiredChoices.choices,
-        blank=True,
-        default="",
-    )
-    display_order = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ["display_order", "id"]
-
-    def __str__(self) -> str:
-        return f"{self.framework_indicator.code} - {self.title}"
-
-class ProjectEvidenceRequirement(models.Model):
-    project = models.ForeignKey(
-        "projects.AccreditationProject",
-        on_delete=models.CASCADE,
-        related_name="evidence_requirements",
-    )
-    project_indicator = models.ForeignKey(
-        ProjectIndicator,
-        on_delete=models.CASCADE,
-        related_name="evidence_requirements",
-    )
-    framework_indicator = models.ForeignKey(
-        Indicator,
-        on_delete=models.PROTECT,
-    )
-    evidence_requirement = models.ForeignKey(
-        EvidenceRequirement,
-        on_delete=models.PROTECT,
-    )
-    status = models.CharField(
-        max_length=20,
-        choices=EvidenceFulfillmentStatusChoices.choices,
-        default=EvidenceFulfillmentStatusChoices.MISSING,
-    )
-    notes = models.TextField(blank=True)
-    gap_summary = models.TextField(blank=True)
-    owner = models.ForeignKey(
-        "accounts.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="owned_evidence_requirements",
-    )
-    due_date = models.DateField(null=True, blank=True)
-    approved_by = models.ForeignKey(
-        "accounts.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="approved_evidence_requirements",
-    )
-    approved_at = models.DateTimeField(null=True, blank=True)
-    rejected_by = models.ForeignKey(
-        "accounts.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="rejected_evidence_requirements",
-    )
-    rejected_at = models.DateTimeField(null=True, blank=True)
-    rejection_reason = models.TextField(blank=True)
-
-    class Meta:
-        unique_together = ("project_indicator", "evidence_requirement")
-
-    def clean(self):
-        if self.project_indicator.project_id != self.project_id:
-            raise ValidationError("Project indicator does not belong to the correct project.")
-        if self.evidence_requirement.framework_indicator_id != self.framework_indicator_id:
-            raise ValidationError("Evidence requirement does not belong to the correct framework indicator.")
-        if self.project_indicator.indicator_id != self.framework_indicator_id:
-            raise ValidationError("Project indicator and framework indicator mismatch.")
-
-    def __str__(self) -> str:
-        return f"{self.project_indicator.indicator.code} - {self.evidence_requirement.title}"

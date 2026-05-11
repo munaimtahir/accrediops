@@ -1,0 +1,53 @@
+
+Running 1 test using 1 worker
+
+(node:875137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:875137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:61:7 › Core operational browser journeys › evidence review journey works end-to-end (33.4s)
+
+
+  1) tests/e2e/core-journeys.spec.ts:61:7 › Core operational browser journeys › evidence review journey works end-to-end 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/project-indicators\/\d+/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects/272/worklist"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/projects/272/worklist"[22m
+
+
+      55 |   await expect(openFull).toBeVisible({ timeout: 20000 });
+      56 |   await openFull.click();
+    > 57 |   await expect(page).toHaveURL(/\/project-indicators\/\d+/);
+         |                      ^
+      58 | }
+      59 |
+      60 | test.describe("Core operational browser journeys", () => {
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:57:22)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:62:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/core-journeys.spec.ts:61:7 › Core operational browser journeys › evidence review journey works end-to-end 

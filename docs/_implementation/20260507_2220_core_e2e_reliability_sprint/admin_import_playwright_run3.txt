@@ -1,0 +1,116 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1480499) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1480499) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload
+[1A[2K(node:1481104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1481104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/2] (retries) tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload (retry #1)
+[1A[2K  1) tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Select a project before validation.')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Select a project before validation.')[22m
+
+
+      32 |     const validateButton = page.getByRole("button", { name: "Validate sample" });
+      33 |     await expect(validateButton).toBeDisabled();
+    > 34 |     await expect(page.getByText("Select a project before validation.")).toBeVisible();
+         |                                                                         ^
+      35 |
+      36 |     await page.getByLabel("Project").selectOption(String(projectId));
+      37 |     await expect(validateButton).toBeDisabled();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/admin-import-validation.spec.ts:34:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Select a project before validation.')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Select a project before validation.')[22m
+
+
+      32 |     const validateButton = page.getByRole("button", { name: "Validate sample" });
+      33 |     await expect(validateButton).toBeDisabled();
+    > 34 |     await expect(page.getByText("Select a project before validation.")).toBeVisible();
+         |                                                                         ^
+      35 |
+      36 |     await page.getByLabel("Project").selectOption(String(projectId));
+      37 |     await expect(validateButton).toBeDisabled();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/admin-import-validation.spec.ts:34:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/admin-import-validation-Ad-5dc35-d-completes-with-CSV-upload-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1482094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1482094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/2] tests/e2e/admin-import-validation.spec.ts:56:7 › Admin framework validation parity › authenticated navigation stays on proxy origin
+[1A[2K  1 failed
+    tests/e2e/admin-import-validation.spec.ts:27:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload 
+  1 passed (2.0m)

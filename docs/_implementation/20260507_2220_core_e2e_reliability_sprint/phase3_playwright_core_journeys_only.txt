@@ -1,0 +1,349 @@
+
+Running 10 tests using 1 worker
+
+(node:864630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:864630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 tests/e2e/core-journeys.spec.ts:68:7 › Core operational browser journeys › evidence review journey works end-to-end (9.0s)
+(node:864964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:864964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 tests/e2e/core-journeys.spec.ts:92:7 › Core operational browser journeys › recurring approval from indicator context works (11.1s)
+(node:865352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:865352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/e2e/core-journeys.spec.ts:109:7 › Core operational browser journeys › create flow supports client profile linkage (1.1m)
+(node:866851) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:866851) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 tests/e2e/core-journeys.spec.ts:143:7 › Core operational browser journeys › clone project then open cloned workspace (1.1m)
+(node:868871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:868871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 tests/e2e/core-journeys.spec.ts:164:7 › Core operational browser journeys › admin route access is available after login (13.1s)
+  ✘   6 tests/e2e/core-journeys.spec.ts:171:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (8.5s)
+(node:869432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:869432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 tests/e2e/core-journeys.spec.ts:209:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (8.2s)
+(node:869671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:869671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 tests/e2e/core-journeys.spec.ts:249:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (1.1m)
+(node:871242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:871242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 tests/e2e/core-journeys.spec.ts:272:7 › Core operational browser journeys › non-admin user cannot access export history actions (19.2s)
+  ✘  10 tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (8.0s)
+
+
+  1) tests/e2e/core-journeys.spec.ts:68:7 › Core operational browser journeys › evidence review journey works end-to-end 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |   // Prefer deterministic seeded project over creating a new one, to avoid initialization timing variance.
+      33 |   const projectsResponse = await page.request.get("/api/projects/?page_size=200");
+    > 34 |   expect(projectsResponse.ok()).toBeTruthy();
+         |                                 ^
+      35 |   const projectsPayload = await projectsResponse.json();
+      36 |   const projects = (projectsPayload?.data?.results ?? []) as Array<{ id: number; name: string }>;
+      37 |   const seededProject = projects.find((item) => item.name === "E2E Lab Project");
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:34:33)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:69:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ee73a-ew-journey-works-end-to-end/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:92:7 › Core operational browser journeys › recurring approval from indicator context works 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |   // Prefer deterministic seeded project over creating a new one, to avoid initialization timing variance.
+      33 |   const projectsResponse = await page.request.get("/api/projects/?page_size=200");
+    > 34 |   expect(projectsResponse.ok()).toBeTruthy();
+         |                                 ^
+      35 |   const projectsPayload = await projectsResponse.json();
+      36 |   const projects = (projectsPayload?.data?.results ?? []) as Array<{ id: number; name: string }>;
+      37 |   const seededProject = projects.find((item) => item.name === "E2E Lab Project");
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:34:33)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:93:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/core-journeys.spec.ts:109:7 › Core operational browser journeys › create flow supports client profile linkage 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Client profile' }).first()[22m
+
+
+      130 |
+      131 |     await expect(page).toHaveURL(/\/projects\/\d+/);
+    > 132 |     await page.getByRole("link", { name: "Client profile" }).first().click();
+          |                                                                      ^
+      133 |     await expect(page).toHaveURL(/\/projects\/\d+\/client-profile/);
+      134 |     const linkedHeading = page.getByRole("heading", { name: "Client profile and variable preview" });
+      135 |     const unlinkedHeading = page.getByRole("heading", { name: "Client profile is not linked" });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:132:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-0afef-orts-client-profile-linkage/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/core-journeys.spec.ts:143:7 › Core operational browser journeys › clone project then open cloned workspace 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Clone project' })[22m
+
+
+      150 |     const cloneClientName = `E2E Clone Client ${Date.now()}`;
+      151 |
+    > 152 |     await page.getByRole("button", { name: "Clone project" }).click();
+          |                                                               ^
+      153 |     const cloneModal = page.locator("div.fixed.inset-0").last();
+      154 |     await cloneModal.getByLabel("New project name").fill(cloneModalName);
+      155 |     await cloneModal.getByLabel("New client name").fill(cloneClientName);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:152:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-162c7--then-open-cloned-workspace/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-162c7--then-open-cloned-workspace/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-162c7--then-open-cloned-workspace/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-162c7--then-open-cloned-workspace/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-162c7--then-open-cloned-workspace/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/e2e/core-journeys.spec.ts:171:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |   // Prefer deterministic seeded project over creating a new one, to avoid initialization timing variance.
+      33 |   const projectsResponse = await page.request.get("/api/projects/?page_size=200");
+    > 34 |   expect(projectsResponse.ok()).toBeTruthy();
+         |                                 ^
+      35 |   const projectsPayload = await projectsResponse.json();
+      36 |   const projects = (projectsPayload?.data?.results ?? []) as Array<{ id: number; name: string }>;
+      37 |   const seededProject = projects.find((item) => item.name === "E2E Lab Project");
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:34:33)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:172:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/e2e/core-journeys.spec.ts:209:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |   // Prefer deterministic seeded project over creating a new one, to avoid initialization timing variance.
+      33 |   const projectsResponse = await page.request.get("/api/projects/?page_size=200");
+    > 34 |   expect(projectsResponse.ok()).toBeTruthy();
+         |                                 ^
+      35 |   const projectsPayload = await projectsResponse.json();
+      36 |   const projects = (projectsPayload?.data?.results ?? []) as Array<{ id: number; name: string }>;
+      37 |   const seededProject = projects.find((item) => item.name === "E2E Lab Project");
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:34:33)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:210:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/e2e/core-journeys.spec.ts:249:7 › Core operational browser journeys › export lifecycle creates history row with persisted status 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Generate print-bundle' })[22m
+    [2m    - locator resolved to <button disabled title="Resolve export blockers before generation." class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-10 px-4 py-2">Generate print-bundle</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    98 × waiting for element to be visible, enabled and stable[22m
+    [2m       - element is not enabled[22m
+    [2m     - retrying click action[22m
+    [2m       - waiting 500ms[22m
+
+
+      263 |     await expect(page.getByRole("heading", { name: "Export history" })).toBeVisible();
+      264 |
+    > 265 |     await page.getByRole("button", { name: "Generate print-bundle" }).click();
+          |                                                                       ^
+      266 |     const table = page.locator("table").first();
+      267 |     await expect(table).toContainText("print-bundle");
+      268 |     const statusCell = page.locator("tr").filter({ hasText: "print-bundle" }).first();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:265:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |   // Prefer deterministic seeded project over creating a new one, to avoid initialization timing variance.
+      33 |   const projectsResponse = await page.request.get("/api/projects/?page_size=200");
+    > 34 |   expect(projectsResponse.ok()).toBeTruthy();
+         |                                 ^
+      35 |   const projectsPayload = await projectsResponse.json();
+      36 |   const projects = (projectsPayload?.data?.results ?? []) as Array<{ id: number; name: string }>;
+      37 |   const seededProject = projects.find((item) => item.name === "E2E Lab Project");
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:34:33)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:292:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    tests/e2e/core-journeys.spec.ts:68:7 › Core operational browser journeys › evidence review journey works end-to-end 
+    tests/e2e/core-journeys.spec.ts:92:7 › Core operational browser journeys › recurring approval from indicator context works 
+    tests/e2e/core-journeys.spec.ts:109:7 › Core operational browser journeys › create flow supports client profile linkage 
+    tests/e2e/core-journeys.spec.ts:143:7 › Core operational browser journeys › clone project then open cloned workspace 
+    tests/e2e/core-journeys.spec.ts:171:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:209:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+    tests/e2e/core-journeys.spec.ts:249:7 › Core operational browser journeys › export lifecycle creates history row with persisted status 
+    tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+  2 passed (5.2m)

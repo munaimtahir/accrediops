@@ -40,7 +40,7 @@ class EvidenceRequirementTests(TestCase):
     def test_missing_mandatory_blocks_readiness(self):
         # Create mandatory evidence requirement
         er1 = EvidenceRequirement.objects.create(
-            framework_indicator=self.indicator,
+            indicator=self.indicator,
             title="Policy Document",
             mandatory=True,
         )

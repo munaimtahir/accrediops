@@ -1,0 +1,264 @@
+# Playwright: key specs (clean rerun)
+
+Running 14 tests using 1 worker
+
+[1A[2K(node:1601243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1601243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/14] tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections
+[1A[2K[2/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin
+[1A[2K[3/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:46:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin
+[1A[2K[4/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:69:7 › Simplified Navigation and Homepage › Simplified project dashboard
+[1A[2K[5/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist
+[1A[2K  1) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('h2:has-text(\'Section 7 — AI / Assist\')')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('h2:has-text(\'Section 7 — AI / Assist\')')[22m
+
+
+      114 |
+      115 |     // Expect the AI section header in the detail page
+    > 116 |     await expect(page.locator("h2:has-text('Section 7 — AI / Assist')")).toBeVisible();
+          |                                                                          ^
+      117 |     
+      118 |     await adminContext.close();
+      119 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:116:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1604202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1604202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[6/14] tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel
+[1A[2K[7/14] tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale
+[1A[2K[8/14] tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home
+[1A[2K[9/14] tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval
+Terminated
+===========================
+
+      25 |     // Admin/Lead can navigate to Users
+      26 |     await Promise.all([
+    > 27 |       page.waitForURL(/.*admin\/users/),
+         |            ^
+      28 |       page.getByRole("link", { name: "Users" }).click(),
+      29 |     ]);
+      30 |     
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:27:12
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1601236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1601236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:46:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin
+[1A[2K[4/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:69:7 › Simplified Navigation and Homepage › Simplified project dashboard
+[1A[2K[5/14] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:93:7 › Simplified Navigation and Homepage › AI discoverability from worklist
+[1A[2K[6/14] tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel
+[1A[2K[7/14] tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale
+[1A[2K[8/14] tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home
+[1A[2K  3) tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Generate Print Pack' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Generate Print Pack' })[22m
+
+
+      23 |     await expect(main.getByRole("link", { name: "Export history" }).first()).toBeVisible();
+      24 |     await main.getByRole("link", { name: "Print pack preview" }).click();
+    > 25 |     await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+         |                                                                             ^
+      26 |   });
+      27 | });
+      28 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:25:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1603335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1603335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[9/14] tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval
+[1A[2K  4) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+    [2m  - navigating to "http://127.0.0.1:18080/login", waiting until "load"[22m
+
+
+       at helpers.ts:169
+
+      167 |   // If we're already on the login route (or being redirected there), avoid interrupting navigation.
+      168 |   if (!page.url().includes("/login")) {
+    > 169 |     await page.goto("/login");
+          |                ^
+      170 |   } else {
+      171 |     await page.waitForLoadState("domcontentloaded");
+      172 |   }
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:169:16)
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:163:9)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:34:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1604847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1604847) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[10/14] tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation
+[1A[2K[11/14] tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section
+[1A[2K[12/14] tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes
+[1A[2K  5) tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Readiness', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Readiness', exact: true })[22m
+
+
+      21 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      22 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+    > 23 |     await expect(page.getByRole("button", { name: "Readiness", exact: true })).toBeDisabled();
+         |                                                                                ^
+      24 |     await expect(page.getByRole("button", { name: "Export history", exact: true })).toBeDisabled();
+      25 |
+      26 |     await page.goto(`/projects/${projectId}/readiness`);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:23:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1605794) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1605794) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[13/14] tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways
+[1A[2K[14/14] tests/e2e/workflow-guidance.spec.ts:17:7 › Workflow guidance › worklist and recurring screens provide action guidance
+Terminated

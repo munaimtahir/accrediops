@@ -9,6 +9,7 @@ from apps.api.views.admin import (
     FrameworkClassificationView,
     FrameworkClassifyIndicatorsView,
     FrameworkImportCreateView,
+    FrameworkDocumentationDraftGenerateView,
     AdminUserUpdateView,
     AdminUserPasswordResetView,
     AdminUsersView,
@@ -130,6 +131,11 @@ urlpatterns = [
     path("api/frameworks/<int:framework_id>/analysis/", FrameworkAnalysisView.as_view(), name="framework-analysis"),
     path("api/admin/frameworks/", FrameworkAdminListCreateView.as_view(), name="admin-frameworks"),
     path("api/admin/frameworks/import/", FrameworkImportCreateView.as_view(), name="admin-frameworks-import"),
+    path(
+        "api/admin/frameworks/<int:framework_id>/documentation/generate-draft/",
+        FrameworkDocumentationDraftGenerateView.as_view(),
+        name="admin-framework-documentation-generate-draft",
+    ),
     path(
         "api/admin/frameworks/<int:framework_id>/classification/",
         FrameworkClassificationView.as_view(),

@@ -1,76 +1,45 @@
 import { test, expect } from "@playwright/test";
-import path from "node:path";
 
-const AUTH_DIR = path.resolve(__dirname, ".auth");
+import { loginAs, logout } from "./helpers";
 
 test.describe("Recurring Queue and Admin Masters Capabilities", () => {
-  test("Recurring queue row action visibility", async ({ browser }) => {
-    // 1. Check as Admin
-    const adminContext = await browser.newContext({ storageState: path.join(AUTH_DIR, "pw_admin.json") });
-    const adminPage = await adminContext.newPage();
-    await adminPage.goto("/projects");
-    
-    // Find the E2E project and click the "Open project" button
-    const projectCard = adminPage.locator('.rounded-xl', { hasText: 'E2E Lab Project' });
-    await projectCard.getByRole('link', { name: 'Open project' }).click();
-    
-    // Wait for navigation and extract numeric ID properly
-    await adminPage.waitForURL(/\/projects\/\d+/);
-    const url = adminPage.url();
-    const match = url.match(/\/projects\/(\d+)/);
-    if (!match) throw new Error(`Could not extract project ID from URL: ${url}`);
+  test("Recurring queue row action visibility", async ({ page }) => {
+    test.setTimeout(180_000);
+    await loginAs(page, "admin");
+    await page.goto("/projects");
+
+    const seededProjectHeading = page.getByRole("heading", { name: "E2E Lab Project", exact: true });
+    const projectCard = page.locator("main").locator("div").filter({ has: seededProjectHeading }).first();
+    const openProjectHref = await projectCard.getByRole("link", { name: "Open project" }).first().getAttribute("href");
+    if (!openProjectHref) throw new Error("Open project href missing for E2E Lab Project.");
+    await page.goto(openProjectHref);
+
+    const match = page.url().match(/\/projects\/(\d+)/);
+    if (!match) throw new Error(`Could not extract project ID from URL: ${page.url()}`);
     const projectId = match[1];
-    
-    console.log(`Detected Project ID: ${projectId}`);
-    
-    await adminPage.goto(`/projects/${projectId}/recurring`);
-    
-    // Check for "Request failed" banner
-    await expect(adminPage.locator('text="Request failed"')).not.toBeVisible();
-    
-    // Row actions render with capability state from the backend.
-    const submitButton = adminPage.locator('button:has-text("Submit")').first();
-    await expect(submitButton).toBeVisible();
-    
-    const approveButton = adminPage.locator('button:has-text("Approve")').first();
-    await expect(approveButton).toBeVisible();
-    
-    await adminContext.close();
 
-    // 2. Check as Owner (Assigned)
-    const ownerContext = await browser.newContext({ storageState: path.join(AUTH_DIR, "pw_owner.json") });
-    const ownerPage = await ownerContext.newPage();
-    await ownerPage.goto(`/projects/${projectId}/recurring`);
-    
-    // The seed_e2e_state assigns indicators to PW users where applicable. Capability
-    // checks should never hide the row actions completely.
-    const submitButtonOwner = ownerPage.locator('button:has-text("Submit")').first();
-    await expect(submitButtonOwner).toBeVisible();
-    
-    // Owner cannot approve
-    const approveButtonOwner = ownerPage.locator('button:has-text("Approve")').first();
-    await expect(approveButtonOwner).toBeDisabled();
-    
-    await ownerContext.close();
+    await page.goto(`/projects/${projectId}/recurring`);
+    await expect(page.getByText("Request failed")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Submit" }).first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Approve" }).first()).toBeVisible();
 
-    // 3. Check as Reviewer
-    const reviewerContext = await browser.newContext({ storageState: path.join(AUTH_DIR, "pw_reviewer.json") });
-    const reviewerPage = await reviewerContext.newPage();
-    await reviewerPage.goto(`/projects/${projectId}/recurring`);
-    
-    // Reviewer can see both actions; submit remains disabled when not owner.
-    const submitButtonReviewer = reviewerPage.locator('button:has-text("Submit")').first();
-    await expect(submitButtonReviewer).toBeDisabled();
-    
-    const approveButtonReviewer = reviewerPage.locator('button:has-text("Approve")').first();
-    await expect(approveButtonReviewer).toBeVisible();
-    
-    await reviewerContext.close();
+    await logout(page);
+
+    await loginAs(page, "owner");
+    await page.goto(`/projects/${projectId}/recurring`);
+    await expect(page.getByRole("button", { name: "Submit" }).first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Approve" }).first()).toBeDisabled();
+
+    await logout(page);
+
+    await loginAs(page, "reviewer");
+    await page.goto(`/projects/${projectId}/recurring`);
+    await expect(page.getByRole("button", { name: "Submit" }).first()).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Approve" }).first()).toBeVisible();
   });
 
-  test("Admin masters edit", async ({ browser }) => {
-    const adminContext = await browser.newContext({ storageState: path.join(AUTH_DIR, "pw_admin.json") });
-    const page = await adminContext.newPage();
+  test("Admin masters edit", async ({ page }) => {
+    await loginAs(page, "admin");
     await page.goto("/admin/masters/statuses");
 
     // Click on the first edit button
@@ -94,7 +63,7 @@ test.describe("Recurring Queue and Admin Masters Capabilities", () => {
 
     // The table should contain the new label
     await expect(page.locator(`text=${currentLabel} edited`)).toBeVisible();
-    
-    await adminContext.close();
+
+    await logout(page);
   });
 });

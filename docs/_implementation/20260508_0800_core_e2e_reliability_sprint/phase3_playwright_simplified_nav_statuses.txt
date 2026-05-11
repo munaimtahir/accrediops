@@ -1,0 +1,71 @@
+# Playwright: simplified nav spec rerun (statuses heading)
+
+Running 4 tests using 1 worker
+
+[1A[2K(node:1617797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1617797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:9:9 › Simplified Navigation and Homepage › admin › Simplified navigation for admin
+[1A[2K[2/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:36:9 › Simplified Navigation and Homepage › admin › Simplified project dashboard
+[1A[2K  1) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:36:9 › Simplified Navigation and Homepage › admin › Simplified project dashboard 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Open Worklist' })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: 'Open Worklist' }) resolved to 3 elements:
+        1) <a href="/projects/462/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-300 bg-white text-slate-900 hover:bg-slate-50 h-10 px-4 py-2">Open Worklist</a> aka getByRole('banner').getByRole('link', { name: 'Open Worklist' })
+        2) <a href="/projects/462/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-10 px-4 py-2">Open Worklist</a> aka locator('#main-content').getByRole('link', { name: 'Open Worklist', exact: true })
+        3) <a href="/projects/462/worklist" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open worklist</a> aka getByRole('link', { name: 'Open worklist', exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Open Worklist' })[22m
+
+
+      40 |
+      41 |       await expect(page.locator("main").getByText("Project Dashboard")).toBeVisible();
+    > 42 |       await expect(page.getByRole("link", { name: "Open Worklist" })).toBeVisible();
+         |                                                                       ^
+      43 |
+      44 |       await Promise.all([page.waitForURL(/\/worklist/), page.getByRole("link", { name: "Open Worklist" }).click()]);
+      45 |       await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:42:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-55c8b-implified-project-dashboard/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-55c8b-implified-project-dashboard/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-55c8b-implified-project-dashboard/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-55c8b-implified-project-dashboard/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-55c8b-implified-project-dashboard/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1618334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1618334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:48:9 › Simplified Navigation and Homepage › admin › AI discoverability from worklist
+[1A[2K[4/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:74:9 › Simplified Navigation and Homepage › owner › Simplified navigation for non-admin
+[1A[2K  1 failed
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:36:9 › Simplified Navigation and Homepage › admin › Simplified project dashboard 
+  3 passed (1.1m)

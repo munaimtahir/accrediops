@@ -1,0 +1,95 @@
+
+Running 1 test using 1 worker
+
+[1A[2K(node:1489013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1489013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/1] tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth
+[1A[2K(node:1491677) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1491677) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/1] (retries) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth (retry #1)
+[1A[2K  1) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'E2E_SMOKE_FIRST_1778228436647' }).first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'E2E_SMOKE_FIRST_1778228436647' }).first()[22m
+
+
+      32 |     );
+      33 |     await page.goto(`/projects/${project.id}`, { waitUntil: "domcontentloaded" });
+    > 34 |     await expect(page.getByRole("heading", { name: project.name }).first()).toBeVisible({ timeout: 15000 });
+         |                                                                             ^
+      35 |     await page.goto(`/projects/${project.id}/worklist`, { waitUntil: "domcontentloaded" });
+      36 |     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
+      37 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:34:77
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/da6ec6deb327de81ac98-1469df5c9eb1048b9663.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/bb5a6b08e3ab3ac89bf3032a4c854028.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: page.evaluate: Execution context was destroyed, most likely because of a navigation
+
+       at helpers.ts:97
+
+       95 | async function browserRequestRaw(page: Page, url: string, method: "POST" | "PATCH", data: unknown) {
+       96 |   await ensureOriginPage(page);
+    >  97 |   return page.evaluate(
+          |               ^
+       98 |     async ({ targetUrl, targetMethod, payload }) => {
+       99 |       const csrf = decodeURIComponent(document.cookie.match(/(?:^|; )csrftoken=([^;]+)/)?.[1] ?? "");
+      100 |       const response = await fetch(targetUrl, {
+        at browserRequestRaw (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:97:15)
+        at browserRequest (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:121:18)
+        at createProjectFromLab (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:285:19)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:16:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 

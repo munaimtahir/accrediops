@@ -1,0 +1,1295 @@
+# Playwright: full run (baseline)
+
+Running 80 tests using 1 worker
+
+(node:1501161) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1501161) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/00_runtime_and_auth.spec.ts:6:7 › 00 runtime and auth › runtime stays on 18080 and health routes are reachable (16.1s)
+  ✘   2 tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash (29.0s)
+(node:1502643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1502643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash (retry #1) (27.6s)
+(node:1503286) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1503286) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/e2e/01_lab_framework_integrity.spec.ts:8:7 › 01 LAB framework integrity › LAB is visible in admin framework view and has exactly 119 indicators (29.5s)
+  ✓   5 tests/e2e/02_project_create_and_initialize.spec.ts:9:9 › 02 project create and initialize › admin › ADMIN can create and initialize a LAB project (9.0s)
+  ✓   6 tests/e2e/02_project_create_and_initialize.spec.ts:25:9 › 02 project create and initialize › lead › LEAD can create and initialize a LAB project (4.2s)
+  ✓   7 tests/e2e/02_project_create_and_initialize.spec.ts:41:9 › 02 project create and initialize › owner › OWNER cannot create project (3.6s)
+  ✓   8 tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance (45.6s)
+  ✘   9 tests/e2e/04_worklist_core.spec.ts:14:7 › 04 worklist core › worklist filters and show-all operate without 500 responses (14.6s)
+(node:1506274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1506274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 tests/e2e/04_worklist_core.spec.ts:14:7 › 04 worklist core › worklist filters and show-all operate without 500 responses (retry #1) (27.1s)
+  ✘  11 tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections (1.0m)
+(node:1509755) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1509755) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections (retry #1) (7.1s)
+(node:1510037) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1510037) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 tests/e2e/06_evidence_lifecycle.spec.ts:8:7 › 06 evidence lifecycle › add/review/version evidence and keep a single current marker (17.1s)
+  ✓  14 tests/e2e/07_review_and_approval_lifecycle.spec.ts:8:7 › 07 review and approval lifecycle › start -> review -> met flow works and invalid transition is blocked (10.2s)
+  ✓  15 tests/e2e/08_recurring_workflows.spec.ts:8:7 › 08 recurring workflows › submit and approve a recurring instance with state updates (15.4s)
+  ✓  16 tests/e2e/09_ai_advisory_non_mutation.spec.ts:8:7 › 09 ai advisory non-mutation › AI output can be generated and accepted without mutating workflow status (21.6s)
+  ✓  17 tests/e2e/10_readiness_inspection_exports.spec.ts:9:9 › 10 readiness, inspection, exports › admin › readiness and inspection screens open, unready export generation is blocked without history (58.8s)
+  ✓  18 tests/e2e/10_readiness_inspection_exports.spec.ts:40:9 › 10 readiness, inspection, exports › owner › owner sees clean restricted UX on readiness and exports (7.8s)
+  ✓  19 tests/e2e/11_clone_and_reuse.spec.ts:8:7 › 11 clone and reuse › clone project keeps source intact and copies initialized structure (13.4s)
+  ✓  20 tests/e2e/12_admin_surfaces.spec.ts:8:7 › 12 admin surfaces › admin dashboard/users/masters/audit/import logs/overrides are reachable (56.0s)
+  ✓  21 tests/e2e/13_role_visibility_and_authorization.spec.ts:9:9 › 13 role visibility and authorization › admin › admin has admin discoverability and create CTA (5.4s)
+  ✓  22 tests/e2e/13_role_visibility_and_authorization.spec.ts:19:9 › 13 role visibility and authorization › lead › lead sees admin navigation and can access admin route (6.4s)
+  ✓  23 tests/e2e/13_role_visibility_and_authorization.spec.ts:31:9 › 13 role visibility and authorization › owner › owner sees restricted route UX and no create capability (32.5s)
+  ✓  24 tests/e2e/13_role_visibility_and_authorization.spec.ts:55:9 › 13 role visibility and authorization › lead overrides › lead can review overrides page but cannot execute admin-only reopen control (3.4s)
+  ✓  25 tests/e2e/14_regression_500s_and_console_errors.spec.ts:13:7 › 14 regression 500s and console errors › high-risk routes do not emit pageerror/console.error/requestfailed/5xx (46.5s)
+  ✓  26 tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth (15.7s)
+  ✓  27 tests/e2e/16_action_visibility_fix.spec.ts:8:7 › 16 action visibility fix › primary worklist drawer exposes full detail and AI Action Center entry points (11.5s)
+Detected Project ID: 414
+  ✘  28 tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (15.3s)
+(node:1516851) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1516851) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Detected Project ID: 414
+  ✘  29 tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (retry #1) (13.5s)
+(node:1517237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1517237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  30 tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:71:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit (4.5s)
+  ✘  31 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (8.1s)
+(node:1517583) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1517583) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  32 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (retry #1) (7.9s)
+(node:1517850) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1517850) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  33 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:42:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin (6.5s)
+  ✘  34 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:65:7 › Simplified Navigation and Homepage › Simplified project dashboard (23.2s)
+(node:1519025) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1519025) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  35 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:65:7 › Simplified Navigation and Homepage › Simplified project dashboard (retry #1) (18.1s)
+(node:1519476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1519476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  36 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:87:7 › Simplified Navigation and Homepage › AI discoverability from worklist (12.2s)
+  ✓  37 tests/e2e/19_accessibility.spec.ts:17:7 › 19 accessibility and keyboard navigation › TAB through login form and ENTER submits (20.5s)
+  ✓  38 tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions (12.1s)
+  ✓  39 tests/e2e/19_accessibility.spec.ts:58:7 › 19 accessibility and keyboard navigation › recurring approve modal traps focus, closes with ESC, and submits with ENTER (10.4s)
+  ✓  40 tests/e2e/19_accessibility.spec.ts:121:7 › 19 accessibility and keyboard navigation › disabled recurring actions are announced as disabled by role (9.6s)
+  ✓  41 tests/e2e/19_accessibility.spec.ts:166:7 › 19 accessibility and keyboard navigation › admin master inputs have labels and edit modal returns focus (4.2s)
+  ✓  42 tests/e2e/19_accessibility.spec.ts:186:7 › 19 accessibility and keyboard navigation › classification route has accessible filter labels and row selection (19.8s)
+  ✓  43 tests/e2e/20_indicator_classification_workflow.spec.ts:7:7 › Indicator Classification Workflow › admin reviews, edits, approves, and filters saved classifications (4.9s)
+  ✓  44 tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:49:9 › 30 PHC LAB framework full workflow › admin-driven full lifecycle › PHC LAB lifecycle works end-to-end (core happy path) (1.7m)
+  ✓  45 tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:293:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › reviewer can review evidence but cannot add evidence (10.4s)
+  ✓  46 tests/e2e/30_phc_lab_framework_full_workflow.spec.ts:317:9 › 30 PHC LAB framework full workflow › reviewer/approver role enforcement › approver can mark met when readiness allows (11.5s)
+  ✓  47 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (15.1s)
+  ✓  48 tests/e2e/admin-import-validation.spec.ts:6:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload (13.5s)
+  ✓  49 tests/e2e/admin-import-validation.spec.ts:38:7 › Admin framework validation parity › authenticated navigation stays on proxy origin (10.6s)
+  ✓  50 tests/e2e/app-flows.spec.ts:5:7 › AccrediOps end-to-end flows › 1. protected routes redirect unauthenticated users to login (2.7s)
+  ✓  51 tests/e2e/app-flows.spec.ts:11:7 › AccrediOps end-to-end flows › 2. login page opens with expected form (2.8s)
+  ✓  52 tests/e2e/app-flows.spec.ts:18:7 › AccrediOps end-to-end flows › 3. admin user can login and reach projects page (5.4s)
+  ✓  53 tests/e2e/app-flows.spec.ts:24:7 › AccrediOps end-to-end flows › 3b. expired session redirects protected navigation to login (6.6s)
+  ✓  54 tests/e2e/app-flows.spec.ts:31:7 › AccrediOps end-to-end flows › 4. create project and initialize from framework flow works (11.0s)
+  ✓  55 tests/e2e/app-flows.spec.ts:51:7 › AccrediOps end-to-end flows › 5. post-login operational journey route opens from project home (8.7s)
+  ✓  56 tests/e2e/app-flows.spec.ts:60:7 › AccrediOps end-to-end flows › 6. health endpoints reachable via proxy (160ms)
+  ✓  57 tests/e2e/core-journeys.spec.ts:69:7 › Core operational browser journeys › evidence review journey works end-to-end (50.8s)
+  ✓  58 tests/e2e/core-journeys.spec.ts:93:7 › Core operational browser journeys › recurring approval from indicator context works (22.7s)
+  ✓  59 tests/e2e/core-journeys.spec.ts:110:7 › Core operational browser journeys › create flow supports client profile linkage (30.5s)
+  ✓  60 tests/e2e/core-journeys.spec.ts:146:7 › Core operational browser journeys › clone project then open cloned workspace (10.0s)
+  ✓  61 tests/e2e/core-journeys.spec.ts:167:7 › Core operational browser journeys › admin route access is available after login (16.7s)
+  ✘  62 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (1.2m)
+(node:1529229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1529229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  63 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (retry #1) (21.1s)
+(node:1529695) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1529695) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  64 tests/e2e/core-journeys.spec.ts:211:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (26.8s)
+  ✘  65 tests/e2e/core-journeys.spec.ts:237:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (19.1s)
+(node:1531221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1531221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  66 tests/e2e/core-journeys.spec.ts:237:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (retry #1) (24.6s)
+  ✓  67 tests/e2e/core-journeys.spec.ts:259:7 › Core operational browser journeys › non-admin user cannot access export history actions (20.4s)
+  ✓  68 tests/e2e/core-journeys.spec.ts:278:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (39.5s)
+  ✓  69 tests/e2e/cta-discoverability.spec.ts:5:7 › CTA discoverability › projects page create CTA is visible in header and sticky action panel (5.7s)
+  ✘  70 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (5.5s)
+(node:1533147) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1533147) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  71 tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale (retry #1) (5.7s)
+(node:1533371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1533371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  72 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (15.2s)
+(node:1533776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1533776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  73 tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home (retry #1) (20.2s)
+  ✓  74 tests/e2e/cta-visibility.spec.ts:9:9 › CTA visibility › admin › project create and admin actions are visible (4.2s)
+  ✓  75 tests/e2e/cta-visibility.spec.ts:20:9 › CTA visibility › owner › restricted CTAs remain visible with clear disabled state (4.7s)
+  ✓  76 tests/e2e/export-guard.spec.ts:8:7 › export guard › backend and UI both block unready exports (11.2s)
+  ✓  77 tests/e2e/negative-flows.spec.ts:8:7 › Negative flows › restricted and empty-state flows always provide operator guidance (26.5s)
+  ✓  78 tests/e2e/next-action-consistency.spec.ts:8:7 › next action consistency › target screens all show action, reason, and status guidance (57.6s)
+  ✘  79 tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval (14.1s)
+(node:1536563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1536563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  80 tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval (retry #1) (14.8s)
+(node:1536984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1536984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  81 tests/e2e/permission-enforcement.spec.ts:9:9 › permission enforcement › owner › restricted admin and export endpoints return 403 (4.1s)
+  ✓  82 tests/e2e/role-based-access.spec.ts:9:9 › Role based access › admin and lead › admin can open admin dashboard (3.8s)
+  ✓  83 tests/e2e/role-based-access.spec.ts:18:9 › Role based access › owner › owner sees restricted messaging for admin and readiness (7.7s)
+  ✘  84 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (8.6s)
+(node:1537586) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1537586) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  85 tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation (retry #1) (6.0s)
+(node:1537807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1537807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  86 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section (5.0s)
+(node:1537964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1537964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  87 tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section (retry #1) (5.5s)
+(node:1538244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1538244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  88 tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes (14.9s)
+  ✓  89 tests/e2e/ui-clarity.spec.ts:7:7 › UI clarity › projects page exposes prominent create CTA and guidance (7.9s)
+  ✓  90 tests/e2e/ui-clarity.spec.ts:16:7 › UI clarity › indicator follows ordered workflow sections (12.3s)
+  ✓  91 tests/e2e/workflow-completion.spec.ts:8:7 › Workflow completion surfaces › operator can traverse core workflow screens with explicit next action guidance (28.3s)
+  ✘  92 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (11.3s)
+(node:1539797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1539797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  93 tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (retry #1) (11.3s)
+(node:1540128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1540128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  94 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (1.1m)
+(node:1541428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1541428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  95 tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance (retry #1) (1.2m)
+
+
+  1) tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects/[39m
+    Received string:  [31m"http://127.0.0.1:18080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/login"[22m
+
+
+       at helpers.ts:170
+
+      168 | }
+      169 |
+    > 170 | export async function loginAs(page: Page, role: RoleKey) {
+          |                      ^
+      171 |   await page.goto("/login");
+      172 |   await page.getByLabel("Username").fill(ROLE_USERNAMES[role]);
+      173 |   await page.getByLabel("Password").fill(PASSWORD);
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:170:22)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/00_runtime_and_auth.spec.ts:21:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects/[39m
+    Received string:  [31m"http://127.0.0.1:18080/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/login"[22m
+
+
+       at helpers.ts:175
+
+      173 |   await page.getByLabel("Password").fill(PASSWORD);
+      174 |   await page.getByRole("button", { name: "Sign in" }).click();
+    > 175 |   await expect(page).toHaveURL(/\/projects/);
+          |                      ^
+      176 | }
+      177 |
+      178 | export async function login(page: Page, user: { username: string; password: string }) {
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:175:22)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/00_runtime_and_auth.spec.ts:21:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/00_runtime_and_auth-00-run-a4cc2--logout-without-shell-crash-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-3/traces/d74881877a86d3521bec-844b6b8745aee8f829c5-recording1.network'
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Governed indicator command surface')
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Governed indicator command surface')[22m
+    [2m    - waiting for" http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F47083" navigation to finish...[22m
+    [2m    - navigated to "http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F47083"[22m
+
+
+      11 |     await page.goto(`/project-indicators/${indicatorId}`);
+      12 |
+    > 13 |     await expect(page.getByText("Governed indicator command surface")).toBeVisible();
+         |                                                                        ^
+      14 |     await expect(page.getByText("Indicator sections")).toBeVisible();
+      15 |
+      16 |     await page.getByRole("button", { name: "Summary", exact: true }).click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/05_indicator_detail_and_actions.spec.ts:13:72
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-3/4dc1e14ee5455dd690df257ebe356b7b.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: initialize created project failed (403): {"code":"PERMISSION_DENIED","message":"Authentication credentials were not provided.","details":{"detail":"Authentication credentials were not provided."}}
+
+       at helpers.ts:141
+
+      139 |   const result = await browserRequestRaw(page, url, method, data);
+      140 |   if (!result.ok || !result.body?.success) {
+    > 141 |     throw new Error(`${label} failed (${result.status}): ${JSON.stringify(result.body?.error ?? result.body)}`);
+          |           ^
+      142 |   }
+      143 |   return result.body.data as T;
+      144 | }
+        at browserRequest (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:141:11)
+        at createProjectFromLab (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:317:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/05_indicator_detail_and_actions.spec.ts:9:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/05_indicator_detail_and_ac-f4714-curring-governance-sections-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Submit")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Submit")').first()[22m
+
+
+      31 |     // Row actions render with capability state from the backend.
+      32 |     const submitButton = adminPage.locator('button:has-text("Submit")').first();
+    > 33 |     await expect(submitButton).toBeVisible();
+         |                                ^
+      34 |     
+      35 |     const approveButton = adminPage.locator('button:has-text("Approve")').first();
+      36 |     await expect(approveButton).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:33:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Submit")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Submit")').first()[22m
+
+
+      31 |     // Row actions render with capability state from the backend.
+      32 |     const submitButton = adminPage.locator('button:has-text("Submit")').first();
+    > 33 |     await expect(submitButton).toBeVisible();
+         |                                ^
+      34 |     
+      35 |     const approveButton = adminPage.locator('button:has-text("Approve")').first();
+      36 |     await expect(approveButton).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:33:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  locator('nav').locator('text=Dashboard')
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "not toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('nav').locator('text=Dashboard')[22m
+    [2m    9 × locator resolved to <a href="/admin" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 text-slate-300 hover:bg-white/5 hover:text-white">…</a>[22m
+    [2m      - unexpected value "visible"[22m
+
+
+      11 |
+      12 |     // Admin/Lead sees simplified primary items
+    > 13 |     await expect(page.locator("nav >> text=Dashboard")).not.toBeVisible(); // Not in the main sidebar
+         |                                                             ^
+      14 |     await expect(page.locator("nav >> text=Worklist")).not.toBeVisible(); // Not in the main sidebar
+      15 |
+      16 |     // Admin/Lead can access Settings/Admin landing page
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:13:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  locator('nav').locator('text=Dashboard')
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "not toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('nav').locator('text=Dashboard')[22m
+    [2m    8 × locator resolved to <a href="/admin" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 text-slate-300 hover:bg-white/5 hover:text-white">…</a>[22m
+    [2m      - unexpected value "visible"[22m
+
+
+      11 |
+      12 |     // Admin/Lead sees simplified primary items
+    > 13 |     await expect(page.locator("nav >> text=Dashboard")).not.toBeVisible(); // Not in the main sidebar
+         |                                                             ^
+      14 |     await expect(page.locator("nav >> text=Worklist")).not.toBeVisible(); // Not in the main sidebar
+      15 |
+      16 |     // Admin/Lead can access Settings/Admin landing page
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:13:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-dc3ea-lified-navigation-for-admin-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:65:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*worklist/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects/414"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/projects/414"[22m
+
+
+      80 |     // Open Worklist works
+      81 |     await main.getByRole("link", { name: "Open Worklist", exact: true }).click();
+    > 82 |     await expect(page).toHaveURL(/.*worklist/);
+         |                        ^
+      83 |     
+      84 |     await adminContext.close();
+      85 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:82:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*worklist/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects/414"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/projects/414"[22m
+
+
+      80 |     // Open Worklist works
+      81 |     await main.getByRole("link", { name: "Open Worklist", exact: true }).click();
+    > 82 |     await expect(page).toHaveURL(/.*worklist/);
+         |                        ^
+      83 |     
+      84 |     await adminContext.close();
+      85 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:82:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Audit log viewer' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Audit log viewer' })[22m
+
+
+      204 |     await page.goto("/admin/audit");
+      205 |     await expect(page).toHaveURL(/\/admin\/audit/);
+    > 206 |     await expect(page.getByRole("heading", { name: "Audit log viewer" })).toBeVisible({ timeout: 15000 });
+          |                                                                           ^
+      207 |     await expect(page.getByRole("cell", { name: "project_indicator.status_changed" }).first()).toBeVisible();
+      208 |     await expect(page.getByRole("cell", { name: "Admin governance override from E2E" }).first()).toBeVisible();
+      209 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:206:75
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects\/\d+/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://127.0.0.1:18080/projects"[22m
+
+
+      178 |     const seededProjectCard = page.locator("main").locator("div").filter({ has: seededProjectHeading }).first();
+      179 |     await seededProjectCard.getByRole("link", { name: "Open project" }).first().click();
+    > 180 |     await expect(page).toHaveURL(/\/projects\/\d+/);
+          |                        ^
+      181 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+      182 |     expect(Number.isFinite(projectId)).toBeTruthy();
+      183 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:180:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Only ADMIN or LEAD can create or manage projects/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Only ADMIN or LEAD can create or manage projects/i) resolved to 2 elements:
+        1) <p class="mt-1">You can view and open projects. Only ADMIN or LEA…</p> aka getByText('You can view and open')
+        2) <p class="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">Only ADMIN or LEAD can create or manage projects.</p> aka getByText('Only ADMIN or LEAD can create or manage projects.', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Only ADMIN or LEAD can create or manage projects/i)[22m
+
+
+      13 |     await login(page, seededUsers.owner);
+      14 |     await expect(page.getByRole("button", { name: "Create project" }).first()).toBeDisabled();
+    > 15 |     await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+         |                                                                                       ^
+      16 |   });
+      17 |
+      18 |   test("print pack and export CTA entry points are visible from project home", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:15:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Only ADMIN or LEAD can create or manage projects/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Only ADMIN or LEAD can create or manage projects/i) resolved to 2 elements:
+        1) <p class="mt-1">You can view and open projects. Only ADMIN or LEA…</p> aka getByText('You can view and open')
+        2) <p class="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">Only ADMIN or LEAD can create or manage projects.</p> aka getByText('Only ADMIN or LEAD can create or manage projects.', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Only ADMIN or LEAD can create or manage projects/i)[22m
+
+
+      13 |     await login(page, seededUsers.owner);
+      14 |     await expect(page.getByRole("button", { name: "Create project" }).first()).toBeDisabled();
+    > 15 |     await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+         |                                                                                       ^
+      16 |   });
+      17 |
+      18 |   test("print pack and export CTA entry points are visible from project home", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:15:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-76dd7-ate-CTA-with-role-rationale-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Go to worklist' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Go to worklist' })[22m
+
+
+      29 |     await page.goto(`/projects/${project.id}`);
+      30 |     await expect(page.getByTestId("next-action-banner").getByText("Action", { exact: true })).toBeVisible();
+    > 31 |     await expect(page.getByRole("link", { name: "Go to worklist" })).toBeVisible();
+         |                                                                      ^
+      32 |
+      33 |     await page.context().clearCookies();
+      34 |     await loginAs(page, "owner");
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:31:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('link', { name: 'Go to worklist' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('link', { name: 'Go to worklist' })[22m
+
+
+      29 |     await page.goto(`/projects/${project.id}`);
+      30 |     await expect(page.getByTestId("next-action-banner").getByText("Action", { exact: true })).toBeVisible();
+    > 31 |     await expect(page.getByRole("link", { name: "Go to worklist" })).toBeVisible();
+         |                                                                      ^
+      32 |
+      33 |     await page.context().clearCookies();
+      34 |     await loginAs(page, "owner");
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:31:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Only ADMIN or LEAD can create or manage projects/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Only ADMIN or LEAD can create or manage projects/i) resolved to 2 elements:
+        1) <p class="mt-1">You can view and open projects. Only ADMIN or LEA…</p> aka getByText('You can view and open')
+        2) <p class="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">Only ADMIN or LEAD can create or manage projects.</p> aka getByText('Only ADMIN or LEAD can create or manage projects.', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Only ADMIN or LEAD can create or manage projects/i)[22m
+
+
+       7 |     const createButton = page.getByRole("button", { name: "Create project" }).first();
+       8 |     await expect(createButton).toBeDisabled();
+    >  9 |     await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+         |                                                                                       ^
+      10 |   });
+      11 |
+      12 |   test("lead sees admin navigation section", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:9:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Only ADMIN or LEAD can create or manage projects/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Only ADMIN or LEAD can create or manage projects/i) resolved to 2 elements:
+        1) <p class="mt-1">You can view and open projects. Only ADMIN or LEA…</p> aka getByText('You can view and open')
+        2) <p class="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">Only ADMIN or LEAD can create or manage projects.</p> aka getByText('Only ADMIN or LEAD can create or manage projects.', { exact: true })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Only ADMIN or LEAD can create or manage projects/i)[22m
+
+
+       7 |     const createButton = page.getByRole("button", { name: "Create project" }).first();
+       8 |     await expect(createButton).toBeDisabled();
+    >  9 |     await expect(page.getByText(/Only ADMIN or LEAD can create or manage projects/i)).toBeVisible();
+         |                                                                                       ^
+      10 |   });
+      11 |
+      12 |   test("lead sees admin navigation section", async ({ page }) => {
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:9:87
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-ef7ff-roject-CTA-with-explanation-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Admin')
+    Expected: visible
+    Error: strict mode violation: getByText('Admin') resolved to 2 elements:
+        1) <p class="px-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">Admin</p> aka getByText('Admin', { exact: true })
+        2) <a href="/admin" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Admin Dashboard' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Admin')[22m
+
+
+      12 |   test("lead sees admin navigation section", async ({ page }) => {
+      13 |     await login(page, seededUsers.lead);
+    > 14 |     await expect(page.getByText("Admin")).toBeVisible();
+         |                                           ^
+      15 |     await expect(page.getByRole("link", { name: "Admin Dashboard" })).toBeVisible();
+      16 |     await expect(page.getByText("Viewing as LEAD")).toBeVisible();
+      17 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:14:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Admin')
+    Expected: visible
+    Error: strict mode violation: getByText('Admin') resolved to 2 elements:
+        1) <p class="px-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">Admin</p> aka getByText('Admin', { exact: true })
+        2) <a href="/admin" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 text-slate-300 hover:bg-white/5 hover:text-white">…</a> aka getByRole('link', { name: 'Admin Dashboard' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Admin')[22m
+
+
+      12 |   test("lead sees admin navigation section", async ({ page }) => {
+      13 |     await login(page, seededUsers.lead);
+    > 14 |     await expect(page.getByText("Admin")).toBeVisible();
+         |                                           ^
+      15 |     await expect(page.getByRole("link", { name: "Admin Dashboard" })).toBeVisible();
+      16 |     await expect(page.getByText("Viewing as LEAD")).toBeVisible();
+      17 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:14:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-979b1-es-admin-navigation-section-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').getByText('Next Action')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('main').getByText('Next Action')[22m
+
+
+       7 |     await page.getByRole("link", { name: "Open project" }).first().click();
+       8 |     const main = page.locator("main");
+    >  9 |     await expect(main.getByText("Next Action")).toBeVisible();
+         |                                                 ^
+      10 |     await expect(main.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
+      11 |     await expect(main.getByRole("heading", { name: "Review readiness" })).toBeVisible();
+      12 |     await expect(main.getByRole("heading", { name: "Export and documentation" })).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:9:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').getByText('Next Action')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('main').getByText('Next Action')[22m
+
+
+       7 |     await page.getByRole("link", { name: "Open project" }).first().click();
+       8 |     const main = page.locator("main");
+    >  9 |     await expect(main.getByText("Next Action")).toBeVisible();
+         |                                                 ^
+      10 |     await expect(main.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
+      11 |     await expect(main.getByRole("heading", { name: "Review readiness" })).toBeVisible();
+      12 |     await expect(main.getByRole("heading", { name: "Export and documentation" })).toBeVisible();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:9:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-1b155-idance-and-grouped-pathways-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Go to worklist' })[22m
+
+
+      16 |     await loginAsSeededAdmin(page);
+      17 |     await page.getByRole("link", { name: "Open project" }).first().click();
+    > 18 |     await page.getByRole("link", { name: "Go to worklist" }).click();
+         |                                                              ^
+      19 |     await expect(page.getByText("How to use this screen")).toBeVisible();
+      20 |     await expect(page.getByText("Fast operator path")).toBeVisible();
+      21 |     await page.getByRole("link", { name: "Recurring Queue" }).first().click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:18:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Go to worklist' })[22m
+
+
+      16 |     await loginAsSeededAdmin(page);
+      17 |     await page.getByRole("link", { name: "Open project" }).first().click();
+    > 18 |     await page.getByRole("link", { name: "Go to worklist" }).click();
+         |                                                              ^
+      19 |     await expect(page.getByText("How to use this screen")).toBeVisible();
+      20 |     await expect(page.getByText("Fast operator path")).toBeVisible();
+      21 |     await page.getByRole("link", { name: "Recurring Queue" }).first().click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/workflow-guidance.spec.ts:18:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/workflow-guidance-Workflow-81270-ens-provide-action-guidance-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) tests/e2e/04_worklist_core.spec.ts:14:7 › 04 worklist core › worklist filters and show-all operate without 500 responses 
+
+    Error: create project from lab failed (500): {"code":"SERVER_ERROR","message":"An unexpected error occurred.","details":{}}
+
+       at helpers.ts:141
+
+      139 |   const result = await browserRequestRaw(page, url, method, data);
+      140 |   if (!result.ok || !result.body?.success) {
+    > 141 |     throw new Error(`${label} failed (${result.status}): ${JSON.stringify(result.body?.error ?? result.body)}`);
+          |           ^
+      142 |   }
+      143 |   return result.body.data as T;
+      144 | }
+        at browserRequest (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:141:11)
+        at createProjectFromLab (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:303:19)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/04_worklist_core.spec.ts:15:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/04_worklist_core-04-workli-5909c-erate-without-500-responses/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/04_worklist_core-04-workli-5909c-erate-without-500-responses/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/04_worklist_core-04-workli-5909c-erate-without-500-responses/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/04_worklist_core-04-workli-5909c-erate-without-500-responses/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/04_worklist_core-04-workli-5909c-erate-without-500-responses/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) tests/e2e/core-journeys.spec.ts:237:7 › Core operational browser journeys › export lifecycle creates history row with persisted status 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects\/\d+\/exports/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects/423"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/projects/423"[22m
+
+
+      248 |
+      249 |     await page.locator("main").getByRole("link", { name: "Export history" }).first().click();
+    > 250 |     await expect(page).toHaveURL(/\/projects\/\d+\/exports/);
+          |                        ^
+      251 |     await expect(page.getByRole("heading", { name: "Export history" })).toBeVisible();
+      252 |
+      253 |     // New projects are typically unready; ensure the UI blocks generation until blockers are resolved.
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:250:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-fdeb5-y-row-with-persisted-status/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Generate Print Pack' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Generate Print Pack' })[22m
+
+
+      23 |     await expect(main.getByRole("link", { name: "Export history" }).first()).toBeVisible();
+      24 |     await main.getByRole("link", { name: "Print pack preview" }).click();
+    > 25 |     await expect(page.getByRole("button", { name: "Generate Print Pack" })).toBeVisible();
+         |                                                                             ^
+      26 |   });
+      27 | });
+      28 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/cta-discoverability.spec.ts:25:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/cta-discoverability-CTA-di-7ba1d-e-visible-from-project-home/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12 failed
+    tests/e2e/00_runtime_and_auth.spec.ts:19:7 › 00 runtime and auth › admin/lead/owner can authenticate and logout without shell crash 
+    tests/e2e/05_indicator_detail_and_actions.spec.ts:8:7 › 05 indicator detail and actions › indicator detail renders readiness/summary/actions/evidence/recurring/governance sections 
+    tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin 
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:65:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/cta-discoverability.spec.ts:12:7 › CTA discoverability › owner sees disabled create CTA with role rationale 
+    tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+    tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation 
+    tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section 
+    tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways 
+    tests/e2e/workflow-guidance.spec.ts:15:7 › Workflow guidance › worklist and recurring screens provide action guidance 
+  3 flaky
+    tests/e2e/04_worklist_core.spec.ts:14:7 › 04 worklist core › worklist filters and show-all operate without 500 responses 
+    tests/e2e/core-journeys.spec.ts:237:7 › Core operational browser journeys › export lifecycle creates history row with persisted status 
+    tests/e2e/cta-discoverability.spec.ts:18:7 › CTA discoverability › print pack and export CTA entry points are visible from project home 
+  65 passed (32.5m)

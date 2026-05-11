@@ -1,0 +1,19 @@
+TimeoutError: page.waitForURL: Timeout 60000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+  navigated to "http://127.0.0.1:18080/login?next=%2Fprojects"
+============================================================
+
+   at global-setup.cjs:135
+
+  133 |     await browser.close();
+  134 |   }
+> 135 | }
+      |  ^
+  136 |
+  137 | module.exports = async () => {
+  138 |   const baseUrl = process.env.PLAYWRIGHT_BASE_URL || DEFAULT_BASE_URL;
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:135:18)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:156:3)
+
+[1A[2K

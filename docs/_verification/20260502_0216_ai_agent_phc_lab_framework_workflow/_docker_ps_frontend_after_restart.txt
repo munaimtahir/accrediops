@@ -1,0 +1,2 @@
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED          STATUS                            PORTS
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   16 minutes ago   Up 8 seconds (health: starting)   3000/tcp

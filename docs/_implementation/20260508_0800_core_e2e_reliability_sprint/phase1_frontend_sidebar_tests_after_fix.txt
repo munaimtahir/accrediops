@@ -1,0 +1,10 @@
+# Frontend: vitest sidebar (post-fix)
+
+ RUN  v4.1.4 /home/munaim/srv/apps/accrediops/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  08:23:55
+   Duration  1.88s (transform 187ms, setup 125ms, import 522ms, tests 217ms, environment 694ms)
+

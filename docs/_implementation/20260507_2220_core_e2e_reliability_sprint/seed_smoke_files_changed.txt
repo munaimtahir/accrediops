@@ -1,0 +1,10 @@
+frontend/components/screens/project-worklist-screen.tsx
+frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts
+frontend/tests/e2e/global-setup.cjs
+frontend/tests/e2e/helpers.ts
+---
+ .../components/screens/project-worklist-screen.tsx |  11 ++-
+ .../tests/e2e/15_smoke_clean_new_app_mode.spec.ts  |  11 ++-
+ frontend/tests/e2e/global-setup.cjs                | 107 ++++++++++++++++-----
+ frontend/tests/e2e/helpers.ts                      |  52 ++++++++--
+ 4 files changed, 142 insertions(+), 39 deletions(-)

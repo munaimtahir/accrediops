@@ -1,0 +1,4 @@
+Migrations for 'ai_actions':
+  apps/ai_actions/migrations/0004_documentdraft_draft_kind_and_more.py
+    - Add field draft_kind to documentdraft
+    - Add field related_indicators to documentdraft

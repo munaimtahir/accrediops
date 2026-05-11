@@ -1,17 +1,19 @@
 from .indicator import (
+    EvidenceRequirement,
+    EvidenceRequirementSuggestion,
     Indicator,
+    ProjectEvidenceRequirement,
     ProjectIndicator,
     ProjectIndicatorComment,
     ProjectIndicatorStatusHistory,
-    EvidenceRequirement,
-    ProjectEvidenceRequirement,
 )
 
 __all__ = [
+    "EvidenceRequirement",
+    "EvidenceRequirementSuggestion",
     "Indicator",
+    "ProjectEvidenceRequirement",
     "ProjectIndicator",
     "ProjectIndicatorComment",
     "ProjectIndicatorStatusHistory",
-    "EvidenceRequirement",
-    "ProjectEvidenceRequirement",
 ]

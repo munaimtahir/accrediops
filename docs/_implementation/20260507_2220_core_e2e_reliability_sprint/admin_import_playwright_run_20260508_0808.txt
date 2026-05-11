@@ -1,0 +1,19 @@
+TimeoutError: page.waitForURL: Timeout 60000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+  navigated to "http://127.0.0.1:18080/login?next=%2Fprojects"
+============================================================
+
+   at global-setup.cjs:120
+
+  118 |         await page.goto("/projects", { waitUntil: "domcontentloaded", timeout: 60000 });
+  119 |       }
+> 120 |       await page.waitForURL(/\/projects/, { timeout: 60000, waitUntil: "domcontentloaded" });
+      |                  ^
+  121 |       const storageState = await context.storageState();
+  122 |       const normalized = {
+  123 |         ...storageState,
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:120:18)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:140:3)
+
+[1A[2K

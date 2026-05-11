@@ -1,11 +1,31 @@
-from django.db import transaction
+from django.core.exceptions import ValidationError
+from django.db import models, transaction
 from django.utils import timezone
 
 from apps.audit.services import log_audit_event, snapshot_instance
-from apps.indicators.models import Indicator, ProjectIndicator
-from apps.masters.choices import ProjectStatusChoices
+from apps.indicators.models import ProjectEvidenceRequirement
+from apps.indicators.models import Indicator
+from apps.indicators.models import ProjectIndicator
+from apps.masters.choices import (
+    AIAssistanceLevelChoices,
+    ClassificationConfidenceChoices,
+    ClassificationReviewStatusChoices,
+    DocumentTypeChoices,
+    EvidenceFrequencyChoices,
+    EvidenceReusePolicyChoices,
+    EvidenceTypeChoices,
+    IndicatorCommentTypeChoices,
+    PrimaryActionRequiredChoices,
+    PriorityChoices,
+    ProjectEvidenceRequirementStatusChoices,
+    ProjectIndicatorStatusChoices,
+    ProjectStatusChoices,
+    RecurrenceFrequencyChoices,
+    RecurrenceModeChoices,
+)
 from apps.projects.models import AccreditationProject
-from apps.recurring.models import RecurringRequirement
+from apps.recurring.models import RecurringEvidenceInstance, RecurringRequirement
+from apps.recurring.services import ensure_recurring_requirement_for_project_indicator, generate_recurring_instances
 from apps.workflow.permissions import ensure_admin_or_lead_access
 
 
@@ -84,21 +104,18 @@ def initialize_project_from_framework(
     actor,
     create_initial_instances: bool = True,
 ) -> dict:
-    from apps.recurring.services import ensure_recurring_requirement_for_project_indicator, generate_recurring_instances
-    from apps.indicators.models import ProjectEvidenceRequirement, EvidenceRequirement
-
     ensure_admin_or_lead_access(actor)
     indicators = Indicator.objects.filter(
         framework=project.framework,
         is_active=True,
     ).select_related("area", "standard")
-    created_count = 0
+    created_project_indicator_count = 0
+    created_project_evidence_requirement_count = 0
     recurring_count = 0
-    requirements_count = 0
     until_date = min(project.target_date, timezone.localdate())
 
     for indicator in indicators:
-        project_indicator, created = ProjectIndicator.objects.get_or_create(
+        project_indicator, created_pi = ProjectIndicator.objects.get_or_create(
             project=project,
             indicator=indicator,
             defaults={
@@ -107,18 +124,30 @@ def initialize_project_from_framework(
                 "last_updated_by": actor,
             },
         )
-        if created:
-            created_count += 1
-            # Generate project level fulfillment
-            evidence_requirements = indicator.evidence_requirements.filter(is_active=True)
-            for er in evidence_requirements:
-                ProjectEvidenceRequirement.objects.get_or_create(
-                    project=project,
-                    project_indicator=project_indicator,
-                    framework_indicator=indicator,
-                    evidence_requirement=er,
-                )
-                requirements_count += 1
+        if created_pi:
+            created_project_indicator_count += 1
+
+        # Fetch all active evidence requirements for this indicator
+        evidence_requirements = indicator.evidence_requirements.filter(is_active=True)
+        for evidence_req in evidence_requirements:
+            # Create a ProjectEvidenceRequirement for each EvidenceRequirement linked to the Indicator
+            # Use get_or_create to handle cases where the function might be called multiple times
+            # or for existing indicators/requirements.
+            per, created_per = ProjectEvidenceRequirement.objects.get_or_create(
+                project=project,
+                project_indicator=project_indicator,
+                framework_indicator=indicator, # The indicator itself acts as framework_indicator here
+                evidence_requirement=evidence_req,
+                defaults={
+                    "status": ProjectEvidenceRequirementStatusChoices.MISSING, # Default status for new fulfillment
+                    "assigned_to": None, # Default to None
+                    "due_date": project.target_date, # Inherit from project target date
+                    "created_by": actor, # Track who initialized it
+                    "last_updated_by": actor,
+                }
+            )
+            if created_per:
+                created_project_evidence_requirement_count += 1
 
         if indicator.is_recurring:
             recurring_requirement = ensure_recurring_requirement_for_project_indicator(
@@ -143,15 +172,15 @@ def initialize_project_from_framework(
         obj=project,
         before=None,
         after={
-            "created_project_indicators": created_count,
+            "created_project_indicators": created_project_indicator_count,
+            "created_project_evidence_requirements": created_project_evidence_requirement_count,
             "recurring_requirements_processed": recurring_count,
-            "created_evidence_requirements": requirements_count,
         },
     )
     return {
-        "created_project_indicators": created_count,
+        "created_project_indicators": created_project_indicator_count,
+        "created_project_evidence_requirements": created_project_evidence_requirement_count,
         "recurring_requirements_processed": recurring_count,
-        "created_evidence_requirements": requirements_count,
     }
 
 
@@ -210,6 +239,9 @@ def clone_project(
         )
 
     created_project_indicators = ProjectIndicator.objects.bulk_create(project_indicators_to_create)
+
+    # Logic for cloning ProjectEvidenceRequirements would go here if needed for clone function
+    # For now, focus is on initialization from framework.
 
     recurring_requirements_to_create = []
     for project_indicator in created_project_indicators:

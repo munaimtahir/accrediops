@@ -1,0 +1,120 @@
+accrediops-frontend  | 113:40  Warning: 'instanceId' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/project-worklist-screen.tsx
+accrediops-frontend  | 148:9  Warning: The 'rows' logical expression could make the dependencies of useMemo Hook (at line 181) change on every render. To fix this, wrap the initialization of 'rows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/project-workspace-board.tsx
+accrediops-frontend  | 11:10  Warning: 'Card' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 14:24  Warning: 'DashboardRow' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 31:9  Warning: The 'areaRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'areaRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 32:9  Warning: The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 32:9  Warning: The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 54) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 
+accrediops-frontend  | info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+accrediops-frontend  |    Collecting page data ...
+accrediops-frontend  |    Generating static pages (0/22) ...
+accrediops-frontend  |    Generating static pages (5/22) 
+accrediops-frontend  |    Generating static pages (10/22) 
+accrediops-frontend  |    Generating static pages (16/22) 
+accrediops-frontend  |  ✓ Generating static pages (22/22)
+accrediops-frontend  |    Finalizing page optimization ...
+accrediops-frontend  |    Collecting build traces ...
+accrediops-frontend  | 
+accrediops-frontend  | Route (app)                                      Size  First Load JS
+accrediops-frontend  | ┌ ○ /                                           132 B         102 kB
+accrediops-frontend  | ├ ○ /_not-found                                 996 B         103 kB
+accrediops-frontend  | ├ ○ /admin                                    2.63 kB         108 kB
+accrediops-frontend  | ├ ○ /admin/ai/usage                           6.43 kB         130 kB
+accrediops-frontend  | ├ ○ /admin/audit                              1.93 kB         128 kB
+accrediops-frontend  | ├ ○ /admin/client-profiles                    1.94 kB         130 kB
+accrediops-frontend  | ├ ƒ /admin/document-drafts/[id]               14.2 kB         140 kB
+accrediops-frontend  | ├ ○ /admin/frameworks                         3.47 kB         130 kB
+accrediops-frontend  | ├ ƒ /admin/frameworks/classification          4.31 kB         131 kB
+accrediops-frontend  | ├ ○ /admin/import-logs                        3.08 kB         129 kB
+accrediops-frontend  | ├ ○ /admin/masters/document-types             2.99 kB         126 kB
+accrediops-frontend  | ├ ○ /admin/masters/evidence-types             2.99 kB         126 kB
+accrediops-frontend  | ├ ○ /admin/masters/priorities                 2.99 kB         126 kB
+accrediops-frontend  | ├ ○ /admin/masters/statuses                   2.99 kB         126 kB
+accrediops-frontend  | ├ ○ /admin/overrides                          5.65 kB         132 kB
+accrediops-frontend  | ├ ○ /admin/queues/document-generation         5.35 kB         131 kB
+accrediops-frontend  | ├ ○ /admin/system-health                      3.05 kB         120 kB
+accrediops-frontend  | ├ ○ /admin/users                              3.86 kB         130 kB
+accrediops-frontend  | ├ ƒ /frameworks/[id]/analysis                 3.43 kB         120 kB
+accrediops-frontend  | ├ ƒ /healthz                                    132 B         102 kB
+accrediops-frontend  | ├ ○ /login                                    3.63 kB         123 kB
+accrediops-frontend  | ├ ƒ /project-indicators/[id]                  11.1 kB         143 kB
+accrediops-frontend  | ├ ○ /projects                                 5.23 kB         134 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]                     3.68 kB         140 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/areas-progress       4.1 kB         121 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/client-profile      4.18 kB         132 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/exports             3.57 kB         130 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/inspection          1.95 kB         129 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/pending-actions     9.04 kB         129 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/print-pack          2.97 kB         130 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/readiness           2.23 kB         129 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/recurring           3.87 kB         132 kB
+accrediops-frontend  | ├ ƒ /projects/[projectId]/standards-progress  4.14 kB         121 kB
+accrediops-frontend  | └ ƒ /projects/[projectId]/worklist            4.99 kB         142 kB
+accrediops-frontend  | + First Load JS shared by all                  102 kB
+accrediops-frontend  |   ├ chunks/1255-5fe68596fe147850.js             46 kB
+accrediops-frontend  |   ├ chunks/4bd1b696-f785427dddbba9fb.js       54.2 kB
+accrediops-frontend  |   └ other shared chunks (total)               1.93 kB
+accrediops-frontend  | 
+accrediops-frontend  | 
+accrediops-frontend  | ƒ Middleware                                  34.5 kB
+accrediops-frontend  | 
+accrediops-frontend  | ○  (Static)   prerendered as static content
+accrediops-frontend  | ƒ  (Dynamic)  server-rendered on demand
+accrediops-frontend  | 
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 start
+accrediops-frontend  | > next start --hostname 0.0.0.0 --port 3000
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.15
+accrediops-frontend  |    - Local:        http://localhost:3000
+accrediops-frontend  |    - Network:      http://0.0.0.0:3000
+accrediops-frontend  | 
+accrediops-frontend  |  ✓ Starting...
+accrediops-frontend  |  ✓ Ready in 3.2s
+accrediops-frontend  | 
+accrediops-frontend  | up to date, audited 505 packages in 18s
+accrediops-frontend  | 
+accrediops-frontend  | 178 packages are looking for funding
+accrediops-frontend  |   run `npm fund` for details
+accrediops-frontend  | 
+accrediops-frontend  | 2 moderate severity vulnerabilities
+accrediops-frontend  | 
+accrediops-frontend  | To address all issues (including breaking changes), run:
+accrediops-frontend  |   npm audit fix --force
+accrediops-frontend  | 
+accrediops-frontend  | Run `npm audit` for details.
+accrediops-frontend  | 
+accrediops-frontend  | > accrediops-frontend@0.1.0 build
+accrediops-frontend  | > next build
+accrediops-frontend  | 
+accrediops-frontend  |    ▲ Next.js 15.5.15
+accrediops-frontend  | 
+accrediops-frontend  |    Creating an optimized production build ...
+accrediops-frontend  |  ✓ Compiled successfully in 85s
+accrediops-frontend  |    Linting and checking validity of types ...
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/admin-frameworks-screen.tsx
+accrediops-frontend  | 84:9  Warning: 'projectsQuery' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/indicator-drawer.tsx
+accrediops-frontend  | 38:22  Warning: 'formatDateTime' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 113:40  Warning: 'instanceId' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/project-worklist-screen.tsx
+accrediops-frontend  | 148:9  Warning: The 'rows' logical expression could make the dependencies of useMemo Hook (at line 181) change on every render. To fix this, wrap the initialization of 'rows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 
+accrediops-frontend  | ./components/screens/project-workspace-board.tsx
+accrediops-frontend  | 11:10  Warning: 'Card' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 14:24  Warning: 'DashboardRow' is defined but never used.  @typescript-eslint/no-unused-vars
+accrediops-frontend  | 31:9  Warning: The 'areaRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'areaRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 32:9  Warning: The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 44) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 32:9  Warning: The 'standardRows' conditional could make the dependencies of useMemo Hook (at line 54) change on every render. To fix this, wrap the initialization of 'standardRows' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+accrediops-frontend  | 
+accrediops-frontend  | info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+accrediops-frontend  |    Collecting page data ...
+accrediops-frontend  |    Generating static pages (0/22) ...

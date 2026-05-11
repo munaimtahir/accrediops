@@ -7,6 +7,8 @@ from apps.audit.models import AuditEvent
 from apps.audit.services import log_audit_event, snapshot_instance
 from apps.exports.services import classify_indicator_risk
 from apps.indicators.models import (
+    EvidenceRequirement,
+    ProjectEvidenceRequirement,
     ProjectIndicator,
     ProjectIndicatorComment,
     ProjectIndicatorStatusHistory,
@@ -14,6 +16,7 @@ from apps.indicators.models import (
 from apps.masters.choices import (
     IndicatorCommentTypeChoices,
     PriorityChoices,
+    ProjectEvidenceRequirementStatusChoices,
     ProjectIndicatorStatusChoices,
     RoleChoices,
 )
@@ -206,7 +209,7 @@ def validate_project_indicator_readiness(project_indicator: ProjectIndicator) ->
     rejected_current = current_evidence.filter(approval_status="REJECTED")
 
     # Compute from ProjectEvidenceRequirement
-    requirements = project_indicator.evidence_requirements.all()
+    requirements = project_indicator.project_evidence_requirements.all()
     total_reqs = requirements.count()
     mandatory_reqs = requirements.filter(evidence_requirement__mandatory=True)
 
@@ -384,3 +387,156 @@ def recent_audit_summary(project_indicator: ProjectIndicator, limit: int = 8):
         | Q(object_type="EvidenceItem", object_id__in=[str(value) for value in evidence_ids])
         | Q(object_type="GeneratedOutput", object_id__in=[str(value) for value in project_indicator.generated_outputs.values_list("id", flat=True)])
     ).select_related("actor")[:limit]
+
+
+@transaction.atomic
+def create_or_update_evidence_requirement(
+    *,
+    actor,
+    indicator,
+    evidence_requirement: EvidenceRequirement | None = None,
+    **validated_data,
+) -> EvidenceRequirement:
+    ensure_admin_or_lead_access(actor)
+    if evidence_requirement is None:
+        evidence_requirement = EvidenceRequirement(indicator=indicator)
+        before = None
+        event_type = "evidence_requirement.created"
+    else:
+        before = snapshot_instance(evidence_requirement)
+        event_type = "evidence_requirement.updated"
+
+    for field, value in validated_data.items():
+        setattr(evidence_requirement, field, value)
+    evidence_requirement.indicator = indicator
+    evidence_requirement.full_clean()
+    evidence_requirement.save()
+    log_audit_event(
+        actor=actor,
+        event_type=event_type,
+        obj=evidence_requirement,
+        before=before,
+        after=snapshot_instance(evidence_requirement),
+    )
+    return evidence_requirement
+
+
+@transaction.atomic
+def initialize_project_evidence_requirements_for_indicator(*, project_indicator: ProjectIndicator) -> int:
+    created_count = 0
+    for requirement in project_indicator.indicator.evidence_requirements.filter(is_active=True):
+        _, created = ProjectEvidenceRequirement.objects.get_or_create(
+            project=project_indicator.project,
+            project_indicator=project_indicator,
+            framework_indicator=project_indicator.indicator,
+            evidence_requirement=requirement,
+            defaults={
+                "status": ProjectEvidenceRequirementStatusChoices.MISSING,
+                "due_date": project_indicator.due_date,
+            },
+        )
+        if created:
+            created_count += 1
+    return created_count
+
+
+@transaction.atomic
+def update_project_evidence_requirement(
+    *,
+    actor,
+    project_evidence_requirement: ProjectEvidenceRequirement,
+    **validated_data,
+) -> ProjectEvidenceRequirement:
+    ensure_project_owner_access(actor, project_evidence_requirement.project_indicator)
+    before = snapshot_instance(project_evidence_requirement)
+    for field, value in validated_data.items():
+        setattr(project_evidence_requirement, field, value)
+    project_evidence_requirement.full_clean()
+    project_evidence_requirement.save()
+    log_audit_event(
+        actor=actor,
+        event_type="project_evidence_requirement.updated",
+        obj=project_evidence_requirement,
+        before=before,
+        after=snapshot_instance(project_evidence_requirement),
+    )
+    return project_evidence_requirement
+
+
+@transaction.atomic
+def submit_project_evidence_requirement(
+    *,
+    actor,
+    project_evidence_requirement: ProjectEvidenceRequirement,
+    notes: str = "",
+) -> ProjectEvidenceRequirement:
+    ensure_project_owner_access(actor, project_evidence_requirement.project_indicator)
+    before = snapshot_instance(project_evidence_requirement)
+    project_evidence_requirement.status = ProjectEvidenceRequirementStatusChoices.SUBMITTED
+    project_evidence_requirement.submitted_by = actor
+    project_evidence_requirement.submitted_at = timezone.now()
+    if notes:
+        project_evidence_requirement.review_notes = notes
+    project_evidence_requirement.save()
+    log_audit_event(
+        actor=actor,
+        event_type="project_evidence_requirement.submitted",
+        obj=project_evidence_requirement,
+        before=before,
+        after=snapshot_instance(project_evidence_requirement),
+    )
+    return project_evidence_requirement
+
+
+@transaction.atomic
+def approve_project_evidence_requirement(
+    *,
+    actor,
+    project_evidence_requirement: ProjectEvidenceRequirement,
+    review_notes: str = "",
+) -> ProjectEvidenceRequirement:
+    ensure_project_approver_access(actor, project_evidence_requirement.project_indicator)
+    before = snapshot_instance(project_evidence_requirement)
+    project_evidence_requirement.status = ProjectEvidenceRequirementStatusChoices.APPROVED
+    project_evidence_requirement.approved_by = actor
+    project_evidence_requirement.approved_at = timezone.now()
+    project_evidence_requirement.rejected_by = None
+    project_evidence_requirement.rejected_at = None
+    project_evidence_requirement.rejection_reason = ""
+    if review_notes:
+        project_evidence_requirement.review_notes = review_notes
+    project_evidence_requirement.save()
+    log_audit_event(
+        actor=actor,
+        event_type="project_evidence_requirement.approved",
+        obj=project_evidence_requirement,
+        before=before,
+        after=snapshot_instance(project_evidence_requirement),
+    )
+    return project_evidence_requirement
+
+
+@transaction.atomic
+def reject_project_evidence_requirement(
+    *,
+    actor,
+    project_evidence_requirement: ProjectEvidenceRequirement,
+    rejection_reason: str,
+) -> ProjectEvidenceRequirement:
+    ensure_project_approver_access(actor, project_evidence_requirement.project_indicator)
+    if not rejection_reason.strip():
+        raise ValidationError("Rejection reason is required.")
+    before = snapshot_instance(project_evidence_requirement)
+    project_evidence_requirement.status = ProjectEvidenceRequirementStatusChoices.REJECTED
+    project_evidence_requirement.rejected_by = actor
+    project_evidence_requirement.rejected_at = timezone.now()
+    project_evidence_requirement.rejection_reason = rejection_reason
+    project_evidence_requirement.save()
+    log_audit_event(
+        actor=actor,
+        event_type="project_evidence_requirement.rejected",
+        obj=project_evidence_requirement,
+        before=before,
+        after=snapshot_instance(project_evidence_requirement),
+    )
+    return project_evidence_requirement

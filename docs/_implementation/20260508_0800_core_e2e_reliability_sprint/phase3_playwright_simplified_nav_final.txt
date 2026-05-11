@@ -1,0 +1,17 @@
+# Playwright: simplified nav spec final rerun
+
+Running 4 tests using 1 worker
+
+[1A[2K(node:1619594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1619594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:9:9 › Simplified Navigation and Homepage › admin › Simplified navigation for admin
+[1A[2K[2/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:36:9 › Simplified Navigation and Homepage › admin › Simplified project dashboard
+[1A[2K[3/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:49:9 › Simplified Navigation and Homepage › admin › AI discoverability from worklist
+[1A[2K[4/4] tests/e2e/18_simplified_navigation_and_homepage.spec.ts:75:9 › Simplified Navigation and Homepage › owner › Simplified navigation for non-admin
+[1A[2K  4 passed (1.1m)

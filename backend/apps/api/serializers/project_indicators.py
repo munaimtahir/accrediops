@@ -7,8 +7,8 @@ from apps.api.serializers.evidence import EvidenceItemSerializer
 from apps.api.serializers.recurring import RecurringEvidenceInstanceSerializer, RecurringRequirementSerializer
 from apps.indicators.models import (
     EvidenceRequirement,
-    ProjectEvidenceRequirement,
     Indicator,
+    ProjectEvidenceRequirement,
     ProjectIndicator,
     ProjectIndicatorComment,
     ProjectIndicatorStatusHistory,
@@ -72,6 +72,63 @@ class ProjectIndicatorStatusHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectIndicatorStatusHistory
         fields = ("id", "from_status", "to_status", "action", "reason", "actor", "timestamp")
+
+
+class EvidenceRequirementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EvidenceRequirement
+        fields = (
+            "id",
+            "indicator",
+            "title",
+            "description",
+            "evidence_category",
+            "artifact_type",
+            "mandatory",
+            "ai_generatable",
+            "physical_proof_required",
+            "signature_required",
+            "ongoing_record_required",
+            "default_document_type",
+            "primary_action_required",
+            "display_order",
+            "is_active",
+            "created_at",
+            "updated_at",
+        )
+
+
+class ProjectEvidenceRequirementSerializer(serializers.ModelSerializer):
+    evidence_requirement = EvidenceRequirementSerializer(read_only=True)
+    assigned_to = UserSummarySerializer(read_only=True)
+    submitted_by = UserSummarySerializer(read_only=True)
+    approved_by = UserSummarySerializer(read_only=True)
+    rejected_by = UserSummarySerializer(read_only=True)
+
+    class Meta:
+        model = ProjectEvidenceRequirement
+        fields = (
+            "id",
+            "project",
+            "project_indicator",
+            "framework_indicator",
+            "evidence_requirement",
+            "status",
+            "assigned_to",
+            "due_date",
+            "notes",
+            "gap_summary",
+            "review_notes",
+            "submitted_by",
+            "submitted_at",
+            "approved_by",
+            "approved_at",
+            "rejected_by",
+            "rejected_at",
+            "rejection_reason",
+            "created_at",
+            "updated_at",
+        )
 
 
 class ProjectIndicatorSerializer(serializers.ModelSerializer):
@@ -170,6 +227,7 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
     ai_outputs = serializers.SerializerMethodField()
     audit_summary = serializers.SerializerMethodField()
     readiness_flags = serializers.SerializerMethodField()
+    project_evidence_requirements = ProjectEvidenceRequirementSerializer(many=True, read_only=True)
 
     class Meta(ProjectIndicatorSerializer.Meta):
         fields = ProjectIndicatorSerializer.Meta.fields + (
@@ -182,6 +240,7 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
             "ai_outputs",
             "audit_summary",
             "readiness_flags",
+            "project_evidence_requirements",
         )
 
     def get_recurring_requirement(self, obj):
@@ -213,9 +272,12 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
 
         return {
             "can_assign": can_admin_or_lead_access(user),
+            "can_manage_evidence_requirements": can_admin_or_lead_access(user),
             "can_update_working_state": can_owner,
             "can_start": can_owner,
             "can_send_for_review": can_owner,
+            "can_submit_evidence": can_owner,
+            "can_approve_evidence": can_project_approver_access(user, obj),
             "can_mark_met": can_project_approver_access(user, obj),
             "can_reopen": can_admin_access(user),
             "can_add_evidence": can_owner,
@@ -264,18 +326,3 @@ class WorkflowActionSerializer(serializers.Serializer):
 
 class ReopenWorkflowActionSerializer(serializers.Serializer):
     reason = serializers.CharField()
-
-class EvidenceRequirementSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EvidenceRequirement
-        fields = "__all__"
-
-class ProjectEvidenceRequirementSerializer(serializers.ModelSerializer):
-    evidence_requirement = EvidenceRequirementSerializer(read_only=True)
-    owner = UserSummarySerializer(read_only=True)
-    approved_by = UserSummarySerializer(read_only=True)
-    rejected_by = UserSummarySerializer(read_only=True)
-
-    class Meta:
-        model = ProjectEvidenceRequirement
-        fields = "__all__"

@@ -1,0 +1,7 @@
+session:
+{"success":true,"data":{"authenticated":false,"user":null}}
+csrf=kpyDEse2zwCUL6L26OWdf4V9Mb4TeKQb
+
+status=200
+login:
+{"success":true,"data":{"authenticated":true,"user":{"id":2,"username":"pw_admin","first_name":"","last_name":"","role":"ADMIN","is_active":true}}}

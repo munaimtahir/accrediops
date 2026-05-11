@@ -1,0 +1,10 @@
+accrediops-caddy  | {"level":"info","ts":1777993683.5624459,"msg":"using config from file","file":"/etc/caddy/Caddyfile"}
+accrediops-caddy  | {"level":"info","ts":1777993683.572782,"msg":"adapted config to JSON","adapter":"caddyfile"}
+accrediops-caddy  | {"level":"warn","ts":1777993683.5730038,"msg":"Caddyfile input is not formatted; run 'caddy fmt --overwrite' to fix inconsistencies","adapter":"caddyfile","file":"/etc/caddy/Caddyfile","line":3}
+accrediops-caddy  | {"level":"info","ts":1777993683.5946026,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+accrediops-caddy  | {"level":"info","ts":1777993683.596014,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0xc0004dd880"}
+accrediops-caddy  | {"level":"info","ts":1777993683.5983074,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+accrediops-caddy  | {"level":"info","ts":1777993683.5988634,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+accrediops-caddy  | {"level":"info","ts":1777993683.598885,"msg":"serving initial configuration"}
+accrediops-caddy  | {"level":"info","ts":1777993683.696626,"logger":"tls","msg":"storage cleaning happened too recently; skipping for now","storage":"FileStorage:/data/caddy","instance":"438bfc1e-a8bd-4e6d-85f7-aa1d351f33fc","try_again":1778080083.6966128,"try_again_in":86399.999998652}
+accrediops-caddy  | {"level":"info","ts":1777993683.6968262,"logger":"tls","msg":"finished cleaning storage units"}

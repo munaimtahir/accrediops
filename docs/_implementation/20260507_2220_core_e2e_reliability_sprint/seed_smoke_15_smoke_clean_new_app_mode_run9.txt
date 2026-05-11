@@ -1,0 +1,15 @@
+Error: Session cookie missing after login for storageState user=pw_admin
+
+   at global-setup.cjs:111
+
+  109 |       const cookies = await context.cookies();
+  110 |       if (!cookies.some((cookie) => cookie.name === "sessionid")) {
+> 111 |         throw new Error(`Session cookie missing after login for storageState user=${username}`);
+      |               ^
+  112 |       }
+  113 |
+  114 |       const storageState = await context.storageState();
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:111:15)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:133:3)
+
+[1A[2K

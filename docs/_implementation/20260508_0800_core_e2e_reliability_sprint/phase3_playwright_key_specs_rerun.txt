@@ -1,0 +1,307 @@
+# Playwright: rerun key stabilized specs
+
+Running 8 tests using 1 worker
+
+[1A[2K(node:1587509) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1587509) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/8] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility
+[1A[2K(node:1590532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1590532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/8] (retries) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (retry #1)
+[1A[2K  1) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/8990e2fd3e971968a8b3-db41ad0549a23d7de919.trace'
+
+    Error: locator.click: Target page, context or browser has been closed
+
+       at helpers.ts:197
+
+      195 |
+      196 | export async function logout(page: Page) {
+    > 197 |   await page.getByRole("button", { name: "Sign out" }).click();
+          |                                                        ^
+      198 |   await page.waitForURL(/\/login/, { timeout: 15000 });
+      199 | }
+      200 |
+        at logout (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:197:56)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:25:17
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/38c3816f949b46d12efd6f4c353799fc.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/traces/8990e2fd3e971968a8b3-db41ad0549a23d7de919-retry1.network'
+
+    Error: apiRequestContext.post: Request context disposed.
+    Call log:
+    [2m  - → POST http://127.0.0.1:18080/api/auth/login/[22m
+    [2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+    [2m    - content-type: application/json[22m
+    [2m    - content-length: 38[22m
+    [2m    - cookie: csrftoken=ArzRM1QPxfISqF8ZEG3u03xNlbvoXikH[22m
+
+
+       at helpers.ts:179
+
+      177 |     await page.waitForURL((url) => url.pathname !== "/login", { timeout: 15000 });
+      178 |   } catch {
+    > 179 |     const response = await page.request.post("/api/auth/login/", { data: user });
+          |                                         ^
+      180 |     const payload = (await response.json()) as { success?: boolean; data?: { authenticated?: boolean } };
+      181 |     if (!response.ok() || !payload?.success || !payload?.data?.authenticated) {
+      182 |       throw new Error(`Login fallback failed (${response.status()}): ${JSON.stringify(payload)}`);
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:179:41)
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:163:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:27:5
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/5a8bed64fe0e179c168dd934c5bcd700.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/error-context.md
+
+
+[1A[2K(node:1593145) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1593145) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/8] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:40:7 › Recurring Queue and Admin Masters Capabilities › Admin[1A[2K  2) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval 
+
+    Error: [[1A[2K(node:1594998) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1594998) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[5/8] (retries) tests/e2e/operator-first-time.spec.ts:8:7 › operator first time › first-time operator journey stays explicit across create, evidence, review, and approval (retry #1)
+Terminated
+22m
+
+
+      106 |         .getByTestId("next-action-banner")
+      107 |         .getByText("Indicator is already completed. Use Return or Reopen only when a governance override is required."),
+    > 108 |     ).toBeVisible();
+          |       ^
+      109 |   });
+      110 | });
+      111 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:108:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('next-action-banner').getByText('Indicator is already completed. Use Return or Reopen only when a governance override is required.')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByTestId('next-action-banner').getByText('Indicator is already completed. Use Return or Reopen only when a governance override is required.')[22m
+
+
+      106 |         .getByTestId("next-action-banner")
+      107 |         .getByText("Indicator is already completed. Use Return or Reopen only when a governance override is required."),
+    > 108 |     ).toBeVisible();
+          |       ^
+      109 |   });
+      110 | });
+      111 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/operator-first-time.spec.ts:108:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/operator-first-time-operat-b7d88-vidence-review-and-approval-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1593789) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1593789) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[6/8] tests/e2e/role-visibility.spec.ts:5:7 › Role visibility and gating › owner sees disabled create project CTA with explanation
+[1A[2K[7/8] tests/e2e/role-visibility.spec.ts:12:7 › Role visibility and gating › lead sees admin navigation section
+[1A[2K[8/8] tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes
+[1A[2K(node:1594693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1594693) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[9/8] (retries) tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes (retry #1)
+[1A[2K  3) tests/e2e/role-visibility.spec.ts:19:7 › Role visibility and gating › owner sees disabled readiness/export CTAs and guarded routes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Readiness', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Readiness', exact: true })[22m
+
+
+      21 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      22 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+    > 23 |     await expect(page.getByRole("button", { name: "Readiness", exact: true })).toBeDisabled();
+         |                                                                                ^
+      24 |     await expect(page.getByRole("button", { name: "Export history", exact: true })).toBeDisabled();
+      25 |
+      26 |     await page.goto(`/projects/${projectId}/readiness`);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:23:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeDisabled[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Readiness', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeDisabled" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Readiness', exact: true })[22m
+
+
+      21 |     await page.getByRole("link", { name: "Open project" }).first().click();
+      22 |     const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+    > 23 |     await expect(page.getByRole("button", { name: "Readiness", exact: true })).toBeDisabled();
+         |                                                                                ^
+      24 |     await expect(page.getByRole("button", { name: "Export history", exact: true })).toBeDisabled();
+      25 |
+      26 |     await page.goto(`/projects/${projectId}/readiness`);
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/role-visibility.spec.ts:23:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/role-visibility-Role-visib-4783b-ort-CTAs-and-guarded-routes-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1595074) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1595074) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[10/8] tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways
+[1A[2K(node:1595747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1595747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[11/8] (retries) tests/e2e/workflow-guidance.spec.ts:5:7 › Workflow guidance › project overview shows next-step guidance and grouped pathways (retry #1)
+Terminated

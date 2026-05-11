@@ -1,0 +1,220 @@
+
+Running 13 tests using 1 worker
+
+  ✘   1 tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance (17.4s)
+  ✘   2 tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance (retry #1) (15.7s)
+Detected Project ID: 163
+  ✓   3 tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:7:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (21.1s)
+  ✓   4 tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:71:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit (7.1s)
+  ✓   5 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:7:7 › Simplified Navigation and Homepage › Simplified navigation for admin (16.5s)
+  ✓   6 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:38:7 › Simplified Navigation and Homepage › Simplified navigation for non-admin (4.5s)
+  ✘   7 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard (9.6s)
+  ✓   8 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard (retry #1) (9.8s)
+  ✘   9 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist (22.9s)
+  ✘  10 tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist (retry #1) (22.5s)
+  ✓  11 tests/e2e/19_accessibility.spec.ts:17:7 › 19 accessibility and keyboard navigation › TAB through login form and ENTER submits (5.0s)
+  ✓  12 tests/e2e/19_accessibility.spec.ts:34:7 › 19 accessibility and keyboard navigation › dashboard exposes skip link and keyboard-reachable main actions (12.3s)
+  ✓  13 tests/e2e/19_accessibility.spec.ts:58:7 › 19 accessibility and keyboard navigation › recurring approve modal traps focus, closes with ESC, and submits with ENTER (8.7s)
+  ✓  14 tests/e2e/19_accessibility.spec.ts:121:7 › 19 accessibility and keyboard navigation › disabled recurring actions are announced as disabled by role (8.1s)
+  ✓  15 tests/e2e/19_accessibility.spec.ts:166:7 › 19 accessibility and keyboard navigation › admin master inputs have labels and edit modal returns focus (3.1s)
+  ✓  16 tests/e2e/19_accessibility.spec.ts:186:7 › 19 accessibility and keyboard navigation › classification route has accessible filter labels and row selection (6.7s)
+
+
+  1) tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Operate indicators' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Operate indicators' })[22m
+
+
+      18 |     await expect(nextAction.getByText("Reason", { exact: true })).toBeVisible();
+      19 |     await expect(nextAction.getByText("Status", { exact: true })).toBeVisible();
+    > 20 |     await expect(page.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
+         |                                                                             ^
+      21 |     await expect(page.getByRole("heading", { name: "Review readiness" })).toBeVisible();
+      22 |     await expect(page.getByRole("heading", { name: "Export and documentation" })).toBeVisible();
+      23 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/03_projects_navigation_and_overview.spec.ts:20:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Operate indicators' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Operate indicators' })[22m
+
+
+      18 |     await expect(nextAction.getByText("Reason", { exact: true })).toBeVisible();
+      19 |     await expect(nextAction.getByText("Status", { exact: true })).toBeVisible();
+    > 20 |     await expect(page.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
+         |                                                                             ^
+      21 |     await expect(page.getByRole("heading", { name: "Review readiness" })).toBeVisible();
+      22 |     await expect(page.getByRole("heading", { name: "Export and documentation" })).toBeVisible();
+      23 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/03_projects_navigation_and_overview.spec.ts:20:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/03_projects_navigation_and-01cc6-th-clear-next-step-guidance-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Ind 001")')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('button:has-text("Ind 001")')[22m
+
+
+      94 |     // from Worklist, open indicator drawer
+      95 |     const indicatorButton = page.locator('button:has-text("Ind 001")');
+    > 96 |     await expect(indicatorButton).toBeVisible({ timeout: 15000 });
+         |                                   ^
+      97 |     await indicatorButton.click();
+      98 |     
+      99 |     // AI Action Center link/button still exists in drawer
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:96:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Ind 001")')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('button:has-text("Ind 001")')[22m
+
+
+      94 |     // from Worklist, open indicator drawer
+      95 |     const indicatorButton = page.locator('button:has-text("Ind 001")');
+    > 96 |     await expect(indicatorButton).toBeVisible({ timeout: 15000 });
+         |                                   ^
+      97 |     await indicatorButton.click();
+      98 |     
+      99 |     // AI Action Center link/button still exists in drawer
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:96:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-6bf74-scoverability-from-worklist-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*worklist/[39m
+    Received string:  [31m"http://127.0.0.1:18080/projects/163"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/projects/163"[22m
+
+
+      76 |     // Open Worklist works
+      77 |     await main.locator("a:has-text('Open Worklist')").click();
+    > 78 |     await expect(page).toHaveURL(/.*worklist/);
+         |                        ^
+      79 |     
+      80 |     await adminContext.close();
+      81 |   });
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts:78:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/18_simplified_navigation_a-8ffe2-implified-project-dashboard/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/03_projects_navigation_and_overview.spec.ts:8:7 › 03 projects navigation and overview › project list and overview surfaces are navigable with clear next-step guidance 
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:83:7 › Simplified Navigation and Homepage › AI discoverability from worklist 
+  1 flaky
+    tests/e2e/18_simplified_navigation_and_homepage.spec.ts:61:7 › Simplified Navigation and Homepage › Simplified project dashboard 
+  10 passed (4.3m)
