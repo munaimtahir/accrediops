@@ -6,8 +6,9 @@ import React from 'react';
 // Mock the next/navigation hooks
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ replace: vi.fn() }),
-  usePathname: () => '/projects/123/worklist',
-  useParams: () => ({ projectId: '123', id: '456' }),
+  // Simulate a path where the project must be resolved via the indicator
+  usePathname: () => '/project-indicators/456',
+  useParams: () => ({ id: '456' }), // No projectId
 }));
 
 // Mock the hooks used in Topbar
