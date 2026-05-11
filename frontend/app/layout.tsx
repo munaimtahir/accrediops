@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 
 import { AppProviders } from "@/components/providers/app-providers";
+import { SkipLink } from "@/components/layout/skip-link";
 
 import "./globals.css";
 
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plexSans.variable} ${plexMono.variable}`}>
-        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <SkipLink />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

@@ -1,0 +1,107 @@
+# Playwright: rerun recurring and masters spec
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1579101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1579101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility
+[1A[2K(node:1580843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1580843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/2] (retries) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility (retry #1)
+[1A[2K  1) tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: apiRequestContext.post: Test timeout of 60000ms exceeded.
+
+       at helpers.ts:187
+
+      185 |     await page.waitForURL((url) => url.pathname !== "/login", { timeout: 15000 });
+      186 |   } catch {
+    > 187 |     const response = await page.request.post("/api/auth/login/", { data: user });
+          |                                         ^
+      188 |     const payload = (await response.json()) as { success?: boolean; data?: { authenticated?: boolean } };
+      189 |     if (!response.ok() || !payload?.success || !payload?.data?.authenticated) {
+      190 |       throw new Error(`Login fallback failed (${response.status()}): ${JSON.stringify(payload)}`);
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:187:41)
+        at loginAs (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:171:3)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:27:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    TimeoutError: page.waitForURL: Timeout 15000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+       at helpers.ts:206
+
+      204 |   if (existing) {
+      205 |     return existing;
+    > 206 |   }
+          |    ^
+      207 |   return apiPost<ClientProfile>(
+      208 |     page,
+      209 |     "/api/client-profiles/",
+        at logout (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:206:14)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:25:5
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/17_recurring_and_masters_c-d8f61-queue-row-action-visibility-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K(node:1582629) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1582629) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[3/2] tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:40:7 › Recurring Queue and Admin Masters Capabilities › Admin masters edit
+[1A[2K  1 failed
+    tests/e2e/17_recurring_and_masters_capability_fix.spec.ts:6:7 › Recurring Queue and Admin Masters Capabilities › Recurring queue row action visibility 
+  1 passed (4.1m)

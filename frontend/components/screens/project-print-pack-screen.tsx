@@ -23,6 +23,12 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
   const effectiveProjectId = canManageExports ? projectId : Number.NaN;
   const printBundle = useProjectExport(projectId, "print-bundle");
   const readiness = useProjectReadiness(effectiveProjectId);
+  const sections = useMemo(() => {
+    if (!printBundle.data) {
+      return [];
+    }
+    return printBundle.data.sections ?? printBundle.data.bundle?.sections ?? [];
+  }, [printBundle.data]);
 
   if (authQuery.isLoading) {
     return <LoadingSkeleton className="h-40 w-full" />;
@@ -42,19 +48,10 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
     );
   }
 
-  if (readiness.isLoading) {
-    return <LoadingSkeleton className="h-40 w-full" />;
-  }
   if (readiness.error) {
     return <ErrorPanel message={readiness.error.message} />;
   }
 
-  const sections = useMemo(() => {
-    if (!printBundle.data) {
-      return [];
-    }
-    return printBundle.data.sections ?? printBundle.data.bundle?.sections ?? [];
-  }, [printBundle.data]);
   const readinessData = (readiness.data ?? {}) as Record<string, unknown>;
   const exportBlockers = [
     Number(readinessData.percent_met ?? 0) < 100
@@ -67,7 +64,7 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
       ? `Critical indicators pending: ${readinessData.high_risk_indicators.length}`
       : "",
   ].filter(Boolean);
-  const exportReady = exportBlockers.length === 0;
+  const exportReady = !readiness.isLoading && exportBlockers.length === 0;
 
   return (
     <div className="space-y-6">
@@ -107,6 +104,13 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
         status={`Sections loaded: ${sections.length} • Readiness score: ${Number(readinessData.overall_score ?? 0)}`}
         blockers={exportBlockers}
       />
+
+      {readiness.isLoading ? (
+        <div className="space-y-3">
+          <LoadingSkeleton className="h-40 w-full" />
+          <LoadingSkeleton className="h-40 w-full" />
+        </div>
+      ) : null}
 
       {printBundle.isPending ? (
         <div className="space-y-3">

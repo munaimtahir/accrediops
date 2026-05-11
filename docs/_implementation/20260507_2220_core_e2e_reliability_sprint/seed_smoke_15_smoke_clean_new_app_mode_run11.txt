@@ -1,0 +1,94 @@
+
+Running 1 test using 1 worker
+
+[1A[2K(node:1502411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1502411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/1] tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth
+[1A[2K(node:1505246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1505246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[2/1] (retries) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth (retry #1)
+[1A[2K  1) tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Project worklist' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Project worklist' })[22m
+
+
+      34 |     await expect(page.getByRole("heading", { name: project.name }).first()).toBeVisible({ timeout: 15000 });
+      35 |     await page.goto(`/projects/${project.id}/worklist`, { waitUntil: "domcontentloaded" });
+    > 36 |     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
+         |                                                                           ^
+      37 |   });
+      38 | });
+      39 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:36:75
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/traces/da6ec6deb327de81ac98-1469df5c9eb1048b9663.network'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-0/aafa54d74c88d76bacb1f62ddf481bee.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Project worklist' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Project worklist' })[22m
+
+
+      34 |     await expect(page.getByRole("heading", { name: project.name }).first()).toBeVisible({ timeout: 15000 });
+      35 |     await page.goto(`/projects/${project.id}/worklist`, { waitUntil: "domcontentloaded" });
+    > 36 |     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible({ timeout: 15000 });
+         |                                                                           ^
+      37 |   });
+      38 | });
+      39 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts:36:75
+
+    Error: apiRequestContext._wrapApiCall: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/traces/da6ec6deb327de81ac98-1469df5c9eb1048b9663-retry1.trace'
+
+    Error: ENOENT: no such file or directory, open '/home/munaim/srv/apps/accrediops/OUT/playwright/.playwright-artifacts-1/210041cb3c3b44e1b851b240af7ae099.zip'
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/15_smoke_clean_new_app_mod-08504-project-flow-remains-smooth-retry1/error-context.md
+
+
+[1A[2K  1 failed
+    tests/e2e/15_smoke_clean_new_app_mode.spec.ts:15:7 › 15 smoke clean new app mode › app stays LAB-only and first-project flow remains smooth 

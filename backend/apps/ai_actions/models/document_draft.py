@@ -1,7 +1,17 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from apps.masters.choices import DocumentTypeChoices
+
+
+class DocumentDraftKindChoices(models.TextChoices):
+    SOP = "SOP", "SOP"
+    POLICY = "POLICY", "Policy"
+    CHECKLIST = "CHECKLIST", "Checklist"
+    REGISTER_TEMPLATE = "REGISTER_TEMPLATE", "Register template"
+    EVIDENCE_REQUIREMENT_SHEET = "EVIDENCE_REQUIREMENT_SHEET", "Evidence requirement sheet"
+    GAP_CLOSURE_PLAN = "GAP_CLOSURE_PLAN", "Gap closure plan"
 
 
 class DocumentDraft(models.Model):
@@ -15,6 +25,11 @@ class DocumentDraft(models.Model):
         "indicators.Indicator",
         on_delete=models.CASCADE,
         related_name="document_drafts",
+    )
+    related_indicators = models.ManyToManyField(
+        "indicators.Indicator",
+        related_name="related_document_drafts",
+        blank=True,
     )
     project = models.ForeignKey(
         "projects.AccreditationProject",
@@ -30,9 +45,21 @@ class DocumentDraft(models.Model):
         null=True,
         blank=True,
     )
+    project_evidence_requirement = models.ForeignKey(
+        "indicators.ProjectEvidenceRequirement",
+        on_delete=models.SET_NULL,
+        related_name="document_drafts",
+        null=True,
+        blank=True,
+    )
 
     # Draft content and metadata
     title = models.CharField(max_length=500)
+    draft_kind = models.CharField(
+        max_length=40,
+        choices=DocumentDraftKindChoices.choices,
+        default=DocumentDraftKindChoices.POLICY,
+    )
     document_type = models.CharField(
         max_length=20,
         choices=DocumentTypeChoices.choices,
@@ -129,6 +156,15 @@ class DocumentDraft(models.Model):
         else:
             # Invalid state: either project or project_indicator is null, but not both
             raise ValidationError("Document drafts must either be framework-level (no project/project_indicator) or project-level (both project and project_indicator linked).")
+
+        if self.project_evidence_requirement_id:
+            if self.project_indicator_id is None:
+                raise ValidationError("Project evidence requirement linkage requires a project-level draft.")
+            if self.project_evidence_requirement.project_indicator_id != self.project_indicator_id:
+                raise ValidationError("Project evidence requirement linkage must match the selected project indicator.")
+
+        if self.framework_id and self.indicator_id and self.indicator.framework_id != self.framework_id:
+            raise ValidationError("Document drafts must link to an indicator within the same framework.")
 
     def __str__(self) -> str:
         if self.project:

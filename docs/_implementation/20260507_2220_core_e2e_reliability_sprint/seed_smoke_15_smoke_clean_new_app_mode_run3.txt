@@ -1,0 +1,18 @@
+TimeoutError: page.goto: Timeout 30000ms exceeded.
+Call log:
+[2m  - navigating to "http://127.0.0.1:18080/login", waiting until "load"[22m
+
+
+   at global-setup.cjs:102
+
+  100 |       const maxLoginAttempts = 2;
+  101 |       let loggedIn = false;
+> 102 |       for (let attempt = 1; attempt <= maxLoginAttempts; attempt += 1) {
+      |                  ^
+  103 |         // Wait for hydration/loading to finish
+  104 |         // eslint-disable-next-line no-await-in-loop
+  105 |         await page.waitForSelector("#username-input", { state: "visible", timeout: 30000 });
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:102:18)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:141:3)
+
+[1A[2K

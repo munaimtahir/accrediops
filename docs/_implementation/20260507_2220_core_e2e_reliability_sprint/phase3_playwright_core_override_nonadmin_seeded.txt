@@ -1,0 +1,94 @@
+
+Running 2 tests using 1 worker
+
+(node:912486) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:912486) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (17.3s)
+(node:912992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:912992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/e2e/core-journeys.spec.ts:203:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (25.0s)
+
+
+  1) tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      179 |       `/api/dashboard/worklist/?project_id=${projectId}&status=MET&page=1&page_size=2`,
+      180 |     );
+    > 181 |     expect(worklistResponse.ok()).toBeTruthy();
+          |                                   ^
+      182 |     const worklistPayload = await worklistResponse.json();
+      183 |     const metIndicatorId = Number(worklistPayload?.data?.results?.[0]?.project_indicator_id);
+      184 |     expect(Number.isFinite(metIndicatorId)).toBeTruthy();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:181:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:203:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/projects/[39m
+    Received string:  [31m"http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F33749"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://127.0.0.1:18080/login?next=%2Fproject-indicators%2F33749"[22m
+
+
+       at helpers.ts:170
+
+      168 |   await page.getByLabel("Password").fill(user.password);
+      169 |   await page.getByRole("button", { name: "Sign in" }).click();
+    > 170 |   await expect(page).toHaveURL(/\/projects/);
+          |                      ^
+      171 | }
+      172 |
+      173 | export async function loginAsSeededAdmin(page: Page) {
+        at login (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/helpers.ts:170:22)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:206:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/e2e/core-journeys.spec.ts:174:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:203:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 

@@ -1,0 +1,6 @@
+date_utc: 2026-05-07T11:14:37Z
+cwd: /home/munaim/srv/apps/accrediops
+python: Python 3.12.3
+pip: pip 26.0.1 from /home/munaim/srv/apps/accrediops/backend/.venv/lib/python3.12/site-packages/pip (python 3.12)
+pytest: pytest 8.4.2 
+django: 5.2.12

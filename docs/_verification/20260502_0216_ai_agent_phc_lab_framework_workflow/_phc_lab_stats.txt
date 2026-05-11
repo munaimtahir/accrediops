@@ -1,0 +1,4 @@
+28 objects imported automatically (use -v 2 for details).
+
+PHC_LAB_ID 1
+INDICATORS 118

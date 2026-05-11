@@ -1,0 +1,18 @@
+accrediops-backend  | Operations to perform:
+accrediops-backend  |   Apply all migrations: accounts, admin, ai_actions, audit, auth, contenttypes, evidence, exports, frameworks, indicators, masters, projects, recurring, sessions
+accrediops-backend  | Running migrations:
+accrediops-backend  |   No migrations to apply.
+accrediops-backend  | Performing system checks...
+accrediops-backend  | 
+accrediops-backend  | System check identified no issues (0 silenced).
+accrediops-backend  | May 05, 2026 - 15:07:10
+accrediops-backend  | Django version 5.2.13, using settings 'config.accrediops_backend.settings'
+accrediops-backend  | Starting development server at http://0.0.0.0:8000/
+accrediops-backend  | Quit the server with CONTROL-C.
+accrediops-backend  | 
+accrediops-backend  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+accrediops-backend  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+accrediops-backend  | [05/May/2026 15:07:13] "GET /api/health/ HTTP/1.1" 200 86
+accrediops-backend  | [05/May/2026 15:07:29] "GET /api/health/ HTTP/1.1" 200 86
+accrediops-backend  | [05/May/2026 15:07:45] "GET /api/health/ HTTP/1.1" 200 86
+accrediops-backend  | [05/May/2026 15:08:00] "GET /api/health/ HTTP/1.1" 200 86

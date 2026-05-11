@@ -1,0 +1,105 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (8.5s)
+  ✘  2 tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only (retry #1) (9.2s)
+
+
+  1) tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Advisory:\s*true/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Advisory:\s*true/i) resolved to 8 elements:
+        1) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').first()
+        2) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(1)
+        3) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(2)
+        4) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(3)
+        5) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(4)
+        6) <div class="text-xs text-slate-500">Status: DRAFT • Advisory: true</div> aka getByText('Status: DRAFT • Advisory: true').first()
+        7) <div class="text-xs text-slate-500">Status: DRAFT • Advisory: true</div> aka getByText('Status: DRAFT • Advisory: true').nth(1)
+        8) <div class="text-xs text-slate-500">Status: DRAFT • Advisory: true</div> aka getByText('Status: DRAFT • Advisory: true').nth(2)
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Advisory:\s*true/i)[22m
+
+
+      30 |
+      31 |     // Draft remains advisory-only in the API response (visible in recent drafts list).
+    > 32 |     await expect(page.getByText(/Advisory:\s*true/i)).toBeVisible();
+         |                                                       ^
+      33 |   });
+      34 | });
+      35 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/40_framework_documentation_ai.spec.ts:32:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/Advisory:\s*true/i)
+    Expected: visible
+    Error: strict mode violation: getByText(/Advisory:\s*true/i) resolved to 8 elements:
+        1) <div class="text-xs text-slate-500">Status: HUMAN_REVIEW_REQUIRED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEW_REQUIRED')
+        2) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').first()
+        3) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(1)
+        4) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(2)
+        5) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(3)
+        6) <div class="text-xs text-slate-500">Status: HUMAN_REVIEWED • Advisory: true</div> aka getByText('Status: HUMAN_REVIEWED •').nth(4)
+        7) <div class="text-xs text-slate-500">Status: DRAFT • Advisory: true</div> aka getByText('Status: DRAFT • Advisory: true').first()
+        8) <div class="text-xs text-slate-500">Status: DRAFT • Advisory: true</div> aka getByText('Status: DRAFT • Advisory: true').nth(1)
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/Advisory:\s*true/i)[22m
+
+
+      30 |
+      31 |     // Draft remains advisory-only in the API response (visible in recent drafts list).
+    > 32 |     await expect(page.getByText(/Advisory:\s*true/i)).toBeVisible();
+         |                                                       ^
+      33 |   });
+      34 | });
+      35 |
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/40_framework_documentation_ai.spec.ts:32:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/40_framework_documentation-67290-nd-it-remains-advisory-only-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/40_framework_documentation_ai.spec.ts:6:7 › Framework Documentation AI › admin can generate a framework draft and it remains advisory-only 

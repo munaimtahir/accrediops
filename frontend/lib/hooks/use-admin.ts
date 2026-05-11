@@ -5,7 +5,39 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api/client";
 import { buildFrameworkImportFormData } from "@/lib/framework-import";
 import { queryKeys } from "@/lib/hooks/query-keys";
-import { FrameworkImportCreatePayload, FrameworkImportCreateResult, FrameworkImportValidatePayload, FrameworkImportValidateResult, FrameworkSummary } from "@/types";
+import {
+  DocumentDraft,
+  FrameworkImportCreatePayload,
+  FrameworkImportCreateResult,
+  FrameworkImportValidatePayload,
+  FrameworkImportValidateResult,
+  FrameworkSummary,
+} from "@/types";
+
+export type DocumentDraftDetail = DocumentDraft & {
+  indicator_text?: string;
+  required_evidence_description?: string;
+  fulfillment_guidance?: string;
+  ai_assistance_level?: string;
+};
+
+export type DocumentGenerationQueueDraftSummary = {
+  id: number;
+  title: string;
+  review_status: DocumentDraft["review_status"];
+  generated_at: string;
+  version: number;
+};
+
+export type DocumentGenerationQueueRow = {
+  indicator_id: number;
+  code: string;
+  text: string;
+  framework_name: string;
+  ai_assistance_level: string;
+  latest_draft: DocumentGenerationQueueDraftSummary | null;
+  draft_count: number;
+};
 
 export function useAdminDashboard() {
   return useQuery({
@@ -107,7 +139,7 @@ export function useAuditLogs(filters: Record<string, unknown>) {
 export function useDocumentGenerationQueue(filters: Record<string, unknown> = {}) {
   return useQuery({
     queryKey: ["admin", "queue", "document-generation", filters],
-    queryFn: () => apiClient.get<{ results: Record<string, unknown>[] }>("/api/admin/queues/document-generation/", filters),
+    queryFn: () => apiClient.get<{ results: DocumentGenerationQueueRow[] }>("/api/admin/queues/document-generation/", filters),
   });
 }
 
@@ -121,14 +153,14 @@ export function useGenerateDocumentDraft(indicatorId: number) {
 export function useListDocumentDrafts(filters: Record<string, unknown> = {}) {
   return useQuery({
     queryKey: ["admin", "document-drafts", filters],
-    queryFn: () => apiClient.get<Record<string, unknown>[]>("/api/admin/document-drafts/", filters),
+    queryFn: () => apiClient.get<DocumentDraft[]>("/api/admin/document-drafts/", filters),
   });
 }
 
 export function useRetrieveDocumentDraft(draftId: number) {
   return useQuery({
     queryKey: ["admin", "document-drafts", draftId],
-    queryFn: () => apiClient.get<Record<string, unknown>>(`/api/admin/document-drafts/${draftId}/`),
+    queryFn: () => apiClient.get<DocumentDraftDetail>(`/api/admin/document-drafts/${draftId}/`),
     enabled: Number.isFinite(draftId),
   });
 }

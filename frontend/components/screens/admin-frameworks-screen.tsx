@@ -22,7 +22,6 @@ import {
   useFrameworkImportValidate,
   useFrameworkTemplate,
 } from "@/lib/hooks/use-framework-management";
-import { useProjects } from "@/lib/hooks/use-projects";
 import { FrameworkSummary } from "@/types";
 import { cn } from "@/utils/cn";
 
@@ -81,7 +80,6 @@ function getImportErrorMessage(error: unknown) {
 export function AdminFrameworksScreen() {
   const { pushToast } = useToast();
   const frameworksQuery = useAdminFrameworks();
-  const projectsQuery = useProjects();
   const templateQuery = useFrameworkTemplate();
   const createFramework = useCreateFramework();
   const validateImport = useFrameworkImportValidate();

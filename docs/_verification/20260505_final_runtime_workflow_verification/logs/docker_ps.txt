@@ -1,0 +1,4 @@
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+accrediops-backend    accrediops-backend    "sh -c 'python manag…"   backend    About a minute ago   Up About a minute (healthy)   8000/tcp
+accrediops-caddy      caddy:2.8             "caddy run --config …"   caddy      About a minute ago   Up 4 seconds                  80/tcp, 443/tcp, 2019/tcp, 443/udp, 0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   About a minute ago   Up 52 seconds (healthy)       3000/tcp

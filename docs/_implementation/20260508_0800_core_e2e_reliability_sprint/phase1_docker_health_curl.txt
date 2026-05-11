@@ -1,0 +1,4 @@
+# Docker: curl backend health
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}
+# Docker: curl frontend health
+{"status":"ok","service":"accrediops-frontend"}

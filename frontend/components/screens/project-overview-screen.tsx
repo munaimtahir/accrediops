@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
 import { MetricCard } from "@/components/common/metric-card";
+import { Modal } from "@/components/common/modal";
+import { NextActionBanner } from "@/components/common/next-action-banner";
 import { OnboardingCallout } from "@/components/common/onboarding-callout";
 import { PageHeader } from "@/components/common/page-header";
+import { CloneProjectForm } from "@/components/forms/clone-project-form";
 import { Card } from "@/components/ui/card";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ProjectWorkspaceBoard } from "@/components/screens/project-workspace-board";
-import { canAccessAdminArea } from "@/lib/authz";
+import { canAccessAdminArea, canViewExports, canViewReadiness, getRestrictionMessage } from "@/lib/authz";
 import { useProject } from "@/lib/hooks/use-projects";
 import { useProgress } from "@/lib/hooks/use-progress";
 import { useAuthSession } from "@/lib/hooks/use-auth";
@@ -32,6 +36,7 @@ function ProjectOverviewLoading() {
 }
 
 export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
+  const router = useRouter();
   const authQuery = useAuthSession();
   const projectQuery = useProject(projectId);
   const standardsQuery = useProgress(projectId, "standards");
@@ -39,6 +44,10 @@ export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
   const role = authUser?.role;
   const canAccessAdmin = canAccessAdminArea(authUser);
   const canReview = role && ["ADMIN", "LEAD", "REVIEWER", "APPROVER"].includes(role);
+  const canSeeReadiness = canViewReadiness(authUser);
+  const canSeeExports = canViewExports(authUser);
+  const canClone = role && ["ADMIN", "LEAD"].includes(role);
+  const [showClone, setShowClone] = useState(false);
 
   const underReviewCount = useMemo(() => {
     const standards = Array.isArray(standardsQuery.data) ? standardsQuery.data : [];
@@ -58,6 +67,10 @@ export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
   if (!project) {
     return <ErrorPanel message="Project not found." />;
   }
+
+  const nextAction = "Open Worklist and operate indicators";
+  const nextReason = "Worklist is the primary workspace to add evidence, request AI assistance, and submit indicators for review.";
+  const nextStatus = `${project.met_indicators}/${project.total_indicators} indicators met • ${project.pending_indicators} pending`;
 
   return (
     <div className="space-y-6">
@@ -88,12 +101,113 @@ export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
                 href="/admin"
                 className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
               >
-                Open Settings
+                Open Admin Dashboard
               </Link>
             )}
+            {canClone ? (
+              <button
+                type="button"
+                className={cn(buttonVariants({ variant: "secondary", size: "default" }))}
+                onClick={() => setShowClone(true)}
+              >
+                Clone project
+              </button>
+            ) : null}
           </div>
         }
       />
+
+      <NextActionBanner action={nextAction} reason={nextReason} status={nextStatus} />
+
+      <section className="grid gap-3 lg:grid-cols-3">
+        <Card className="p-4">
+          <h2 className="text-sm font-semibold text-slate-950">Operate indicators</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Add evidence, update working notes, use AI assistance, and submit indicators for review.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href={`/projects/${project.id}/worklist`} className={cn(buttonVariants({ variant: "default", size: "sm" }))}>
+              Open worklist
+            </Link>
+            <Link href={`/projects/${project.id}/recurring`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}>
+              Recurring queue
+            </Link>
+          </div>
+        </Card>
+        <Card className="p-4">
+          <h2 className="text-sm font-semibold text-slate-950">Review readiness</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Inspect what is missing, what is unapproved, and what is overdue before marking indicators met.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {canSeeReadiness ? (
+              <Link
+                href={`/projects/${project.id}/readiness`}
+                className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}
+              >
+                Readiness
+              </Link>
+            ) : (
+              <Button
+                size="sm"
+                variant="secondary"
+                disabled
+                title={getRestrictionMessage("readiness")}
+                aria-label={`Readiness (${getRestrictionMessage("readiness")})`}
+              >
+                Readiness
+              </Button>
+            )}
+            <Link href={`/projects/${project.id}/inspection`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}>
+              Inspection view
+            </Link>
+          </div>
+        </Card>
+        <Card className="p-4">
+          <h2 className="text-sm font-semibold text-slate-950">Export and documentation</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Generate packs and exports for inspection preparation. Drafts remain advisory until governed promotion.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {canSeeExports ? (
+              <Link
+                href={`/projects/${project.id}/print-pack`}
+                className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}
+              >
+                Print pack preview
+              </Link>
+            ) : (
+              <Button
+                size="sm"
+                variant="secondary"
+                disabled
+                title={getRestrictionMessage("exports")}
+                aria-label={`Print pack preview (${getRestrictionMessage("exports")})`}
+              >
+                Print pack preview
+              </Button>
+            )}
+            {canSeeExports ? (
+              <Link
+                href={`/projects/${project.id}/exports`}
+                className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}
+              >
+                Export history
+              </Link>
+            ) : (
+              <Button
+                size="sm"
+                variant="secondary"
+                disabled
+                title={getRestrictionMessage("exports")}
+                aria-label={`Export history (${getRestrictionMessage("exports")})`}
+              >
+                Export history
+              </Button>
+            )}
+          </div>
+        </Card>
+      </section>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <MetricCard label="Indicators total" value={project.total_indicators} />
@@ -143,6 +257,21 @@ export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
       />
 
       <ProjectWorkspaceBoard projectId={project.id} />
+
+      <Modal
+        open={showClone}
+        title="Clone project"
+        description="Create a copy of this project for reuse. Indicators remain governed and evidence remains project-specific."
+        onClose={() => setShowClone(false)}
+      >
+        <CloneProjectForm
+          projectId={project.id}
+          onSuccess={(newProjectId) => {
+            setShowClone(false);
+            router.push(`/projects/${newProjectId}`);
+          }}
+        />
+      </Modal>
     </div>
   );
 }

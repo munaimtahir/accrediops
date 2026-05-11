@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.evidence.models import EvidenceItem
-from apps.indicators.models import ProjectIndicator
+from apps.indicators.models import ProjectEvidenceRequirement, ProjectIndicator
 from apps.masters.choices import (
     EvidenceApprovalStatusChoices,
     EvidenceCompletenessStatusChoices,
@@ -17,6 +17,7 @@ class EvidenceItemSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "project_indicator",
+            "project_evidence_requirement",
             "title",
             "description",
             "source_type",
@@ -45,6 +46,12 @@ class CreateEvidenceSerializer(serializers.Serializer):
     project_indicator_id = serializers.PrimaryKeyRelatedField(
         queryset=ProjectIndicator.objects.all(),
         source="project_indicator",
+    )
+    project_evidence_requirement_id = serializers.PrimaryKeyRelatedField(
+        queryset=ProjectEvidenceRequirement.objects.all(),
+        source="project_evidence_requirement",
+        required=False,
+        allow_null=True,
     )
     title = serializers.CharField()
     description = serializers.CharField(required=False, allow_blank=True, default="")
@@ -79,6 +86,12 @@ class UpdateEvidenceSerializer(serializers.Serializer):
     location_details = serializers.CharField(required=False, allow_blank=True)
     file_label = serializers.CharField(required=False, allow_blank=True)
     is_physical_copy_available = serializers.BooleanField(required=False)
+    project_evidence_requirement_id = serializers.PrimaryKeyRelatedField(
+        queryset=ProjectEvidenceRequirement.objects.all(),
+        source="project_evidence_requirement",
+        required=False,
+        allow_null=True,
+    )
 
 
 class EvidenceReviewSerializer(serializers.Serializer):

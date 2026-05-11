@@ -1,0 +1,14 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K(node:1486379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1486379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] tests/e2e/admin-import-validation.spec.ts:6:7 › Admin framework validation parity › admin validate sample enforces required inputs and completes with CSV upload
+[1A[2K[2/2] tests/e2e/admin-import-validation.spec.ts:34:7 › Admin framework validation parity › authenticated navigation stays on proxy origin
+[1A[2K  2 passed (1.2m)

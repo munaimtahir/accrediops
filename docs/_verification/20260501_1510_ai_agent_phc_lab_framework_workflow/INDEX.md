@@ -1,0 +1,15 @@
+# PHC LAB Framework Workflow Verification — Index
+
+Folder: `docs/_verification/20260501_1510_ai_agent_phc_lab_framework_workflow/`
+
+- `00_EXECUTIVE_SUMMARY.md`
+- `01_DISCOVERY_FINDINGS.md`
+- `02_SEED_DATA_AND_PRECONDITIONS.md`
+- `03_PLAYWRIGHT_SPEC_DESIGN.md`
+- `04_WORKFLOW_COVERAGE_MAP.md`
+- `05_COMMANDS_AND_RESULTS.md`
+- `06_FIXES_APPLIED.md`
+- `07_FRONTEND_BACKEND_GAPS_FOUND.md`
+- `08_MANUAL_REVIEW_REQUIRED.md`
+- `09_GO_NO_GO_VERDICT.md`
+- `10_NEXT_RECOMMENDED_PROMPT.md`

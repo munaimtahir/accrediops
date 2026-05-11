@@ -78,3 +78,9 @@ To run without external AI provider calls, ensure `.env` has:
 2. `npm run build` passes.
 3. `npx playwright test tests/e2e/15_smoke_clean_new_app_mode.spec.ts` passes.
 4. Contract documentation in `docs/_contracts/` is updated.
+
+## 9. Contract Completeness Guard
+To prevent shipping heading-only contract files:
+```bash
+python3 scripts/check_contract_docs.py
+```

@@ -51,6 +51,11 @@ class ProjectIndicatorDetailView(APIView):
                 "status_history__actor",
                 "generated_outputs",
                 "recurring_requirement__instances",
+                "project_evidence_requirements__evidence_requirement",
+                "project_evidence_requirements__assigned_to",
+                "project_evidence_requirements__submitted_by",
+                "project_evidence_requirements__approved_by",
+                "project_evidence_requirements__rejected_by",
             ),
             pk=pk,
         )
@@ -173,3 +178,31 @@ class ProjectIndicatorsForProjectListView(APIView):
             "approver"
         )
         return success_response(ProjectIndicatorSerializer(project_indicators, many=True).data)
+
+from apps.indicators.models import ProjectEvidenceRequirement
+
+class ProjectEvidenceRequirementUpdateView(APIView):
+    permission_classes = [ExplicitAuthenticatedPermission]
+
+    def post(self, request, pk):
+        from apps.api.serializers.project_indicators import ProjectEvidenceRequirementSerializer
+        req = get_object_or_404(ProjectEvidenceRequirement, pk=pk)
+        ensure_project_owner_access(request.user, req.project_indicator)
+
+        status = request.data.get("status")
+        notes = request.data.get("notes")
+        gap_summary = request.data.get("gap_summary")
+        due_date = request.data.get("due_date")
+
+        if status:
+            req.status = status
+        if notes is not None:
+            req.notes = notes
+        if gap_summary is not None:
+            req.gap_summary = gap_summary
+        if due_date:
+            req.due_date = due_date
+
+        req.save()
+
+        return success_response(ProjectEvidenceRequirementSerializer(req).data)

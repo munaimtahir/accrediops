@@ -1,0 +1,14 @@
+ Container accrediops-backend Running 
+ Container accrediops-frontend Running 
+ Container accrediops-backend Waiting 
+ Container accrediops-backend Healthy 
+ Container accrediops-frontend Waiting 
+ Container accrediops-backend Waiting 
+ Container accrediops-backend Healthy 
+ Container accrediops-frontend Healthy 
+ Container accrediops-caddy Starting 
+ Container accrediops-caddy Started 
+NAME                  IMAGE                 COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+accrediops-backend    accrediops-backend    "sh -c 'python manag…"   backend    4 minutes ago   Up 3 minutes (healthy)   8000/tcp
+accrediops-caddy      caddy:2.8             "caddy run --config …"   caddy      4 minutes ago   Up Less than a second    80/tcp, 443/tcp, 2019/tcp, 443/udp, 0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
+accrediops-frontend   accrediops-frontend   "docker-entrypoint.s…"   frontend   3 minutes ago   Up 3 minutes (healthy)   3000/tcp

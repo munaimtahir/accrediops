@@ -1,0 +1,48 @@
+
+Running 1 test using 1 worker
+
+(node:877948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:877948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/core-journeys.spec.ts:87:7 › Core operational browser journeys › recurring approval from indicator context works (1.1m)
+
+
+  1) tests/e2e/core-journeys.spec.ts:87:7 › Core operational browser journeys › recurring approval from indicator context works 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Submit instance' }).first()[22m
+
+
+      89 |
+      90 |     await openIndicatorPanelIfAvailable(page, "Recurring");
+    > 91 |     await page.getByRole("button", { name: "Submit instance" }).first().click();
+         |                                                                         ^
+      92 |     const submitModal = page.locator("div.fixed.inset-0").last();
+      93 |     await submitModal.getByLabel("Submission text").fill("Recurring submission from E2E.");
+      94 |     await submitModal.getByRole("button", { name: "Submit instance" }).click();
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:91:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-6d7be-rom-indicator-context-works/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/core-journeys.spec.ts:87:7 › Core operational browser journeys › recurring approval from indicator context works 

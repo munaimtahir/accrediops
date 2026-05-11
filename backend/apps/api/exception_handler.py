@@ -21,13 +21,14 @@ def _extract_message(default: str, payload):
 
 def accrediops_exception_handler(exc, context):
     if isinstance(exc, DjangoValidationError):
+        details = getattr(exc, "message_dict", exc.messages)
         return Response(
             {
                 "success": False,
                 "error": {
                     "code": "VALIDATION_ERROR",
-                    "message": "Validation failed.",
-                    "details": getattr(exc, "message_dict", exc.messages),
+                    "message": _extract_message("Validation failed.", details),
+                    "details": details,
                 },
             },
             status=status.HTTP_400_BAD_REQUEST,

@@ -1,0 +1,2 @@
+# Backend: python3 manage.py check
+System check identified no issues (0 silenced).

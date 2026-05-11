@@ -1,0 +1,32 @@
+git restore --staged .
+git add backend/apps/ai_actions/migrations/0004_documentdraft_evidence_requirement_and_more.py
+git add backend/apps/ai_actions/migrations/0005_evidencerequirementsuggestion.py
+git add backend/apps/ai_actions/models/__init__.py
+git add backend/apps/ai_actions/models/document_draft.py
+git add backend/apps/ai_actions/models/evidence_requirement_suggestion.py
+git add backend/apps/ai_actions/services/document_drafting.py
+git add backend/apps/api/serializers/project_indicators.py
+git add backend/apps/api/tests/test_document_drafting.py
+git add backend/apps/api/tests/test_evidence_and_ai.py
+git add backend/apps/api/urls.py
+git add backend/apps/api/views/admin.py
+git add backend/apps/api/views/exports.py
+git add backend/apps/api/views/indicator.py
+git add backend/apps/api/views/project_indicators.py
+git add backend/apps/evidence/migrations/0003_evidenceitem_evidence_requirement_and_more.py
+git add backend/apps/evidence/models/evidence.py
+git add backend/apps/indicators/migrations/0004_evidencerequirement_projectevidencerequirement.py
+git add backend/apps/indicators/models/__init__.py
+git add backend/apps/indicators/models/indicator.py
+git add backend/apps/indicators/services.py
+git add backend/apps/indicators/tests/test_evidence_requirements.py
+git add backend/apps/masters/choices.py
+git add backend/apps/projects/services.py
+git add copilotsession.md
+git add docs/_implementation/20260508_2348_evidence_requirement_pack_builder_alignment/09_IMPLEMENTATION_LOG.md
+git add docs/_implementation/20260508_2348_evidence_requirement_pack_builder_alignment/10_FINAL_VERIFICATION_REPORT.md
+git add docs/_implementation/20260508_2348_evidence_requirement_pack_builder_alignment/11_FINAL_GO_NO_GO_VERDICT.md
+git add docs/_implementation/20260508_2348_evidence_requirement_pack_builder_alignment/12_STABILIZATION_AND_API_COMPLETION_LOG.md
+git add docs/_implementation/20260508_2348_evidence_requirement_pack_builder_alignment/COMMAND_LOG.md
+git add OUT/evidence_requirement_pack_builder_alignment_latest.md
+git diff --name-only --cached

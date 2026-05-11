@@ -1,6 +1,7 @@
 """Tests for document drafting and promotion."""
 
 from unittest.mock import patch
+from django.test import override_settings
 from django.utils import timezone
 
 from apps.ai_actions.models import DocumentDraft, AIUsageLog
@@ -44,6 +45,32 @@ class DocumentDraftingAndPromotionTest(ContractBaseTestCase):
         
         # Verify AI usage log
         self.assertEqual(AIUsageLog.objects.filter(feature="Document Drafting").count(), 1)
+
+    @override_settings(AI_DEMO_MODE=False, AI_PROVIDER="gemini", AI_MODEL="gemini-1.5-flash", GEMINI_API_KEY="")
+    def test_generate_draft_missing_ai_key_returns_clear_error(self):
+        self.client.force_authenticate(user=self.admin)
+        indicator = self.project_indicator.indicator
+        response = self.client.post(
+            f"/api/admin/queues/document-generation/{indicator.id}/generate-draft/",
+            {"user_instruction": "Test instruction"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("GEMINI_API_KEY", response.json()["error"]["message"])
+
+    @override_settings(AI_DEMO_MODE=False, AI_PROVIDER="gemini", AI_MODEL="gemini-1.5-flash", GEMINI_API_KEY="fake")
+    def test_generate_draft_provider_failure_is_handled(self):
+        self.client.force_authenticate(user=self.admin)
+        indicator = self.project_indicator.indicator
+
+        with patch("apps.ai_actions.services.generation._call_gemini_api", side_effect=Exception("boom")):
+            response = self.client.post(
+                f"/api/admin/queues/document-generation/{indicator.id}/generate-draft/",
+                {"user_instruction": "Test instruction"},
+                format="json",
+            )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("AI document drafting failed", response.json()["error"]["message"])
 
     def test_generate_project_specific_draft(self):
         self.client.force_authenticate(user=self.admin)
@@ -124,6 +151,9 @@ class DocumentDraftingAndPromotionTest(ContractBaseTestCase):
         self.assertEqual(evidence.source_type, "GENERATED")
         self.assertEqual(evidence.uploaded_by, self.admin)
         self.assertEqual(evidence.project_indicator, self.project_indicator)
+        self.project_indicator.refresh_from_db()
+        self.assertFalse(self.project_indicator.is_met)
+        self.assertEqual(self.project_indicator.current_status, "NOT_STARTED")
 
     def test_cannot_promote_already_promoted_draft(self):
         evidence = EvidenceItem.objects.create(
@@ -156,3 +186,8 @@ class DocumentDraftingAndPromotionTest(ContractBaseTestCase):
         
         self.assertEqual(response.status_code, 400)
         self.assertIn("already been promoted", response.json()["error"]["message"])
+
+    def test_owner_cannot_access_admin_draft_endpoints(self):
+        self.client.force_authenticate(user=self.owner)
+        response = self.client.get("/api/admin/document-drafts/")
+        self.assertEqual(response.status_code, 403)

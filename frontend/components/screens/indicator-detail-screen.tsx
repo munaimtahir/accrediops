@@ -155,6 +155,15 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
     }
   }, [searchParams]);
 
+  const standardsMap = useMemo(() => {
+    const list = Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [];
+    const map = new Map<number, StandardProgress>();
+    for (const standard of list) {
+      map.set(standard.standard_id, standard);
+    }
+    return map;
+  }, [standardsQuery.data]);
+
   if (indicatorQuery.isLoading) {
     return (
       <div className="space-y-4">
@@ -177,15 +186,6 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
 
   const evidenceItems = evidenceQuery.data ?? indicator.evidence_items;
   const aiOutputs = aiOutputsQuery.data ?? indicator.ai_outputs;
-  const standards = Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [];
-
-  const standardsMap = useMemo(() => {
-    const map = new Map<number, StandardProgress>();
-    for (const standard of standards) {
-      map.set(standard.standard_id, standard);
-    }
-    return map;
-  }, [standards]);
 
   const currentStandard = standardsMap.get(indicator.indicator.standard);
   const areaName = currentStandard?.area_name ?? `Area #${indicator.indicator.area}`;

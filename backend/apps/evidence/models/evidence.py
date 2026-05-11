@@ -16,6 +16,13 @@ class EvidenceItem(models.Model):
         on_delete=models.PROTECT,
         related_name="evidence_items",
     )
+    project_evidence_requirement = models.ForeignKey(
+        "indicators.ProjectEvidenceRequirement",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="evidence_items",
+    )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     source_type = models.CharField(max_length=20, choices=EvidenceSourceTypeChoices.choices)
@@ -69,6 +76,12 @@ class EvidenceItem(models.Model):
         ordering = ["-uploaded_at"]
 
     def clean(self):
+        if (
+            self.project_evidence_requirement_id
+            and self.project_indicator_id
+            and self.project_evidence_requirement.project_indicator_id != self.project_indicator_id
+        ):
+            raise ValidationError("Evidence requirement linkage must belong to the same project indicator.")
         if self.source_type in {
             EvidenceSourceTypeChoices.UPLOAD,
             EvidenceSourceTypeChoices.URL,

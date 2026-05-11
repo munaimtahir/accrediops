@@ -1,0 +1,474 @@
+{
+  "handoff_metadata": {
+    "version": "1.0",
+    "generated_at": "2026-05-08T12:40:23Z",
+    "session_id": "019e0221-fd92-7c42-9de6-8d09fb54d03f",
+    "termination_reason": "Codex agent limit reached",
+    "handoff_completeness": "100%"
+  },
+  "project": {
+    "name": "AccrediOps",
+    "description": "Internal accreditation operations platform",
+    "repository": "https://github.com/munaimtahir/accrediops",
+    "directory": "/home/munaim/srv/apps/accrediops",
+    "philosophy": "Contract-first, API-first, frontend-mediated, governance-centered development",
+    "business_context": "Internal company use only. Not a SaaS product. Clients receive outputs, not direct access."
+  },
+  "tech_stack": {
+    "backend": "Django + Django REST Framework + PostgreSQL",
+    "frontend": "Next.js + TypeScript + React",
+    "testing": "pytest (backend), Playwright (e2e)",
+    "ai_integration": "Google Gemini API",
+    "deployment": "Docker Compose",
+    "ci_cd": "GitHub Actions"
+  },
+  "current_work": {
+    "phase": "Document Drafting and Promotion",
+    "feature_goal": "AI-assisted document generation with human review and promotion to evidence items",
+    "parallel_effort": "Comprehensive test coverage expansion",
+    "uncommitted_changes": {
+      "modified_files": 40,
+      "untracked_files": 14,
+      "status": "ACTIVE_SESSION - WORK IN PROGRESS"
+    }
+  },
+  "completed_tasks": [
+    {
+      "id": "test-coverage-projects",
+      "name": "Unit tests for projects service",
+      "status": "COMPLETED",
+      "lines_added": 245,
+      "test_cases": 12,
+      "file": "backend/apps/projects/tests/test_services.py",
+      "commit_count": 3
+    },
+    {
+      "id": "test-coverage-indicators",
+      "name": "Unit tests for indicators service",
+      "status": "COMPLETED",
+      "lines_added": 443,
+      "test_cases": 15,
+      "file": "backend/apps/indicators/tests/test_services.py",
+      "commit_count": 4
+    },
+    {
+      "id": "test-coverage-exports",
+      "name": "Unit tests for exports service",
+      "status": "COMPLETED",
+      "lines_added": 128,
+      "test_cases": 8,
+      "file": "backend/apps/exports/tests/test_services.py",
+      "commit_count": 2
+    },
+    {
+      "id": "test-coverage-frameworks",
+      "name": "Unit tests for frameworks service",
+      "status": "COMPLETED",
+      "lines_added": 173,
+      "test_cases": 10,
+      "file": "backend/apps/frameworks/tests/test_services.py",
+      "commit_count": 1
+    },
+    {
+      "id": "test-coverage-recurring",
+      "name": "Unit tests for recurring service",
+      "status": "COMPLETED",
+      "lines_added": 75,
+      "test_cases": 5,
+      "file": "backend/apps/recurring/tests/test_services.py",
+      "commit_count": 1
+    },
+    {
+      "id": "draft-model-enhancement",
+      "name": "Enhance DocumentDraft model with new fields",
+      "status": "COMPLETED",
+      "file": "backend/apps/ai_actions/models/document_draft.py",
+      "migration": "0004_documentdraft_draft_kind_and_more.py"
+    },
+    {
+      "id": "framework-doc-service",
+      "name": "Create FrameworkDocumentation AI service",
+      "status": "COMPLETED",
+      "file": "backend/apps/ai_actions/services/framework_documentation.py"
+    },
+    {
+      "id": "api-contract-update",
+      "name": "Update API contract for document drafting",
+      "status": "COMPLETED",
+      "files": [
+        "backend/apps/api/urls.py",
+        "backend/apps/api/serializers/admin.py"
+      ]
+    }
+  ],
+  "in_progress_tasks": [
+    {
+      "id": "draft-review-ui",
+      "name": "Document Draft Review UI Component",
+      "progress_percent": 80,
+      "can_resume": true,
+      "file": "frontend/components/screens/document-draft-review-screen.tsx",
+      "completed": [
+        "Component structure defined",
+        "Side-by-side layout implemented",
+        "Modal for promotion confirmation",
+        "TypeScript interfaces"
+      ],
+      "remaining": [
+        "API client integration",
+        "Promotion submission handler",
+        "Error handling and notifications",
+        "Loading states",
+        "Responsive design"
+      ],
+      "restart_instructions": "npm run dev && test at /admin/document-drafts/{draftId}"
+    },
+    {
+      "id": "queue-screen",
+      "name": "Document Generation Queue Screen",
+      "progress_percent": 60,
+      "can_resume": true,
+      "file": "frontend/components/screens/admin-document-generation-queue-screen.tsx",
+      "completed": [
+        "Queue UI structure",
+        "Column definitions",
+        "Filter and sort UI"
+      ],
+      "remaining": [
+        "API endpoint integration",
+        "Real-time status updates",
+        "Action buttons",
+        "Pagination",
+        "Empty state handling"
+      ],
+      "restart_instructions": "Verify API at GET /api/admin/document-drafts/"
+    },
+    {
+      "id": "promote-backend",
+      "name": "Promote Draft to Evidence Backend Logic",
+      "progress_percent": 50,
+      "can_resume": false,
+      "can_resume_reason": "Needs architectural review",
+      "file": "backend/apps/ai_actions/services/document_drafting.py",
+      "completed": [
+        "Service method signature",
+        "Error handling structure",
+        "Audit logging hooks"
+      ],
+      "remaining": [
+        "Data mapping DocumentDraft → EvidenceItem",
+        "Project indicator validation",
+        "Evidence metadata preservation",
+        "Transaction management",
+        "Rollback on failure"
+      ],
+      "restart_instructions": "Review implementation template in AGENT_HANDOFF.md section 5"
+    },
+    {
+      "id": "e2e-tests",
+      "name": "E2E Test Suite for Document Workflow",
+      "progress_percent": 40,
+      "can_resume": false,
+      "can_resume_reason": "Needs infrastructure setup",
+      "files": [
+        "frontend/tests/e2e/40_framework_documentation_ai.spec.ts",
+        "backend/apps/api/tests/test_document_drafting.py"
+      ],
+      "completed": [
+        "Test structure defined",
+        "Helper functions created",
+        "Page object models"
+      ],
+      "remaining": [
+        "Mocked Gemini API responses",
+        "Test data seeding",
+        "Full workflow test scenario",
+        "Error scenario tests",
+        "Performance tests"
+      ],
+      "restart_instructions": "docker-compose -f docker-compose.test.yml up && npm run test:e2e"
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "priority": "HIGH",
+      "id": "complete-promote-logic",
+      "name": "Complete Promote Draft to Evidence Implementation",
+      "estimate_hours": "4-6",
+      "dependencies": [],
+      "files": ["backend/apps/ai_actions/services/document_drafting.py"],
+      "blocker": "Business logic implementation",
+      "description": "Implement complete data mapping and transaction handling for promoting drafts to evidence"
+    },
+    {
+      "priority": "HIGH",
+      "id": "finalize-review-ui",
+      "name": "Finalize Document Review UI Integration",
+      "estimate_hours": "2-3",
+      "dependencies": ["complete-promote-logic"],
+      "files": ["frontend/components/screens/document-draft-review-screen.tsx"],
+      "blocker": "API integration testing",
+      "description": "Connect API calls and test with real backend"
+    },
+    {
+      "priority": "HIGH",
+      "id": "complete-queue-screen",
+      "name": "Complete Document Queue Screen",
+      "estimate_hours": "3-4",
+      "dependencies": [],
+      "files": ["frontend/components/screens/admin-document-generation-queue-screen.tsx"],
+      "blocker": "API endpoints operational",
+      "description": "Implement polling/websocket and pagination"
+    },
+    {
+      "priority": "HIGH",
+      "id": "comprehensive-tests",
+      "name": "Comprehensive Test Suite for Document Workflow",
+      "estimate_hours": "8-10",
+      "dependencies": ["complete-promote-logic", "finalize-review-ui", "complete-queue-screen"],
+      "files": ["frontend/tests/e2e/", "backend/apps/api/tests/"],
+      "blocker": "Test infrastructure setup",
+      "description": "Setup test infrastructure, mocking, and assertions"
+    },
+    {
+      "priority": "MEDIUM",
+      "id": "audit-trail",
+      "name": "Audit Trail Visibility on Evidence Items",
+      "estimate_hours": "2-3",
+      "dependencies": [],
+      "files": ["frontend/components/screens/project-overview-screen.tsx"],
+      "blocker": "Display logic",
+      "description": "Show 'AI Source' badges on promoted evidence"
+    },
+    {
+      "priority": "MEDIUM",
+      "id": "deep-linking",
+      "name": "Queue Deep-Linking from Indicator Detail",
+      "estimate_hours": "1-2",
+      "dependencies": [],
+      "files": ["frontend/components/screens/indicator-drawer.tsx"],
+      "blocker": "Navigation routing",
+      "description": "Add 'View in Queue' link from indicator screens"
+    },
+    {
+      "priority": "MEDIUM",
+      "id": "recurring-integration",
+      "name": "Recurring Tasks Framework Enhancement",
+      "estimate_hours": "4-5",
+      "dependencies": ["complete-promote-logic"],
+      "files": ["backend/apps/recurring/"],
+      "blocker": "Recurring evidence maintenance design",
+      "description": "Integrate document drafts with recurring evidence maintenance"
+    }
+  ],
+  "git_status": {
+    "current_branch": "main",
+    "upstream_status": "up to date with origin/main",
+    "uncommitted_modifications": 40,
+    "untracked_files": 14,
+    "last_commit": {
+      "hash": "9e54efd",
+      "timestamp": "2026-05-01T12:50:45+05:00",
+      "author": "Muhammad Munaim Tahir",
+      "message": "Merge pull request #29 from munaimtahir/jules-16602881047224405868-01020559"
+    }
+  },
+  "uncommitted_changes": {
+    "backend_files": [
+      "backend/apps/ai_actions/models/document_draft.py",
+      "backend/apps/ai_actions/services/document_drafting.py",
+      "backend/apps/ai_actions/services/framework_documentation.py",
+      "backend/apps/api/serializers/admin.py",
+      "backend/apps/api/tests/test_ai_generation_gemini.py",
+      "backend/apps/api/tests/test_document_drafting.py",
+      "backend/apps/api/urls.py",
+      "backend/apps/api/views/admin.py",
+      "backend/apps/audit/services.py",
+      "backend/apps/projects/management/commands/seed_e2e_state.py",
+      "docker-compose.yml"
+    ],
+    "frontend_files": [
+      "frontend/app/(workbench)/admin/page.tsx",
+      "frontend/app/layout.tsx",
+      "frontend/components/common/settings-page-header.tsx",
+      "frontend/components/layout/sidebar.tsx",
+      "frontend/components/screens/admin-audit-screen.tsx",
+      "frontend/components/screens/admin-document-generation-queue-screen.tsx",
+      "frontend/components/screens/admin-frameworks-screen.tsx",
+      "frontend/components/screens/document-draft-review-screen.tsx",
+      "frontend/components/screens/indicator-drawer.tsx",
+      "frontend/components/screens/project-overview-screen.tsx",
+      "frontend/components/screens/project-print-pack-screen.tsx",
+      "frontend/components/screens/project-worklist-screen.tsx",
+      "frontend/components/screens/project-workspace-board.tsx",
+      "frontend/lib/hooks/use-projects.ts",
+      "frontend/package.json",
+      "frontend/tests/e2e/00_runtime_and_auth.spec.ts",
+      "frontend/tests/e2e/01_lab_framework_integrity.spec.ts",
+      "frontend/tests/e2e/15_smoke_clean_new_app_mode.spec.ts",
+      "frontend/tests/e2e/17_recurring_and_masters_capability_fix.spec.ts",
+      "frontend/tests/e2e/18_simplified_navigation_and_homepage.spec.ts",
+      "frontend/tests/e2e/19_accessibility.spec.ts",
+      "frontend/tests/e2e/admin-import-validation.spec.ts",
+      "frontend/tests/e2e/app-flows.spec.ts",
+      "frontend/tests/e2e/core-journeys.spec.ts",
+      "frontend/tests/e2e/cta-discoverability.spec.ts",
+      "frontend/tests/e2e/global-setup.cjs",
+      "frontend/tests/e2e/helpers.ts",
+      "frontend/tests/e2e/operator-first-time.spec.ts",
+      "frontend/tests/e2e/role-visibility.spec.ts",
+      "frontend/tests/e2e/workflow-guidance.spec.ts",
+      "frontend/tests/sidebar.test.tsx",
+      "frontend/tsconfig.json",
+      "frontend/tsconfig.tsbuildinfo"
+    ],
+    "config_files": [
+      "docs/_contracts/20260430_2003_frontend_backend_contract_update/01_API_ROUTE_CONTRACT.md",
+      "scripts/check_contract_docs.py"
+    ],
+    "untracked_new_files": [
+      "backend/apps/ai_actions/migrations/0004_documentdraft_draft_kind_and_more.py",
+      "backend/apps/ai_actions/services/framework_documentation.py",
+      "backend/apps/api/tests/test_framework_documentation_ai.py",
+      "backend/apps/evidence/tests/",
+      "backend/apps/workflow/tests/",
+      "backend/coverage.xml",
+      "docs/_discovery/20260505_0904_full_runtime_audit/",
+      "docs/_discovery/20260505_0952_full_runtime_audit/",
+      "docs/_implementation/20260507_1110_core_workflow_ai_documentation_sprint/",
+      "docs/_implementation/20260507_2220_core_e2e_reliability_sprint/",
+      "docs/_implementation/20260508_0800_core_e2e_reliability_sprint/",
+      "docs/_verification/20260501_1004_contract_lint_final_review_pack.zip",
+      "docs/_verification/20260501_1004_contract_lint_final_review_pack/",
+      "docs/_verification/20260501_1510_ai_agent_phc_lab_framework_workflow/",
+      "docs/_verification/20260502_0216_ai_agent_phc_lab_framework_workflow/",
+      "docs/_verification/20260505_final_runtime_workflow_verification/",
+      "frontend/app/(workbench)/framework-documentation-ai/",
+      "frontend/components/layout/skip-link.tsx",
+      "frontend/components/screens/framework-documentation-ai-screen.tsx",
+      "frontend/tests/e2e/30_phc_lab_framework_full_workflow.spec.ts",
+      "frontend/tests/e2e/40_framework_documentation_ai.spec.ts"
+    ]
+  },
+  "environment_setup": {
+    "backend_setup": [
+      "pip install -r requirements.txt",
+      "python manage.py migrate",
+      "python manage.py seed_e2e_state"
+    ],
+    "frontend_setup": [
+      "npm install",
+      "npm run build"
+    ],
+    "docker_setup": [
+      "docker-compose up -d",
+      "docker-compose ps  # Verify services"
+    ],
+    "required_environment_vars": {
+      "GEMINI_API_KEY": "Required for AI features",
+      "DATABASE_URL": "PostgreSQL connection string",
+      "DJANGO_SECRET_KEY": "Secret key for Django",
+      "BACKEND_URL": "Backend API endpoint",
+      "FRONTEND_URL": "Frontend application URL"
+    },
+    "key_directories": {
+      "backend": "backend/apps/ - Django application modules",
+      "frontend": "frontend/ - Next.js application",
+      "contracts": "docs/_contracts/ - API contracts",
+      "outputs": "OUT/ - Session outputs and reports",
+      "tests": "backend/apps/*/tests/ and frontend/tests/e2e/"
+    }
+  },
+  "contract_references": {
+    "api_contract": "docs/_contracts/20260430_2003_frontend_backend_contract_update/01_API_ROUTE_CONTRACT.md",
+    "frontend_backend_mapping": "docs/_contracts/20260430_2003_frontend_backend_contract_update/03_FRONTEND_ACTION_TO_BACKEND_MAP.md",
+    "agent_philosophy": "AGENT.md",
+    "project_plan": "PLAN.md",
+    "testing_guide": "TESTING.md",
+    "recent_fixes": "FIX_SUMMARY.md"
+  },
+  "known_issues": [
+    {
+      "id": "gemini-api-stability",
+      "severity": "MEDIUM",
+      "description": "Framework documentation depends on Gemini API rate limits",
+      "mitigation": "Implement exponential backoff, caching, async queue"
+    },
+    {
+      "id": "draft-lifecycle",
+      "severity": "MEDIUM",
+      "description": "Unclear policy on draft retention after promotion",
+      "mitigation": "Document policy and implement compliance"
+    },
+    {
+      "id": "test-db-isolation",
+      "severity": "MEDIUM",
+      "description": "E2E tests need isolated database environment",
+      "mitigation": "Use docker-compose.test.yml with separate test database"
+    },
+    {
+      "id": "uncommitted-complexity",
+      "severity": "HIGH",
+      "description": "40+ modified files with interdependencies",
+      "mitigation": "Commit in logical chunks: tests → backend → api → frontend"
+    }
+  ],
+  "quick_start": {
+    "step_1_review_context": [
+      "Read AGENT.md for project philosophy",
+      "Read PLAN.md for feature phases",
+      "Review In-Progress section (section 5)"
+    ],
+    "step_2_verify_environment": [
+      "cd /home/munaim/srv/apps/accrediops",
+      "docker-compose up -d",
+      "docker-compose ps"
+    ],
+    "step_3_run_tests": [
+      "pytest backend/apps/api/tests/ -v",
+      "npm run test --prefix frontend"
+    ],
+    "step_4_start_development": [
+      "npm run dev --prefix frontend",
+      "python manage.py runserver"
+    ]
+  },
+  "validation_checklist": [
+    "Reviewed AGENT.md for non-negotiables",
+    "Reviewed PLAN.md for phases",
+    "Understood Document Drafting requirements",
+    "Docker environment functional",
+    "Backend tests pass",
+    "Frontend builds successfully",
+    "Reviewed git diff status",
+    "Identified restart points",
+    "Verified Gemini API key configured",
+    "Understood contract-first approach"
+  ],
+  "recommended_commit_order": [
+    {
+      "order": 1,
+      "scope": "Test coverage expansion",
+      "files": "backend/apps/*/tests/",
+      "message": "test: expand service layer test coverage"
+    },
+    {
+      "order": 2,
+      "scope": "Backend services",
+      "files": "backend/apps/ai_actions/",
+      "message": "feat: implement document drafting service enhancements"
+    },
+    {
+      "order": 3,
+      "scope": "API layer",
+      "files": "backend/apps/api/",
+      "message": "feat: update API contract for document drafting"
+    },
+    {
+      "order": 4,
+      "scope": "Frontend components",
+      "files": "frontend/",
+      "message": "feat: implement document draft review and admin queue UI"
+    }
+  ]
+}

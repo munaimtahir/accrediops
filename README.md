@@ -7,6 +7,8 @@ Prepared: 2026-04-02
 This is a GitHub-ready starter pack for the internal accreditation services application discussed in the project context.
 It is designed for internal company use only. The application is not intended to be sold directly to clients, exposed as a SaaS product, or used as a public-facing portal.
 
+AccrediOps is an **Accreditation Evidence Management and Document Generation Platform**, built as a framework-first, indicator-driven, evidence-based accreditation operating system.
+
 The application exists to help your team:
 
 - load accreditation frameworks and checklists
@@ -16,7 +18,7 @@ The application exists to help your team:
 - maintain recurring evidence items
 - reuse completed accreditation structures for future clients
 - generate and organize print-ready hard evidence packs
-- use AI as an internal advisory layer with manual human review
+- use AI as an internal advisory layer with manual human review; AI can **classify indicators** and **suggest evidence requirements** that are then reviewed by human users.
 
 ## Recommended working name
 

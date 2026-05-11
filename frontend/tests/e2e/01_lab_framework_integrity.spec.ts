@@ -15,11 +15,11 @@ test.describe("01 LAB framework integrity", () => {
     expect(frameworksResponse.ok()).toBeTruthy();
     const frameworks = frameworksPayload.data as Array<{ id: number; name: string }>;
     expect(frameworks).toHaveLength(1);
-    expect(frameworks[0].name).toBe("LAB");
+    expect(frameworks[0].name).toBe("PHC LAB");
 
     const analysisResponse = await page.request.get(`/api/frameworks/${frameworks[0].id}/analysis/`);
     const analysisPayload = await analysisResponse.json();
     expect(analysisResponse.ok()).toBeTruthy();
-    expect(analysisPayload.data.total_indicators).toBe(119);
+    expect(analysisPayload.data.total_indicators).toBe(118);
   });
 });

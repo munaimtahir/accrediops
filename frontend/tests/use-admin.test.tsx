@@ -20,7 +20,11 @@ vi.mock("@/lib/api/client", () => ({
 
 function createWrapper() {
   const queryClient = new QueryClient();
-  return ({ children }: { children: ReactNode }) => <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  const Wrapper = ({ children }: { children: ReactNode }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+  Wrapper.displayName = "QueryClientWrapper";
+  return Wrapper;
 }
 
 describe("useFrameworkImportValidation", () => {

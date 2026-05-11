@@ -1,0 +1,15 @@
+Error: API login failed for storageState user=pw_owner: {"ok":false,"status":500,"body":{"success":false,"error":{"code":"SERVER_ERROR","message":"An unexpected error occurred.","details":{}}}}
+
+   at global-setup.cjs:122
+
+  120 |       );
+  121 |       if (!loginResult.ok || !loginResult.body?.success) {
+> 122 |         throw new Error(`API login failed for storageState user=${username}: ${JSON.stringify(loginResult)}`);
+      |               ^
+  123 |       }
+  124 |
+  125 |       if (!page.url().includes("/projects")) {
+    at buildRoleStorageStates (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:122:15)
+    at module.exports (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/global-setup.cjs:148:3)
+
+[1A[2K

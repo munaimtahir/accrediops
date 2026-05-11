@@ -1,0 +1,166 @@
+
+Running 10 tests using 1 worker
+
+(node:886518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:886518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/core-journeys.spec.ts:67:7 › Core operational browser journeys › evidence review journey works end-to-end (23.8s)
+  ✓   2 tests/e2e/core-journeys.spec.ts:91:7 › Core operational browser journeys › recurring approval from indicator context works (19.5s)
+  ✓   3 tests/e2e/core-journeys.spec.ts:108:7 › Core operational browser journeys › create flow supports client profile linkage (26.4s)
+  ✓   4 tests/e2e/core-journeys.spec.ts:144:7 › Core operational browser journeys › clone project then open cloned workspace (8.0s)
+  ✓   5 tests/e2e/core-journeys.spec.ts:165:7 › Core operational browser journeys › admin route access is available after login (16.1s)
+  ✘   6 tests/e2e/core-journeys.spec.ts:172:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible (7.4s)
+(node:888668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:888668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 tests/e2e/core-journeys.spec.ts:210:7 › Core operational browser journeys › non-admin user cannot reopen met indicator (7.8s)
+(node:888843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:888843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 tests/e2e/core-journeys.spec.ts:250:7 › Core operational browser journeys › export lifecycle creates history row with persisted status (13.3s)
+  ✓   9 tests/e2e/core-journeys.spec.ts:272:7 › Core operational browser journeys › non-admin user cannot access export history actions (18.6s)
+  ✘  10 tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export (12.2s)
+
+
+  1) tests/e2e/core-journeys.spec.ts:172:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })
+    Expected: visible
+    Error: strict mode violation: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' }) resolved to 3 elements:
+        1) <a href="/projects/278" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).first()
+        2) <a href="/projects/277" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(1)
+        3) <a href="/projects/276" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(2)
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 20000ms[22m
+    [2m  - waiting for locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })[22m
+
+
+      36 |   const seededProjectName = "E2E Lab Project";
+      37 |   const seededProjectCard = page.locator("main").locator("div").filter({ hasText: seededProjectName }).first();
+    > 38 |   await expect(seededProjectCard.getByRole("link", { name: "Open project" })).toBeVisible({ timeout: 20000 });
+         |                                                                               ^
+      39 |   await seededProjectCard.getByRole("link", { name: "Open project" }).click();
+      40 |   await expect(page).toHaveURL(/\/projects\/\d+/);
+      41 |   const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:38:79)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:173:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-c07e8-d-audit-evidence-is-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/e2e/core-journeys.spec.ts:210:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })
+    Expected: visible
+    Error: strict mode violation: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' }) resolved to 3 elements:
+        1) <a href="/projects/278" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).first()
+        2) <a href="/projects/277" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(1)
+        3) <a href="/projects/276" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(2)
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 20000ms[22m
+    [2m  - waiting for locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })[22m
+
+
+      36 |   const seededProjectName = "E2E Lab Project";
+      37 |   const seededProjectCard = page.locator("main").locator("div").filter({ hasText: seededProjectName }).first();
+    > 38 |   await expect(seededProjectCard.getByRole("link", { name: "Open project" })).toBeVisible({ timeout: 20000 });
+         |                                                                               ^
+      39 |   await seededProjectCard.getByRole("link", { name: "Open project" }).click();
+      40 |   await expect(page).toHaveURL(/\/projects\/\d+/);
+      41 |   const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:38:79)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:211:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-ea94f-cannot-reopen-met-indicator/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })
+    Expected: visible
+    Error: strict mode violation: locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' }) resolved to 5 elements:
+        1) <a href="/projects/280" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).first()
+        2) <a href="/projects/279" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(1)
+        3) <a href="/projects/278" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(2)
+        4) <a href="/projects/277" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(3)
+        5) <a href="/projects/276" class="inline-flex items-center justify-center gap-2 rounded-md border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 ring-offset-white outline-none border-slate-900 bg-slate-900 text-white hover:bg-slate-800 h-8 px-3 py-1.5 text-xs">Open project</a> aka getByRole('link', { name: 'Open project' }).nth(4)
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 20000ms[22m
+    [2m  - waiting for locator('main').locator('div').filter({ hasText: 'E2E Lab Project' }).first().getByRole('link', { name: 'Open project' })[22m
+
+
+      36 |   const seededProjectName = "E2E Lab Project";
+      37 |   const seededProjectCard = page.locator("main").locator("div").filter({ hasText: seededProjectName }).first();
+    > 38 |   await expect(seededProjectCard.getByRole("link", { name: "Open project" })).toBeVisible({ timeout: 20000 });
+         |                                                                               ^
+      39 |   await seededProjectCard.getByRole("link", { name: "Open project" }).click();
+      40 |   await expect(page).toHaveURL(/\/projects\/\d+/);
+      41 |   const projectId = Number(page.url().match(/\/projects\/(\d+)/)?.[1]);
+        at createProjectAndOpenIndicator (/home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:38:79)
+        at /home/munaim/srv/apps/accrediops/frontend/tests/e2e/core-journeys.spec.ts:292:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+    Usage:
+
+        npx playwright show-trace ../OUT/playwright/core-journeys-Core-operati-7e776-e-evidence-recurring-export/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/e2e/core-journeys.spec.ts:172:7 › Core operational browser journeys › admin override reopens met indicator and audit evidence is visible 
+    tests/e2e/core-journeys.spec.ts:210:7 › Core operational browser journeys › non-admin user cannot reopen met indicator 
+    tests/e2e/core-journeys.spec.ts:291:7 › Core operational browser journeys › combined governance path: create, evidence, recurring, export 
+  7 passed (3.0m)

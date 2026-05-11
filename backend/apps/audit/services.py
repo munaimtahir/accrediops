@@ -17,6 +17,9 @@ def normalize_for_json(value):
         return {key: normalize_for_json(item) for key, item in value.items()}
     if isinstance(value, (list, tuple, set)):
         return [normalize_for_json(item) for item in value]
+    # Fallback for model instances (e.g. m2m values) to avoid JSON serialization crashes.
+    if hasattr(value, "pk"):
+        return getattr(value, "pk")
     return value
 
 

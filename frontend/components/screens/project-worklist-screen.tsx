@@ -64,8 +64,13 @@ function parsePageSize(value: string | null): number | "all" {
 
 function WorklistLoading() {
   return (
-    <div className="space-y-4">
-      <LoadingSkeleton className="h-32 w-full" />
+    <div className="space-y-6">
+      <PageHeader
+        eyebrow="Primary Screen"
+        title="Project worklist"
+        description="Inspection-first indicator dashboard grouped by Area and Standard with status-driven tiles for rapid accreditation scanning."
+      />
+      <LoadingSkeleton className="h-20 w-full" />
       <LoadingSkeleton className="h-20 w-full" />
       <LoadingSkeleton className="h-96 w-full" />
     </div>
@@ -145,7 +150,7 @@ export function ProjectWorklistScreen({ projectId }: { projectId: number }) {
     router.replace(pathname);
   }
 
-  const rows = worklistQuery.data?.results ?? [];
+  const rows = useMemo(() => worklistQuery.data?.results ?? [], [worklistQuery.data?.results]);
   const standards = Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [];
   const areaOptions = standards.reduce<Array<{ id: number; name: string }>>((items, row) => {
     if (!items.some((entry) => entry.id === row.area_id)) {

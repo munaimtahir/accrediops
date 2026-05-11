@@ -22,7 +22,7 @@ export function SettingsPageHeader({
           className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-2 -ml-3 text-slate-500 hover:text-slate-900")}
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Settings
+          Back to Admin dashboard
         </Link>
       </div>
       <PageHeader eyebrow="Admin" title={title} description={description} actions={actions} />

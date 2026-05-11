@@ -1,0 +1,1 @@
+{"success":true,"data":{"status":"ok","service":"accrediops-backend","database":"ok"}}

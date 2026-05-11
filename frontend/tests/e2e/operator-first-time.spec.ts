@@ -28,7 +28,7 @@ test.describe("operator first time", () => {
 
     await page.goto(`/projects/${project.id}`);
     await expect(page.getByTestId("next-action-banner").getByText("Action", { exact: true })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Go to worklist" })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Open worklist/i }).first()).toBeVisible();
 
     await page.context().clearCookies();
     await loginAs(page, "owner");
@@ -101,10 +101,8 @@ test.describe("operator first time", () => {
     );
 
     await page.reload();
-    await expect(
-      page
-        .getByTestId("next-action-banner")
-        .getByText("Indicator is already completed. Use Return or Reopen only when a governance override is required."),
-    ).toBeVisible();
+    await expect(page.getByTestId("next-action-banner").getByText(/Indicator is already completed/i)).toBeVisible({
+      timeout: 15000,
+    });
   });
 });

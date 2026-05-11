@@ -8,6 +8,7 @@ from apps.exports.services import (build_print_bundle,
                                    enforce_export_eligibility,
                                    log_export_audit, upsert_print_pack_items)
 from apps.projects.models import AccreditationProject
+from apps.indicators.models import EvidenceRequirement, ProjectEvidenceRequirement
 from apps.workflow.permissions import AdminOrLeadPermission
 
 

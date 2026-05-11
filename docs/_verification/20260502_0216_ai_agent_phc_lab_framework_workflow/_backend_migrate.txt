@@ -1,0 +1,4 @@
+Operations to perform:
+  Apply all migrations: accounts, admin, ai_actions, audit, auth, contenttypes, evidence, exports, frameworks, indicators, masters, projects, recurring, sessions
+Running migrations:
+  No migrations to apply.

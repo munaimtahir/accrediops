@@ -2,7 +2,7 @@
 import { Modal } from "@/components/common/modal";
 import { Card } from "@/components/ui/card";
 
-import { FormEvent, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
@@ -22,14 +22,33 @@ import {
   useRetrieveDocumentDraft,
   useUpdateDocumentDraft,
 } from "@/lib/hooks/use-admin";
-import { Dialog } from "@headlessui/react";
 import { Check, Clipboard, Save } from "lucide-react";
 import { DocumentTypeChoices, EvidenceTypeChoices } from "@/lib/constants";
 import { useForm } from "react-hook-form";
-import { ProjectIndicatorSummary } from "@/types";
+import { Project } from "@/types";
+import type { DocumentDraftDetail } from "@/lib/hooks/use-admin";
 
 
-function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: boolean; onClose: () => void }) {
+type PromoteDraftFormValues = {
+  project_id: string;
+  project_indicator_id: string;
+  evidence_title: string;
+  evidence_type: string;
+  document_type: string;
+  final_filename: string;
+  notes: string;
+  confirm_promotion: boolean;
+};
+
+function PromoteToEvidenceModal({
+  draft,
+  open,
+  onClose,
+}: {
+  draft: DocumentDraftDetail;
+  open: boolean;
+  onClose: () => void;
+}) {
   const { pushToast } = useToast();
   const promoteDraft = usePromoteDocumentDraftToEvidence(draft.id);
   const projectsQuery = useAdminProjects();
@@ -40,7 +59,7 @@ function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: bo
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<PromoteDraftFormValues>({
     defaultValues: {
       project_id: draft.project?.toString() || "",
       project_indicator_id: draft.project_indicator?.toString() || "",
@@ -58,7 +77,7 @@ function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: bo
   const projectIndicators = projectIndicatorsQuery.data ?? [];
 
 
-  async function onSubmit(data: any) {
+  async function onSubmit(data: PromoteDraftFormValues) {
     try {
       await promoteDraft.mutateAsync({
         project_id: Number(data.project_id),
@@ -86,7 +105,7 @@ function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: bo
           <span className="font-medium text-slate-700">Project</span>
           <Select {...register("project_id", { required: true })}>
             <option value="">Select a project</option>
-            {projectsQuery.data?.map((p: any) => (
+            {projectsQuery.data?.map((p: Project) => (
               <option key={p.id} value={p.id}>
                 {p.name}
               </option>
@@ -98,8 +117,8 @@ function PromoteToEvidenceModal({ draft, open, onClose }: { draft: any; open: bo
           <span className="font-medium text-slate-700">Project Indicator</span>
           <Select {...register("project_indicator_id", { required: true })} disabled={!selectedProjectId}>
             <option value="">Select an indicator</option>
-            {projectIndicators.map((pi: ProjectIndicatorSummary) => (
-              <option key={pi.id} value={pi.id}>
+            {projectIndicators.map((pi) => (
+              <option key={pi.project_indicator_id} value={pi.project_indicator_id}>
                 {pi.indicator_code} - {pi.indicator_text.substring(0, 50)}...
               </option>
             ))}
@@ -168,17 +187,17 @@ export function DocumentDraftReviewScreen({ draftId }: { draftId: number }) {
   const canEdit = true;
   const canPromote = true;
 
-  useMemo(() => {
-    if (draftQuery.data) {
-      setEditedTitle(draftQuery.data.title as string);
-      setEditedContent(draftQuery.data.draft_content as string);
-    }
+  useEffect(() => {
+    if (!draftQuery.data) return;
+    setEditedTitle(draftQuery.data.title);
+    setEditedContent(draftQuery.data.draft_content);
   }, [draftQuery.data]);
 
   if (draftQuery.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (draftQuery.error) return <ErrorPanel message={draftQuery.error.message} />;
 
-  const draft = draftQuery.data as any;
+  const draft = draftQuery.data;
+  if (!draft) return <ErrorPanel message="Draft not found." />;
 
   async function handleSave() {
     try {

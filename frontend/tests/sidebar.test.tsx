@@ -25,7 +25,7 @@ describe("Sidebar", () => {
     renderWithQueryClient(<Sidebar />);
 
     expect(screen.queryByText("Admin")).not.toBeInTheDocument();
-    expect(screen.queryByText("Settings")).not.toBeInTheDocument();
+    expect(screen.queryByText("Admin Dashboard")).not.toBeInTheDocument();
   });
 
   it("shows admin and export links for admin users", () => {
@@ -33,7 +33,7 @@ describe("Sidebar", () => {
     renderWithQueryClient(<Sidebar />);
 
     expect(screen.getByText("Admin")).toBeInTheDocument();
-    expect(screen.getByText("Settings")).toBeInTheDocument();
+    expect(screen.getByText("Admin Dashboard")).toBeInTheDocument();
     expect(screen.getByText("AI Classification")).toBeInTheDocument();
   });
 
@@ -42,7 +42,7 @@ describe("Sidebar", () => {
     renderWithQueryClient(<Sidebar />);
 
     expect(screen.getByText("Admin")).toBeInTheDocument();
-    expect(screen.getByText("Settings")).toBeInTheDocument();
+    expect(screen.getByText("Admin Dashboard")).toBeInTheDocument();
     expect(screen.getByText("AI Classification")).toBeInTheDocument();
   });
 });

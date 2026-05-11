@@ -8,10 +8,9 @@ import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
 import { IndicatorDrawer } from "@/components/screens/indicator-drawer";
 import { buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { useProgress } from "@/lib/hooks/use-progress";
 import { useWorklist } from "@/lib/hooks/use-worklist";
-import { AreaProgress, DashboardRow, StandardProgress } from "@/types";
+import { AreaProgress, StandardProgress } from "@/types";
 import { cn } from "@/utils/cn";
 import { formatPercent } from "@/utils/format";
 import { getIndicatorStatusVisual } from "@/utils/indicator-status";
@@ -28,8 +27,8 @@ export function ProjectWorkspaceBoard({ projectId }: { projectId: number }) {
 
   const areasQuery = useProgress(projectId, "areas");
   const standardsQuery = useProgress(projectId, "standards");
-  const areaRows = Array.isArray(areasQuery.data) ? (areasQuery.data as AreaProgress[]) : [];
-  const standardRows = Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [];
+  const areaRows = useMemo(() => Array.isArray(areasQuery.data) ? (areasQuery.data as AreaProgress[]) : [], [areasQuery.data]);
+  const standardRows = useMemo(() => Array.isArray(standardsQuery.data) ? (standardsQuery.data as StandardProgress[]) : [], [standardsQuery.data]);
 
   const areaCards = useMemo<AreaSummaryCard[]>(() => {
     return areaRows.map((area) => {
@@ -71,7 +70,7 @@ export function ProjectWorkspaceBoard({ projectId }: { projectId: number }) {
     page: 1,
     page_size: 200,
   });
-  const indicatorRows = indicatorQuery.data?.results ?? [];
+  const indicatorRows = useMemo(() => indicatorQuery.data?.results ?? [], [indicatorQuery.data?.results]);
 
   if (areasQuery.isLoading || standardsQuery.isLoading) {
     return (
