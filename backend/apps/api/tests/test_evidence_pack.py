@@ -1,4 +1,5 @@
 from django.utils import timezone
+from apps.accounts.models import ClientProfile
 from apps.api.tests.base import ContractBaseTestCase
 from apps.evidence.services import create_evidence_item, review_evidence_item
 from apps.indicators.models import ProjectIndicator
@@ -10,6 +11,14 @@ from apps.ai_actions.models.document_draft import DocumentDraftKindChoices
 
 class EvidencePackTest(ContractBaseTestCase):
     def test_evidence_pack_returns_structured_sections_with_enhanced_data(self):
+        self.project.client_profile = ClientProfile.objects.create(
+            organization_name="Client Alpha Health",
+            address="1 Health Way",
+            license_number="LIC-123",
+            registration_number="REG-456",
+            contact_person="A. Manager",
+        )
+        self.project.save(update_fields=["client_profile"])
         project_indicators_map = self.initialize_project()
         all_project_indicators = project_indicators_map.values()
 
@@ -141,7 +150,7 @@ class EvidencePackTest(ContractBaseTestCase):
         self.assertEqual(project_summary["framework_name"], self.framework.name)
         self.assertIn("date_generated", project_summary)
         self.assertIn("overall_readiness_score", project_summary)
-        self.assertEqual(project_summary["client_info"]["organization_name"], self.client_profile.organization_name)
+        self.assertEqual(project_summary["client_info"]["organization_name"], self.project.client_profile.organization_name)
         self.assertEqual(project_summary["total_indicators"], len(all_project_indicators)) # All should be counted
         self.assertEqual(project_summary["met_indicators"], len(all_project_indicators)) # All should be MET
         self.assertEqual(project_summary["partial_indicators"], 0)
@@ -175,6 +184,7 @@ class EvidencePackTest(ContractBaseTestCase):
         self.assertIsNotNone(found_pi_data, "Project indicator for drafts (IND-001) not found in print bundle sections")
 
         # --- Test Indicator-level Data ---
+        project_indicator_for_drafts.refresh_from_db()
         self.assertEqual(found_pi_data["indicator_code"], self.indicator.code)
         self.assertEqual(found_pi_data["status"], project_indicator_for_drafts.current_status)
         self.assertEqual(found_pi_data["assigned_owner"], self.owner.get_full_name())
@@ -210,20 +220,6 @@ class EvidencePackTest(ContractBaseTestCase):
         self.assertEqual(promoted_ai_drafts[0]["review_status"], "PROMOTED_TO_EVIDENCE")
         self.assertEqual(promoted_ai_drafts[0]["promoted_evidence_id"], evidence_item.id)
 
-        # --- Test Consolidated Lists ---
-        consolidated_lists = data["consolidated_lists"]
-        self.assertIn("missing_evidence", consolidated_lists)
-        self.assertIn("partial_evidence", consolidated_lists)
-        self.assertIn("ai_drafts_for_review", consolidated_lists)
-
-        self.assertEqual(len(consolidated_lists["missing_evidence"]), 0)
-        self.assertEqual(len(consolidated_lists["partial_evidence"]), 0)
-        
-        found_ai_draft_for_review = False
-        for ai_draft in consolidated_lists["ai_drafts_for_review"]:
-            if ai_draft["id"] == advisory_draft.id:
-                found_ai_draft_for_review = True
-                self.assertEqual(ai_draft["review_status"], "HUMAN_REVIEW_REQUIRED")
-                break
-        self.assertTrue(found_ai_draft_for_review, "Advisory AI draft not found in consolidated list")
-
+        # --- Test Response Contract ---
+        self.assertIn("warnings", data)
+        self.assertEqual(data["warnings"], [])

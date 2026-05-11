@@ -10,6 +10,7 @@ from apps.masters.choices import (
     EvidenceCompletenessStatusChoices,
     EvidenceSourceTypeChoices,
     EvidenceValidityStatusChoices,
+    ProjectEvidenceRequirementStatusChoices,
 )
 from apps.workflow.permissions import ensure_project_owner_access, ensure_project_reviewer_access
 
@@ -188,28 +189,71 @@ def review_evidence_item(
 
 
 def calculate_project_evidence_readiness(project) -> dict:
-    """
-    Calculates readiness counts for project evidence requirements by status.
-    """
-    
-    # Ensure we are querying ProjectEvidenceRequirement, not EvidenceItem
-    # ProjectEvidenceRequirement tracks the status of a requirement for a project.
-    # EvidenceItem tracks the actual uploaded/generated proof.
-    
-    project_evidence_requirements = ProjectEvidenceRequirement.objects.filter(project=project)
-    
-    readiness_counts = {
-        "total": project_evidence_requirements.count(),
-        "approved": project_evidence_requirements.filter(status="APPROVED").count(),
-        "missing": project_evidence_requirements.filter(status="MISSING").count(),
-        "partial": project_evidence_requirements.filter(status="PARTIAL").count(),
-        "submitted": project_evidence_requirements.filter(status="SUBMITTED").count(),
-        "rejected": project_evidence_requirements.filter(status="REJECTED").count(),
-        "not_applicable": project_evidence_requirements.filter(status="NOT_APPLICABLE").count(),
-        # Include other statuses if they become relevant, e.g., IN_REVIEW
+    project_evidence_requirements = (
+        ProjectEvidenceRequirement.objects.filter(project=project)
+        .select_related("project_indicator__indicator", "evidence_requirement")
+        .order_by(
+            "project_indicator__indicator__area__sort_order",
+            "project_indicator__indicator__standard__sort_order",
+            "project_indicator__indicator__sort_order",
+            "evidence_requirement__display_order",
+            "id",
+        )
+    )
+    current_evidence = EvidenceItem.objects.filter(project_indicator__project=project, is_current=True)
+    approved_evidence_items = current_evidence.filter(approval_status=EvidenceApprovalStatusChoices.APPROVED).count()
+    unapproved_evidence_items = current_evidence.exclude(approval_status=EvidenceApprovalStatusChoices.APPROVED).count()
+    rejected_evidence_items = current_evidence.filter(approval_status=EvidenceApprovalStatusChoices.REJECTED).count()
+
+    mandatory_blockers = []
+    for requirement in project_evidence_requirements:
+        if requirement.evidence_requirement.mandatory and requirement.status not in {
+            ProjectEvidenceRequirementStatusChoices.APPROVED,
+            ProjectEvidenceRequirementStatusChoices.NOT_APPLICABLE,
+        }:
+            mandatory_blockers.append(
+                {
+                    "project_evidence_requirement_id": requirement.id,
+                    "project_indicator_id": requirement.project_indicator_id,
+                    "indicator_code": requirement.framework_indicator.code,
+                    "requirement_title": requirement.evidence_requirement.title,
+                    "status": requirement.status,
+                }
+            )
+
+    total = project_evidence_requirements.count()
+    approved = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.APPROVED).count()
+    missing = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.MISSING).count()
+    partial = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.PARTIAL).count()
+    submitted = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.SUBMITTED).count()
+    rejected = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.REJECTED).count()
+    not_applicable = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.NOT_APPLICABLE).count()
+    mandatory_total = project_evidence_requirements.filter(evidence_requirement__mandatory=True).count()
+    mandatory_approved = project_evidence_requirements.filter(
+        evidence_requirement__mandatory=True,
+        status=ProjectEvidenceRequirementStatusChoices.APPROVED,
+    ).count()
+    mandatory_not_applicable = project_evidence_requirements.filter(
+        evidence_requirement__mandatory=True,
+        status=ProjectEvidenceRequirementStatusChoices.NOT_APPLICABLE,
+    ).count()
+    export_ready = mandatory_total == (mandatory_approved + mandatory_not_applicable) and not mandatory_blockers
+    readiness_percent = 100.0 if total == 0 else round((approved / total) * 100, 2)
+    return {
+        "total": total,
+        "approved": approved,
+        "missing": missing,
+        "partial": partial,
+        "submitted": submitted,
+        "rejected": rejected,
+        "not_applicable": not_applicable,
+        "mandatory_total": mandatory_total,
+        "mandatory_approved": mandatory_approved,
+        "mandatory_not_applicable": mandatory_not_applicable,
+        "mandatory_blockers": mandatory_blockers,
+        "approved_evidence_items": approved_evidence_items,
+        "unapproved_evidence_items": unapproved_evidence_items,
+        "rejected_evidence_items": rejected_evidence_items,
+        "readiness_percent": readiness_percent,
+        "export_ready": export_ready,
     }
-    
-    # Add a 'ready_for_inspection' count if applicable, e.g., all mandatory items are approved or N/A.
-    # For now, just returning counts per status.
-    
-    return readiness_counts

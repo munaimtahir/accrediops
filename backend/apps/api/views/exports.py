@@ -33,6 +33,7 @@ class ProjectExcelExportView(APIView):
                 "project_id": project.id,
                 "status": "ready",
                 "message": "Structured excel export payload generated.",
+                "project_summary": bundle["project_summary"],
                 "bundle": bundle,
                 "warnings": [],
             }
@@ -60,6 +61,7 @@ class ProjectPrintBundleExportView(APIView):
                 "project_id": project.id,
                 "status": "ready",
                 "message": "Structured print bundle generated.",
+                "project_summary": bundle["project_summary"],
                 "sections": bundle["sections"],
                 "warnings": [],
             }

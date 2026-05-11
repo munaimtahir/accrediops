@@ -271,7 +271,7 @@ def mark_project_indicator_met(
     readiness = validate_project_indicator_readiness(project_indicator)
     if not readiness["ready_for_met"]:
         raise ValidationError("Project indicator cannot be marked MET until readiness conditions pass.")
-    return _change_project_indicator_status(
+    project_indicator = _change_project_indicator_status(
         project_indicator=project_indicator,
         actor=actor,
         to_status=ProjectIndicatorStatusChoices.MET,
@@ -280,6 +280,37 @@ def mark_project_indicator_met(
         is_met=True,
         is_finalized=True,
     )
+    now = timezone.now()
+    for requirement in project_indicator.project_evidence_requirements.select_related("evidence_requirement"):
+        if requirement.status == ProjectEvidenceRequirementStatusChoices.NOT_APPLICABLE:
+            continue
+        before = snapshot_instance(requirement)
+        requirement.status = ProjectEvidenceRequirementStatusChoices.APPROVED
+        requirement.approved_by = actor
+        requirement.approved_at = now
+        requirement.rejected_by = None
+        requirement.rejected_at = None
+        requirement.rejection_reason = ""
+        requirement.save(
+            update_fields=[
+                "status",
+                "approved_by",
+                "approved_at",
+                "rejected_by",
+                "rejected_at",
+                "rejection_reason",
+                "updated_at",
+            ]
+        )
+        log_audit_event(
+            actor=actor,
+            event_type="project_evidence_requirement.auto_approved_on_indicator_met",
+            obj=requirement,
+            before=before,
+            after=snapshot_instance(requirement),
+            reason=reason,
+        )
+    return project_indicator
 
 
 def reopen_project_indicator(

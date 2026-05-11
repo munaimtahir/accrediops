@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from apps.api.tests.base import ContractBaseTestCase
 from apps.evidence.models import EvidenceItem
-from apps.indicators.models import Indicator, ProjectIndicator
+from apps.indicators.models import EvidenceRequirement, EvidenceRequirementSuggestion, Indicator, ProjectIndicator
 from apps.masters.choices import ClassificationReviewStatusChoices
 
 
@@ -201,6 +201,29 @@ class IndicatorClassificationTests(ContractBaseTestCase):
         project_indicator.refresh_from_db()
         self.assertEqual(project_indicator.current_status, before_status)
         self.assertEqual(EvidenceItem.objects.count(), before_evidence_count)
+
+    @override_settings(AI_PROVIDER="gemini", AI_MODEL="gemini-2.5-flash", AI_DEMO_MODE=False, GEMINI_API_KEY="test")
+    def test_ai_suggestions_remain_advisory_and_do_not_create_framework_requirements(self):
+        before_requirements = EvidenceRequirement.objects.count()
+        before_suggestions = EvidenceRequirementSuggestion.objects.count()
+        with patch("apps.ai_actions.services.classification._call_gemini_api", return_value=self._mock_ai_payload()):
+            response = self.client.post(f"/api/admin/frameworks/{self.framework.id}/classify-indicators/", {}, format="json")
+        self.assertEqual(response.status_code, 200)
+        EvidenceRequirementSuggestion.objects.create(
+            indicator=self.indicator,
+            suggested_by=self.admin,
+            title="AI suggested policy",
+            description="Advisory suggestion only.",
+            evidence_category="DOCUMENT_POLICY",
+            artifact_type="POLICY",
+            mandatory=True,
+            ai_generatable=True,
+            default_document_type="POLICY",
+            primary_action_required="GENERATE_DOCUMENT",
+            review_status="SUGGESTED",
+        )
+        self.assertEqual(EvidenceRequirement.objects.count(), before_requirements)
+        self.assertGreater(EvidenceRequirementSuggestion.objects.count(), before_suggestions)
 
     def test_filtering_by_classification_fields_uses_saved_values(self):
         self.indicator.evidence_type = "DOCUMENT_POLICY"

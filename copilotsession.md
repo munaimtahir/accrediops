@@ -96,6 +96,7 @@ It is the source of truth for task order, current status, and what remains so a 
 57. `[ ]` Finalize `OUT/evidence_requirement_pack_builder_alignment_latest.md` with path, verdict, done/remaining, next sprint.
 
 ## Current Work State
+- **Sprint Update (2026-05-11):** Evidence Bridge Test Hardening Sprint completed with `CONDITIONAL GO`. Migration drift was fixed, `EvidenceRequirementSuggestion` was canonicalized through `indicators`, export readiness now uses real evidence state, targeted backend bridge tests passed, frontend verification stayed green, and Playwright ran against the live stack with two stale LAB-only framework-count assumptions left as a test-data gap.
 - **Documentation Updates**: `GEMINI.md`, `README.md`, and `docs/05_Architecture_Doctrine.md` have been updated to reflect the core workflow bridge, project identity, AI capabilities (including suggestion of evidence requirements), and architectural principles.
 - **Backend Services**: Phase 3 tasks are largely complete, including AI suggestion persistence and readiness computation. Phase 4 API development is pending.
 - **Persistent Blocker**: A `SyntaxError: unterminated string literal` in `backend/apps/ai_actions/services/document_drafting.py` is preventing Django migrations from running. Multiple attempts to fix this string literal have failed. This issue is documented as a persistent blocker and will be addressed later.
