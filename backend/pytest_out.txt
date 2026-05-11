@@ -1,0 +1,216 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-8.4.2, pluggy-1.6.0 -- /app/backend/.venv/bin/python3
+cachedir: .pytest_cache
+django: version: 5.2.14, settings: config.accrediops_backend.settings (from ini)
+rootdir: /app/backend
+configfile: pytest.ini
+plugins: cov-5.0.0, django-4.12.0
+collecting ... collected 1 item
+
+apps/indicators/tests/test_evidence_requirements.py::EvidenceRequirementTests::test_missing_mandatory_blocks_readiness FAILED [100%]
+
+=================================== FAILURES ===================================
+_______ EvidenceRequirementTests.test_missing_mandatory_blocks_readiness _______
+apps/indicators/tests/test_evidence_requirements.py:67: in test_missing_mandatory_blocks_readiness
+    self.assertTrue(readiness2["ready_for_met"])
+E   AssertionError: False is not true
+---------------------------- Captured stderr setup -----------------------------
+Using existing test database for alias 'default'...
+
+---------- coverage: platform linux, python 3.12.13-final-0 ----------
+Name                                                                                Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------------------------------------------------------------------------
+apps/__init__.py                                                                        0      0      0      0   100%
+apps/accounts/__init__.py                                                               0      0      0      0   100%
+apps/accounts/admin.py                                                                 20      0      0      0   100%
+apps/accounts/apps.py                                                                   5      0      0      0   100%
+apps/accounts/migrations/0001_initial.py                                                9      0      0      0   100%
+apps/accounts/migrations/0002_clientprofile.py                                          4      0      0      0   100%
+apps/accounts/migrations/0003_clientprofile_linked_users.py                             4      0      0      0   100%
+apps/accounts/migrations/__init__.py                                                    0      0      0      0   100%
+apps/accounts/models/__init__.py                                                        3      0      0      0   100%
+apps/accounts/models/department.py                                                     21      2      0      0    90%   11, 33
+apps/accounts/models/user.py                                                            8      1      0      0    88%   22
+apps/ai_actions/__init__.py                                                             0      0      0      0   100%
+apps/ai_actions/admin.py                                                                8      0      0      0   100%
+apps/ai_actions/apps.py                                                                 5      0      0      0   100%
+apps/ai_actions/migrations/0001_initial.py                                              7      0      0      0   100%
+apps/ai_actions/migrations/0002_aiusagelog.py                                           6      0      0      0   100%
+apps/ai_actions/migrations/0003_documentdraft.py                                        6      0      0      0   100%
+apps/ai_actions/migrations/0004_documentdraft_evidence_requirement_and_more.py          5      0      0      0   100%
+apps/ai_actions/migrations/0005_evidencerequirementsuggestion.py                        6      0      0      0   100%
+apps/ai_actions/migrations/__init__.py                                                  0      0      0      0   100%
+apps/ai_actions/models/__init__.py                                                      5      0      0      0   100%
+apps/ai_actions/models/ai_usage_log.py                                                 23      1      0      0    96%   47
+apps/ai_actions/models/document_draft.py                                               49     13     12      0    59%   130-144, 147-149
+apps/ai_actions/models/evidence_requirement_suggestion.py                              16      1      0      0    94%   31
+apps/ai_actions/models/generated_output.py                                             18      1      0      0    94%   38
+apps/ai_actions/services/__init__.py                                                    6      6      0      0     0%   3-26
+apps/ai_actions/services/classification.py                                            147    147     44      0     0%   3-296
+apps/ai_actions/services/classification_prompts.py                                      8      8      2      0     0%   3-39
+apps/ai_actions/services/document_drafting.py                                          95     95     30      0     0%   1-350
+apps/ai_actions/services/generation.py                                                 71     71     10      0     0%   3-164
+apps/ai_actions/services/prompts.py                                                    73     73     16      0     0%   9-334
+apps/ai_actions/services/provider.py                                                   33     33     12      0     0%   9-92
+apps/ai_actions/services/usage.py                                                       5      5      0      0     0%   1-22
+apps/api/__init__.py                                                                    0      0      0      0   100%
+apps/api/apps.py                                                                        5      0      0      0   100%
+apps/api/exception_handler.py                                                          45     45     26      0     0%   1-86
+apps/api/exceptions.py                                                                  6      6      0      0     0%   1-8
+apps/api/migrations/__init__.py                                                         0      0      0      0   100%
+apps/api/pagination.py                                                                 16     16      2      0     0%   1-20
+apps/api/responses.py                                                                   4      4      0      0     0%   1-6
+apps/api/serializers/__init__.py                                                        0      0      0      0   100%
+apps/api/serializers/admin.py                                                         113    113      6      0     0%   1-235
+apps/api/serializers/ai_actions.py                                                     15     15      0      0     0%   1-38
+apps/api/serializers/auth.py                                                           18     18      4      0     0%   1-24
+apps/api/serializers/common.py                                                         52     52      6      0     0%   1-99
+apps/api/serializers/evidence.py                                                       37     37      0      0     0%   1-88
+apps/api/serializers/indicator.py                                                       0      0      0      0   100%
+apps/api/serializers/project_indicators.py                                            119    119      4      0     0%   1-281
+apps/api/serializers/projects.py                                                       62     62      0      0     0%   1-114
+apps/api/serializers/recurring.py                                                      34     34      2      0     0%   1-94
+apps/api/tests/__init__.py                                                              0      0      0      0   100%
+apps/api/tests/base.py                                                                 29     29      0      0     0%   1-110
+apps/api/tests/test_admin_readiness_inspection_exports.py                             124    124      4      0     0%   1-211
+apps/api/tests/test_admin_registry.py                                                  15     15      2      0     0%   1-32
+apps/api/tests/test_ai_generation_gemini.py                                           181    181      2      0     0%   3-466
+apps/api/tests/test_auth_api.py                                                        30     30      0      0     0%   1-56
+apps/api/tests/test_benchmark_bulk_update.py                                           32     32      0      0     0%   1-55
+apps/api/tests/test_clone_project.py                                                   17     17      0      0     0%   1-36
+apps/api/tests/test_document_drafting.py                                               65     65      0      0     0%   3-158
+apps/api/tests/test_evidence_and_ai.py                                                 51     51      2      0     0%   3-135
+apps/api/tests/test_frameworks_api.py                                                  86     86      0      0     0%   1-184
+apps/api/tests/test_governance_hardening.py                                           172    172      8      0     0%   1-352
+apps/api/tests/test_indicator_classification.py                                       141    141      0      0     0%   1-238
+apps/api/tests/test_mark_met_and_progress.py                                           46     46      2      0     0%   1-123
+apps/api/tests/test_physical_evidence.py                                               14     14      0      0     0%   1-35
+apps/api/tests/test_print_pack.py                                                      37     37      2      0     0%   1-92
+apps/api/tests/test_project_create_and_initialize.py                                   16     16      0      0     0%   1-50
+apps/api/tests/test_project_delete_and_client_profiles.py                              25     25      0      0     0%   1-49
+apps/api/tests/test_project_initialization.py                                          12     12      0      0     0%   1-18
+apps/api/tests/test_recurring_queue.py                                                 64     64      0      0     0%   1-123
+apps/api/tests/test_variable_replacement.py                                             9      9      0      0     0%   1-22
+apps/api/urls.py                                                                       18     18      0      0     0%   1-268
+apps/api/views/__init__.py                                                              0      0      0      0   100%
+apps/api/views/admin.py                                                               409    409     94      0     0%   1-737
+apps/api/views/ai_actions.py                                                           35     35      0      0     0%   1-50
+apps/api/views/auth.py                                                                 28     28      0      0     0%   1-49
+apps/api/views/dashboard.py                                                            55     55     32      0     0%   1-118
+apps/api/views/evidence.py                                                             44     44      0      0     0%   1-71
+apps/api/views/exports.py                                                              37     37      0      0     0%   1-125
+apps/api/views/frameworks.py                                                           39     39      0      0     0%   1-69
+apps/api/views/indicator.py                                                            33     33      0      0     0%   1-40
+apps/api/views/project_indicators.py                                                   93     93      8      0     0%   1-203
+apps/api/views/projects.py                                                            105    105     16      0     0%   1-187
+apps/api/views/recurring.py                                                            52     52     10      0     0%   1-82
+apps/api/views/system.py                                                               42     42      6      0     0%   1-86
+apps/api/views/users.py                                                                97     97     10      0     0%   1-134
+apps/audit/__init__.py                                                                  0      0      0      0   100%
+apps/audit/admin.py                                                                    10      0      0      0   100%
+apps/audit/apps.py                                                                      5      0      0      0   100%
+apps/audit/migrations/0001_initial.py                                                   7      0      0      0   100%
+apps/audit/migrations/__init__.py                                                       0      0      0      0   100%
+apps/audit/models/__init__.py                                                           2      0      0      0   100%
+apps/audit/models/audit_event.py                                                       15      1      0      0    93%   25
+apps/audit/services.py                                                                 23     16     12      0    20%   10-20, 24-27, 31
+apps/evidence/__init__.py                                                               0      0      0      0   100%
+apps/evidence/admin.py                                                                  8      0      0      0   100%
+apps/evidence/apps.py                                                                   5      0      0      0   100%
+apps/evidence/migrations/0001_initial.py                                                7      0      0      0   100%
+apps/evidence/migrations/0002_evidenceitem_file_label_and_more.py                       4      0      0      0   100%
+apps/evidence/migrations/0003_evidenceitem_evidence_requirement_and_more.py             5      0      0      0   100%
+apps/evidence/migrations/__init__.py                                                    0      0      0      0   100%
+apps/evidence/models/__init__.py                                                        2      0      0      0   100%
+apps/evidence/models/evidence.py                                                       37      5      4      0    78%   84-91, 94
+apps/evidence/services.py                                                              57     57     14      0     0%   1-178
+apps/exports/__init__.py                                                                0      0      0      0   100%
+apps/exports/admin.py                                                                  16      0      0      0   100%
+apps/exports/apps.py                                                                    4      0      0      0   100%
+apps/exports/migrations/0001_initial.py                                                 6      0      0      0   100%
+apps/exports/migrations/0002_importlog_exportjob.py                                     6      0      0      0   100%
+apps/exports/migrations/__init__.py                                                     0      0      0      0   100%
+apps/exports/models.py                                                                 12      1      0      0    92%   25
+apps/exports/models_admin.py                                                           24      2      0      0    92%   28, 41
+apps/exports/services.py                                                              121     90     40      2    20%   15-30, 34-109, 113-131, 157, 159, 173-196, 200-229, 241-244, 248-253, 264-288, 292-304, 308
+apps/exports/services_admin.py                                                         31     31      4      0     0%   1-76
+apps/exports/tests/__init__.py                                                          0      0      0      0   100%
+apps/exports/tests/test_services.py                                                    77     77      0      0     0%   1-128
+apps/frameworks/__init__.py                                                             0      0      0      0   100%
+apps/frameworks/admin.py                                                               21      0      0      0   100%
+apps/frameworks/apps.py                                                                 5      0      0      0   100%
+apps/frameworks/migrations/0001_initial.py                                              6      0      0      0   100%
+apps/frameworks/migrations/__init__.py                                                  0      0      0      0   100%
+apps/frameworks/models/__init__.py                                                      2      0      0      0   100%
+apps/frameworks/models/framework.py                                                    35      5      2      0    81%   13, 34, 60-61, 64
+apps/frameworks/services.py                                                           149    149     56      0     0%   1-440
+apps/frameworks/tests/__init__.py                                                       0      0      0      0   100%
+apps/frameworks/tests/test_services.py                                                 75     75      0      0     0%   1-173
+apps/indicators/__init__.py                                                             0      0      0      0   100%
+apps/indicators/admin.py                                                               24      0      0      0   100%
+apps/indicators/apps.py                                                                 5      0      0      0   100%
+apps/indicators/migrations/0001_initial.py                                              7      0      0      0   100%
+apps/indicators/migrations/0002_indicator_evidence_reuse_policy_and_more.py             4      0      0      0   100%
+apps/indicators/migrations/0003_indicator_ai_assistance_level_and_more.py              16      4      4      0    70%   23-36
+apps/indicators/migrations/0004_evidencerequirement_projectevidencerequirement.py       6      0      0      0   100%
+apps/indicators/migrations/__init__.py                                                  0      0      0      0   100%
+apps/indicators/models/__init__.py                                                      2      0      0      0   100%
+apps/indicators/models/indicator.py                                                   144     28     24      1    70%   122-131, 134, 200-209, 213, 236, 261, 301, 359-364, 367
+apps/indicators/services.py                                                           144     98     40      1    26%   32-37, 50-77, 92-114, 126-142, 153-167, 171-172, 189-193, 253->256, 267-271, 288-291, 303-338, 342-372, 376-377
+apps/indicators/signals.py                                                              0      0      0      0   100%
+apps/indicators/tests/__init__.py                                                       0      0      0      0   100%
+apps/indicators/tests/test_evidence_requirements.py                                    27      0      0      0   100%
+apps/indicators/tests/test_services.py                                                192    192      0      0     0%   1-443
+apps/masters/__init__.py                                                                0      0      0      0   100%
+apps/masters/admin.py                                                                   7      0      0      0   100%
+apps/masters/apps.py                                                                    5      0      0      0   100%
+apps/masters/choices.py                                                               136      0      0      0   100%
+apps/masters/management/__init__.py                                                     0      0      0      0   100%
+apps/masters/management/commands/__init__.py                                            0      0      0      0   100%
+apps/masters/management/commands/seed_master_values.py                                 16     16      4      0     0%   1-41
+apps/masters/management/commands/seed_policies.py                                      12     12      4      0     0%   1-33
+apps/masters/migrations/0001_initial.py                                                 5      0      0      0   100%
+apps/masters/migrations/0002_policydecision.py                                          4      0      0      0   100%
+apps/masters/migrations/__init__.py                                                     0      0      0      0   100%
+apps/masters/models.py                                                                 25      2      0      0    92%   20, 35
+apps/masters/services.py                                                                7      7      2      0     0%   1-17
+apps/projects/__init__.py                                                               0      0      0      0   100%
+apps/projects/admin.py                                                                  7      0      0      0   100%
+apps/projects/apps.py                                                                   5      0      0      0   100%
+apps/projects/benchmark_clone.py                                                       29     29      2      0     0%   1-70
+apps/projects/management/__init__.py                                                    0      0      0      0   100%
+apps/projects/management/commands/__init__.py                                           0      0      0      0   100%
+apps/projects/management/commands/reset_lab_state.py                                   53     53     14      0     0%   1-105
+apps/projects/management/commands/seed_e2e_state.py                                   160    160     34      0     0%   1-278
+apps/projects/migrations/0001_initial.py                                                7      0      0      0   100%
+apps/projects/migrations/0002_accreditationproject_client_profile.py                    5      0      0      0   100%
+apps/projects/migrations/__init__.py                                                    0      0      0      0   100%
+apps/projects/models/__init__.py                                                        2      0      0      0   100%
+apps/projects/models/project.py                                                        20      1      0      0    95%   45
+apps/projects/services.py                                                              93     93     24      0     0%   1-254
+apps/projects/tests/__init__.py                                                         0      0      0      0   100%
+apps/projects/tests/test_services.py                                                   99     99      2      0     0%   1-241
+apps/recurring/__init__.py                                                              0      0      0      0   100%
+apps/recurring/admin.py                                                                13      0      0      0   100%
+apps/recurring/apps.py                                                                  5      0      0      0   100%
+apps/recurring/migrations/0001_initial.py                                               6      0      0      0   100%
+apps/recurring/migrations/__init__.py                                                   0      0      0      0   100%
+apps/recurring/models/__init__.py                                                       2      0      0      0   100%
+apps/recurring/models/recurring.py                                                     27      2      0      0    93%   25, 62
+apps/recurring/services.py                                                            100    100     44      0     0%   1-201
+apps/recurring/tests/__init__.py                                                        0      0      0      0   100%
+apps/recurring/tests/test_services.py                                                  41     41      0      0     0%   1-75
+apps/workflow/__init__.py                                                               0      0      0      0   100%
+apps/workflow/apps.py                                                                   5      0      0      0   100%
+apps/workflow/guards.py                                                                11      5      0      0    55%   13-17, 21
+apps/workflow/migrations/__init__.py                                                    0      0      0      0   100%
+apps/workflow/permissions.py                                                           73     43     24      0    31%   8, 12-14, 18, 22, 26-28, 32, 36-38, 42-44, 48-50, 54-56, 60-62, 66-68, 72-74, 78-87, 94, 102
+apps/workflow/transitions.py                                                            7      3      2      0    44%   31-33
+-------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                5780   4728    730      4    16%
+Coverage HTML written to dir ../OUT/backend_htmlcov
+Coverage XML written to file ../OUT/backend_coverage.xml
+
+=========================== short test summary info ============================
+FAILED apps/indicators/tests/test_evidence_requirements.py::EvidenceRequirementTests::test_missing_mandatory_blocks_readiness
+============================== 1 failed in 7.56s ===============================

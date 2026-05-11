@@ -19,6 +19,7 @@ from apps.masters.choices import (
     PriorityChoices,
     ProjectEvidenceRequirementStatusChoices,
     ProjectIndicatorStatusChoices,
+    ProjectStatusChoices,
     RecurrenceFrequencyChoices,
     RecurrenceModeChoices,
 )

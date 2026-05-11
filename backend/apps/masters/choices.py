@@ -161,7 +161,6 @@ class PhysicalLocationTypeChoices(models.TextChoices):
     ROOM = "ROOM", "Room"
     OTHER = "OTHER", "Other"
 
-
 class ProjectEvidenceRequirementStatusChoices(models.TextChoices):
     MISSING = "MISSING", "Missing"
     PARTIAL = "PARTIAL", "Partial"
