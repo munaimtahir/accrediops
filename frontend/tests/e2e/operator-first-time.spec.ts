@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { authStatePath, ensureCleanE2EState, getApi, getFirstIndicatorId, loginAs, postApi } from "./helpers";
+import { authStatePath, ensureCleanE2EState, getApi, getFirstIndicatorId, loginAs, patchApi, postApi } from "./helpers";
 
 test.describe("operator first time", () => {
   test.use({ storageState: authStatePath("admin") });
@@ -85,6 +85,24 @@ test.describe("operator first time", () => {
         },
         "reviewer approve evidence",
       );
+    }
+
+    await page.context().clearCookies();
+    await loginAs(page, "admin");
+    const requirements = await getApi<{ id: number; mandatory: boolean }[]>(
+        page,
+        `/api/project-indicators/${indicatorId}/requirements/`,
+        "list evidence requirements for operator test",
+      );
+    for (const req of requirements) {
+        if (req.mandatory) {
+          await patchApi(
+            page,
+            `/api/project-evidence-requirements/${req.id}/`,
+            { status: "APPROVED" },
+            "admin approve mandatory requirement for operator test",
+          );
+        }
     }
 
     await page.context().clearCookies();

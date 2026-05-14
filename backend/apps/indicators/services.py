@@ -476,14 +476,29 @@ def update_project_evidence_requirement(
     *,
     actor,
     project_evidence_requirement: ProjectEvidenceRequirement,
-    **validated_data,
+    status: str | None = None,
+    notes: str | None = None,
+    gap_summary: str | None = None,
+    assigned_to: object | None = None, # Assuming User or similar object type
+    due_date: str | None = None, # Assuming date string or date object
 ) -> ProjectEvidenceRequirement:
     ensure_project_owner_access(actor, project_evidence_requirement.project_indicator)
     before = snapshot_instance(project_evidence_requirement)
-    for field, value in validated_data.items():
-        setattr(project_evidence_requirement, field, value)
+
+    if status is not None:
+        project_evidence_requirement.status = status
+    if notes is not None:
+        project_evidence_requirement.notes = notes
+    if gap_summary is not None:
+        project_evidence_requirement.gap_summary = gap_summary
+    if assigned_to is not None:
+        project_evidence_requirement.assigned_to = assigned_to
+    if due_date is not None:
+        project_evidence_requirement.due_date = due_date
+
     project_evidence_requirement.full_clean()
     project_evidence_requirement.save()
+    project_evidence_requirement.refresh_from_db() # Refresh from DB after save to ensure latest state
     log_audit_event(
         actor=actor,
         event_type="project_evidence_requirement.updated",

@@ -1,0 +1,4 @@
+capa_id,title,root_cause,corrective_action,preventive_action,responsible_person,due_date,status,closure_notes,rejection_reason,linked_gap_id,project_indicator
+{% for capa in bundle.consolidated_lists.pending_capa %}
+{{ capa.id }},"{{ capa.title|escape }}","{{ capa.root_cause|escape }}","{{ capa.corrective_action|escape }}","{{ capa.preventive_action|escape }}","{{ capa.responsible_person|escape }}",{{ capa.due_date }},{{ capa.status }},"{{ capa.closure_notes|escape }}","{{ capa.rejection_reason|escape }}",{{ capa.gap_id }},{{ capa.project_indicator.indicator_code }}
+{% endfor %}

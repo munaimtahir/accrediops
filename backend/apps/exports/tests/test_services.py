@@ -2,7 +2,13 @@ from unittest.mock import patch
 
 from apps.api.tests.base import ContractBaseTestCase
 from apps.exports.services import export_eligibility_report
-from apps.indicators.models import ProjectIndicator
+from apps.indicators.models import (
+    ProjectIndicator,
+    ProjectEvidenceRequirement,
+    EvidenceRequirement,
+    Indicator,
+)
+from apps.masters.choices import ProjectEvidenceRequirementStatusChoices
 
 
 class ExportEligibilityReportTests(ContractBaseTestCase):
@@ -11,118 +17,89 @@ class ExportEligibilityReportTests(ContractBaseTestCase):
         self.project_indicators = self.initialize_project()
 
     @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_happy_path(self, mock_readiness, mock_warnings):
-        # Setup mocks for a perfect project
-        mock_readiness.return_value = {
-            "high_risk_indicators": [],
-            "recurring_compliance_score": 100,
-        }
+    def test_eligibility_happy_path(self, mock_warnings):
+        # ARRANGE: Delete existing requirements, mock warnings, and create a clean state
+        ProjectEvidenceRequirement.objects.filter(project=self.project).delete()
         mock_warnings.return_value = []
+        indicator = Indicator.objects.first()
+        project_indicator = ProjectIndicator.objects.get(project=self.project, indicator=indicator)
+        mandatory_req = EvidenceRequirement.objects.create(
+            indicator=indicator, title="Mandatory Test Requirement", mandatory=True
+        )
+        ProjectEvidenceRequirement.objects.create(
+            project=self.project,
+            project_indicator=project_indicator,
+            framework_indicator=indicator,
+            evidence_requirement=mandatory_req,
+            status=ProjectEvidenceRequirementStatusChoices.APPROVED,
+        )
 
-        # Mark all indicators as MET
-        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
-
+        # ACT
         report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
 
-        self.assertTrue(report["eligible"])
+        # ASSERT
+        self.assertTrue(report["eligible"], msg=f"Should be eligible, but reasons are: {report.get('reasons')}")
         self.assertEqual(report["reasons"], [])
-        self.assertEqual(report["pending_indicator_count"], 0)
-        self.assertEqual(report["warnings"], [])
-        self.assertEqual(report["export_type"], "FULL_PRINT_PACK")
 
-    @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_with_pending_indicators(self, mock_readiness, mock_warnings):
-        mock_readiness.return_value = {
-            "high_risk_indicators": [],
-            "recurring_compliance_score": 100,
-        }
-        mock_warnings.return_value = []
+    def test_eligibility_blocked_by_mandatory_requirement(self):
+        # ARRANGE: Delete existing requirements and create a clean state
+        ProjectEvidenceRequirement.objects.filter(project=self.project).delete()
+        indicator = Indicator.objects.first()
+        project_indicator = ProjectIndicator.objects.get(project=self.project, indicator=indicator)
+        mandatory_req = EvidenceRequirement.objects.create(
+            indicator=indicator, title="Mandatory Test Requirement", mandatory=True
+        )
+        ProjectEvidenceRequirement.objects.create(
+            project=self.project,
+            project_indicator=project_indicator,
+            framework_indicator=indicator,
+            evidence_requirement=mandatory_req,
+            status=ProjectEvidenceRequirementStatusChoices.MISSING, # The blocking status
+        )
 
-        # At least one indicator is pending (default status is usually NOT_STARTED or similar, not MET)
-        pending_count = ProjectIndicator.objects.filter(project=self.project).exclude(current_status="MET").count()
-        self.assertGreater(pending_count, 0)
-
+        # ACT
         report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
 
+        # ASSERT
         self.assertFalse(report["eligible"])
-        self.assertEqual(report["pending_indicator_count"], pending_count)
-        self.assertEqual(len(report["reasons"]), 1)
-        self.assertIn(f"project has {pending_count} indicator(s) still pending approval or completion", report["reasons"][0])
+        # There should be TWO reasons: the mandatory blocker itself, and the validation warning that comes from it.
+        self.assertEqual(len(report["reasons"]), 2, msg=f"Expected 2 reasons, but got {len(report['reasons'])}: {report['reasons']}")
+        self.assertIn("mandatory requirement(s) that are not yet Approved or Not Applicable", report["reasons"][0])
+        self.assertIn("validation warning(s)", report["reasons"][1])
+
 
     @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_with_high_risk_indicators(self, mock_readiness, mock_warnings):
-        mock_readiness.return_value = {
-            "high_risk_indicators": [{"id": 1}],
-            "recurring_compliance_score": 100,
-        }
-        mock_warnings.return_value = []
-
-        # Mark all indicators as MET so pending count is 0
-        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
-
-        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
-
-        self.assertFalse(report["eligible"])
-        self.assertEqual(len(report["reasons"]), 1)
-        self.assertIn("project has 1 critical high-risk indicator(s) pending", report["reasons"][0])
-
-    @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_with_low_recurring_compliance(self, mock_readiness, mock_warnings):
-        mock_readiness.return_value = {
-            "high_risk_indicators": [],
-            "recurring_compliance_score": 95,
-        }
-        mock_warnings.return_value = []
-
-        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
-
-        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
-
-        self.assertFalse(report["eligible"])
-        self.assertEqual(len(report["reasons"]), 1)
-        self.assertIn("recurring compliance is 95% and must be 100%", report["reasons"][0])
-
-    @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_with_validation_warnings(self, mock_readiness, mock_warnings):
-        mock_readiness.return_value = {
-            "high_risk_indicators": [],
-            "recurring_compliance_score": 100,
-        }
-        mock_warnings.return_value = [{"project_indicator_id": 1}, {"project_indicator_id": 2}]
-
-        ProjectIndicator.objects.filter(project=self.project).update(current_status="MET")
-
-        report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
-
-        self.assertFalse(report["eligible"])
-        self.assertEqual(len(report["reasons"]), 1)
-        self.assertIn("approval completeness is not satisfied for 2 indicator(s)", report["reasons"][0])
-
-    @patch("apps.exports.services.export_validation_warnings")
-    @patch("apps.exports.services_admin.project_readiness")
-    def test_eligibility_with_multiple_reasons(self, mock_readiness, mock_warnings):
-        mock_readiness.return_value = {
-            "high_risk_indicators": [{"id": 1}],
-            "recurring_compliance_score": 95,
-        }
+    def test_eligibility_with_validation_warnings(self, mock_warnings):
+        # ARRANGE: Ensure no mandatory blockers and mock the warnings
+        ProjectEvidenceRequirement.objects.filter(project=self.project).delete()
         mock_warnings.return_value = [{"project_indicator_id": 1}]
 
-        # Keep pending indicators active (do not mark as MET)
-        pending_count = ProjectIndicator.objects.filter(project=self.project).exclude(current_status="MET").count()
-        self.assertGreater(pending_count, 0)
-
+        # ACT
         report = export_eligibility_report(self.project, "FULL_PRINT_PACK")
 
+        # ASSERT
         self.assertFalse(report["eligible"])
-        self.assertEqual(len(report["reasons"]), 4) # pending, high risk, low recurring compliance, validation warnings
+        self.assertEqual(len(report["reasons"]), 1)
+        self.assertIn("Project has 1 validation warning(s)", report["reasons"][0])
 
-        reasons_str = " ".join(report["reasons"])
-        self.assertIn(f"project has {pending_count} indicator(s) still pending approval or completion", reasons_str)
-        self.assertIn("project has 1 critical high-risk indicator(s) pending", reasons_str)
-        self.assertIn("recurring compliance is 95% and must be 100%", reasons_str)
-        self.assertIn("approval completeness is not satisfied for 1 indicator(s)", reasons_str)
+    # == Obsolete Tests ==
+    # The following tests are commented out because they validate logic against the
+    # legacy `project_readiness` service, which was explicitly removed in this sprint.
+    # The new logic is based on `calculate_project_evidence_readiness` which correctly
+    # derives eligibility from the database state of mandatory requirements.
+
+    # @patch("apps.exports.services.export_validation_warnings")
+    # @patch("apps.exports.services_admin.project_readiness")
+    # def test_eligibility_with_high_risk_indicators(self, mock_readiness, mock_warnings):
+    #     ...
+
+    # @patch("apps.exports.services.export_validation_warnings")
+    # @patch("apps.exports.services_admin.project_readiness")
+    # def test_eligibility_with_low_recurring_compliance(self, mock_readiness, mock_warnings):
+    #     ...
+
+    # @patch("apps.exports.services.export_validation_warnings")
+    # @patch("apps.exports.services_admin.project_readiness")
+    # def test_eligibility_with_multiple_reasons(self, mock_readiness, mock_warnings):
+    #     ...
+

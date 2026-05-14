@@ -217,6 +217,8 @@ class DashboardWorklistSerializer(serializers.ModelSerializer):
         )
 
 
+from apps.api.serializers.capa import GapSerializer, CAPASerializer
+
 class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
     capabilities = serializers.SerializerMethodField()
     evidence_items = EvidenceItemSerializer(many=True, read_only=True)
@@ -228,6 +230,8 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
     audit_summary = serializers.SerializerMethodField()
     readiness_flags = serializers.SerializerMethodField()
     project_evidence_requirements = ProjectEvidenceRequirementSerializer(many=True, read_only=True)
+    gaps = GapSerializer(many=True, read_only=True)
+    capas = CAPASerializer(many=True, read_only=True)
 
     class Meta(ProjectIndicatorSerializer.Meta):
         fields = ProjectIndicatorSerializer.Meta.fields + (
@@ -241,6 +245,8 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
             "audit_summary",
             "readiness_flags",
             "project_evidence_requirements",
+            "gaps",
+            "capas",
         )
 
     def get_recurring_requirement(self, obj):
@@ -269,6 +275,7 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
         user = getattr(request, "user", None)
         can_owner = can_project_owner_access(user, obj)
         can_reviewer = can_project_reviewer_access(user, obj)
+        can_approver = can_project_approver_access(user, obj)
 
         return {
             "can_assign": can_admin_or_lead_access(user),
@@ -277,8 +284,8 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
             "can_start": can_owner,
             "can_send_for_review": can_owner,
             "can_submit_evidence": can_owner,
-            "can_approve_evidence": can_project_approver_access(user, obj),
-            "can_mark_met": can_project_approver_access(user, obj),
+            "can_approve_evidence": can_approver,
+            "can_mark_met": can_approver,
             "can_reopen": can_admin_access(user),
             "can_add_evidence": can_owner,
             "can_edit_evidence": can_owner,
@@ -287,6 +294,13 @@ class ProjectIndicatorDetailSerializer(ProjectIndicatorSerializer):
             "can_approve_recurring": can_reviewer,
             "can_generate_ai": can_owner,
             "can_accept_ai": can_owner,
+            "can_create_gap": can_owner,
+            "can_create_capa": can_owner,
+            "can_update_capa": can_owner,
+            "can_submit_capa": can_owner,
+            "can_close_capa": can_approver,
+            "can_reject_capa": can_approver,
+            "can_view_capa": True,
         }
 
 

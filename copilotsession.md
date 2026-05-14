@@ -1,4 +1,32 @@
-# Copilot Session Handoff — Evidence Requirement and Inspection Pack Builder Alignment Sprint
+# Current Truth After Gap and CAPA MVP + Evidence Workflow Stabilization Sprint
+
+This section supersedes the stale status in the historical log below.
+
+- Gap and CAPA models implemented and migrated
+- CAPA lifecycle services and APIs operational
+- Readiness and Export Eligibility integrated with CAPA blockers
+- Evidence bridge persistence bug FIXED and verified
+- Frontend badges and CAPA reports implemented
+- Targeted E2E (4/4) and Backend (121/121) tests passing
+- Final ZIP export pending
+- Next sprint: Final ZIP Export Engine & Recurring Workflow Stabilization
+
+---
+# Current Truth After E2E Environment Hardening & ZIP Export Verification Sprint
+
+This section supersedes the stale status in the historical log below.
+
+- migration drift fixed
+- targeted backend evidence bridge tests passed
+- frontend regression passed
+- PHC LAB deterministic seed implemented
+- E2E partial, with stale/persistence concerns and other unrelated failures
+- CAPA placeholder only
+- final ZIP export pending
+- Next sprint: Gap and CAPA MVP + Evidence Workflow Stabilization Sprint
+
+---
+# (Historical) Copilot Session Handoff — Evidence Requirement and Inspection Pack Builder Alignment Sprint
 
 ## Purpose
 This file is the **live execution and handoff ledger** for this sprint.  
@@ -124,5 +152,5 @@ It is the source of truth for task order, current status, and what remains so a 
 - **2026-05-09:** **Persistent Blocker**: Encountered `SyntaxError: unterminated string literal` in `backend/apps/ai_actions/services/document_drafting.py` during migration attempts. Multiple attempts to fix the string literal definition have failed. This issue is preventing migrations from being applied and is documented here for future attention.
 - **2026-05-09:** **Persistent Blocker**: The `SyntaxError: unterminated string literal` in `backend/apps/ai_actions/services/document_drafting.py` persists despite multiple fix attempts and different approaches to string literal definition. Migrations are blocked. Moving forward with Stage 5, documenting the CAPA gap and proceeding with the inspection pack builder.
 - **2026-05-09:** Updated `GEMINI.md` and `README.md` to reflect the core workflow bridge, project identity, AI capabilities (including suggestion of evidence requirements), and architectural principles. Migrations are still pending application.
-- **2026-05-09:** Updated `copilotsession.md` to reflect documentation updates, completion of Phase 3/4 tasks, CAPA gap, persistent migration blocker, and the decision to proceed with Stage 5.
+- **2026-_05-09:** Updated `copilotsession.md` to reflect documentation updates, completion of Phase 3/4 tasks, CAPA gap, persistent migration blocker, and the decision to proceed with Stage 5.
 - **2026-05-09:** Updated `backend/apps/exports/services.py` to include CAPA placeholders in `build_print_bundle` output, documenting the absence of CAPA data.

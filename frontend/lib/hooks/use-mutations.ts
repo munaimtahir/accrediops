@@ -213,6 +213,21 @@ export function useProjectExport(projectId: number, format: "excel" | "print-bun
   });
 }
 
+export function useTriggerZipExport(projectId: number) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () =>
+      apiClient.post<ExportResponse>(`/api/exports/projects/${projectId}/final-zip/`, {}),
+    onSuccess: async (data) => {
+      if (data.file_url) {
+        window.open(data.file_url, "_blank");
+      }
+      await queryClient.invalidateQueries({ queryKey: queryKeys.project(projectId) });
+    },
+  });
+}
+
 export function useCloneProject(projectId: number) {
   const queryClient = useQueryClient();
   return useMutation({

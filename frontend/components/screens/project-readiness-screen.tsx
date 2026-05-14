@@ -112,6 +112,24 @@ export function ProjectReadinessScreen({ projectId }: { projectId: number }) {
         <MetricCard label="% blocked" value={Number(data.percent_blocked ?? 0)} />
         <MetricCard label="Recurring compliance" value={Number(data.recurring_compliance_score ?? 0)} />
       </div>
+
+      <Section title="Gap & CAPA Status">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <MetricCard label="Open Gaps" value={Number(data.open_gap_count ?? 0)} />
+          <MetricCard label="Open CAPAs" value={Number(data.open_capa_count ?? 0)} />
+          <MetricCard label="High-Risk CAPAs" value={Number(data.high_risk_capa_count ?? 0)} />
+          <MetricCard label="Overdue CAPAs" value={Number(data.overdue_capa_count ?? 0)} />
+        </div>
+      </Section>
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-panel">
+      <h2 className="text-lg font-semibold text-slate-950 mb-4">{title}</h2>
+      {children}
     </div>
   );
 }

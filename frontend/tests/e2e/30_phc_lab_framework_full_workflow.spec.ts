@@ -363,6 +363,23 @@ test.describe("30 PHC LAB framework full workflow", () => {
           "approve evidence for approver",
         );
       }
+      // To satisfy the new, stricter readiness checks, we also need to approve the ProjectEvidenceRequirements.
+      const requirements = await getApi<{ id: number; mandatory: boolean }[]>(
+        adminPage,
+        `/api/project-indicators/${indicatorId}/requirements/`,
+        "list evidence requirements",
+      );
+      for (const req of requirements) {
+        if (req.mandatory) {
+          await patchApi(
+            adminPage,
+            `/api/project-evidence-requirements/${req.id}/`,
+            { status: "APPROVED" },
+            "approve mandatory requirement",
+          );
+        }
+      }
+
       await postApi(adminPage, `/api/project-indicators/${indicatorId}/start/`, { reason: "E2E start" }, "start");
       await postApi(
         adminPage,

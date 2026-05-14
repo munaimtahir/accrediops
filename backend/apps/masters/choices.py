@@ -169,3 +169,29 @@ class ProjectEvidenceRequirementStatusChoices(models.TextChoices):
     APPROVED = "APPROVED", "Approved"
     REJECTED = "REJECTED", "Rejected"
     NOT_APPLICABLE = "NOT_APPLICABLE", "Not Applicable"
+
+
+class GapSourceChoices(models.TextChoices):
+    MISSING_EVIDENCE = "MISSING_EVIDENCE", "Missing Evidence"
+    PARTIAL_EVIDENCE = "PARTIAL_EVIDENCE", "Partial Evidence"
+    REJECTED_EVIDENCE = "REJECTED_EVIDENCE", "Rejected Evidence"
+    MANUAL = "MANUAL", "Manual"
+    MOCK_INSPECTION = "MOCK_INSPECTION", "Mock Inspection"
+    AI_SUGGESTED = "AI_SUGGESTED", "AI Suggested"
+
+
+class GapStatusChoices(models.TextChoices):
+    OPEN = "OPEN", "Open"
+    LINKED_TO_CAPA = "LINKED_TO_CAPA", "Linked to CAPA"
+    RESOLVED = "RESOLVED", "Resolved"
+    DISMISSED = "DISMISSED", "Dismissed"
+
+
+class CapaStatusChoices(models.TextChoices):
+    OPEN = "OPEN", "Open"
+    IN_PROGRESS = "IN_PROGRESS", "In Progress"
+    SUBMITTED_FOR_REVIEW = "SUBMITTED_FOR_REVIEW", "Submitted for Review"
+    CLOSED = "CLOSED", "Closed"
+    REJECTED = "REJECTED", "Rejected"
+    CANCELLED = "CANCELLED", "Cancelled"
+

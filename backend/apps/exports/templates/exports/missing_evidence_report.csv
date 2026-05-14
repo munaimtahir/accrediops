@@ -1,0 +1,6 @@
+indicator_code,indicator_text,requirement_title,status,reason
+{% for warning in bundle.project_summary.export_eligibility.warnings %}
+{% if warning.missing_evidence_count > 0 %}
+{{ warning.indicator_code }},"{{ warning.indicator_title|escape }}","{{ warning.requirement_title|escape }}",MISSING,"Missing required evidence"
+{% endif %}
+{% endfor %}

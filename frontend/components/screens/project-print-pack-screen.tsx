@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { canViewExports, getRestrictionMessage } from "@/lib/authz";
 import { useAuthSession } from "@/lib/hooks/use-auth";
-import { useProjectExport } from "@/lib/hooks/use-mutations";
+import { useProjectExport, useTriggerZipExport } from "@/lib/hooks/use-mutations";
 import { useProjectReadiness } from "@/lib/hooks/use-readiness";
 import { cn } from "@/utils/cn";
 
@@ -23,6 +23,7 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
   const effectiveProjectId = canManageExports ? projectId : Number.NaN;
   const printBundle = useProjectExport(projectId, "print-bundle");
   const readiness = useProjectReadiness(effectiveProjectId);
+  const triggerZipExport = useTriggerZipExport(projectId);
   const sections = useMemo(() => {
     if (!printBundle.data) {
       return [];
@@ -63,6 +64,9 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
     Array.isArray(readinessData.high_risk_indicators) && readinessData.high_risk_indicators.length > 0
       ? `Critical indicators pending: ${readinessData.high_risk_indicators.length}`
       : "",
+    Array.isArray(readinessData.capa_blockers) && readinessData.capa_blockers.length > 0
+      ? `CAPA Blockers: ${readinessData.capa_blockers.length} open CAPAs on mandatory requirements or high severity.`
+      : "",
   ].filter(Boolean);
   const exportReady = !readiness.isLoading && exportBlockers.length === 0;
 
@@ -73,14 +77,24 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
         title="Print pack preview"
         description="Structured print pack with area → standard → indicator → evidence ordering."
         actions={
-          <Button
-            onClick={() => printBundle.mutate()}
-            loading={printBundle.isPending}
-            disabled={!exportReady}
-            title={exportReady ? "Generate print pack preview" : "Resolve export blockers before generation."}
-          >
-            Generate Print Pack
-          </Button>
+          <>
+            <Button
+              onClick={() => printBundle.mutate()}
+              loading={printBundle.isPending}
+              disabled={!exportReady}
+              title={exportReady ? "Generate print pack preview" : "Resolve export blockers before generation."}
+            >
+              Generate Print Pack
+            </Button>
+            <Button
+              onClick={() => triggerZipExport.mutate()}
+              loading={triggerZipExport.isPending}
+              disabled={!exportReady}
+              title={exportReady ? "Generate final ZIP export" : "Resolve export blockers before generation."}
+            >
+              Final ZIP Export
+            </Button>
+          </>
         }
       />
 
@@ -127,6 +141,26 @@ export function ProjectPrintPackScreen({ projectId }: { projectId: number }) {
           description="Generate print pack to preview evidence structure and print order."
         />
       ) : null}
+
+      {printBundle.data?.consolidated_lists?.pending_capa && printBundle.data.consolidated_lists.pending_capa.length > 0 && (
+        <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-panel">
+          <h3 className="text-lg font-semibold text-slate-950">CAPA Report</h3>
+          <div className="mt-3 space-y-3">
+            {printBundle.data.consolidated_lists.pending_capa.map((capa: Record<string, unknown>) => (
+              <div key={capa.id as number} className="rounded-lg border border-slate-200 p-3">
+                <h4 className="font-semibold text-slate-900">{capa.title as string}</h4>
+                <div className="mt-2 space-y-2 text-sm text-slate-700">
+                  <p><strong>Indicator:</strong> {capa.indicator_code as string}</p>
+                  <p><strong>Status:</strong> {capa.status as string}</p>
+                  <p><strong>Severity:</strong> {capa.severity as string}</p>
+                  <p><strong>Assigned To:</strong> {(capa.responsible_person as string) || "Unassigned"}</p>
+                  <p><strong>Due Date:</strong> {(capa.due_date as string) || "Not set"}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {sections.map((section) => (
         <div key={section.name} className="rounded-xl border border-slate-200 bg-white p-4 shadow-panel">

@@ -56,6 +56,8 @@ class ProjectIndicatorDetailView(APIView):
                 "project_evidence_requirements__submitted_by",
                 "project_evidence_requirements__approved_by",
                 "project_evidence_requirements__rejected_by",
+                "gaps",
+                "capas",
             ),
             pk=pk,
         )

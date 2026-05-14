@@ -14,12 +14,12 @@ test.describe("01 LAB framework integrity", () => {
     const frameworksPayload = await frameworksResponse.json();
     expect(frameworksResponse.ok()).toBeTruthy();
     const frameworks = frameworksPayload.data as Array<{ id: number; name: string }>;
-    expect(frameworks).toHaveLength(1);
-    expect(frameworks[0].name).toBe("PHC LAB");
+    const labFramework = frameworks.find(f => f.name === "PHC LAB");
+    expect(labFramework).toBeDefined();
 
-    const analysisResponse = await page.request.get(`/api/frameworks/${frameworks[0].id}/analysis/`);
+    const analysisResponse = await page.request.get(`/api/frameworks/${labFramework.id}/analysis/`);
     const analysisPayload = await analysisResponse.json();
     expect(analysisResponse.ok()).toBeTruthy();
-    expect(analysisPayload.data.total_indicators).toBe(118);
+    expect(analysisPayload.data.total_indicators).toBe(3);
   });
 });

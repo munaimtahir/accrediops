@@ -611,21 +611,39 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                 </li>
               </ul>
             </Card>
+
             <Card className="border-slate-200 p-4">
-              <p className="text-sm font-semibold text-slate-900">Evidence requirement definition</p>
-              <p className="mt-2 text-sm text-slate-700">
-                {indicator.indicator.required_evidence_description || "No required evidence description configured."}
-              </p>
-              <div className="mt-3 grid gap-3 md:grid-cols-3 text-sm text-slate-700">
-                <p>
-                  <span className="font-semibold">Evidence type:</span> {indicator.indicator.evidence_type}
-                </p>
-                <p>
-                  <span className="font-semibold">Document type:</span> {indicator.indicator.document_type}
-                </p>
-                <p>
-                  <span className="font-semibold">Reuse policy:</span> {formatEnumLabel(indicator.indicator.evidence_reuse_policy)}
-                </p>
+              <p className="text-sm font-semibold text-slate-900">Evidence Requirements</p>
+              <div className="mt-3 space-y-3">
+                {indicator.project_evidence_requirements?.map((req: Record<string, unknown>) => {
+                  const reqId = req.id as number;
+                  const reqStatus = req.status as string;
+                  const reqEvidenceRequirement = req.evidence_requirement as Record<string, unknown>;
+                  const reqTitle = reqEvidenceRequirement.title as string;
+                  const reqMandatory = reqEvidenceRequirement.mandatory as boolean;
+
+                  const reqGaps = indicator.gaps?.filter((g: Record<string, unknown>) => g.project_evidence_requirement === reqId) || [];
+                  const reqCapas = indicator.capas?.filter((c: Record<string, unknown>) => c.project_evidence_requirement === reqId) || [];
+                  
+                  return (
+                  <div key={reqId} className="rounded-lg border border-slate-200 p-3 bg-slate-50">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">{reqTitle}</p>
+                        <p className="text-xs text-slate-500">Status: {reqStatus} {reqMandatory && "(Mandatory)"}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        {reqGaps.length > 0 && <span className="rounded-full bg-red-100 text-red-800 px-2 py-1 text-xs">Open Gap</span>}
+                        {reqCapas.map((capa: Record<string, unknown>) => (
+                          <span key={capa.id as number} className="rounded-full bg-orange-100 text-orange-800 px-2 py-1 text-xs">CAPA {capa.status as string}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )})}
+                {(!indicator.project_evidence_requirements || indicator.project_evidence_requirements.length === 0) && (
+                  <p className="text-sm text-slate-500">No specific evidence requirements.</p>
+                )}
               </div>
             </Card>
           </div>

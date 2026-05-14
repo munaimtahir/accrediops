@@ -189,6 +189,10 @@ def review_evidence_item(
 
 
 def calculate_project_evidence_readiness(project) -> dict:
+    from apps.indicators.capa_services import calculate_project_capa_summary, list_open_capa_for_project
+    from apps.indicators.models.capa import Gap
+    from apps.masters.choices import PriorityChoices
+    
     project_evidence_requirements = (
         ProjectEvidenceRequirement.objects.filter(project=project)
         .select_related("project_indicator__indicator", "evidence_requirement")
@@ -221,6 +225,23 @@ def calculate_project_evidence_readiness(project) -> dict:
                 }
             )
 
+    capa_summary = calculate_project_capa_summary(project)
+    open_capas = list_open_capa_for_project(project)
+    
+    capa_blockers = []
+    for capa in open_capas:
+        is_high_risk = capa.gap.severity in [PriorityChoices.HIGH, PriorityChoices.CRITICAL]
+        is_mandatory = capa.project_evidence_requirement and capa.project_evidence_requirement.evidence_requirement.mandatory
+        
+        if is_high_risk or is_mandatory:
+            capa_blockers.append({
+                "capa_id": capa.id,
+                "capa_title": capa.title,
+                "gap_severity": capa.gap.severity,
+                "is_mandatory_evidence": is_mandatory,
+                "status": capa.status
+            })
+
     total = project_evidence_requirements.count()
     approved = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.APPROVED).count()
     missing = project_evidence_requirements.filter(status=ProjectEvidenceRequirementStatusChoices.MISSING).count()
@@ -237,8 +258,14 @@ def calculate_project_evidence_readiness(project) -> dict:
         evidence_requirement__mandatory=True,
         status=ProjectEvidenceRequirementStatusChoices.NOT_APPLICABLE,
     ).count()
-    export_ready = mandatory_total == (mandatory_approved + mandatory_not_applicable) and not mandatory_blockers
+    
+    export_ready = (
+        mandatory_total == (mandatory_approved + mandatory_not_applicable) 
+        and not mandatory_blockers 
+        and not capa_blockers
+    )
     readiness_percent = 100.0 if total == 0 else round((approved / total) * 100, 2)
+    
     return {
         "total": total,
         "approved": approved,
@@ -256,4 +283,9 @@ def calculate_project_evidence_readiness(project) -> dict:
         "rejected_evidence_items": rejected_evidence_items,
         "readiness_percent": readiness_percent,
         "export_ready": export_ready,
+        "open_gap_count": Gap.objects.filter(project=project, status__in=["OPEN", "LINKED_TO_CAPA"]).count(),
+        "open_capa_count": capa_summary["open_capa_count"],
+        "high_risk_capa_count": capa_summary["high_risk_capa_count"],
+        "overdue_capa_count": capa_summary["overdue_capa_count"],
+        "capa_blockers": capa_blockers,
     }

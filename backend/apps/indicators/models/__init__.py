@@ -1,3 +1,4 @@
+from .capa import CAPA, Gap
 from .indicator import (
     EvidenceRequirement,
     EvidenceRequirementSuggestion,
@@ -9,8 +10,10 @@ from .indicator import (
 )
 
 __all__ = [
+    "CAPA",
     "EvidenceRequirement",
     "EvidenceRequirementSuggestion",
+    "Gap",
     "Indicator",
     "ProjectEvidenceRequirement",
     "ProjectIndicator",

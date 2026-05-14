@@ -10,6 +10,7 @@ from apps.exports.services import (build_print_bundle,
 from apps.projects.models import AccreditationProject
 from apps.indicators.models import EvidenceRequirement, ProjectEvidenceRequirement
 from apps.workflow.permissions import AdminOrLeadPermission
+from apps.exports.services import build_final_zip_export
 
 
 class ProjectExcelExportView(APIView):
@@ -132,3 +133,23 @@ class ProjectPhysicalRetrievalExportView(APIView):
                 "items": items,
             }
         )
+
+class ProjectFinalZipExportView(APIView):
+    permission_classes = [AdminOrLeadPermission]
+
+    def post(self, request, project_id):
+        project = get_object_or_404(AccreditationProject, pk=project_id)
+        
+        try:
+            zip_file_path = build_final_zip_export(project=project, actor=request.user)
+            return success_response({
+                "format": "zip",
+                "project_id": project.id,
+                "status": "generated",
+                "message": "Final ZIP export generated successfully.",
+                "file_url": f"/media/exports/{zip_file_path.name}" # Assuming MEDIA_URL setup
+            })
+        except PermissionDenied as e:
+            return Response({"success": False, "error": {"code": "EXPORT_BLOCKED", "message": str(e)}}, status=status.HTTP_403_FORBIDDEN)
+        except Exception as e:
+            return Response({"success": False, "error": {"code": "SERVER_ERROR", "message": str(e)}}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

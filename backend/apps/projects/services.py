@@ -142,8 +142,6 @@ def initialize_project_from_framework(
                     "status": ProjectEvidenceRequirementStatusChoices.MISSING, # Default status for new fulfillment
                     "assigned_to": None, # Default to None
                     "due_date": project.target_date, # Inherit from project target date
-                    "created_by": actor, # Track who initialized it
-                    "last_updated_by": actor,
                 }
             )
             if created_per:

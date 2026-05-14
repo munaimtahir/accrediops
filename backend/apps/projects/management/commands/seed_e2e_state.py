@@ -4,6 +4,7 @@ from datetime import timedelta
 import time
 
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.db.utils import OperationalError
@@ -63,6 +64,9 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def _handle_atomic(self, *args, **options):
+        self.stdout.write(self.style.SUCCESS("--- Ensuring base PHC LAB framework exists ---"))
+        call_command("seed_phc_lab_framework")
+
         password: str = options["password"]
         ensure_client: bool = options["ensure_client"]
         ensure_project: bool = options["ensure_project"]

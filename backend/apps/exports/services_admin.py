@@ -73,6 +73,12 @@ def project_readiness(project: AccreditationProject) -> dict:
             )
 
     overall_score = round(((met / total) * 70) + ((recurring_compliance_score / 100) * 30), 2)
+    
+    from apps.indicators.capa_services import calculate_project_capa_summary
+    from apps.indicators.models.capa import Gap
+    capa_summary = calculate_project_capa_summary(project)
+    open_gap_count = Gap.objects.filter(project=project, status__in=["OPEN", "LINKED_TO_CAPA"]).count()
+    
     return {
         "overall_score": overall_score,
         "percent_met": round((met / total) * 100, 2),
@@ -80,4 +86,9 @@ def project_readiness(project: AccreditationProject) -> dict:
         "percent_blocked": round((blocked / total) * 100, 2),
         "recurring_compliance_score": recurring_compliance_score,
         "high_risk_indicators": high_risk,
+        "open_gap_count": open_gap_count,
+        "open_capa_count": capa_summary["open_capa_count"],
+        "high_risk_capa_count": capa_summary["high_risk_capa_count"],
+        "overdue_capa_count": capa_summary["overdue_capa_count"],
+        "capa_blockers": [], # Not populated here, rely on evidence readiness for export blocking
     }

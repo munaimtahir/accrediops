@@ -42,6 +42,7 @@ from apps.api.views.exports import (
     ProjectExcelExportView,
     ProjectPhysicalRetrievalExportView,
     ProjectPrintBundleExportView,
+    ProjectFinalZipExportView,
 )
 from apps.api.views.frameworks import FrameworkAnalysisView, FrameworkListView
 from apps.api.views.frameworks import FrameworkTemplateView, FrameworkExportView
@@ -53,6 +54,10 @@ from apps.api.views.project_indicators import (
     ProjectIndicatorSendForReviewView,
     ProjectIndicatorStartView,
     ProjectIndicatorUpdateWorkingStateView,
+)
+from apps.api.views.project_evidence_requirements import (
+    ProjectEvidenceRequirementListView,
+    ProjectEvidenceRequirementDetailView,
 )
 from apps.api.views.projects import (
     AreasProgressView,
@@ -222,6 +227,16 @@ urlpatterns = [
         name="project-indicator-evidence",
     ),
     path(
+        "api/project-indicators/<int:project_indicator_id>/requirements/",
+        ProjectEvidenceRequirementListView.as_view(),
+        name="project-indicator-requirements-list",
+    ),
+    path(
+        "api/project-evidence-requirements/<int:pk>/",
+        ProjectEvidenceRequirementDetailView.as_view(),
+        name="project-evidence-requirement-detail",
+    ),
+    path(
         "api/project-indicators/<int:pk>/ai-outputs/",
         ProjectIndicatorAIOutputsView.as_view(),
         name="project-indicator-ai-outputs",
@@ -251,6 +266,11 @@ urlpatterns = [
         "api/exports/projects/<int:project_id>/print-bundle/",
         ProjectPrintBundleExportView.as_view(),
         name="project-export-print-bundle",
+    ),
+    path(
+        "api/exports/projects/<int:project_id>/final-zip/", # New endpoint
+        ProjectFinalZipExportView.as_view(),
+        name="project-export-final-zip",
     ),
     path(
         "api/exports/projects/<int:project_id>/physical-retrieval/",
@@ -287,4 +307,24 @@ urlpatterns.extend([
         ProjectEvidenceRequirementUpdateView.as_view(),
         name="project-evidence-requirement-update"
     ),
+])
+
+from apps.api.views.capa import (
+    ProjectGapListView,
+    ProjectCAPAListView,
+    ProjectCAPASummaryView,
+    RequirementGapListView,
+    GapCAPACreateView,
+    CAPADetailView,
+    CAPAActionView,
+)
+
+urlpatterns.extend([
+    path("api/projects/<int:project_id>/gaps/", ProjectGapListView.as_view(), name="project-gap-list"),
+    path("api/projects/<int:project_id>/capas/", ProjectCAPAListView.as_view(), name="project-capa-list"),
+    path("api/projects/<int:project_id>/capa-summary/", ProjectCAPASummaryView.as_view(), name="project-capa-summary"),
+    path("api/project-evidence-requirements/<int:requirement_id>/gaps/", RequirementGapListView.as_view(), name="requirement-gap-list"),
+    path("api/gaps/<int:gap_id>/capas/", GapCAPACreateView.as_view(), name="gap-capa-create"),
+    path("api/capas/<int:pk>/", CAPADetailView.as_view(), name="capa-detail"),
+    path("api/capas/<int:pk>/action/", CAPAActionView.as_view(), name="capa-action"),
 ])

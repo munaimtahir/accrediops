@@ -1,0 +1,4 @@
+gap_id,title,description,severity,source,status,project_indicator,evidence_requirement
+{% for gap in bundle.consolidated_lists.pending_gaps %}
+{{ gap.id }},"{{ gap.title|escape }}","{{ gap.description|escape }}",{{ gap.severity }},{{ gap.source }},{{ gap.status }},{{ gap.project_indicator.indicator_code }},{{ gap.evidence_requirement.title|escape }}
+{% endfor %}

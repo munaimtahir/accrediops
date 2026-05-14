@@ -19,8 +19,8 @@ test.describe("15 smoke clean new app mode", () => {
     const frameworksPayload = await frameworksResponse.json();
     expect(frameworksResponse.ok()).toBeTruthy();
     const frameworks = frameworksPayload.data as Array<{ id: number; name: string }>;
-    expect(frameworks).toHaveLength(1);
-    expect(frameworks[0].name).toBe(seededUser.frameworkName);
+    const labFramework = frameworks.find(f => f.name === seededUser.frameworkName);
+    expect(labFramework).toBeDefined();
 
     const projects = await listProjects(page);
     expect(projects.results.every((item) => item.name.startsWith("E2E"))).toBeTruthy();

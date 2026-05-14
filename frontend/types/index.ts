@@ -290,6 +290,9 @@ export interface ProjectIndicatorDetail extends ProjectIndicator {
   ai_outputs: AIOutput[];
   audit_summary: AuditEvent[];
   readiness_flags: IndicatorReadinessFlags;
+  project_evidence_requirements?: Record<string, unknown>[];
+  gaps?: Record<string, unknown>[];
+  capas?: Record<string, unknown>[];
 }
 
 export interface DashboardRow {
@@ -523,6 +526,12 @@ export interface ExportResponse {
   warnings?: string[];
   sections?: PrintPackSection[];
   bundle?: { sections: PrintPackSection[] };
+  consolidated_lists?: {
+    missing_evidence?: any[];
+    partial_evidence?: any[];
+    ai_drafts_for_review?: any[];
+    pending_capa?: any[];
+  };
   items?: {
     area: string;
     standard: string;
