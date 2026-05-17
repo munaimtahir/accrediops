@@ -24,6 +24,8 @@ import { AssignmentForm } from "@/components/forms/assignment-form";
 import { EvidenceForm } from "@/components/forms/evidence-form";
 import { EvidenceReviewForm } from "@/components/forms/evidence-review-form";
 import { IndicatorActionDialog } from "@/components/forms/indicator-action-dialog";
+import { RecordGapForm } from "@/components/forms/record-gap-form";
+import { InitializeCapaForm } from "@/components/forms/initialize-capa-form";
 import { WorkingStateForm } from "@/components/forms/working-state-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -46,6 +48,8 @@ import {
   useStartIndicator,
   useSubmitRecurring,
   useUpdateWorkingState,
+  useRecordGap,
+  useInitializeCapa,
 } from "@/lib/hooks/use-mutations";
 import { useProgress } from "@/lib/hooks/use-progress";
 import { useAuthSession } from "@/lib/hooks/use-auth";
@@ -57,6 +61,7 @@ import {
   StandardProgress,
 } from "@/types";
 import { formatDate, formatDateTime, formatEnumLabel } from "@/utils/format";
+import { cn } from "@/utils/cn";
 import { getEvidenceApprovalTone, getRecurringStatusTone } from "@/utils/status-semantics";
 
 type IndicatorPanel =
@@ -138,6 +143,8 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
   const [aiInstruction, setAiInstruction] = useState("");
   const [acceptingAI, setAcceptingAI] = useState<AIOutput | null>(null);
   const [activeAction, setActiveAction] = useState<"start" | "review" | "met" | "reopen" | null>(null);
+  const [recordingGapFor, setRecordingGapFor] = useState<number | null>(null);
+  const [initializingCapaFor, setInitializingCapaFor] = useState<number | null>(null);
   const [activePanel, setActivePanel] = useState<IndicatorPanel>("readiness");
   const [recurringEvidenceId, setRecurringEvidenceId] = useState("");
   const [recurringText, setRecurringText] = useState("");
@@ -147,6 +154,8 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
   const submitRecurring = useSubmitRecurring(indicatorId, submittingRecurring?.id ?? 0, projectId);
   const approveRecurring = useApproveRecurring(indicatorId, approvingRecurring?.id ?? 0, projectId);
   const acceptAI = useAcceptAI(indicatorId, acceptingAI?.id ?? 0, projectId);
+  const recordGap = useRecordGap(indicatorId, projectId);
+  const initializeCapa = useInitializeCapa(indicatorId, projectId);
 
   useEffect(() => {
     const requestedPanel = parseIndicatorPanel(searchParams.get("panel"));
@@ -422,6 +431,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
               size="sm"
               variant={activePanel === item.key ? "default" : "secondary"}
               onClick={() => setActivePanel(item.key as IndicatorPanel)}
+              data-testid={`panel-btn-${item.key}`}
             >
               {item.label}
             </Button>
@@ -625,18 +635,78 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                   const reqGaps = indicator.gaps?.filter((g: Record<string, unknown>) => g.project_evidence_requirement === reqId) || [];
                   const reqCapas = indicator.capas?.filter((c: Record<string, unknown>) => c.project_evidence_requirement === reqId) || [];
                   
+                  const hasGap = reqGaps.length > 0;
+                  const hasCapa = reqCapas.length > 0;
+                  const primaryGap = hasGap ? reqGaps[0] : null;
+                  const primaryCapa = hasCapa ? reqCapas[0] : null;
+                  
+                  const isMissingMandatoryNoGap = reqMandatory && reqStatus !== "MET" && !hasGap && !hasCapa;
+
                   return (
-                  <div key={reqId} className="rounded-lg border border-slate-200 p-3 bg-slate-50">
-                    <div className="flex items-center justify-between">
+                  <div key={reqId} className={cn("rounded-lg border p-3", isMissingMandatoryNoGap ? "border-rose-300 bg-rose-50" : "border-slate-200 bg-slate-50")}>
+                    <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                       <div>
-                        <p className="text-sm font-semibold text-slate-900">{reqTitle}</p>
-                        <p className="text-xs text-slate-500">Status: {reqStatus} {reqMandatory && "(Mandatory)"}</p>
+                        <p className={cn("text-sm font-semibold", isMissingMandatoryNoGap ? "text-rose-950" : "text-slate-900")}>{reqTitle}</p>
+                        <p className={cn("text-xs", isMissingMandatoryNoGap ? "text-rose-700 font-semibold" : "text-slate-500")}>
+                          Status: {reqStatus} {reqMandatory && "(Mandatory)"}
+                          {isMissingMandatoryNoGap && " — Missing mandatory requirement needs a gap"}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {!hasGap && !hasCapa && <span className="inline-flex rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">No Gap</span>}
+                          {hasGap && primaryGap?.status === "OPEN" && !hasCapa && <span className="inline-flex rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900">Open Gap</span>}
+                          {hasCapa && primaryCapa?.status === "OPEN" && <span className="inline-flex rounded-full border border-blue-300 bg-blue-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-900">CAPA Open</span>}
+                          {hasCapa && primaryCapa?.status === "SUBMITTED_FOR_REVIEW" && <span className="inline-flex rounded-full border border-violet-300 bg-violet-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-violet-900">CAPA Submitted</span>}
+                          {hasCapa && primaryCapa?.status === "CLOSED" && <span className="inline-flex rounded-full border border-emerald-300 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-900">CAPA Closed</span>}
+                          {hasCapa && Boolean(primaryCapa?.is_export_blocker) && <span className="inline-flex rounded-full border border-rose-300 bg-rose-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-rose-900" data-testid="capa-export-blocker-badge">Blocks Export</span>}
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        {reqGaps.length > 0 && <span className="rounded-full bg-red-100 text-red-800 px-2 py-1 text-xs">Open Gap</span>}
-                        {reqCapas.map((capa: Record<string, unknown>) => (
-                          <span key={capa.id as number} className="rounded-full bg-orange-100 text-orange-800 px-2 py-1 text-xs">CAPA {capa.status as string}</span>
-                        ))}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {isMissingMandatoryNoGap ? (
+                          <Button
+                            variant="default"
+                            size="sm"
+                            className="bg-rose-600 hover:bg-rose-700 text-white"
+                            onClick={() => setRecordingGapFor(reqId)}
+                            data-testid="create-gap-button"
+                          >
+                            Record Gap
+                          </Button>
+                        ) : !hasGap && (
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => setRecordingGapFor(reqId)}
+                            data-testid="create-gap-button"
+                          >
+                            Record Gap
+                          </Button>
+                        )}
+                        {hasGap && !hasCapa && primaryGap?.status === "OPEN" && (
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => setInitializingCapaFor(primaryGap.id as number)}
+                            data-testid="create-capa-button"
+                          >
+                            Create CAPA
+                          </Button>
+                        )}
+                        {hasCapa && (
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => window.location.assign(`/projects/${projectId}/capa`)}
+                          >
+                            View CAPA
+                          </Button>
+                        )}
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={() => setActivePanel("evidence")}
+                        >
+                          View Evidence
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -671,6 +741,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
           <div className="flex flex-wrap gap-2">
             <Button
               onClick={() => setActiveAction("start")}
+              data-testid="indicator-start-btn"
               loading={startIndicator.isPending}
               disabled={!canStart}
               title={canStart ? "Move indicator into active work" : "Requires the assigned OWNER, or LEAD/ADMIN."}
@@ -680,6 +751,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="secondary"
               onClick={() => setActiveAction("review")}
+              data-testid="indicator-review-btn"
               loading={sendForReview.isPending}
               disabled={!canSendForReview}
               title={canSendForReview ? "Submit indicator for review" : "Requires the assigned OWNER, or LEAD/ADMIN."}
@@ -689,6 +761,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="secondary"
               onClick={() => setActiveAction("met")}
+              data-testid="indicator-mark-met-btn"
               loading={markMet.isPending}
               disabled={!canMarkMet || !readiness.ready_for_met}
               title={
@@ -704,6 +777,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="danger"
               onClick={() => setActiveAction("reopen")}
+              data-testid="indicator-reopen-btn"
               loading={reopen.isPending}
               disabled={!canReopen}
               title={canReopen ? "Admin governance override to reopen indicator" : "Only ADMIN can reopen indicators."}
@@ -732,6 +806,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
           <div className="mb-4 flex justify-end">
             <Button
               onClick={() => setShowAddEvidence(true)}
+              data-testid="add-evidence-btn"
               disabled={!canAddEvidence}
               title={canAddEvidence ? "Add evidence" : "Requires the assigned OWNER, or LEAD/ADMIN."}
             >
@@ -827,6 +902,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                         variant="secondary"
                         size="sm"
                         onClick={() => setEditingEvidence(item)}
+                        data-testid={`edit-evidence-btn-${item.id}`}
                         disabled={!canEditEvidence}
                         title={canEditEvidence ? "Edit evidence details" : "Requires the assigned OWNER, or LEAD/ADMIN."}
                       >
@@ -836,6 +912,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                         variant="secondary"
                         size="sm"
                         onClick={() => setReviewingEvidence(item)}
+                        data-testid={`review-evidence-btn-${item.id}`}
                         disabled={!canReviewEvidence}
                         title={canReviewEvidence ? "Review evidence quality and approval" : "Requires the assigned REVIEWER, or APPROVER/LEAD/ADMIN."}
                       >
@@ -899,6 +976,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                         variant="secondary"
                         size="sm"
                         onClick={() => setSubmittingRecurring(instance)}
+                        data-testid={`submit-recurring-btn-${instance.id}`}
                         disabled={!canSubmitRecurring}
                         title={canSubmitRecurring ? "Submit recurring instance" : "Requires the assigned OWNER, or LEAD/ADMIN."}
                       >
@@ -908,6 +986,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
                         variant="secondary"
                         size="sm"
                         onClick={() => setApprovingRecurring(instance)}
+                        data-testid={`approve-recurring-btn-${instance.id}`}
                         disabled={!canApproveRecurring}
                         title={canApproveRecurring ? "Approve or reject recurring instance" : "Requires the assigned REVIEWER, or APPROVER/LEAD/ADMIN."}
                       >
@@ -947,6 +1026,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="secondary"
               onClick={() => setAiOutputMode("GUIDANCE")}
+              data-testid="generate-guidance-btn"
               disabled={!canAIActions}
             >
               📋 Generate guidance
@@ -954,6 +1034,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="secondary"
               onClick={() => setAiOutputMode("DRAFT")}
+              data-testid="generate-draft-btn"
               disabled={!canAIActions}
             >
               📄 Generate draft
@@ -961,6 +1042,7 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
             <Button
               variant="secondary"
               onClick={() => setAiOutputMode("ASSESSMENT")}
+              data-testid="generate-assessment-btn"
               disabled={!canAIActions}
             >
               📊 Generate assessment
@@ -1384,6 +1466,52 @@ export function IndicatorDetailScreen({ indicatorId }: { indicatorId: number }) 
           return reopen.mutateAsync({ reason });
         }}
       />
+
+      <Modal
+        open={recordingGapFor !== null}
+        title="Record Gap"
+        description="Log a gap for this specific evidence requirement."
+        onClose={() => setRecordingGapFor(null)}
+      >
+        <RecordGapForm
+          loading={recordGap.isPending}
+          onSubmit={async (payload) => {
+            if (recordingGapFor === null) return;
+            try {
+              await recordGap.mutateAsync({ requirementId: recordingGapFor, payload });
+              pushToast("Gap recorded successfully.", "success");
+              setRecordingGapFor(null);
+              await indicatorQuery.refetch();
+            } catch (error) {
+              pushToast(getSafeErrorMessage(error), "error");
+            }
+          }}
+          onCancel={() => setRecordingGapFor(null)}
+        />
+      </Modal>
+
+      <Modal
+        open={initializingCapaFor !== null}
+        title="Initialize CAPA"
+        description="Create a Corrective and Preventive Action plan for the identified gap."
+        onClose={() => setInitializingCapaFor(null)}
+      >
+        <InitializeCapaForm
+          loading={initializeCapa.isPending}
+          onSubmit={async (payload) => {
+            if (initializingCapaFor === null) return;
+            try {
+              await initializeCapa.mutateAsync({ gapId: initializingCapaFor, payload });
+              pushToast("CAPA initialized successfully.", "success");
+              setInitializingCapaFor(null);
+              await indicatorQuery.refetch();
+            } catch (error) {
+              pushToast(getSafeErrorMessage(error), "error");
+            }
+          }}
+          onCancel={() => setInitializingCapaFor(null)}
+        />
+      </Modal>
     </div>
   );
 }

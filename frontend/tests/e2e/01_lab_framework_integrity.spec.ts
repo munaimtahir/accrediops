@@ -20,6 +20,6 @@ test.describe("01 LAB framework integrity", () => {
     const analysisResponse = await page.request.get(`/api/frameworks/${labFramework.id}/analysis/`);
     const analysisPayload = await analysisResponse.json();
     expect(analysisResponse.ok()).toBeTruthy();
-    expect(analysisPayload.data.total_indicators).toBe(3);
+    expect(analysisPayload.data.total_indicators).toBe(4);
   });
 });

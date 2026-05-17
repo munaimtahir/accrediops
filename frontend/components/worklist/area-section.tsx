@@ -26,7 +26,7 @@ export function AreaSection({
   }, createStatusCounts());
 
   return (
-    <section className="space-y-4 rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+    <section data-testid={`area-section-${areaName}`} className="space-y-4 rounded-xl border border-slate-200 bg-slate-50/50 p-4">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <h3 className="text-lg font-semibold tracking-tight text-slate-950">{areaName}</h3>
       </div>

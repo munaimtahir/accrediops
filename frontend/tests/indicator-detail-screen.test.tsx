@@ -131,6 +131,9 @@ vi.mock("@/lib/hooks/use-mutations", () => ({
   useSubmitRecurring: () => ({ isPending: false, mutateAsync: vi.fn() }),
   useApproveRecurring: () => ({ isPending: false, mutateAsync: vi.fn() }),
   useAcceptAI: () => ({ isPending: false, mutateAsync: vi.fn() }),
+  useRecordGap: () => ({ isPending: false, mutateAsync: vi.fn() }),
+  useInitializeCapa: () => ({ isPending: false, mutateAsync: vi.fn() }),
+  useCapaAction: () => ({ isPending: false, mutateAsync: vi.fn() }),
 }));
 
 vi.mock("@/components/common/toaster", () => ({

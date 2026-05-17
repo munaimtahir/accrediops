@@ -58,10 +58,10 @@ export function IndicatorActionDialog({
           />
         </div>
         <div className="flex justify-end gap-2">
-          <Button type="button" variant="secondary" onClick={onClose}>
+          <Button type="button" variant="secondary" onClick={onClose} data-testid="dialog-cancel-btn">
             Cancel
           </Button>
-          <Button type="submit" loading={loading}>
+          <Button type="submit" loading={loading} data-testid="dialog-confirm-btn">
             {confirmLabel}
           </Button>
         </div>

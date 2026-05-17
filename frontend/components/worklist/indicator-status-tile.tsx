@@ -15,6 +15,7 @@ export function IndicatorStatusTile({
     <button
       type="button"
       onClick={() => onOpen(row.project_indicator_id)}
+      data-testid={`indicator-tile-${row.indicator_code}`}
       className={cn(
         "w-full rounded-lg border p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20",
         visual.tileClassName,

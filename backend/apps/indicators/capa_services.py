@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.db.models import Q
 from django.utils import timezone
 
 from apps.audit.services import log_audit_event, snapshot_instance
@@ -288,13 +289,28 @@ def reject_capa(
 
 def calculate_project_capa_summary(project) -> dict:
     all_capas = CAPA.objects.filter(project=project)
+    active_capas = all_capas.filter(
+        status__in=[
+            CapaStatusChoices.OPEN,
+            CapaStatusChoices.IN_PROGRESS,
+            CapaStatusChoices.SUBMITTED_FOR_REVIEW,
+            CapaStatusChoices.REJECTED,
+        ]
+    )
     return {
         "total_capa": all_capas.count(),
         "open_capa_count": all_capas.filter(status__in=[CapaStatusChoices.OPEN, CapaStatusChoices.IN_PROGRESS]).count(),
+        "in_progress_capa_count": all_capas.filter(status=CapaStatusChoices.IN_PROGRESS).count(),
         "submitted_capa_count": all_capas.filter(status=CapaStatusChoices.SUBMITTED_FOR_REVIEW).count(),
         "closed_capa_count": all_capas.filter(status=CapaStatusChoices.CLOSED).count(),
+        "rejected_capa_count": all_capas.filter(status=CapaStatusChoices.REJECTED).count(),
+        "cancelled_capa_count": all_capas.filter(status=CapaStatusChoices.CANCELLED).count(),
         "high_risk_capa_count": all_capas.filter(status__in=[CapaStatusChoices.OPEN, CapaStatusChoices.IN_PROGRESS, CapaStatusChoices.SUBMITTED_FOR_REVIEW], gap__severity__in=[PriorityChoices.HIGH, PriorityChoices.CRITICAL]).count(),
         "overdue_capa_count": all_capas.filter(status__in=[CapaStatusChoices.OPEN, CapaStatusChoices.IN_PROGRESS], due_date__lt=timezone.localdate()).count(),
+        "export_blocker_count": active_capas.filter(
+            Q(gap__severity__in=[PriorityChoices.HIGH, PriorityChoices.CRITICAL])
+            | Q(project_evidence_requirement__evidence_requirement__mandatory=True)
+        ).count(),
     }
 
 
@@ -303,4 +319,3 @@ def list_open_capa_for_project(project):
         project=project, 
         status__in=[CapaStatusChoices.OPEN, CapaStatusChoices.IN_PROGRESS, CapaStatusChoices.SUBMITTED_FOR_REVIEW, CapaStatusChoices.REJECTED]
     )
-

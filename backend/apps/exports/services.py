@@ -95,6 +95,7 @@ def build_print_bundle(project: AccreditationProject) -> dict:
             section_key,
             {
                 "name": area.name,
+                "code": area.code,
                 "standards": {},
             },
         )
@@ -103,6 +104,7 @@ def build_print_bundle(project: AccreditationProject) -> dict:
             standard_key,
             {
                 "name": standard.name,
+                "code": standard.code,
                 "indicators": [],
             },
         )
@@ -126,6 +128,8 @@ def build_print_bundle(project: AccreditationProject) -> dict:
                     "physical_location_type": evidence.physical_location_type,
                     "location_details": evidence.location_details,
                     "file_label": evidence.file_label,
+                    "file_or_url": evidence.file_or_url,
+                    "text_content": evidence.text_content,
                     "is_physical_copy_available": evidence.is_physical_copy_available,
                     "reviewed_by": evidence.reviewed_by.get_full_name() if evidence.reviewed_by else None,
                     "reviewed_at": evidence.reviewed_at.isoformat() if evidence.reviewed_at else None,
@@ -177,7 +181,11 @@ def build_print_bundle(project: AccreditationProject) -> dict:
         standards = []
         for (_, _), standard in sorted(section["standards"].items(), key=lambda item: item[0]):
             standards.append(standard)
-        ordered_sections.append({"name": section["name"], "standards": standards})
+        ordered_sections.append({
+            "name": section["name"],
+            "code": section.get("code", "A"),
+            "standards": standards
+        })
 
     # Consolidated lists for the summary
     all_warnings = eligibility_report["warnings"]
@@ -208,6 +216,7 @@ def build_print_bundle(project: AccreditationProject) -> dict:
             "final_evidence_ready_indicators": eligibility_report["readiness"]["final_evidence_ready_indicators"],
             "client_info": client_info,
             "export_eligibility": eligibility_report,
+            "readiness": eligibility_report["readiness"],
             "pending_capa_count": eligibility_report["readiness"].get("open_capa_count", 0),
             "open_capa_report": pending_capa_list,
         },
@@ -517,13 +526,14 @@ def build_final_zip_export(*, project: AccreditationProject, actor, export_type:
     # Framework areas/standards/indicators
     for section in bundle["sections"]:
         area_name_safe = "".join(c for c in section["name"] if c.isalnum() or c == "_").rstrip()
-        area_path = temp_export_root / f"{section['name'].split(' ')[0]}_{area_name_safe}" # e.g., 01_AAC_AccessAssessmentandContinuityofCare
+        # Pattern: AreaCode_AreaName (e.g. A1_PatientSafety)
+        area_path = temp_export_root / f"{section.get('code', 'A')}_{area_name_safe}" 
         area_path.mkdir(exist_ok=True)
 
         for standard in section["standards"]:
             standard_name_safe = "".join(c for c in standard["name"] if c.isalnum() or c == "_").rstrip()
-            standard_code = standard["indicators"][0]["indicator_code"].split('-')[0] if standard["indicators"] else "STD"
-            standard_path = area_path / f"{standard_code}_{standard_name_safe}" # e.g., AAC.1_Servicesareaccessibleto...
+            # Pattern: StandardCode_StandardName (e.g. S1_MedicationGovernance)
+            standard_path = area_path / f"{standard.get('code', 'S')}_{standard_name_safe}"
             standard_path.mkdir(exist_ok=True)
 
             for indicator_data in standard["indicators"]:

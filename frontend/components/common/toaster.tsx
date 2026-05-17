@@ -52,7 +52,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
     window.setTimeout(() => {
       setItems((current) => current.filter((entry) => entry.id !== item.id));
-    }, 3500);
+    }, 1500);
   }, []);
 
   const value = useMemo(() => ({ pushToast }), [pushToast]);

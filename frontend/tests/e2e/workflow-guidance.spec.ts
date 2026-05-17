@@ -6,7 +6,7 @@ test.describe("Workflow guidance", () => {
     await loginAsSeededAdmin(page);
     await page.getByRole("link", { name: "Open project" }).first().click();
     const main = page.locator("main");
-    await expect(main.getByText("Action")).toBeVisible();
+    await expect(main.getByText("Action").first()).toBeVisible();
     await expect(main.getByText("Reason")).toBeVisible();
     await expect(main.getByText("Status")).toBeVisible();
     await expect(main.getByRole("heading", { name: "Operate indicators" })).toBeVisible();
@@ -23,7 +23,7 @@ test.describe("Workflow guidance", () => {
 
     await page.goto(`/projects/${projectId}/worklist`);
     await expect(page.getByRole("heading", { name: "Project worklist" })).toBeVisible();
-    await expect(page.getByText("Action")).toBeVisible();
+    await expect(page.getByText("Action").first()).toBeVisible();
 
     await page.goto(`/projects/${projectId}/recurring`);
     await expect(page.getByRole("heading", { name: "Recurring evidence queue" })).toBeVisible({ timeout: 20000 });

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 
 import { EmptyState } from "@/components/common/empty-state";
 import { ErrorPanel } from "@/components/common/error-panel";
@@ -10,16 +11,26 @@ import { NextActionBanner } from "@/components/common/next-action-banner";
 import { OnboardingCallout } from "@/components/common/onboarding-callout";
 import { PageHeader } from "@/components/common/page-header";
 import { WorkflowContextStrip } from "@/components/common/workflow-context-strip";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants, Button } from "@/components/ui/button";
+import { PriorityBadge } from "@/components/badges/priority-badge";
 import { canViewReadiness, getRestrictionMessage } from "@/lib/authz";
 import { useAuthSession } from "@/lib/hooks/use-auth";
 import { useProjectReadiness } from "@/lib/hooks/use-readiness";
+import { useProjectCapas } from "@/lib/hooks/use-capa";
 import { cn } from "@/utils/cn";
+import { formatDate } from "@/utils/format";
+import type { Priority } from "@/types";
 
 export function ProjectReadinessScreen({ projectId }: { projectId: number }) {
   const authQuery = useAuthSession();
   const canAccessReadiness = canViewReadiness(authQuery.data?.user);
   const query = useProjectReadiness(canAccessReadiness ? projectId : Number.NaN);
+  const capasQuery = useProjectCapas(canAccessReadiness ? projectId : Number.NaN);
+
+  const exportBlockers = useMemo(() => {
+    if (!capasQuery.data) return [];
+    return capasQuery.data.filter(c => c.is_export_blocker && c.status !== "CLOSED" && c.status !== "CANCELLED");
+  }, [capasQuery.data]);
 
   if (authQuery.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (!canAccessReadiness) {
@@ -60,7 +71,9 @@ export function ProjectReadinessScreen({ projectId }: { projectId: number }) {
     Number(data.recurring_compliance_score ?? 0) < 100
       ? `Recurring compliance is ${Number(data.recurring_compliance_score ?? 0)}%, not 100%.`
       : "",
+    exportBlockers.length > 0 ? "Final export is blocked because some mandatory evidence requirements still have open CAPA." : "",
   ].filter(Boolean);
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -113,14 +126,56 @@ export function ProjectReadinessScreen({ projectId }: { projectId: number }) {
         <MetricCard label="Recurring compliance" value={Number(data.recurring_compliance_score ?? 0)} />
       </div>
 
-      <Section title="Gap & CAPA Status">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <MetricCard label="Open Gaps" value={Number(data.open_gap_count ?? 0)} />
-          <MetricCard label="Open CAPAs" value={Number(data.open_capa_count ?? 0)} />
-          <MetricCard label="High-Risk CAPAs" value={Number(data.high_risk_capa_count ?? 0)} />
-          <MetricCard label="Overdue CAPAs" value={Number(data.overdue_capa_count ?? 0)} />
-        </div>
-      </Section>
+      <div data-testid="readiness-capa-section">
+        <Section title="Gap & CAPA Status">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <MetricCard label="Open Gaps" value={Number(data.open_gap_count ?? 0)} />
+            <MetricCard label="Open CAPAs" value={Number(data.open_capa_count ?? 0)} />
+            <MetricCard label="High-Risk CAPAs" value={Number(data.high_risk_capa_count ?? 0)} />
+            <MetricCard label="Overdue CAPAs" value={Number(data.overdue_capa_count ?? 0)} />
+            <MetricCard label="CAPA Blocking Export" value={exportBlockers.length} />
+            <MetricCard label="Closed CAPAs" value={Number(data.closed_capa_count ?? 0)} />
+          </div>
+          
+          {exportBlockers.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-sm font-semibold text-slate-900 mb-3">CAPA Export Blockers</h3>
+              <div className="rounded-xl border border-slate-200 bg-white shadow-panel overflow-x-auto">
+                <table className="w-full text-left text-sm whitespace-nowrap" data-testid="capa-blocker-list">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-600">
+                    <tr>
+                      <th className="px-4 py-3 font-semibold">Indicator</th>
+                      <th className="px-4 py-3 font-semibold">Requirement</th>
+                      <th className="px-4 py-3 font-semibold">CAPA Title</th>
+                      <th className="px-4 py-3 font-semibold">Severity</th>
+                      <th className="px-4 py-3 font-semibold">Due Date</th>
+                      <th className="px-4 py-3 font-semibold">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {exportBlockers.map((capa) => (
+                      <tr key={capa.id} className="hover:bg-slate-50/50">
+                        <td className="px-4 py-3 font-semibold text-slate-900">{capa.indicator_code}</td>
+                        <td className="px-4 py-3 text-slate-600">{capa.evidence_requirement_title}</td>
+                        <td className="px-4 py-3 font-semibold text-slate-900">{capa.title}</td>
+                        <td className="px-4 py-3">
+                          {capa.gap_severity ? <PriorityBadge priority={capa.gap_severity as Priority} /> : null}
+                        </td>
+                        <td className="px-4 py-3 text-slate-600">{formatDate(capa.due_date)}</td>
+                        <td className="px-4 py-3">
+                          <Button variant="secondary" size="sm" onClick={() => window.location.assign(`/projects/${projectId}/capa`)}>
+                            View CAPA
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </Section>
+      </div>
     </div>
   );
 }

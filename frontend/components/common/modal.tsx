@@ -92,7 +92,7 @@ export function Modal({
             <h3 id={titleId} className="text-lg font-semibold text-slate-900">{title}</h3>
             {description ? <p id={descriptionId} className="mt-1 text-sm text-slate-600">{description}</p> : null}
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+          <Button variant="ghost" size="sm" onClick={onClose} data-testid="modal-close-btn">
             Close
           </Button>
         </div>

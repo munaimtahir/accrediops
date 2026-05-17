@@ -121,6 +121,17 @@ export function ProjectOverviewScreen({ projectId }: { projectId: number }) {
 
       <section className="grid gap-3 lg:grid-cols-3">
         <Card className="p-4">
+          <h2 className="text-sm font-semibold text-slate-950">Gap & CAPA workspace</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Review open, overdue, and export-blocking CAPA across the project in one workspace.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link href={`/projects/${project.id}/capa`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }))}>
+              Open CAPA workspace
+            </Link>
+          </div>
+        </Card>
+        <Card className="p-4">
           <h2 className="text-sm font-semibold text-slate-950">Operate indicators</h2>
           <p className="mt-1 text-sm text-slate-600">
             Add evidence, update working notes, use AI assistance, and submit indicators for review.

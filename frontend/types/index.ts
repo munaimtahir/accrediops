@@ -523,6 +523,7 @@ export interface ExportResponse {
   project_id: number;
   status: string;
   message: string;
+  file_url?: string;
   warnings?: string[];
   sections?: PrintPackSection[];
   bundle?: { sections: PrintPackSection[] };
@@ -698,6 +699,103 @@ export interface VariablesPreviewPayload {
 export interface VariablesPreviewResponse {
   text: string;
   replaced_text: string;
+}
+
+export interface RecordGapPayload {
+  title: string;
+  description?: string;
+  severity?: Priority;
+}
+
+export interface InitializeCapaPayload {
+  title: string;
+  root_cause?: string;
+  corrective_action?: string;
+  preventive_action?: string;
+  responsible_person?: number | null;
+  due_date?: string | null;
+}
+
+export type CapaStatus =
+  | "OPEN"
+  | "IN_PROGRESS"
+  | "SUBMITTED_FOR_REVIEW"
+  | "CLOSED"
+  | "REJECTED"
+  | "CANCELLED";
+
+export type GapStatus = "OPEN" | "RESOLVED" | "DISMISSED";
+
+export interface Gap {
+  id: number;
+  project: number;
+  project_indicator: number;
+  project_evidence_requirement: number | null;
+  evidence_requirement: number | null;
+  title: string;
+  description: string;
+  severity: Priority;
+  source: string;
+  status: GapStatus;
+  created_by: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Capa {
+  id: number;
+  project: number;
+  gap: number;
+  project_indicator: number;
+  project_evidence_requirement: number | null;
+  title: string;
+  root_cause: string;
+  corrective_action: string;
+  preventive_action: string;
+  responsible_person: number | null;
+  due_date: string | null;
+  status: CapaStatus;
+  closure_notes: string;
+  closure_evidence: number | null;
+  submitted_by: number | null;
+  submitted_at: string | null;
+  reviewed_by: number | null;
+  reviewed_at: string | null;
+  closed_by: number | null;
+  closed_at: string | null;
+  rejection_reason: string;
+  created_by: number | null;
+  created_at: string;
+  updated_at: string;
+  gap_title?: string;
+  indicator_code?: string;
+  gap_severity?: Priority;
+  responsible_person_username?: string | null;
+  evidence_requirement_title?: string | null;
+  is_mandatory_evidence?: boolean;
+  is_overdue?: boolean;
+  is_export_blocker?: boolean;
+}
+
+export interface CapaSummary {
+  total_capa: number;
+  open_capa_count: number;
+  in_progress_capa_count: number;
+  submitted_capa_count: number;
+  closed_capa_count: number;
+  rejected_capa_count: number;
+  cancelled_capa_count: number;
+  high_risk_capa_count: number;
+  overdue_capa_count: number;
+  export_blocker_count: number;
+  assigned_to_me_count?: number;
+}
+
+export interface CapaActionPayload {
+  action: "SUBMIT" | "CLOSE" | "REJECT";
+  closure_notes?: string;
+  closure_evidence_id?: number | null;
+  rejection_reason?: string;
 }
 
 export interface PrintPackSection {

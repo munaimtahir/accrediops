@@ -15,23 +15,56 @@ test.describe("07 review and approval lifecycle", () => {
     }
 
     const detailBefore = await getApi<{
+      project_evidence_requirements: Array<{ id: number }>;
       indicator: { minimum_required_evidence_count: number };
     }>(page, `/api/project-indicators/${indicatorId}/`, "get indicator readiness baseline");
-    const requiredEvidence = Math.max(detailBefore.indicator.minimum_required_evidence_count, 1);
+    
+    const requirements = detailBefore.project_evidence_requirements || [];
+    const requiredEvidenceCount = Math.max(detailBefore.indicator.minimum_required_evidence_count, requirements.length, 1);
 
     await postApi(page, `/api/project-indicators/${indicatorId}/start/`, { reason: "E2E start" }, "start indicator");
 
-    for (let index = 0; index < requiredEvidence; index += 1) {
+    // Loop through explicit requirements first
+    for (const req of requirements) {
       const evidence = await postApi<{ id: number }>(
         page,
         "/api/evidence/",
         {
           project_indicator_id: indicatorId,
-          title: `E2E_REVIEW_READY_${Date.now()}_${index}`,
+          project_evidence_requirement_id: req.id,
+          title: `E2E_REVIEW_REQ_${req.id}_${Date.now()}`,
           source_type: "TEXT_NOTE",
-          text_content: `Evidence for review workflow ${index}`,
+          text_content: `Evidence for requirement ${req.id}`,
         },
-        "create review evidence",
+        "create review evidence for requirement",
+      );
+
+      await postApi(
+        page,
+        `/api/evidence/${evidence.id}/review/`,
+        {
+          validity_status: "VALID",
+          completeness_status: "COMPLETE",
+          approval_status: "APPROVED",
+          review_notes: "Workflow review",
+        },
+        "review evidence",
+      );
+    }
+
+    // If more evidence is needed to meet the minimum count, add generic ones
+    const genericNeeded = requiredEvidenceCount - requirements.length;
+    for (let index = 0; index < genericNeeded; index += 1) {
+      const evidence = await postApi<{ id: number }>(
+        page,
+        "/api/evidence/",
+        {
+          project_indicator_id: indicatorId,
+          title: `E2E_REVIEW_GENERIC_${Date.now()}_${index}`,
+          source_type: "TEXT_NOTE",
+          text_content: `Generic evidence ${index}`,
+        },
+        "create generic review evidence",
       );
 
       await postApi(

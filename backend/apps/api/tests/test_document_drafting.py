@@ -10,6 +10,7 @@ from apps.evidence.models import EvidenceItem
 from apps.indicators.services import assign_project_indicator
 
 
+@override_settings(AI_DEMO_MODE=False)
 class DocumentDraftingAndPromotionTest(ContractBaseTestCase):
     def setUp(self):
         super().setUp()

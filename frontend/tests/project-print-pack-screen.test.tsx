@@ -47,6 +47,7 @@ vi.mock("@/lib/hooks/use-auth", () => ({
 
 vi.mock("@/lib/hooks/use-mutations", () => ({
   useProjectExport: () => printBundleState,
+  useTriggerZipExport: () => ({ isPending: false, mutate: vi.fn() }),
 }));
 
 vi.mock("@/lib/hooks/use-readiness", () => ({

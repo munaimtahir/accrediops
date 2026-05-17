@@ -18,6 +18,9 @@ export const queryKeys = {
   frameworkClassification: (frameworkId: number | string, filters: object) =>
     ["admin", "frameworks", frameworkId, "classification", filters] as const,
   project: (projectId: number | string) => ["projects", projectId] as const,
+  projectCapas: <T extends object>(projectId: number | string, filters: T) =>
+    ["projects", projectId, "capas", filters] as const,
+  projectCapaSummary: (projectId: number | string) => ["projects", projectId, "capa-summary"] as const,
   worklist: <T extends object>(filters: T) => ["worklist", filters] as const,
   indicator: (indicatorId: number | string) => ["project-indicators", indicatorId] as const,
   evidence: (indicatorId: number | string) => ["project-indicators", indicatorId, "evidence"] as const,

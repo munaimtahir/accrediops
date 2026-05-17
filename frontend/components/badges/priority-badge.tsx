@@ -12,6 +12,7 @@ const toneMap: Record<Priority, string> = {
 export function PriorityBadge({ priority }: { priority: Priority }) {
   return (
     <span
+      data-testid="capa-severity-badge"
       className={cn(
         "inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide",
         toneMap[priority],

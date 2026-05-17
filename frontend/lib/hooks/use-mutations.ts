@@ -25,6 +25,9 @@ import {
   SubmitRecurringPayload,
   WorkingStatePayload,
   WorkflowReasonPayload,
+  RecordGapPayload,
+  InitializeCapaPayload,
+  CapaActionPayload,
 } from "@/types";
 
 function useInvalidateIndicatorFamily() {
@@ -37,6 +40,9 @@ function useInvalidateIndicatorFamily() {
       queryClient.invalidateQueries({ queryKey: queryKeys.aiOutputs(indicatorId) }),
       queryClient.invalidateQueries({ queryKey: ["worklist"] }),
       projectId ? queryClient.invalidateQueries({ queryKey: queryKeys.project(projectId) }) : Promise.resolve(),
+      projectId ? queryClient.invalidateQueries({ queryKey: queryKeys.projectReadiness(projectId) }) : Promise.resolve(),
+      projectId ? queryClient.invalidateQueries({ queryKey: queryKeys.projectCapaSummary(projectId) }) : Promise.resolve(),
+      projectId ? queryClient.invalidateQueries({ queryKey: ["projects", projectId, "capas"] }) : Promise.resolve(),
       projectId ? queryClient.invalidateQueries({ queryKey: queryKeys.standardsProgress(projectId) }) : Promise.resolve(),
       projectId ? queryClient.invalidateQueries({ queryKey: queryKeys.areasProgress(projectId) }) : Promise.resolve(),
       queryClient.invalidateQueries({ queryKey: ["recurring-queue"] }),
@@ -184,6 +190,36 @@ export function useGenerateAI(indicatorId: number, projectId?: number) {
 
   return useMutation({
     mutationFn: (payload: GenerateAIPayload) => apiClient.post<AIOutput>("/api/ai/generate/", payload),
+    onSuccess: async () => invalidate(indicatorId, projectId),
+  });
+}
+
+export function useRecordGap(indicatorId: number, projectId?: number) {
+  const invalidate = useInvalidateIndicatorFamily();
+
+  return useMutation({
+    mutationFn: ({ requirementId, payload }: { requirementId: number; payload: RecordGapPayload }) =>
+      apiClient.post(`/api/project-evidence-requirements/${requirementId}/gaps/`, payload),
+    onSuccess: async () => invalidate(indicatorId, projectId),
+  });
+}
+
+export function useInitializeCapa(indicatorId: number, projectId?: number) {
+  const invalidate = useInvalidateIndicatorFamily();
+
+  return useMutation({
+    mutationFn: ({ gapId, payload }: { gapId: number; payload: InitializeCapaPayload }) =>
+      apiClient.post(`/api/gaps/${gapId}/capas/`, payload),
+    onSuccess: async () => invalidate(indicatorId, projectId),
+  });
+}
+
+export function useCapaAction(indicatorId: number, projectId?: number) {
+  const invalidate = useInvalidateIndicatorFamily();
+
+  return useMutation({
+    mutationFn: ({ capaId, payload }: { capaId: number; payload: CapaActionPayload }) =>
+      apiClient.post(`/api/capas/${capaId}/action/`, payload),
     onSuccess: async () => invalidate(indicatorId, projectId),
   });
 }

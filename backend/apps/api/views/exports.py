@@ -1,5 +1,8 @@
 from django.db.models import F, Q
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.api.responses import success_response
@@ -150,6 +153,12 @@ class ProjectFinalZipExportView(APIView):
                 "file_url": f"/media/exports/{zip_file_path.name}" # Assuming MEDIA_URL setup
             })
         except PermissionDenied as e:
-            return Response({"success": False, "error": {"code": "EXPORT_BLOCKED", "message": str(e)}}, status=status.HTTP_403_FORBIDDEN)
+            return Response(
+                {"success": False, "error": {"code": "EXPORT_BLOCKED", "message": str(e)}}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
         except Exception as e:
-            return Response({"success": False, "error": {"code": "SERVER_ERROR", "message": str(e)}}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"success": False, "error": {"code": "SERVER_ERROR", "message": str(e)}}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

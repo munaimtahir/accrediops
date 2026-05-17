@@ -86,8 +86,8 @@ test.describe("Core operational browser journeys", () => {
     await page.getByLabel("Approval").selectOption("APPROVED");
     await page.getByRole("button", { name: "Save review" }).click();
 
-    await expect(page.getByText("Approval state")).toBeVisible();
-    await expect(page.getByText(/^Approved$/).first()).toBeVisible();
+    await expect(page.getByText("Approval state").first()).toBeVisible();
+    await expect(page.getByText(/^Completed$/).first()).toBeVisible();
   });
 
   test("recurring approval from indicator context works", async ({ page }) => {
@@ -99,12 +99,17 @@ test.describe("Core operational browser journeys", () => {
     await submitModal.getByLabel("Submission text").fill("Recurring submission from E2E.");
     await submitModal.getByRole("button", { name: "Submit instance" }).click();
 
+    // Wait for submission toast to hide to prevent pointer interception
+    await page.locator("text=Recurring instance submitted").waitFor({ state: "hidden", timeout: 10000 });
+    // Small additional buffer for layout stabilization
+    await page.waitForTimeout(500);
+
     await page.getByRole("button", { name: "Approve instance" }).first().click();
     const approveModal = page.locator("div.fixed.inset-0").last();
     await approveModal.getByLabel("Notes").fill("Approved by E2E.");
     await approveModal.getByRole("button", { name: "Approve instance" }).click();
 
-    await expect(page.getByText(/Status\s+Approved/i)).toBeVisible();
+    await expect(page.getByText(/^Completed$/).first()).toBeVisible();
   });
 
   test("create flow supports client profile linkage", async ({ page }) => {
@@ -218,7 +223,7 @@ test.describe("Core operational browser journeys", () => {
         await page.getByLabel("Completeness").selectOption("COMPLETE");
         await page.getByLabel("Approval").selectOption("APPROVED");
         await page.getByRole("button", { name: "Save review" }).click();
-        await expect(page.getByText(/^Approved$/).first()).toBeVisible();
+        await expect(page.getByText(/^Completed$/).first()).toBeVisible();
       }
       await runIndicatorCommand(page, "Mark as Met", "Marking as MET for reopen test");
     }
@@ -339,11 +344,16 @@ test.describe("Core operational browser journeys", () => {
     await submitModal.getByLabel("Submission text").fill("Combined recurring submission.");
     await submitModal.getByRole("button", { name: "Submit instance" }).click();
 
+    // Wait for submission toast to hide to prevent pointer interception
+    await page.locator("text=Recurring instance submitted").waitFor({ state: "hidden", timeout: 10000 });
+    // Small additional buffer for layout stabilization
+    await page.waitForTimeout(500);
+
     await page.getByRole("button", { name: "Approve instance" }).first().click();
     const approveModal = page.locator("div.fixed.inset-0").last();
     await approveModal.getByLabel("Notes").fill("Combined recurring approval.");
     await approveModal.getByRole("button", { name: "Approve instance" }).click();
-    await expect(page.getByText(/Status\s+Approved/i)).toBeVisible();
+    await expect(page.getByText(/^Completed$/).first()).toBeVisible();
 
     // Verify export surface is reachable (generation may still be blocked by readiness).
     await page.goto(`/projects/${projectId}/exports`);

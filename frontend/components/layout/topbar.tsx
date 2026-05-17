@@ -23,6 +23,7 @@ function getPageLabel(pathname: string) {
   if (pathname.endsWith("/pending-actions")) return "Pending Actions";
   if (pathname.endsWith("/readiness")) return "Readiness";
   if (pathname.endsWith("/inspection")) return "Inspection Mode";
+  if (pathname.endsWith("/capa")) return "Gap & CAPA";
   if (pathname.endsWith("/client-profile")) return "Client Profile";
   if (pathname.startsWith("/admin")) return "Admin";
   if (pathname.startsWith("/project-indicators/")) return "Indicator Detail";

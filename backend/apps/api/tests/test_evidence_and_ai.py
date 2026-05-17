@@ -9,6 +9,9 @@ from apps.evidence.models import EvidenceItem
 from apps.indicators.services import assign_project_indicator
 
 
+from django.test import override_settings
+
+@override_settings(AI_DEMO_MODE=False)
 class EvidenceAndAITest(ContractBaseTestCase):
     def test_multiple_evidence_items_are_allowed_for_one_project_indicator(self):
         project_indicators = self.initialize_project()

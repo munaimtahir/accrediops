@@ -55,6 +55,7 @@ export function Sidebar() {
   const projectItems: NavItem[] = projectId ? [
     { href: `/projects/${projectId}`, label: "Dashboard", icon: Gauge },
     { href: `/projects/${projectId}/worklist`, label: "Worklist", icon: ListTodo },
+    { href: `/projects/${projectId}/capa`, label: "Gap & CAPA", icon: FileText },
     {
       href: `/projects/${projectId}/inspection`,
       label: "Review / Inspection",
@@ -93,6 +94,7 @@ export function Sidebar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                     active
@@ -109,6 +111,7 @@ export function Sidebar() {
             {(role === "ADMIN" || role === "LEAD") && (
               <Link
                 href="/admin/frameworks/classification"
+                data-testid="nav-ai-classification"
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   pathname === "/admin/frameworks/classification"
@@ -124,6 +127,7 @@ export function Sidebar() {
             {(role === "ADMIN" || role === "LEAD") && (
               <Link
                 href="/framework-documentation-ai"
+                data-testid="nav-framework-documentation-ai"
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                   pathname === "/framework-documentation-ai"
@@ -160,6 +164,7 @@ export function Sidebar() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                       active
@@ -183,6 +188,7 @@ export function Sidebar() {
                <Link
                   key={settingsItem.href}
                   href={settingsItem.href}
+                  data-testid="nav-admin-dashboard"
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                     pathname === settingsItem.href
@@ -195,6 +201,7 @@ export function Sidebar() {
                 </Link>
                 <Link
                   href="/admin/ai/usage"
+                  data-testid="nav-ai-usage"
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                     pathname === "/admin/ai/usage"
@@ -207,6 +214,7 @@ export function Sidebar() {
                 </Link>
                 <Link
                   href="/admin/queues/document-generation"
+                  data-testid="nav-document-queue"
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                     pathname === "/admin/queues/document-generation"

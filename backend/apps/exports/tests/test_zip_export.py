@@ -103,9 +103,9 @@ class ZipExportTest(ContractBaseTestCase):
         response = self.client.post(self.zip_export_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(response.data["success"])
-        self.assertIn("file_url", response.data)
+        self.assertIn("file_url", response.data["data"])
         
-        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["file_url"]).name
+        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["data"]["file_url"]).name
         self.assertTrue(zip_file_path.exists())
         self.assertTrue(zip_file_path.is_file())
         self.assertGreater(zip_file_path.stat().st_size, 0) # Check file is not empty
@@ -127,7 +127,7 @@ class ZipExportTest(ContractBaseTestCase):
     def test_zip_export_contains_approved_evidence(self, mock_log_export_audit):
         response = self.client.post(self.zip_export_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["file_url"]).name
+        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["data"]["file_url"]).name
 
         with zipfile.ZipFile(zip_file_path, "r") as zf:
             namelist = zf.namelist()
@@ -136,11 +136,13 @@ class ZipExportTest(ContractBaseTestCase):
             for pi in self.project.project_indicators.all():
                 for evidence in pi.evidence_items.filter(approval_status=EvidenceApprovalStatusChoices.APPROVED):
                     # Construct expected path based on build_final_zip_export logic
+                    area_name_safe = "".join(c for c in pi.indicator.area.name if c.isalnum() or c == "_").rstrip()
+                    standard_name_safe = "".join(c for c in pi.indicator.standard.name if c.isalnum() or c == "_").rstrip()
                     indicator_code_safe = "".join(c for c in pi.indicator.code if c.isalnum() or c == "_").rstrip()
                     file_label_safe = "".join(c for c in evidence.file_label if c.isalnum() or c == "_").rstrip() or f"evidence_{evidence.id}"
                     
-                    expected_path_prefix = f"0{pi.indicator.area.sort_order}_{pi.indicator.area.name}/"
-                    expected_path_prefix += f"{pi.indicator.standard.code}_{pi.indicator.standard.name}/{indicator_code_safe}/approved_evidence/"
+                    expected_path_prefix = f"{pi.indicator.area.code}_{area_name_safe}/"
+                    expected_path_prefix += f"{pi.indicator.standard.code}_{standard_name_safe}/{indicator_code_safe}/approved_evidence/"
                     
                     if evidence.source_type == "UPLOAD" and evidence.file_or_url:
                         expected_path = expected_path_prefix + f"{file_label_safe}_{Path(evidence.file_or_url).name}"
@@ -159,13 +161,13 @@ class ZipExportTest(ContractBaseTestCase):
         from apps.indicators.models.capa import Gap, CAPA
         from apps.masters.choices import PriorityChoices, GapStatusChoices, CapaStatusChoices
 
-        # Create a gap and CAPA
+        # Create a gap and CAPA - use MEDIUM severity so it doesn't block export
         gap = Gap.objects.create(
             project=self.project,
             project_indicator=self.first_project_indicator,
             title="Test Gap",
             description="Test Gap Description",
-            severity=PriorityChoices.HIGH,
+            severity=PriorityChoices.MEDIUM,
             source=GapSourceChoices.MANUAL,
             created_by=self.admin_user,
         )
@@ -181,7 +183,7 @@ class ZipExportTest(ContractBaseTestCase):
 
         response = self.client.post(self.zip_export_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["file_url"]).name
+        zip_file_path = Path(settings.MEDIA_ROOT) / "exports" / Path(response.data["data"]["file_url"]).name
 
         with zipfile.ZipFile(zip_file_path, "r") as zf:
             namelist = zf.namelist()
@@ -193,5 +195,5 @@ class ZipExportTest(ContractBaseTestCase):
             with zf.open("90_Gaps_and_CAPA/capa_summary.md") as f:
                 content = f.read().decode("utf-8")
                 self.assertIn("Test CAPA", content)
-                self.assertIn("Open CAPAs: 1", content)
-                self.assertIn("High-Risk CAPAs: 1", content)
+                self.assertIn("Open CAPAs:** 1", content)
+                self.assertIn("High-Risk CAPAs:** 0", content)

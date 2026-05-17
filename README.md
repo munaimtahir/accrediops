@@ -68,9 +68,21 @@ This is an internal operations system for delivering accreditation services more
 Clients do not log into this application.
 Clients receive outputs generated and verified by the internal team.
 
-## Suggested initial technical direction
+## Suggested current technical direction
 
-- Backend: Django + Django REST Framework
-- Frontend: keep current Streamlit bridge temporarily or migrate later to a stronger frontend
-- API contract: OpenAPI-first
-- AI mode: manual AI assistance first, automated AI integration later only if clearly justified
+- Backend: Django 5.2 + Django REST Framework 3.16
+- Frontend: Next.js 15 (App Router), React 19, Tailwind CSS
+- API contract: OpenAPI 3.0 (contracts/openapi/openapi.yaml)
+- Infrastructure: Docker Compose, Caddy (Reverse Proxy)
+
+## Project Status
+
+The core accreditation workflow is **complete and stable**:
+- Framework/Indicator/Requirement management
+- Project lifecycle and Evidence fulfillment
+- AI-advisory Classification and Drafting
+- Evidence Review and Approval cycle
+- Gap and CAPA MVP
+- Recurring Evidence queue
+- Project Readiness and Export Eligibility
+- Final Inspection ZIP Export

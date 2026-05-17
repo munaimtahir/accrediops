@@ -65,6 +65,7 @@ def create_evidence_item(
     ).update(is_current=False)
     evidence_item = EvidenceItem.objects.create(
         project_indicator=project_indicator,
+        project_evidence_requirement=project_evidence_requirement,
         title=title,
         description=description,
         source_type=source_type,
@@ -178,6 +179,37 @@ def review_evidence_item(
     evidence_item.reviewed_at = timezone.now()
     evidence_item.review_notes = review_notes
     evidence_item.save()
+
+    # Update linked ProjectEvidenceRequirement if present
+    if evidence_item.project_evidence_requirement:
+        req = evidence_item.project_evidence_requirement
+        before_req = snapshot_instance(req)
+        
+        # Map Evidence approval to ProjectEvidenceRequirement status
+        new_status = ProjectEvidenceRequirementStatusChoices.MISSING
+        if approval_status == EvidenceApprovalStatusChoices.APPROVED:
+            new_status = ProjectEvidenceRequirementStatusChoices.APPROVED
+        elif approval_status == EvidenceApprovalStatusChoices.REJECTED:
+            new_status = ProjectEvidenceRequirementStatusChoices.REJECTED
+        
+        req.status = new_status
+        if new_status == ProjectEvidenceRequirementStatusChoices.APPROVED:
+            req.approved_by = actor
+            req.approved_at = evidence_item.reviewed_at
+        elif new_status == ProjectEvidenceRequirementStatusChoices.REJECTED:
+            req.rejected_by = actor
+            req.rejected_at = evidence_item.reviewed_at
+
+        req.save()
+        log_audit_event(
+            actor=actor,
+            event_type="evidence_requirement.status_updated",
+            obj=req,
+            before=before_req,
+            after=snapshot_instance(req),
+            reason="Triggered by evidence review",
+        )
+
     log_audit_event(
         actor=actor,
         event_type="evidence.reviewed",

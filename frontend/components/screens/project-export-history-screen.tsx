@@ -6,6 +6,7 @@ import { useState } from "react";
 import { EmptyState } from "@/components/common/empty-state";
 import { ErrorPanel } from "@/components/common/error-panel";
 import { LoadingSkeleton } from "@/components/common/loading-skeleton";
+import { MetricCard } from "@/components/common/metric-card";
 import { NextActionBanner } from "@/components/common/next-action-banner";
 import { OnboardingCallout } from "@/components/common/onboarding-callout";
 import { PermissionHint } from "@/components/common/permission-hint";
@@ -16,6 +17,7 @@ import { WorkbenchTable } from "@/components/common/workbench-table";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { useExportHistory, useGenerateExport, usePhysicalRetrievalExport, useProjectReadiness } from "@/lib/hooks/use-readiness";
+import { useProjectCapas } from "@/lib/hooks/use-capa";
 import { getSafeErrorMessage } from "@/lib/api/client";
 import { canViewExports, getRestrictionMessage } from "@/lib/authz";
 import { useAuthSession } from "@/lib/hooks/use-auth";
@@ -32,6 +34,7 @@ export function ProjectExportHistoryScreen({ projectId }: { projectId: number })
   const generate = useGenerateExport(projectId);
   const physical = usePhysicalRetrievalExport(effectiveProjectId);
   const readiness = useProjectReadiness(effectiveProjectId);
+  const capasQuery = useProjectCapas(effectiveProjectId);
 
   if (authQuery.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (!canManageExports) {
@@ -82,6 +85,8 @@ export function ProjectExportHistoryScreen({ projectId }: { projectId: number })
   if (readiness.isLoading) return <LoadingSkeleton className="h-40 w-full" />;
   if (readiness.error) return <ErrorPanel message={readiness.error.message} />;
   const rows = history.data ?? [];
+  const capas = capasQuery.data ?? [];
+  const exportBlockingCapas = capas.filter(c => c.is_export_blocker && c.status !== "CLOSED" && c.status !== "CANCELLED");
   const readinessData = (readiness.data ?? {}) as Record<string, unknown>;
   const exportBlockers = [
     !canManageExports ? `Role restriction: ${getRestrictionMessage("exports")}` : "",
@@ -93,6 +98,9 @@ export function ProjectExportHistoryScreen({ projectId }: { projectId: number })
       : "",
     Array.isArray(readinessData.high_risk_indicators) && readinessData.high_risk_indicators.length > 0
       ? `Critical indicators pending: ${readinessData.high_risk_indicators.length}`
+      : "",
+    exportBlockingCapas.length > 0
+      ? `Final export is blocked because some mandatory evidence requirements still have open CAPA.`
       : "",
   ].filter(Boolean);
   const exportReady = canManageExports && exportBlockers.length === 0;
@@ -198,6 +206,27 @@ export function ProjectExportHistoryScreen({ projectId }: { projectId: number })
         rows={rows}
         rowKey={(row) => String(row.id)}
       />
+      
+      <div data-testid="print-pack-capa-section" className="mt-8">
+        <h2 className="text-lg font-semibold text-slate-950 mb-4">CAPA Report</h2>
+        {capas.length === 0 ? (
+          <p className="text-sm text-slate-600">No CAPA records in this project.</p>
+        ) : (
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-panel">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-4">
+              <MetricCard label="Total CAPA" value={capas.length} />
+              <MetricCard label="Export Blockers" value={exportBlockingCapas.length} />
+              <MetricCard label="Closed CAPA" value={capas.filter(c => c.status === "CLOSED").length} />
+              <MetricCard label="Open CAPA" value={capas.filter(c => c.status !== "CLOSED" && c.status !== "CANCELLED").length} />
+            </div>
+            {exportBlockingCapas.length > 0 && (
+              <div className="rounded-md border border-rose-200 bg-rose-50 p-3 mb-4 text-sm text-rose-900">
+                <span className="font-semibold">Warning:</span> There are {exportBlockingCapas.length} CAPA(s) blocking final export.
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

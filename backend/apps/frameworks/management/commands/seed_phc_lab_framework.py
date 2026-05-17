@@ -45,6 +45,16 @@ class Command(BaseCommand):
             framework=framework, area=std2.area, standard=std2, code="IND-003",
             defaults={"text": "Patient Identification is Verified"}
         )
+        ind4, _ = Indicator.objects.update_or_create(
+            framework=framework, area=std2.area, standard=std2, code="IND-004",
+            defaults={
+                "text": "Daily Temperature Log",
+                "is_recurring": True,
+                "recurrence_frequency": "DAILY",
+                "recurrence_mode": "EITHER",
+                "fulfillment_guidance": "Upload daily temperature log scans or submit digital notes."
+            }
+        )
 
         # Create Evidence Requirements
         EvidenceRequirement.objects.update_or_create(
@@ -62,6 +72,10 @@ class Command(BaseCommand):
         EvidenceRequirement.objects.update_or_create(
             indicator=ind3, title="Patient registration form sample.",
             defaults={"mandatory": False}
+        )
+        EvidenceRequirement.objects.update_or_create(
+            indicator=ind4, title="Daily Temperature Log Scan",
+            defaults={"mandatory": True}
         )
 
         self.stdout.write(self.style.SUCCESS(f"Successfully seeded PHC LAB framework with {Indicator.objects.filter(framework=framework).count()} indicators."))
